@@ -35,4 +35,4 @@ class Main extends React.Component {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(null, null)(Main)
