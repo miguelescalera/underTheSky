@@ -5,9 +5,9 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const { db } = require("./models/index");
-const { User } = require("./models/index");
-const routes = require("./routes");
+const  db  = require("./db/index");
+// const { User } = require("./models/index");
+// const routes = require("./routes");
 const volleyball = require("volleyball");
 const path = require("path");
 
@@ -30,51 +30,51 @@ app.use(cookieParser());
 //STATIC MIDDLEWARE
 app.use("/", express.static(path.join(__dirname, "public")));
 
-/*******PASSPORT ********/
-app.use(
-  session({
-    secret: "under_the_sky",
-    resave: true,
-    saveUninitialized: true
-  })
-);
+// /*******PASSPORT ********/
+// app.use(
+//   session({
+//     secret: "under_the_sky",
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password"
-    },
-    function(email, password, done) {
-      User.findOne({ where: { email } })
-        .then(user => {
-          if (!user) {
-            return done(null, false, { message: "Incorrect username." });
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { message: "Incorrect password." });
-          }
-          return done(null, user);
-        })
-        .catch(done);
-    }
-  )
-);
+// passport.use(
+//   new LocalStrategy(
+//     {
+//       usernameField: "email",
+//       passwordField: "password"
+//     },
+//     function(email, password, done) {
+//       User.findOne({ where: { email } })
+//         .then(user => {
+//           if (!user) {
+//             return done(null, false, { message: "Incorrect username." });
+//           }
+//           if (!user.validPassword(password)) {
+//             return done(null, false, { message: "Incorrect password." });
+//           }
+//           return done(null, user);
+//         })
+//         .catch(done);
+//     }
+//   )
+// );
 
-//Serialize
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+// //Serialize
+// passport.serializeUser(function(user, done) {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser(function(id, done) {
-  User.findByPk(id).then(user => done(null, user));
-});
+// passport.deserializeUser(function(id, done) {
+//   User.findByPk(id).then(user => done(null, user));
+// });
 
 //Rutas de back
-app.use("/api", routes);
+// app.use("/api", routes);
 
 //servimos el index
 app.use("/*", function(req, res, next) {
