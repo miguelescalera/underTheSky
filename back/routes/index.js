@@ -1,0 +1,1 @@
+/*app.js pega aca a las rutas, de aca se redirigen a sus correspondientes archivos */
