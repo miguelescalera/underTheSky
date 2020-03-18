@@ -7,7 +7,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const  db  = require("./db/index");
 // const { User } = require("./models/index");
-// const routes = require("./routes");
+const routes = require("./routes");
 const volleyball = require("volleyball");
 const path = require("path");
 
@@ -74,7 +74,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 // });
 
 //Rutas de back
-// app.use("/api", routes);
+ app.use("/api", routes);
 
 //servimos el index
 app.use("/*", function(req, res, next) {
