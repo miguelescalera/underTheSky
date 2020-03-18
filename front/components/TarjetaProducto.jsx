@@ -1,0 +1,1 @@
+//producto individual de la lista de productos general 
