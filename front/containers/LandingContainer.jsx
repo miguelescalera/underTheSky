@@ -1,10 +1,10 @@
 import React from 'react'
-import Principal from '../components/Principal'
+import Landing from '../components/Landing'
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 
-class MapaContainer extends React.Component {
+class LandingContainer extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -12,7 +12,7 @@ class MapaContainer extends React.Component {
 
     render() {
         return (
-                <Principal />
+                <Landing />
         )
     }
 }
@@ -32,6 +32,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   
   
   export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(MapaContainer)
+    connect(mapStateToProps, mapDispatchToProps)(LandingContainer)
   );
 
