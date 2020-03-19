@@ -1,10 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const Products = require("../models/products")
+const Product = require("../models/product")
+
+
+router.post("/newProduct",function(req,res){
+
+    Product.create(req.body)
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
 
 
 router.get("/getProducts",function(req,res){
-    Products.findAll()
+    Product.findAll()
     .then(function(products){
         res.json(products)
     })
@@ -12,7 +21,7 @@ router.get("/getProducts",function(req,res){
 
 
 router.get("/:id",function(req,res){
-    Products.findByPk(req.params.id)
+    Product.findByPk(req.params.id)
     .then(function(product){
         res.json(product)
     })
@@ -22,7 +31,7 @@ router.get("/:id",function(req,res){
 
 
 router.put("/:id",function(req,res){
-    Products.findByPk(req.params.id)
+    Product.findByPk(req.params.id)
     .then(function(product){
         product.update(req.body)
     })
@@ -34,7 +43,7 @@ router.put("/:id",function(req,res){
 
 
 router.delete("/:id",function(req,res){
-    Products.findByPk(req.params.id)
+    Product.findByPk(req.params.id)
     .then(function(product){
         product.destroy()
     })

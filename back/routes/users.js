@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../models/users")
+const User = require("../models/user")
 const passport = require("passport")
 
 router.get("/getUsers",function(req,res){
-    Users.findAll()
+    User.findAll()
     .then(function(users){
         res.json(users)
     })
@@ -12,7 +12,7 @@ router.get("/getUsers",function(req,res){
 
 
 router.get("/:id",function(req,res){
-    Users.findByPk(req.params.id)
+    User.findByPk(req.params.id)
     .then(function(user){
         res.json(user)
     })
@@ -20,7 +20,7 @@ router.get("/:id",function(req,res){
 
 
 router.post("/register",function(req,res){
-    Users.create(req.body).then(function(){
+    User.create(req.body).then(function(){
         res.sendStatus(201)
     })
 })
@@ -44,7 +44,7 @@ router.post('/logout', function(req, res){
 
 
 router.put("/:id",function(req,res){
-    Users.findByPk(req.params.id)
+    User.findByPk(req.params.id)
     .then(function(user){
         user.update(req.body)
     })
@@ -56,7 +56,7 @@ router.put("/:id",function(req,res){
 
 
 router.delete("/:id",function(req,res){
-    Users.findByPk(req.params.id)
+    User.findByPk(req.params.id)
     .then(function(user){
         user.destroy()
     })
