@@ -7,6 +7,7 @@ const Frame = require("./frame")
 const Style = require('./style')
 const Size = require('./size')
 
+
 Product.belongsTo(User);
 Product.belongsTo(Frame);
 Product.belongsTo(Style);
