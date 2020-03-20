@@ -33,31 +33,31 @@ User.init({
         }
     },
     salt: {
-             type: Sequelize.STRING, 
-                }
+        type: Sequelize.STRING,
+    }
 
 }, {
         sequelize,
         modelName: 'user'
     });
 
-    User.addHook('beforeCreate', (user) => {
-        user.salt = crypto.randomBytes(20).toString('hex');
-        user.password = user.hashPassword(user.password);
-        
-      })
-      
-    User.prototype.hashPassword = function (password) {
-        return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-    }
-        
-      
-    User.prototype.validPassword = function (password) {
-        return this.password === this.hashPassword(password); 
+User.addHook('beforeCreate', (user) => {
+    user.salt = crypto.randomBytes(20).toString('hex');
+    user.password = user.hashPassword(user.password);
+
+})
+
+User.prototype.hashPassword = function (password) {
+    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+}
+
+
+User.prototype.validPassword = function (password) {
+    return this.password === this.hashPassword(password);
 
 
 
-    }
-       
+}
+
 
 module.exports = User;
