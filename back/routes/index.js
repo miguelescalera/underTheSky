@@ -6,12 +6,14 @@ const usersRouter = require("./users");
 const productsRouter = require("./products")
 const ordersRouter = require("./orders")
 const adminRouter = require("./admin")
+const cartRouter = require("./cart")
 
 
 router.use("/users",usersRouter)
 router.use("/products",productsRouter)
 router.use("/orders",ordersRouter)
 router.use("/admin",adminRouter)
+router.use("/cart",cartRouter)
 
 
 

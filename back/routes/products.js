@@ -6,37 +6,61 @@ const Order = require ("../models/order")
 const Frame = require("../models/frame")
 const Size = require("../models/size")
 const Style = require("../models/style")
-const UserData = require("../models/userData")
+const ProductData = require("../models/productData")
+
+
+
+
+router.post("/newProductData",function(req,res){
+    ProductData.create(req.body)
+    .then(()=>{
+        res.sendStatus(200)
+    })
+})
 
 
 router.post("/newProduct",function(req,res){
-    Product.findOrCreate({where:{
+    
+    Product.findAll({where:{
         frameId: req.body.frameId,
         sizeId: req.body.sizeId,
-        styleId: req.body.sizeId
+        styleId: req.body.sizeId,
     }
 }).then((product)=>{
-        User.findByPk(req.user.id)
-        .then((user)=>{
-            UserData.create()
-            .then((userData)=>{
-                Order.findOrCreate({
-                    where:{
-                        userId: req.user.id,
-                        status:req.body.status,
-                        address: req.body.address
-                    }
-                }).then((order)=>{
-                    userData.setOrder(order)
-                    userData.setUser(user)
-                    userData.setProduct(product)
-                })
-              })
+    let findProduct=null
+    if(product[0]){
+        findProduct= product[0]
+    }
+    else{
+        Product.create(req.body)
+        .then((product)=>{
+            Frame.findByPk(req.body.frameId)
+            .then((frame)=>{
+                product.setFrame(frame)
             })
+            .then(()=>{
+                Size.findByPk(req.body.sizeId)
+                .then((size)=>{
+                    product.setSize(size)
+                })
+            }).then(()=>{
+                Style.findByPk(req.body.styleId)
+                .then((style)=>{
+                    product.setStyle(style)
+                })
+            })
+                    
+            findProduct=product
         })
-    }).then(()=>{
-        res.sendStatus(200)
-    }).catch(error=>console.error(error))
+                    
+    }
+      res.json(findProduct)        
+})
+})
+
+                
+
+                 
     
    /*
    User.findByPk(req.user.id)
@@ -74,7 +98,6 @@ router.post("/newProduct",function(req,res){
        res.sendStatus(200)
    })
    */
-})
 
 
 router.get("/getProducts",function(req,res){
