@@ -13,6 +13,17 @@ Product.init({
     tipo: {
         type: Sequelize.ENUM('digital', 'impreso'),
         allowNull: false
+    },
+    time:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    language:{
+        type:Sequelize.STRING,
+        allowNull: false
+    },
+    emailClient:{
+        type: Sequelize.STRING
     }
 
 

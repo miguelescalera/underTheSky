@@ -13,8 +13,9 @@ Product.belongsTo(Frame);
 Product.belongsTo(Style);
 Product.belongsTo(Size);
 
-Product.belongsToMany(Order)
+//Product.belongsToMany(Order)
 Order.belongsTo(User)
+
 
 
 module.exports = {

@@ -18,6 +18,6 @@ Size.init({
 
 
 
-}, { sequelize, modelName: 'product' });
+}, { sequelize, modelName: 'size' });
 
 module.exports = Size;
