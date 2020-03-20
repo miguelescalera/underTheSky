@@ -84,9 +84,9 @@ app.use("/*", function(req, res, next) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-db.sync({ force: false }).then(function() {
+db.sync({ force: true }).then(function() {
   console.log("database ready");
   app.listen("3000", function() {
-    console.log("Server on port 3000");
+    console.log("Server is on port 3000 and ready to fight (ง •̀_•́)ง");
   });
 });

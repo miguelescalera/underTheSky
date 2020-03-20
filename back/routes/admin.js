@@ -3,6 +3,11 @@ const router = express.Router();
 const Frame = require("../models/frame")
 const Size = require("../models/size")
 const Style = require("../models/style")
+const Display = require('../models/display')
+
+
+
+//RUTAS DE FRAMES
 
 router.get("/getFrame",function(req,res){
     Frame.findAll().then(function(frames){
@@ -30,6 +35,8 @@ router.delete("/deleteFrame",function(req,res){
         
 
 
+//RUTAS DE SIZE
+
 router.get("/getSize",function(req,res){
     Size.findAll().then(function(sizes){
         res.json(sizes)
@@ -54,12 +61,14 @@ router.delete("/deleteSize",function(req,res){
 })
 
 
+
+//RUTAS DE STYLE
+
 router.get("/getStyle",function(req,res){
     Style.findAll().then(function(styles){
         res.json(styles)
     })
 })
-
 
 router.post("/newStyle",function(req,res){
     Style.create(req.body)
@@ -78,5 +87,29 @@ router.delete("/deleteStyle",function(req,res){
     })
 })
 
+//RUTAS DE DISPLAY
+
+router.get("/getDisplay",function(req,res){
+    Style.findAll().then(function(styles){
+        res.json(displays)
+    })
+})
+
+router.post("/newDisplay",function(req,res){
+    Display.create(req.body)
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
+
+router.delete("/deleteDisplay",function(req,res){
+    Display.findByPk(req.body.id)
+    .then(function(style){
+        style.destroy()
+    })
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
 
 module.exports= router

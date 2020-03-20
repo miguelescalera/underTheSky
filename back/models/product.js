@@ -3,28 +3,34 @@ const sequelize = require('../db/index.js');
 
 class Product extends Sequelize.Model { }
 Product.init({
+    emailClient: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     date: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    content: {
-        type: Sequelize.STRING
-    },
-    tipo: {
-        type: Sequelize.ENUM('digital', 'impreso'),
+    time: {
+        type: Sequelize.STRING,
         allowNull: false
-    },
-    time:{
+    }, 
+    place: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    language:{
-        type:Sequelize.STRING,
-        allowNull: false
+    content: {
+        type: Sequelize.STRING,
+        allowNull: true
     },
-    emailClient:{
-        type: Sequelize.STRING
-    }
+    language: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    img: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
 
 
 }, { sequelize, modelName: 'product' });

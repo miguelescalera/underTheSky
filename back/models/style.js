@@ -5,12 +5,14 @@ class Style extends Sequelize.Model { }
 Style.init({
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
     },
     color: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: false,
     }
-}, { sequelize, modelName: 'category' });
+}, { sequelize, modelName: 'style' });
 
 module.exports = Style;

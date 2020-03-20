@@ -13,7 +13,7 @@ Size.init({
     },
     price: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     }
 
 

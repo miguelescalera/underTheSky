@@ -5,16 +5,9 @@ class Frame extends Sequelize.Model { }
 Frame.init({
     frameless: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: false
     },
-    width: {
-        type: Sequelize.INTEGER,
-    },
-    height: {
-        type: Sequelize.INTEGER,
-
-    },
-    color: {
+    type: {
         type: Sequelize.STRING,
     },
     price: {

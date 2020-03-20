@@ -6,17 +6,18 @@ class User extends Sequelize.Model { }
 
 User.init({
     type: {
-        type: Sequelize.ENUM('superAdmin', 'admin', 'normal'),
+        type: Sequelize.ENUM('admin', 'normal'),
         defaultValue: 'normal'
     },
-    username: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-            notEmpty: true
-        }
-
     },
+    lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
     email: {
         type: Sequelize.STRING,
         allowNull: false,
