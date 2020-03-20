@@ -1,12 +1,47 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/product")
+const User = require ("../models/user")
+const Order = require ("../models/order")
+const Frame = require("../models/frame")
+const Size = require("../models/size")
+const Style = require("../models/style")
 
 
 router.post("/newProduct",function(req,res){
-
-    Product.create(req.body)
-    .then(function(){
+   
+    User.findByPk(req.user.id)
+    .then((user)=>{
+        
+        Product.create(req.body)
+        .then((product)=>{
+                product.setUser(user)
+        })
+        .then(()=>{
+            Order.create(req.body)
+        })
+        .then((order)=>{
+            Product.setOrder(order)
+        }).then(()=>{
+            Frame.findByPk(req.body.frameId)
+            .then((frame)=>{
+                Product.setFrame(frame)
+            })
+        })
+        .then(()=>{
+            Size.findByPk(req.body.sizeId)
+            .then((size)=>{
+                Product.setFrame(size)
+            })
+        })
+        .then(()=>{
+            Style.findByPk(req.body.styleId)
+            .then((style)=>{
+                Product.setFrame(style)
+            })
+        })
+    })
+    .then(()=>{
         res.sendStatus(200)
     })
 })
