@@ -6,15 +6,23 @@ const Order = require('./order')
 const Frame = require("./frame")
 const Style = require('./style')
 const Size = require('./size')
+const ProductData = require('./productData')
+const Display = require('./display')
 
 
-Product.belongsTo(User);
+ProductData.belongsTo(Product);
+ProductData.belongsTo(Order);
+
+
+
 Product.belongsTo(Frame);
 Product.belongsTo(Style);
 Product.belongsTo(Size);
 
-//Product.belongsToMany(Order)
+
 Order.belongsTo(User)
+
+Display.belongsTo(Style)
 
 
 
@@ -24,8 +32,10 @@ module.exports = {
     Product,
     Frame,
     Style,
-    Size
-
+    Size,
+    ProductData,
+    Display,
+    Order
 }
 
 
