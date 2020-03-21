@@ -20,16 +20,39 @@ router.get("/:id",function(req,res){
 
 
 router.post("/register",function(req,res){
+    console.log("esty en el back",req.body)
+   
     User.create(req.body).then(function(){
-        res.sendStatus(201)
+        res.sendStatus(201).send(req.body)
     })
 })
 
 
+router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) {
+        return next(err); // will generate a 500 error
+      }
+      // Generate a JSON response reflecting authentication status
+      if (! user) {
+        return res.send({ success : false, message : 'authentication failed' });
+      }
+      
+      req.login(user, loginErr => {
+        if (loginErr) {
+          return next(loginErr);
+        }
+        console.log("REQ.USER:",req.user)
+        return res.send(req.user);
+      });      
+    })(req, res, next);
+  });
 
-router.post("/login",passport.authenticate('local'),function(req,res){
-    res.send(req.user)
-})
+  /*
+  router.post("/login",passport.authenticate('local'),function(req,res){
+      res.send(req.user)
+  })
+  */
 
 router.post('/logout', function(req, res){
    

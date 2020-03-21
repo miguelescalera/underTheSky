@@ -3,12 +3,10 @@ import {Link} from "react-router-dom"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card'
-import Alert from "react-bootstrap/Alert"
-import Img from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 
 
-export default () => {
+export default ({ handleChange, handleSubmit }) => {
 
 
   const formStyle = {
@@ -33,16 +31,16 @@ export default () => {
         <Form  >
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" name="email" />
+            <Form.Control type="email" placeholder="Enter email" name="email" onChange={handleChange} />
             <Form.Text className="text-muted">
               Iniciá sesión con tu email
           </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="password"  />
+            <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
           </Form.Group>
-          <Button variant="dark" type="submit" style={{marginBlockStart:'1rem'}} >
+          <Button variant="dark" type="submit" style={{marginBlockStart:'1rem'}} onClick={handleSubmit}>
             Iniciar Sesión
         </Button>
         <Link to="/register">
@@ -51,10 +49,12 @@ export default () => {
               </Form.Text>
             </Link>
         </Form>
+        <Container style={{display:'flex', justifyContent:'flex-end', alignItems:'flex-end'}} >
+        </Container>
+
+
       </Card>
 
     </div>
   )
 }
-
-
