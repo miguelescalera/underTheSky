@@ -1,92 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/product")
-const User = require ("../models/user")
-const Order = require ("../models/order")
-const Frame = require("../models/frame")
-const Size = require("../models/size")
-const Style = require("../models/style")
+const Product = require("../models/product");
+const ProductData = require("../models/productData");
 
+router.post("/newProductData", function(req, res) {
+  ProductData.create(req.body).then(productData => {
+    res.json(productData);
+  });
+});
 
-router.post("/newProduct",function(req,res){
-   
-    User.findByPk(req.user.id)
-    .then((user)=>{
-        
-        Product.create(req.body)
-        .then((product)=>{
-                product.setUser(user)
-        })
-        .then(()=>{
-            Order.create(req.body)
-        })
-        .then((order)=>{
-            Product.setOrder(order)
-        }).then(()=>{
-            Frame.findByPk(req.body.frameId)
-            .then((frame)=>{
-                Product.setFrame(frame)
-            })
-        })
-        .then(()=>{
-            Size.findByPk(req.body.sizeId)
-            .then((size)=>{
-                Product.setFrame(size)
-            })
-        })
-        .then(()=>{
-            Style.findByPk(req.body.styleId)
-            .then((style)=>{
-                Product.setFrame(style)
-            })
-        })
+router.post("/newProduct", function(req, res) {
+  Product.findOrCreate({
+    where: {
+      digital: req.body.digital,
+      frameId: req.body.frameId,
+      sizeId: req.body.sizeId,
+      styleId: req.body.styleId
+    }
+  }).spread(function(product, created) {
+    res.json(product);
+  });
+});
+
+router.get("/:id", function(req, res) {
+  Product.findByPk(req.params.id).then(function(product) {
+    res.json(product);
+  });
+});
+
+router.put("/:id", function(req, res) {
+  Product.findByPk(req.params.id)
+    .then(function(product) {
+      product.update(req.body);
     })
-    .then(()=>{
-        res.sendStatus(200)
-    })
-})
+    .then(function() {
+      res.sendStatus(204);
+    });
+});
 
-
-router.get("/getProducts",function(req,res){
-    Product.findAll()
-    .then(function(products){
-        res.json(products)
-    })
-})
-
-
-router.get("/:id",function(req,res){
-    Product.findByPk(req.params.id)
-    .then(function(product){
-        res.json(product)
-    })
-})
-
-
-
-
-router.put("/:id",function(req,res){
-    Product.findByPk(req.params.id)
-    .then(function(product){
-        product.update(req.body)
-    })
-    .then(function(){
-        res.sendStatus(204)
-    })
-})
-
-
-
-router.delete("/:id",function(req,res){
-    Product.findByPk(req.params.id)
-    .then(function(product){
-        product.destroy()
-    })
-    .then(function(){
-        res.sendStatus(200)
-    })
-})
-
-
-
-module.exports= router
+module.exports = router;

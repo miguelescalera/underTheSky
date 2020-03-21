@@ -11,6 +11,6 @@ Style.init({
         type: Sequelize.STRING,
         allowNull: false
     }
-}, { sequelize, modelName: 'category' });
+}, { sequelize, modelName: 'style' });
 
 module.exports = Style;

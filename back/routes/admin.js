@@ -3,6 +3,12 @@ const router = express.Router();
 const Frame = require("../models/frame")
 const Size = require("../models/size")
 const Style = require("../models/style")
+const Order = require("../models/order")
+const User = require("../models/user")
+const Product = require("../models/product")
+
+
+
 
 router.get("/getFrame",function(req,res){
     Frame.findAll().then(function(frames){
@@ -78,5 +84,61 @@ router.delete("/deleteStyle",function(req,res){
     })
 })
 
+
+//////////////////////ORDERS////////////////////////////////////
+router.get("/getOrders",function(req,res){
+    Order.findAll()
+    .then(function(orders){
+        res.json(orders)
+    })
+})
+
+
+router.put("/changeStatus",function(req,res){
+    console.log("BODY: ",req.body)
+    Order.findByPk(req.body.id).then(function(order){
+        console.log("ORDER: ",order)
+        order.update({status:req.body.status})
+    .then(function(){
+        res.sendStatus(200)
+        })
+    })
+})
+
+router.delete("/delete",function(){
+    Order.findByPk(req.body.id)
+    .then(function(order){
+        order.destroy()
+    })
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
+
+/////////////////USERS/////////////////////
+router.get("/getUsers",function(req,res){
+    User.findAll()
+    .then(function(users){
+        res.json(users)
+    })
+})
+
+///////////PRODUCTS////////////////////////
+router.get("/getProducts",function(req,res){
+    Product.findAll()
+    .then(function(products){
+        res.json(products)
+    })
+})
+
+router.delete("/:id",function(req,res){
+    Product.findByPk(req.params.id)
+    .then(function(product){
+        product.destroy()
+    })
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
 
 module.exports= router

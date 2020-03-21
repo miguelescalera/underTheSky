@@ -1,40 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/order")
+const User = require("../models/user")
+const ProductData = require("../models/productData")
 
-router.get("/getOrders",function(req,res){
-    Order.findAll()
-    .then(function(orders){
-        res.json(orders)
-    })
-})
-
-
-router.put("/changeStatus",function(req,res){
-    console.log("BODY: ",req.body)
-    Order.findByPk(req.body.id).then(function(order){
-        console.log("ORDER: ",order)
-        order.update({status:req.body.status})
-    .then(function(){
-        res.sendStatus(200)
-        })
-    })
-})
 
 router.post("/addOrder",function(req,res){
-    Order.create(req.body)
-    .then(function(){
-        res.sendStatus(200)
+    User.findByPk(req.user.id)
+        .then((user)=>{
+            ProductData.findByPk(req.body.productDataId)
+            .then((productData)=>{
+                Order.findOrCreate({
+                    where:{
+                            userId:req.user.id,
+                            status:req.body.status,
+                            address:req.body.address
+                    }
+                }).spread(function(order,created){
+                    productData.setOrder(order)
+                    productData.setUser(user)
+                    res.json(order)
+                })
+            })
+        })
     })
-})
+                
+    
+                   
+                
+                    
 
-router.delete("/delete",function(){
-    Order.findByPk(req.body.id)
-    .then(function(order){
-        order.destroy()
-    })
-    .then(function(){
-        res.sendStatus(200)
-    })
-})
+
 module.exports= router
