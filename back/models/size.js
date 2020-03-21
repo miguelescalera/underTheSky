@@ -1,16 +1,19 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db/index.js');
+const Sequelize = require("sequelize");
+const sequelize = require("../db/index.js");
 
-class Size extends Sequelize.Model { }
-Size.init({
+class Size extends Sequelize.Model {}
+Size.init(
+  {
     name: {
-        type: Sequelize.STRING,
-        allowNull: false
+      type: Sequelize.STRING,
+      allowNull: false
     },
     price: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+      type: Sequelize.INTEGER,
+      allowNull: false
     }
-}, { sequelize, modelName: 'size' });
+  },
+  { sequelize, modelName: "size" }
+);
 
 module.exports = Size;
