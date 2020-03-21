@@ -4,6 +4,9 @@ const Frame = require("../models/frame")
 const Size = require("../models/size")
 const Style = require("../models/style")
 const Order = require("../models/order")
+const User = require("../models/user")
+const Product = require("../models/product")
+
 
 
 
@@ -80,6 +83,8 @@ router.delete("/deleteStyle",function(req,res){
         res.sendStatus(200)
     })
 })
+
+
 //////////////////////ORDERS////////////////////////////////////
 router.get("/getOrders",function(req,res){
     Order.findAll()
@@ -109,4 +114,31 @@ router.delete("/delete",function(){
         res.sendStatus(200)
     })
 })
+
+/////////////////USERS/////////////////////
+router.get("/getUsers",function(req,res){
+    User.findAll()
+    .then(function(users){
+        res.json(users)
+    })
+})
+
+///////////PRODUCTS////////////////////////
+router.get("/getProducts",function(req,res){
+    Product.findAll()
+    .then(function(products){
+        res.json(products)
+    })
+})
+
+router.delete("/:id",function(req,res){
+    Product.findByPk(req.params.id)
+    .then(function(product){
+        product.destroy()
+    })
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
+
 module.exports= router
