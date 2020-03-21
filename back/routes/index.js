@@ -9,10 +9,22 @@ const adminRouter = require("./admin")
 const cartRouter = require("./cart")
 const displayRouter= require("./display")
 
+
+function onlyAdmin(req,res,next){
+    if(req.user.type==="superAdmin"){
+        next()
+    }
+    else{
+        res.redirect("/")
+    }
+}
+
+
+
 router.use("/users",usersRouter)
 router.use("/products",productsRouter)
 router.use("/orders",ordersRouter)
-router.use("/admin",adminRouter)
+router.use("/admin",onlyAdmin,adminRouter)
 router.use("/cart",cartRouter)
 router.use("/display",displayRouter)
 

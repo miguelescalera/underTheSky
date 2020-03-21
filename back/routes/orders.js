@@ -6,19 +6,27 @@ const ProductData = require("../models/productData")
 
 
 router.post("/addOrder",function(req,res){
-    console.log("bBODY::",req.body)
     User.findByPk(req.user.id)
         .then((user)=>{
             ProductData.findByPk(req.body.productDataId)
             .then((productData)=>{
-                Order.create(req.body).then((order)=>{
+                Order.findOrCreate({
+                    where:{
+                            userId:req.user.id,
+                            status:req.body.status,
+                            address:req.body.address
+                    }
+                }).spread(function(order,created){
                     productData.setOrder(order)
                     productData.setUser(user)
-                   
+                    res.json(order)
                 })
             })
         })
     })
+                
+    
+                   
                 
                     
 

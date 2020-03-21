@@ -3,12 +3,7 @@ const router = express.Router();
 const User = require("../models/user")
 const passport = require("passport")
 
-router.get("/getUsers",function(req,res){
-    User.findAll()
-    .then(function(users){
-        res.json(users)
-    })
-})
+
 
 
 router.get("/:id",function(req,res){
@@ -41,7 +36,7 @@ router.post('/login', function(req, res, next) {
         if (loginErr) {
           return next(loginErr);
         }
-       
+        console.log("USER!!!!",req.user)
         return res.send(req.user);
       });      
     })(req, res, next);
