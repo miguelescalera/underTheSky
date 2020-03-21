@@ -24,12 +24,13 @@ router.post("/newProduct",function(req,res){
     Product.findAll({where:{
         frameId: req.body.frameId,
         sizeId: req.body.sizeId,
-        styleId: req.body.sizeId,
+        styleId: req.body.styleId,
     }
 }).then((product)=>{
-    let findProduct=null
+    console.log("PRODUCT: ",product)
+    
     if(product[0]){
-        findProduct= product[0]
+        res.json(product[0])
     }
     else{
         Product.create(req.body)
@@ -47,14 +48,15 @@ router.post("/newProduct",function(req,res){
                 Style.findByPk(req.body.styleId)
                 .then((style)=>{
                     product.setStyle(style)
+                    res.json(product)
                 })
             })
                     
-            findProduct=product
+           
         })
                     
     }
-      res.json(findProduct)        
+           
 })
 })
 

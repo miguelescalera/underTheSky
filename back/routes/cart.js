@@ -6,26 +6,16 @@ const Product = require("../models/product")
 
 /*esta ruta trae todos los products data con sus ordenes y productos pero no estan ordenados, buscar la forma de que los traiga ordenados*/
 router.get("/",function(req,res){
-    let data=[]
-    let object={}
     ProductData.findAll({
         where:{
             userId:req.user.id
         }
     }).then((productsData)=>{
-        console.log("PRODUCTOS!!",productsData)
-        productsData.forEach((e)=>{
-            Order.findAll({where:{id:e.orderId}})
-            .then((orders)=>{
-                object.productData=e
-                object.order= orders
-                data.push(object)
-            })
-        })
-    }).then(()=>{
-        res.send(data)
+        res.send(productsData)
     })
 })
+  
+    
                 
                 
             
