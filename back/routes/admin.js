@@ -6,7 +6,7 @@ const Style = require("../models/style")
 const Order = require("../models/order")
 const User = require("../models/user")
 const Product = require("../models/product")
-
+const Display= require("../models/display")
 
 
 
@@ -24,8 +24,7 @@ router.post("/newFrame",function(req,res){
 })
 
 router.delete("/deleteFrame",function(req,res){
-    console.log("aca esta el id: ",req.body.id)
-    Frame.findByPk(req.body.id)
+    Frame.findByPk(req.body.frameId)
     .then(function(frame){
         frame.destroy()
     })
@@ -33,6 +32,7 @@ router.delete("/deleteFrame",function(req,res){
         res.sendStatus(200)
     })
 })
+  
         
 
 
@@ -50,7 +50,7 @@ router.post("/newSize",function(req,res){
 })
 
 router.delete("/deleteSize",function(req,res){
-    Size.findByPk(req.body.id)
+    Size.findByPk(req.body.sizeId)
     .then(function(size){
         size.destroy()
     })
@@ -61,7 +61,7 @@ router.delete("/deleteSize",function(req,res){
 
 
 router.get("/getStyle",function(req,res){
-    Style.findAll().then(function(styles){
+    Style.findAll().then(function(styleId){
         res.json(styles)
     })
 })
@@ -95,18 +95,18 @@ router.get("/getOrders",function(req,res){
 
 
 router.put("/changeStatus",function(req,res){
-    console.log("BODY: ",req.body)
-    Order.findByPk(req.body.id).then(function(order){
-        console.log("ORDER: ",order)
+    Order.findByPk(req.body.orderId).then(function(order){
         order.update({status:req.body.status})
-    .then(function(){
-        res.sendStatus(200)
+    .then(function(newOrder){
+        res.json(newOrder)
         })
     })
 })
+       
+    
 
-router.delete("/delete",function(){
-    Order.findByPk(req.body.id)
+router.delete("/deleteOrder",function(){
+    Order.findByPk(req.body.orderId)
     .then(function(order){
         order.destroy()
     })
@@ -123,18 +123,42 @@ router.get("/getUsers",function(req,res){
     })
 })
 
+router.delete("/deleteUser",function(req,res){
+    User.findByPk(req.body.userId)
+    .then((user)=>{
+        user.destroy
+    })
+    .then(res.sendStatus(204))
+})
 ///////////PRODUCTS////////////////////////
-router.get("/getProducts",function(req,res){
-    Product.findAll()
-    .then(function(products){
-        res.json(products)
+
+
+router.delete("/deleteProduct",function(req,res){
+    Product.findByPk(req.body.productId)
+    .then(function(product){
+        product.destroy()
+    })
+    .then(function(){
+        res.sendStatus(200)
     })
 })
 
-router.delete("/:id",function(req,res){
-    Product.findByPk(req.params.id)
-    .then(function(product){
-        product.destroy()
+/////////DISPLAY//////////////////////
+router.get("/getDisplay",function(req,res){
+    Display.findAll().then(function(display){
+        res.json(display)
+    })
+})
+router.post("/newDisplay",function(req,res){
+    Display.create(req.body)
+    .then(function(){
+        res.sendStatus(200)
+    })
+})
+router.delete("/deleteDisplay",function(req,res){
+    Display.findByPk(req.body.displayId)
+    .then(function(style){
+        style.destroy()
     })
     .then(function(){
         res.sendStatus(200)

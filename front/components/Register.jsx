@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Row from "react-bootstrap/Row";
 
 
-export default ({handleChange, handleSubmit}) => {
+export default ({handleChange, handleClick}) => {
 
 
   const formStyle = {
@@ -38,7 +38,7 @@ border: '1px solid rgba(0,0,0,0)'
       <Row>
       <span>
         <div style={divFormStyle}>
-          <Form onClick={handleSubmit} style={formStyle} >
+          <Form  style={formStyle} >
             <Form.Group controlId="formBasicFirstName">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" placeholder="Nombre" onChange={handleChange} name='firstName' />
@@ -58,7 +58,7 @@ border: '1px solid rgba(0,0,0,0)'
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" onChange={handleChange} name='password' />
             </Form.Group>
-            <Button variant="dark" type="submit">
+            <Button onClick={handleClick} variant="dark" type="submit">
               Registrar
             </Button>
             <Link to="/login">

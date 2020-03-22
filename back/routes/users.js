@@ -9,13 +9,15 @@ router.get("/:id", function(req, res) {
   });
 });
 
-router.post("/register", function(req, res) {
-  console.log("esty en el back", req.body);
 
+router.post("/register", function(req, res) {
   User.create(req.body).then(function() {
     res.sendStatus(201).send(req.body);
   });
 });
+  
+
+
 
 router.post("/login", function(req, res, next) {
   passport.authenticate("local", function(err, user, info) {
@@ -31,39 +33,35 @@ router.post("/login", function(req, res, next) {
       if (loginErr) {
         return next(loginErr);
       }
-      console.log("USER!!!!", req.user);
+     
       return res.send(req.user);
     });
   })(req, res, next);
 });
 
-/*
-  router.post("/login",passport.authenticate('local'),function(req,res){
-      res.send(req.user)
-  })
-  */
+
 
 router.post("/logout", function(req, res) {
   if (req.isAuthenticated()) {
-    // console.log("Logouteo")
     req.logout();
     req.session.destroy();
   }
   res.send("Logout");
 });
+   
 
-router.put("/:id", function(req, res) {
-  User.findByPk(req.params.id)
+router.put("/modify", function(req, res) {
+  User.findByPk(req.user.id)
     .then(function(user) {
       user.update(req.body);
     })
-    .then(function() {
-      res.sendStatus(204);
+    .then(function(newUser) {
+      res.json(newUser);
     });
 });
 
-router.delete("/:id", function(req, res) {
-  User.findByPk(req.params.id)
+router.delete("/delete", function(req, res) {
+  User.findByPk(req.user.id)
     .then(function(user) {
       user.destroy();
     })
