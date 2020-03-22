@@ -5,4 +5,4 @@ import reducer from './reducers/index.js';
 
 
 
-export default createStore( ()=>({}), applyMiddleware(createLogger(), thunkMiddleware));
+export default createStore( reducer, applyMiddleware(createLogger(), thunkMiddleware));

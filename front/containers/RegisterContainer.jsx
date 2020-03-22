@@ -4,14 +4,7 @@ import {userRegister} from "../actions/RegisterAction"
 import {connect} from "react-redux"
 
 
-const mapDispatchToProps = (dispatch, state) => {
-    return {
-        userRegister: (user)=>dispatch(userRegister(user))
-    }
-}
-const mapStateToProps = function (state) {
-    return {}
-}
+
 
 
 class RegisterContainer extends React.Component{
@@ -24,7 +17,7 @@ class RegisterContainer extends React.Component{
             password:""
         }
         this.handleChange=this.handleChange.bind(this)
-        this.handleSubmit=this.handleSubmit.bind(this)
+        this.handleClick=this.handleClick.bind(this)
 
     }
 
@@ -34,10 +27,10 @@ handleChange(e) {
     this.setState({ [key]: value })
 }
 
-handleSubmit(evento){
-    console.log("entre", this.state)
+handleClick(evento){
+    console.log("entre", evento)
     evento.preventDefault()
-    this.props.userRegister(this.state)
+    userRegister(this.state)
     //aca va el history push para redirigir al login
     // this.props.history.push("/login")
 }
@@ -49,9 +42,9 @@ handleSubmit(evento){
             <div>
                 <Register 
                 handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}/>
+                handleClick={this.handleClick}/>
             </div>
         )
     }
 }
-export default connect (null, mapDispatchToProps)(RegisterContainer)
+export default connect (null, null)(RegisterContainer)

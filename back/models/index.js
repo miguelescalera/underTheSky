@@ -12,6 +12,7 @@ const Display = require("./display");
 ProductData.belongsTo(Product);
 ProductData.belongsTo(Order);
 ProductData.belongsTo(User);
+ProductData.belongsTo(Product)
 
 Product.belongsTo(Frame);
 Product.belongsTo(Style);

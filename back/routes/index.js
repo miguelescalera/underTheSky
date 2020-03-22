@@ -7,7 +7,7 @@ const productsRouter = require("./products")
 const ordersRouter = require("./orders")
 const adminRouter = require("./admin")
 const cartRouter = require("./cart")
-const displayRouter= require("./display")
+
 
 
 function onlyAdmin(req,res,next){
@@ -26,7 +26,7 @@ router.use("/products",productsRouter)
 router.use("/orders",ordersRouter)
 router.use("/admin",onlyAdmin,adminRouter)
 router.use("/cart",cartRouter)
-router.use("/display",displayRouter)
+
 
 
 
