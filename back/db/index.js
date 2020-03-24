@@ -2,12 +2,6 @@
 
 const Sequelize = require("sequelize");
 
-const db = new Sequelize(
-  "postgres://postgres:fernandez10@localhost:5432/under_the_sky",
-  {
-    logging: false,
-    dialect: "postgres"
-  }
-);
+const db = new Sequelize('postgres://postgres@localhost:5432/under_the_sky', { logging: false })
 
 module.exports = db;
