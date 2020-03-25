@@ -27,7 +27,9 @@ export default ({handleChange, handleClick}) => {
     
     alignItems:'center',
 backgroundColor:'rgba(0,0,0,0)',
-border: '1px solid rgba(0,0,0,0)'    
+  border: '1px solid rgba(0,0,0,0)',
+  marginBlockStart:'5rem'
+  
   }
 
 

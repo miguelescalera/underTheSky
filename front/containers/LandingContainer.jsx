@@ -7,12 +7,17 @@ import { withRouter } from "react-router-dom";
 class LandingContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this)
+
     }
 
+    handleClick(e) {
+        this.props.history.push('/products/getproducts')
+      }
 
     render() {
         return (
-                <Landing />
+                <Landing handleClick={this.handleClick} />
         )
     }
 }

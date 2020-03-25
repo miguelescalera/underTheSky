@@ -22,7 +22,7 @@ export default ({ handleChange, handleSubmit }) => {
     display:"flex",
     justifyContent: 'center',
     marginBlockEnd: "5rem", 
-    marginBlockStart: "5rem" 
+    marginBlockStart: "15rem" 
   }
   return (
     <div  style={divFormStyle}>
