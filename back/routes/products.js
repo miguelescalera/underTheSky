@@ -22,6 +22,39 @@ router.get('/productData/:id', function (req, res) {
 })
 
 
+
+router.post("/getUserProducts",(req,res)=>{
+  Product.findOne({
+    where:{
+      id:req.body.productId
+    }
+  })
+  .then((product)=>{
+    console.log("userProducst:",product)
+    res.json(product)
+  })
+})
+
+
+
+router.post("/getProductFSS",(req,res)=>{
+  console.log("BODY:",req.body)
+  Size.findByPk(req.body.sizeId)
+  .then((size)=>{
+    Frame.findByPk(req.body.frameId)
+    .then((frame)=>{
+        Style.findByPk(req.body.styleId)
+        .then((style)=>{
+            res.send({
+              size:size,
+              frame:frame,
+              style:style
+            })
+        })
+    })
+  })
+})
+
 router.post("/newProductData", function (req, res) {
   ProductData.create(req.body)
     .then(productData => {

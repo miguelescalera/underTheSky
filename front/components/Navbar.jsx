@@ -24,6 +24,7 @@ export default () => {
           </Form>
             <button><Link to="/register" >Register</Link></button>
             <button><Link to="/products" >products</Link></button>
+            <button><Link to="/cart" >cart</Link></button>
         </Navbar>
     </div>
   );

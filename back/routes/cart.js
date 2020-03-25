@@ -5,12 +5,14 @@ const Order = require("../models/order")
 const Product = require("../models/product")
 
 
-router.get("/",function(req,res){
+router.get("/getDataProducts",function(req,res){
+    console.log("llegue")
     ProductData.findAll({
         where:{
             userId:req.user.id
         }
     }).then((productsData)=>{
+        console.log("productsData:",productsData)
         res.send(productsData)
     })
 })
