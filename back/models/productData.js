@@ -29,6 +29,6 @@ ProductData.init({
     }
 
 
-}, { sequelize, modelName: 'productData' });
+}, { sequelize, modelName: 'product_data' });
 
 module.exports = ProductData;
