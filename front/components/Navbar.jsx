@@ -16,7 +16,7 @@ export default () => {
           </Link>
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="/products/getProducts">Productos</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Form inline>
