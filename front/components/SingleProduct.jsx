@@ -6,18 +6,19 @@ import Button from "react-bootstrap/Button";
 
 
 export default ({ handleSize,
-                  handleFrame,
-                  handleColor,
-                  sizes,
-                  frames,
-                  styles                
-                }) => {
+  handleFrame,
+  handleColor,
+  sizes,
+  frames,
+  styles,
+  handleClick
+}) => {
 
-                  
 
-console.log("sizes",sizes)
-console.log("frames",frames)
-console.log("styles",styles)
+
+  console.log("sizes", sizes)
+  console.log("frames", frames)
+  console.log("styles", styles)
   return (
 
 
@@ -38,57 +39,57 @@ console.log("styles",styles)
 
       <Container className="d-flex justify-content-center">
         <h4>Tamaño</h4>
-        {!sizes?<p>cargando</p>:sizes.map((e)=>{
-          return(
-            <Button variant="outline-info" onClick ={()=>handleSize(e.id)} name="13x18" >{e.name}</Button>
-            )
-          })}
-          <h5>$400</h5> <br/>
-          </Container>
-          
-          <Container className="d-flex justify-content-center">
-           <h4>Color</h4>
-        {!styles?<p>cargando</p>:styles.map((e)=>{
-          return(
-            <Button variant="outline-info" onClick={()=>handleColor(e.id)} name="Blue" >{e.color}</Button>
-            )
-          })}  
-           </Container>
-           
-           <Container className="d-flex justify-content-center">
-           <h4>Marco</h4>
-          {!frames?<p>cargando</p>:frames.map((e)=>{
-            return(
-              <Button variant="outline-info" onClick={()=>handleFrame(e.id)} name="madera" >{e.name}</Button>
-              )
-            })}
-           </Container>
+        {!sizes ? <p>cargando</p> : sizes.map((e) => {
+          return (
+            <Button variant="outline-info" onClick={() => handleSize(e.id)} name="13x18" >{e.name}</Button>
+          )
+        })}
+        <h5>$400</h5> <br />
+      </Container>
+
+      {/* <Container className="d-flex justify-content-center">
+        <h4>Color</h4>
+        {!styles ? <p>cargando</p> : styles.map((e) => {
+          return (
+            <Button variant="outline-info" onClick={() => handleColor(e.id)} name="Blue" >{e.color}</Button>
+          )
+        })}
+      </Container> */}
+
       <Container className="d-flex justify-content-center">
-      <Button variant="outline-info"  type="submit" size="lg" >Comprar</Button>{" "}
+        <h4>Marco</h4>
+        {!frames ? <p>cargando</p> : frames.map((e) => {
+          return (
+            <Button variant="outline-info" onClick={() => handleFrame(e.id)} name="madera" >{e.name}</Button>
+          )
+        })}
+      </Container>
+      <Container className="d-flex justify-content-center">
+        <Button variant="outline-info" type="submit" size="lg" onClick={handleClick} >Siguiente Paso</Button>{" "}
       </Container>
     </div>
   );
 };
 
-     
-
-           
-            
-          
-                
-          
-        
-           
-
-            
 
 
 
-            
 
-            
 
-           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
