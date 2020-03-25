@@ -30,7 +30,7 @@ class Main extends React.Component {
         <Switch>
           <Route path="/home" exact component={LandingContainer} />
           <Route path="/products/getProducts" exact component={ProductsContainer} />
-          <Route path="/products/:id" exact component={SingleProductContainer} />
+          <Route path="/products" exact component={SingleProductContainer} />
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/register" exact component={RegisterContainer} />
           <Route path="/product" exact component={SingleProductContainer} />

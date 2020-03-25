@@ -23,6 +23,7 @@ export default () => {
             <button><Link to="/login" >login</Link></button>
           </Form>
             <button><Link to="/register" >Register</Link></button>
+            <button><Link to="/products" >products</Link></button>
         </Navbar>
     </div>
   );

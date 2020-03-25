@@ -3,11 +3,26 @@ import SingleProduct from "../components/SingleProduct"
 import {connect} from "react-redux"
 import {getAllfss} from "../actions/productsActions"
 
+const mapStateToProps=(state,ownProps)=>{
+    return{
+        
+        frames:state.products.Allfss.frames,
+        sizes:state.products.Allfss.sizes,
+        styles:state.products.Allfss.styles
+        
+    }
+}
+
+
+
+
 const mapDispatchToProps=(dispatch)=>{
     return{
         getAllfss: ()=>dispatch(getAllfss())
     }
 }
+
+
 
 
 class SingleProductContainer extends React.Component{
@@ -24,26 +39,23 @@ class SingleProductContainer extends React.Component{
     }
     
 
+
 componentDidMount(){
-    // console.log(this.props)
     this.props.getAllfss()
+   
+     
 }
 
+ 
 
-    handleFrame(e) {
-        let value = e.target.name
-        this.setState({frame:value})
-        console.log("frame",value)   
+    handleFrame(id) {
+        console.log("id:",id)
     }
-    handleSize(e) {
-        let value = e.target.name
-        this.setState({size:value})
-        console.log("Size",value)
+    handleSize(id) {
+        console.log("id:",id)
     }
-    handleColor(e) {
-        let value = e.target.name
-        this.setState({color:value})
-        console.log("color",value)
+    handleColor(id) {
+        console.log("id:",id)
     }
     // handleSubmit(e){
     //     console.log("entre",e)
@@ -56,18 +68,25 @@ componentDidMount(){
     
     
     render(){
-        console.log("estoy en el size",this.state.size)
-        console.log("estoy en el marco",this.state.frame)
-        console.log("estoy en el color",this.state.color)
+        console.log("frame",this.props.sizes)
+        console.log("size",this.props.frames)
+        console.log("style",this.props.styles)
         return(
             <div>
+                
+                
                 <SingleProduct 
                 handleColor={this.handleColor}
                 handleSize={this.handleSize}
-                handleFrame={this.handleFrame}/>
+                handleFrame={this.handleFrame}
+                sizes={this.props.sizes}
+                frames={this.props.frames}
+                styles={this.props.styles}
+                />
+                
             </div>
         )
     }
 }
 
-export default connect (null, mapDispatchToProps)(SingleProductContainer)
+export default connect (mapStateToProps, mapDispatchToProps)(SingleProductContainer)

@@ -1,52 +1,105 @@
+const Style= require("./models/style")
+const Size= require("./models/size")
+const Frame= require("./models/frame")
+
+/*
 const { 
   Display,
   Style
  } = require("./models/index.js");
 
 
+ */
 
-function addStyle(name, color) {
-  Style.create({
-    name,
-    color
-  })
-  .then(newStyle => {
-    console.log("added", newStyle);
-  })
-  .catch(console.log);
-}
+
+
 
 
 
 
 const styles = [
   
-  (classic = {
+  {
     name:'classic',
-    color: 'esperanza'
-  }),
-  (minimal = {
-    name:'minimalista',
-    color: 'esperanza'
-  }),
-  (zodiac = {
-    name:'zodiac',
-    color: 'esperanza'
-  }),
-  (fullColor = {
-    name:"fullColor",
-    color: 'esperanza'
-  }),
-  (polaroid = {
-    name:"polaroid",
-    color: 'esperanza'
-  }),
+    color: 'blanco'
+  },
+   {
+    name:'classic',
+    color: 'negro'
+  },
+  {  
+    name:'classic',
+    color: 'gris'
+  }
 ]
 
-styles.map(e => addStyle(e));
+const frames= [
+{
+name:"madera",
+price:200
+},
+{
+name:"negro",
+price:200
+},
+{
+name:"blanco",
+price:200
+}
+
+]
+
+const sizes= [
+  {
+    name:"13x18",
+    price:200
+  },
+  {
+    name:"30x40",
+    price:300
+  },
+  {
+    name:"50x70",
+    price:400
+  }
+]
+
+frames.map((e)=>{
+  console.log("elemento:",e)
+  Frame.create(
+    e
+  )
+  .then(newStyle => {
+    console.log("added", newStyle);
+  })
+  .catch(err=>console.error(err));
+})
 
 
+sizes.map((e)=>{
+  console.log("elemento:",e)
+  Size.create(
+    e
+  )
+  .then(newStyle => {
+    console.log("added", newStyle);
+  })
+  .catch(err=>console.error(err));
+})
 
+
+styles.map((e)=>{
+  console.log("elemento:",e)
+  Style.create(
+    e
+  )
+  .then(newStyle => {
+    console.log("added", newStyle);
+  })
+  .catch(err=>console.error(err));
+})
+
+/*
 const addDisplay = async function({ imgURL, styleId }) {
   const styles = [
   
@@ -108,7 +161,7 @@ const addDisplay = async function({ imgURL, styleId }) {
 //     .catch(console.log);
 // }
 
-
+/*
 const styles = [
   
   (classic = {
@@ -132,6 +185,8 @@ const styles = [
     color: 'esperanza'
   }),
 ]
+
+
 
 const displays = [
   (display = {
@@ -222,3 +277,4 @@ const displays = [
 ];
 
 displays.map(e => addDisplay(e));
+*/

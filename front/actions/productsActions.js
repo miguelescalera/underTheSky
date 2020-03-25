@@ -30,9 +30,10 @@ export const getAllProducts=()=>{
     .then(result=>dispatch(AllProducts(result)))
 }
 
-export const getAllfss=()=>{
+export const getAllfss=()=>dispatch=>{
     console.log("estoy en axios")
     axios.post("/api/products/getAllfss")
     .then(res=> res.data)
     .then(result =>dispatch(Allfss(result)))
+    .catch((err=>console.log("err:",err)))
 }
