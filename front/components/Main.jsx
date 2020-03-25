@@ -32,6 +32,7 @@ class Main extends React.Component {
           <Route path="/products/:id" exact component={SingleProductContainer} />
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/register" exact component={RegisterContainer} />
+          <Route path="/product" exact component={SingleProductContainer} />
           <Redirect from="/" to="/home" />
         </Switch>
         <FooterContainer />

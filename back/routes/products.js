@@ -3,6 +3,9 @@ const router = express.Router();
 const Product = require("../models/product");
 const ProductData = require("../models/productData");
 const User = require("../models/user")
+const Size =require("../models/size")
+const Frame =require("../models/frame")
+const Style =require("../models/style")
 
 router.post("/newProductData", function(req, res) {
   ProductData.create(req.body)
@@ -50,6 +53,22 @@ router.get("/:id", function(req, res) {
     res.json(product);
   });
 });
+
+router.post("/getAllfss",function(req,res){
+  console.log("entre")
+ Frame.findAll().then(frames=>{
+   console.log("fffffffffffff",frames)
+   Style.findAll().then(styles=>{
+     Size.findAll().then(sizes=>{
+       res.send({
+         frames:frames,
+         styles:styles,
+         sizes:sizes
+       })
+     })
+   })
+ })
+})
 
 
 
