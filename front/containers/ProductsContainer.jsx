@@ -13,107 +13,107 @@ import {
 
 const displays = [
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=20',
+    imgURL: 'https://i.imgur.com/Usradoq.png',
     styleId: 1,
     name: "classic"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=23',
+    imgURL: 'https://i.imgur.com/oDx7xxC.png',
     styleId: 2,
     name: "minimalista"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=15',
+    imgURL: 'https://i.imgur.com/oH886qa.png',
     styleId: 3,
     name: "polaroid"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=8',
+    imgURL: 'https://i.imgur.com/fT8oOE8.png',
     styleId: 4,
     name: "full color"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=39',
+    imgURL: 'https://i.imgur.com/qGGi3DF.png',
     styleId: 5,
     name: "zodiac"
   },
 
 
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=20',
+    imgURL: 'https://i.imgur.com/Usradoq.png',
     styleId: 1,
     name: "classic"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=23',
+    imgURL: 'https://i.imgur.com/oDx7xxC.png',
     styleId: 2,
     name: "minimalista"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=15',
+    imgURL: 'https://i.imgur.com/oH886qa.png',
     styleId: 3,
     name: "polaroid"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=8',
+    imgURL: 'https://i.imgur.com/fT8oOE8.png',
     styleId: 4,
     name: "full color"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=39',
+    imgURL: 'https://i.imgur.com/qGGi3DF.png',
     styleId: 5,
     name: "zodiac"
   },
 
 
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=20',
+    imgURL: 'https://i.imgur.com/Usradoq.png',
     styleId: 1,
     name: "classic"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=23',
+    imgURL: 'https://i.imgur.com/oDx7xxC.png',
     styleId: 2,
     name: "minimalista"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=15',
+    imgURL: 'https://i.imgur.com/oH886qa.png',
     styleId: 3,
     name: "polaroid"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=8',
+    imgURL: 'https://i.imgur.com/fT8oOE8.png',
     styleId: 4,
     name: "full color"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=39',
+    imgURL: 'https://i.imgur.com/qGGi3DF.png',
     styleId: 5,
     name: "zodiac"
   },
 
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=20',
+    imgURL: 'https://i.imgur.com/Usradoq.png',
     styleId: 1,
     name: "classic"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=23',
+    imgURL: 'https://i.imgur.com/oDx7xxC.png',
     styleId: 2,
     name: "minimalista"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=15',
+    imgURL: 'https://i.imgur.com/oH886qa.png',
     styleId: 3,
     name: "polaroid"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=8',
+    imgURL: 'https://i.imgur.com/fT8oOE8.png',
     styleId: 4,
     name: "full color"
   },
   {
-    imgURL: 'https://gradientjoy.com/300x400?id=39',
+    imgURL: 'https://i.imgur.com/qGGi3DF.png',
     styleId: 5,
     name: "zodiac"
   },

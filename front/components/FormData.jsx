@@ -28,7 +28,8 @@ export default ({ handleChange, handleSubmit }) => {
 
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0)',
-        border: '1px solid rgba(0,0,0,0)'
+        border: '1px solid rgba(0,0,0,0)',
+        marginBlockStart:'5rem'
     }
 
 

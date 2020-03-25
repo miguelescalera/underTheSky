@@ -49,13 +49,7 @@ const TarjetaProducto = function ({ product, handleClick }) {
             <Col md={3} style={{height:"3rem"}}>
               <span>
               <Button variant="dark" onClick={() => 
-                handleClick(
-                    product.id, 
-                    1, 
-                    product.name, 
-                    product.price, 
-                    product.stock, 
-                    product.imgUrl)} >Seleccionar</Button>
+                handleClick()} >Seleccionar</Button>
               </span>
             </Col>
           </Row>
