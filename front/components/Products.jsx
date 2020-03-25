@@ -10,7 +10,8 @@ export default ({ products, handleClick }) => {
     flexWrap: 'wrap',
     flexGrowth: "2",
     width: "100%",
-    maxWidth:'1000px'
+    maxWidth:'1000px',
+    marginBlockStart:'15vh'
   };
 
   const tarj = {

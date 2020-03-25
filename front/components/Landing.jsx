@@ -1,17 +1,18 @@
 import React from "react";
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import {Button} from 'react-bootstrap'
 
 
-export default () => {
+export default ({handleClick}) => {
+
+    const landingStyle = {
+        display : 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+    }
 
     return (
-        <div>
-            <Jumbotron style={{margin:'auto', marginTop:'120px', textAlign:'center'}}>
-                <h1>Aqui va underthesky</h1>
-                <p>
-                    Practica profesional p5
-                </p>
-            </Jumbotron>
+        <div id='landing' style={landingStyle}>
+            <Button onClick={handleClick} variant='dark' > Ver los estilos</Button>
         </div>
     );
 }
