@@ -10,24 +10,24 @@ export default ({ products, handleClick }) => {
     flexWrap: 'wrap',
     flexGrowth: "2",
     width: "100%",
-    maxWidth:'1000px',
-    marginBlockStart:'15vh'
+    maxWidth: '1000px',
+    marginBlockStart: '15vh'
   };
 
   const tarj = {
     padding: '0.5rem',
 
-      width:"40%",
-      maxWidth:'250px',
+    width: "40%",
+    maxWidth: '250px',
 
   };
-  
-  return(
+
+  return (
     <Container className="d-flex justify-content-center" style={resultTarj}>
       {products.map(product => {
         return (
           <span style={tarj}>
-          <TarjetaProducto product={product} handleClick={handleClick}/>
+            <TarjetaProducto product={product} handleClick={handleClick} />
           </span>
         )
       })}
