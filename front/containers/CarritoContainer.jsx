@@ -1,7 +1,7 @@
 import React from "react"
 import Carrito from "../components/Carrito"
 import { connect } from "react-redux";
-import {getCart} from "../actions/cartActions"
+import {getCart,deleteProductData} from "../actions/cartActions"
 
 const mapStateToProps=(state,ownProps)=>{
     return{
@@ -13,16 +13,23 @@ const mapStateToProps=(state,ownProps)=>{
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        getCart: ()=>dispatch(getCart())
+        getCart: ()=>dispatch(getCart()),
+        deleteProductData:(id)=>dispatch(deleteProductData(id))
     }
 }
 
  class NavbarContainer extends React.Component{
      constructor(props){
          super()
+
+         this.handleDelete= this.handleDelete.bind(this)
      }
 componentDidMount(){
     this.props.getCart()
+}
+
+handleDelete(id){
+this.props.deleteProductData(id)
 }
 
     render(){
@@ -32,6 +39,7 @@ componentDidMount(){
                 dataProduct={this.props.dataProduct}
                 userProduct={this.props.userProduct}
                 fss={this.props.fss}
+                handleDelete={this.handleDelete}
                 />
             </div>
         )
