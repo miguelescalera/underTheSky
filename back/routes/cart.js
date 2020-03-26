@@ -26,8 +26,8 @@ router.get("/getDataProducts",function(req,res){
 
 
 
-router.delete("/delete",function(req,res){
-    ProductData.findByPk(req.body.id)
+router.delete("/delete/:id",function(req,res){
+    ProductData.findByPk(req.params.id)
     .then((productData)=>{
         productData.destroy()
     }).then(()=>{
