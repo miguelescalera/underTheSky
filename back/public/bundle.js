@@ -1893,7 +1893,8 @@ var RegisterContainer = /*#__PURE__*/function (_React$Component) {
       console.log("entre", evento);
       evento.preventDefault();
       Object(_actions_RegisterAction__WEBPACK_IMPORTED_MODULE_2__["userRegister"])(this.state); //aca va el history push para redirigir al login
-      // this.props.history.push("/login")
+
+      this.props.history.push("/login");
     }
   }, {
     key: "render",

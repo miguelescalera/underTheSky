@@ -30,6 +30,7 @@ class LoginContainer extends React.Component {
     this.setState({
       [key]: value
     });
+    
   }
 
   handleSubmit(e) {
