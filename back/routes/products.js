@@ -8,20 +8,27 @@ const Frame = require("../models/frame")
 const Style = require("../models/style")
 
 
-
+/* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
-  console.log('llegue a la ruta y esto es', req.body)
   ProductData.create(req.body)
     .then(productData => res.send(productData))
 })
+  
 
 
 router.get('/productData/:id', function (req, res) {
   ProductData.findByPk(req.params.id)
-    .then(data => res.send('entro'))
+    .then(data => res.send(data))
 })
 
-
+router.put("/modifyDataProduct",function(req,res){
+  ProductData.update({quantity: req.body.quantity},
+    {returning: true, where: {id: req.body.productDataId} })
+    .then(([ rowsUpdate, [updatedData] ])=>{
+     res.json(updatedData)
+    })
+    .catch(err=>console.log("error:",err))
+})
 
 router.post("/getUserProducts", (req, res) => {
   Product.findOne({
@@ -37,8 +44,13 @@ router.post("/getUserProducts", (req, res) => {
 
 
 
+
+
+  
+
 router.post("/getProductFSS", (req, res) => {
   console.log("BODY:", req.body)
+
   Size.findByPk(req.body.sizeId)
     .then((size) => {
       Frame.findByPk(req.body.frameId)

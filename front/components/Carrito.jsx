@@ -1,4 +1,4 @@
-import React, { useState } from 'react';;
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
@@ -9,29 +9,49 @@ import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 
 
-export default ({dataProduct,userProduct,fss,handleDelete}) => {
-  const [show, setShow] = useState(false);
+export default ({
+  dataProduct,
+  userProduct,
+  fss,
+  handleDelete,
+  handleSubmit,
+  handleQuantity
+}) => {
 
+  
+  const [show, setShow] = useState(false);
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-    let allData=[]
-    
-    for (let i = 0; i < dataProduct.length; i++) {
-       allData.push({
-        dataProduct:dataProduct[i],
-        userProduct:userProduct[i].data,
-        fss:fss[i].data
-       })
-    }
+  let allData=[]
+  let quantity=1
+  
+  if(userProduct[0]&&fss[0]){
+    console.log("antes de un sort:",dataProduct)
+    dataProduct=dataProduct.sort()
+    console.log("despues de un sort:",dataProduct)
+      for (let i = 0; i < dataProduct.length; i++) {
+              allData.push({
+               dataProduct:dataProduct[i],
+               userProduct:userProduct[i].data,
+               fss:fss[i].data
+              })
+            }
+            
+          }
+          else{
+            allData=[]
+          }
+  
     const CheckoutButton={
-      marginTop:"10%",
+      marginTop:"5%",
       marginBottom:"10%",
       
     }
 
     const buttonModal={
       marginTop:"10%",
-      marginBottom:"10%",
+      marginBottom:"5%",
       backgroundColor:"white",
       border:"solid 1px #80808061"
     }
@@ -62,16 +82,17 @@ export default ({dataProduct,userProduct,fss,handleDelete}) => {
       width:"20%",
       paddingTop: "0px",
       float: "right",
-      backgroundColor: "white",
-      borderWidth: "0px 0px 1px 1px",
+      borderWidth: "0px 0px 0px 0px",
       borderStyle: "solid",
-      borderColor: "white white black black",
+      borderColor: "white white #00000085 #00000085",
       color: "white",
-      backgroundColor: "black"
+      backgroundColor: " #00000085"
     }
+     
       
     const  styleCart={
-        width:"90%",
+        boxShadow :'8px 8px 15px -10px rgba(0,0,0,0.39)',
+        width:"75%",
         textAlign: "center",
         border: "solid 1px #80808061",
         marginTop: "20%"
@@ -89,13 +110,17 @@ export default ({dataProduct,userProduct,fss,handleDelete}) => {
         <Container>
           <Row>
             {allData.map((e,i)=>{
+              quantity=e.dataProduct.quantity
               return (
                 
-                <Col xs lg="3">
+                <Col xs lg="6">
                   
               <div style={styleCart} >
-                  <button onClick={()=>{handleDelete(e.dataProduct.id)}} style={deleteButton}>X</button>
-                  <div style={{paddingTop:"10%"}}>
+                  <button onClick={()=>{handleDelete(e.dataProduct.id)}} style={deleteButton}>
+                    X
+                  </button>
+                  <span style={{float:"left",marginLeft:"10%"}}>{i+1}</span>
+                  <div style={{paddingTop:"15%"}}>
                      <div>
                        <h4>{e.fss.style.name} </h4>
                      </div>
@@ -104,16 +129,22 @@ export default ({dataProduct,userProduct,fss,handleDelete}) => {
                           <strong>size: </strong>{e.fss.size.name} <br/>
                           <strong>frame: </strong>{e.fss.frame.name} <br/>
                           <strong>color: </strong>{e.fss.style.color} <br/>
-                          <h5>${e.fss.size.price}</h5>
+                          <h5>${e.fss.size.price * quantity}</h5>
                           <div>
-                              <button style={quantityButton_1}>-</button><div style={quantityStyle}>1</div><button style={quantityButton_2} >+</button><br/>
+                          <button style={quantityButton_1} onClick={()=>{handleQuantity(e.dataProduct.id,quantity-1)}} >-</button>
+                          <div style={quantityStyle}>{quantity}</div>
+                          <button style={quantityButton_2} onClick={()=>{handleQuantity(e.dataProduct.id,quantity+1)}} >+</button><br/>
                           </div>
+
+
+
+
                       </div>
                   </div>
                   <>
                       <button style={buttonModal} variant="primary" onClick={handleShow}>
                         more information
-                      </button>
+                      </button> <br/>
 
                       <Modal show={show} onHide={handleClose}>
                         
@@ -148,7 +179,9 @@ export default ({dataProduct,userProduct,fss,handleDelete}) => {
                         </Modal.Footer>
                       </Modal>
                     </>
-              <Button variant="dark" style={CheckoutButton}>checkout</Button>
+              <Button variant="dark" onClick={()=>handleSubmit(e.dataProduct.id)} style={CheckoutButton}>
+                checkout
+              </Button>
               </div>
                 </Col>
                 )
