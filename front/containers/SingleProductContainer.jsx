@@ -3,12 +3,13 @@ import SingleProduct from "../components/SingleProduct"
 import { connect } from "react-redux"
 import { getAllfss, fetchNewProduct } from "../actions/productsActions"
 
+
 const mapStateToProps = (state, ownProps) => {
     return {
 
         frames: state.products.Allfss.frames,
         sizes: state.products.Allfss.sizes,
-        styles: state.products.Allfss.styles
+        style: state.products.selectedStyle
 
     }
 }
@@ -25,8 +26,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class SingleProductContainer extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             digital: true,
             frameId: "",
@@ -42,6 +43,7 @@ class SingleProductContainer extends React.Component {
 
 
     componentDidMount() {
+        console.log('ESTE ES EL STYLE', this.props.style)
         this.props.getAllfss()
 
 
@@ -58,7 +60,15 @@ class SingleProductContainer extends React.Component {
     handleClick(e) {
         console.log("entre", e)
         e.preventDefault()
-        this.props.fetchNewProduct(this.state)
+        this.props.fetchNewProduct(
+            {
+                digital: this.state.digital,
+                frameId: this.state.frameId,
+                sizeId: this.state.sizeId,
+                styleId: this.props.style.id
+
+            }
+        )
         this.props.history.push("/productData")
 
     }

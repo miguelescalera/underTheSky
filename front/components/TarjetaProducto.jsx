@@ -15,23 +15,23 @@ const TarjetaProducto = function ({ product, handleClick }) {
 
 
   const card = {
-    width:"100%",
-    boxShadow :'8px 8px 15px -10px rgba(0,0,0,0.39)',
+    width: "100%",
+    boxShadow: '8px 8px 15px -10px rgba(0,0,0,0.39)',
     borderRadius: "0px",
   }
 
   const name = {
     whiteSpace: "nowrap",
     overflowX: "hidden",
-    overflowY : 'hidden',
+    overflowY: 'hidden',
 
   }
 
 
-  
+
   return (
     <div key={product.id} >
-      <Card style={ card }>
+      <Card style={card}>
         <Link to={`/products/${product.id}`}>
           <Card.Img variant="top" src={product.imgURL} />
         </Link>
@@ -43,13 +43,13 @@ const TarjetaProducto = function ({ product, handleClick }) {
               </Link>
             </Col>
           </Row>
-         
+
           <Row>
 
-            <Col md={3} style={{height:"3rem"}}>
+            <Col md={3} style={{ height: "3rem" }}>
               <span>
-              <Button variant="dark" onClick={() => 
-                handleClick()} >Seleccionar</Button>
+                <Button variant="dark" onClick={() =>
+                  handleClick(product.styleId)} >Seleccionar</Button>
               </span>
             </Col>
           </Row>

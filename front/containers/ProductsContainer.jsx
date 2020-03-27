@@ -2,11 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Products from "../components/Products";
+import { fetchStyle } from '../actions/productsActions'
 
 // ACCIONES 
 import {
   getDisplays
 } from "../actions/adminActions";
+import { runInThisContext } from "vm";
+
+const mapDispatchToProps = (dispatch, state) => {
+  return {
+    fetchStyle: (data) => { dispatch(fetchStyle(data)) }
+  };
+};
+
+const mapStateToProps = (state, ownprops) => {
+  return {};
+};
 
 
 
@@ -125,19 +137,14 @@ const displays = [
 //     };
 // };
 
-
-
-
-
-
 class ProductsContainer extends React.Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this)
   }
 
-
   handleClick(e) {
+    this.props.fetchStyle(e)
     this.props.history.push('/product')
   }
 
@@ -150,4 +157,7 @@ class ProductsContainer extends React.Component {
     );
   }
 }
-export default connect()(ProductsContainer);
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
