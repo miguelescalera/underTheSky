@@ -1,15 +1,11 @@
 const Style= require("./models/style")
 const Size= require("./models/size")
 const Frame= require("./models/frame")
+const DataProduct= require("./models/productData")
+const Product = require("./models/product")
+const user = require("./models/user")
+const faker = require("faker")
 
-/*
-const { 
-  Display,
-  Style
- } = require("./models/index.js");
-
-
- */
 
 
 
@@ -64,40 +60,74 @@ const sizes= [
   }
 ]
 
-frames.map((e)=>{
-  console.log("elemento:",e)
-  Frame.create(
-    e
-  )
-  .then(newStyle => {
-    console.log("added", newStyle);
+
+
+  frames.map((e)=>{
+    console.log("elemento:",e)
+    Frame.create(
+      e
+    )
+    .then(newStyle => {
+      console.log("added", newStyle);
+    })
+    .catch(err=>console.error(err));
   })
-  .catch(err=>console.error(err));
-})
-
-
-sizes.map((e)=>{
-  console.log("elemento:",e)
-  Size.create(
-    e
-  )
-  .then(newStyle => {
-    console.log("added", newStyle);
+  
+  sizes.map((e)=>{
+    console.log("elemento:",e)
+    Size.create(
+      e
+    )
+    .then(newStyle => {
+      console.log("added", newStyle);
+    })
+    .catch(err=>console.error(err));
   })
-  .catch(err=>console.error(err));
-})
-
-
-styles.map((e)=>{
-  console.log("elemento:",e)
-  Style.create(
-    e
-  )
-  .then(newStyle => {
-    console.log("added", newStyle);
+  
+  styles.map((e)=>{
+    console.log("elemento:",e)
+    Style.create(
+      e
+    )
+    .then(newStyle => {
+      console.log("added", newStyle);
+    })
+    .catch(err=>console.error(err));
   })
-  .catch(err=>console.error(err));
-})
+
+
+
+
+
+
+
+
+      
+    
+ /*
+ 
+ for (let i = 0; i < 6; i++) {
+   DataProduct.create({
+     date:faker.date.past(),
+     content:faker.lorem.text(),
+     name:faker.name.firstName(),
+     time:"12.00",
+     language:"español",
+     emailClient:faker.internet.email(),
+     userId:1,
+     productId: i
+   }).then(()=>{
+     console.log("done data product!")
+   }).catch(err=>console.log("error:",err))
+ }
+ 
+ */
+
+  
+
+
+  
+    
 
 /*
 const addDisplay = async function({ imgURL, styleId }) {

@@ -1,8 +1,8 @@
 import axios from "axios"
-import { DATA_PRODUCTS } from "../constans"
+import { DATA_PRODUCT } from "../constans"
 
 export const dataProduct = dataProduct => ({
-    type: DATA_PRODUCTS,
+    type: DATA_PRODUCT,
     dataProduct
 })
 
@@ -15,11 +15,10 @@ export const fetchProductData = (productId) => dispatch => {
 
 /*data es un objeto que debe contener: fecha,lugar,etc... y  el productId(id del producto que contiene el marco,tamaño,etc)*/
 export const createDataProduct = (data) => dispatch => {
-    console.log("llego aca", data)
     axios.post("/api/products/nuevoproducto", data)
         .then(res => res.data)
         .then(productData => dispatch(dataProduct(productData)))
+    
+    } 
 
 
-
-} 

@@ -10,6 +10,7 @@ import LoginContainer from "../containers/LoginContainer";
 import RegisterContainer from "../containers/RegisterContainer"
 import FormDataContainer from '../containers/FormDataContainer'
 import CarritoContainer from "../containers/CarritoContainer"
+import CheckoutContainer from "../containers/CheckoutContainer"
 
 const mapStateToProps = state => {
   return {};
@@ -37,6 +38,7 @@ class Main extends React.Component {
           <Route path="/product" exact component={SingleProductContainer} />
           <Route path='/productData' exact component={FormDataContainer} />
           <Route path='/cart' exact component={CarritoContainer} />
+          <Route path='/cart/checkout' exact component={CheckoutContainer} />
 
           <Redirect from="/" to="/home" />
         </Switch>
