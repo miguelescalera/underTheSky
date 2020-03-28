@@ -49,7 +49,6 @@ class CheckoutContainer extends React.Component {
     }
 
     render() {
-        console.log("props",this.props)
         return (
             <div>
                 <Checkout
@@ -62,6 +61,7 @@ class CheckoutContainer extends React.Component {
             </div>
         );
     }
+    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);

@@ -22,6 +22,7 @@ router.get('/productData/:id', function (req, res) {
 })
 
 router.put("/modifyDataProduct",function(req,res){
+  console.log("BODY:",req.body)
   ProductData.update({quantity: req.body.quantity},
     {returning: true, where: {id: req.body.productDataId} })
     .then(([ rowsUpdate, [updatedData] ])=>{
@@ -37,10 +38,10 @@ router.post("/getUserProducts",(req,res)=>{
     }
   })
   .then((product)=>{
-    console.log("userProducst:",product)
     res.json(product)
   })
 })
+ 
 
 
 

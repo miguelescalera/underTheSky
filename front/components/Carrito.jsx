@@ -27,21 +27,19 @@ export default ({
   let quantity=1
   
   if(userProduct[0]&&fss[0]){
-    console.log("antes de un sort:",dataProduct)
-    dataProduct=dataProduct.sort()
-    console.log("despues de un sort:",dataProduct)
-      for (let i = 0; i < dataProduct.length; i++) {
-              allData.push({
-               dataProduct:dataProduct[i],
-               userProduct:userProduct[i].data,
-               fss:fss[i].data
-              })
-            }
-            
+    for (let i = 0; i < dataProduct.length; i++) {
+            allData.push({
+             dataProduct:dataProduct[i],
+             userProduct:userProduct[i].data,
+             fss:fss[i].data
+            })
           }
-          else{
-            allData=[]
-          }
+          
+        }
+        else{
+          allData=[]
+        }
+  
   
     const CheckoutButton={
       marginTop:"5%",
@@ -88,22 +86,25 @@ export default ({
       color: "white",
       backgroundColor: " #00000085"
     }
-     
+    const styleModal={
+      display:"flex",
+      justifyContent:"space-between"
+  }
       
     const  styleCart={
         boxShadow :'8px 8px 15px -10px rgba(0,0,0,0.39)',
         width:"75%",
         textAlign: "center",
         border: "solid 1px #80808061",
-        marginTop: "20%"
+        marginTop: "50%"
+      }
+      const  styleContent={
+          textAlign: "left",
+          paddingLeft: "30%"
       }
         
         
        
-    const  styleContent={
-        textAlign: "left",
-        paddingLeft: "30%"
-    }
     
   return (
     <div>
@@ -111,10 +112,9 @@ export default ({
           <Row>
             {allData.map((e,i)=>{
               quantity=e.dataProduct.quantity
+            
               return (
-                
                 <Col xs lg="6">
-                  
               <div style={styleCart} >
                   <button onClick={()=>{handleDelete(e.dataProduct.id)}} style={deleteButton}>
                     X
@@ -129,16 +129,12 @@ export default ({
                           <strong>size: </strong>{e.fss.size.name} <br/>
                           <strong>frame: </strong>{e.fss.frame.name} <br/>
                           <strong>color: </strong>{e.fss.style.color} <br/>
-                          <h5>${e.fss.size.price * quantity}</h5>
+                          <h5>${e.fss.size.price * quantity }</h5>
                           <div>
-                          <button style={quantityButton_1} onClick={()=>{handleQuantity(e.dataProduct.id,quantity-1)}} >-</button>
+                          <button style={quantityButton_1} onClick={()=>{handleQuantity(e.dataProduct.id,e.dataProduct.quantity - 1)}} >-</button>
                           <div style={quantityStyle}>{quantity}</div>
-                          <button style={quantityButton_2} onClick={()=>{handleQuantity(e.dataProduct.id,quantity+1)}} >+</button><br/>
+                          <button style={quantityButton_2} onClick={()=>{handleQuantity(e.dataProduct.id,e.dataProduct.quantity + 1)}} >+</button><br/>
                           </div>
-
-
-
-
                       </div>
                   </div>
                   <>
@@ -160,11 +156,32 @@ export default ({
                           <h5>${e.fss.size.price}</h5>
                         </Col>
                         <Col xs lg="6">
-                          <strong>date: </strong>{e.dataProduct.date} <br/>
-                          <strong>content: </strong>{e.dataProduct.content} <br/>
-                          <strong>name: </strong>{e.dataProduct.name} <br/>
-                          <strong>time: </strong>{e.dataProduct.time} <br/>
-                          <strong>language: </strong>{e.dataProduct.language} <br/>
+                            <ListGroup variant="flush">
+                                 
+                                    <ListGroup.Item style={styleModal}>
+                                        <strong>date: </strong> {e.dataProduct.date}
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item style={styleModal}>
+                                        <strong>name: </strong>  {e.dataProduct.name}
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item style={styleModal}>
+                                        <strong>content: </strong>  {e.dataProduct.content}
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item style={styleModal}>
+                                        <strong>time: </strong>  {e.dataProduct.time}
+                                    </ListGroup.Item>
+                                    
+                                    <ListGroup.Item style={styleModal}>
+                                        <strong>email: </strong>  {e.dataProduct.emailClient}
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item style={{textAlign:"center",display:"inline"}}>
+                                         <Button variant="dark">edit data</Button>
+                                    </ListGroup.Item>
+                            </ListGroup>
                         </Col>
                         </Row>
                         </Container>
@@ -173,25 +190,43 @@ export default ({
                           <Button variant="secondary" onClick={handleClose}>
                             Close
                           </Button>
-                          <Button variant="primary" onClick={handleClose}>
-                            edit
-                          </Button>
+                          
                         </Modal.Footer>
                       </Modal>
                     </>
-              <Button variant="dark" onClick={()=>handleSubmit(e.dataProduct.id)} style={CheckoutButton}>
+              <Button variant="dark" onClick={()=>handleSubmit([e.dataProduct.id])} style={CheckoutButton}>
                 checkout
               </Button>
               </div>
                 </Col>
                 )
+              })}  
+            </Row>
+          </Container>
+      </div>
+    );
+  };
+                                     
+                                      
 
-            })}  
-          </Row>
-        </Container>
-    </div>
-  );
-};
+                            
+              
+             
+                                
+                                
+
+                                        
+                                  
+                                    
+                
+                
+                
+                
+
+
+
+
+
                           
                           
 

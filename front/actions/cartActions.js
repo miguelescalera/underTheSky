@@ -85,11 +85,12 @@ export const getCart = () => dispatch =>
 export const modifyDataProduct =(id,quantity)=> dispatch =>{
   axios.put("/api/products/modifyDataProduct",{quantity:quantity,productDataId:id})
   .then((newData)=>{
-    console.log("newData:",newData)
+    console.log("nuevaData: ",newData)
     axios.get(`/api/cart/getDataProducts`)
     .then(alldataProducts => {
-      console.log("llge a get products:",alldataProducts)
       dispatch(dataProducts(alldataProducts.data))
     })
   })
  }
+      
+   
