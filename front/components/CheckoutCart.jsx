@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button'
 
 
 
-export default ({dataProduct,userProduct,fss,handleDelete})=>{
+export default ({dataProduct,userProduct,fss,handleSubmit})=>{
     
-
+    const dataProductsIds=[]
     let allData=[]
     let total=0
     if(userProduct[0]&&fss[0]){
@@ -16,12 +16,14 @@ export default ({dataProduct,userProduct,fss,handleDelete})=>{
              userProduct:userProduct[i].data,
              fss:fss[i].data
             })
+            dataProductsIds.push(dataProduct[i].id)
         }
+      }
+  else{
+      allData=[]
+      }
+
         
-    }
-    else{
-        allData=[]
-    }
 
 
     const styleCheckout={
@@ -31,20 +33,19 @@ export default ({dataProduct,userProduct,fss,handleDelete})=>{
 
 
 return(
-    <div style={{marginTop:"10%"}}>
+    <div style={{marginTop:"50%"}}>
         <ListGroup variant="flush">
             {allData.map((e,i)=>{
-                total+=e.fss.size.price
+                total+=(e.fss.size.price)*(e.dataProduct.quantity)
                 return(
                     <ListGroup.Item>
                         <div style={styleCheckout}>
                             <span>{i+1}</span>  
                             <span>{e.fss.style.name}</span> 
-                            <span>x1</span>
-                            <strong>${e.fss.size.price}</strong>
+                            <span>x{e.dataProduct.quantity} </span>
+                            <strong>${(e.fss.size.price)*(e.dataProduct.quantity)}</strong>
                         </div>
                         </ListGroup.Item>
-
                     )
                 })}
                 
@@ -54,11 +55,12 @@ return(
                     </div>
                 </ListGroup.Item>
                 <ListGroup.Item style={{textAlign:"center"}}>
-                    <Button variant="dark">checkout all product</Button>
+                    <Button onClick={()=>handleSubmit(dataProductsIds)} variant="dark">checkout all product</Button>
                 </ListGroup.Item>
         </ListGroup>
     </div>
 )
+
 
 
         

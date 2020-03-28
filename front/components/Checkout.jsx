@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card'
+import Container from 'react-bootstrap/Container'
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col'
 
@@ -14,20 +15,18 @@ export default ({
         lastNameUser
     }) => {
 
-const fullname= nameUser+" "+lastNameUser
 
-    const headerFrom={
-        marginBottom: "5%",
-        paddingBottom: "5%",
-        borderBottom: "solid 1px gray",
-        display:"flex",
-        justifyContent:"space-between"
-    }
+
     
-        
+    const orderStyle={
+        marginBottom:"20%",
+        width:"40%",
+        boxShadow :'8px 8px 15px -10px rgba(0,0,0,0.39)',
+        border: "solid 1px #80808061"
+    }
 
     const formStyle = {
-        width: "300px",
+        
         padding: "1rem",
         borderRadius: "0px",
 
@@ -47,55 +46,79 @@ const fullname= nameUser+" "+lastNameUser
         border: '1px solid rgba(0,0,0,0)',
         marginBlockStart:'5rem'
     }
+    return (
+        <Card style={containerStyles}>
+                <span style={orderStyle}>
+                     <div style={divFormStyle}>
+                            <Form style={formStyle} >
+                                <Form.Group controlId="formDateContent">
+                                    <Form.Control type="text" onChange={handleChange} placeholder="dirección" name='address' />
+                                </Form.Group>
+                                <Container>
+                                    <Row>
+                                        <Col xs lg="6">
+                                            <Form.Group controlId="formBasicPhrase">
+                                                <Form.Control type="text"  onChange={handleChange} placeholder="pais" name='country' />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col xs lg="6">
+                                            <Form.Group controlId="formBasicTime">
+                                                <Form.Control type="text" onChange={handleChange}  placeholder="provincia" name='state' />
+                                            </Form.Group>
+                                        </Col >
+                                        <Col xs lg="6">
+                                            <Form.Group controlId="formBasicPlace">
+                                                <Form.Control type="text" onChange={handleChange}  placeholder="ciudad" name='city' />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col xs lg="6">
+                                            <Form.Group controlId="formBasicLanguage">
+                                                <Form.Control type="text"  onChange={handleChange}  placeholder="codigo postal"  name='postCode' />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                                <Button onClick={handleSubmit} variant="dark" type="submit">
+                                    comprar
+                                </Button>
+                            </Form>
+                        </div>
+                    </span>
+                </Card>
+            );
+        };
+            
 
 
 
                         
-    return (
 
-        <Card style={containerStyles}>
-            <Row>
-                <span>
-                <div style={headerFrom}>
-                            <span>{fullname}</span> 
-                            <span><strong>email: </strong>{userEmail }</span>
-                        </div>
-                    <div style={divFormStyle}>
-                        <Form style={formStyle} >
-                            <Form.Group controlId="formDateContent">
-                                <Form.Label>dirección</Form.Label>
-                                <Form.Control type="text" onChange={handleChange} name='address' />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicPhrase">
-                                <Form.Label>pais</Form.Label>
-                                <Form.Control type="text"  onChange={handleChange} name='country' />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicTime">
-                                <Form.Label>provincia</Form.Label>
-                                <Form.Control type="text" onChange={handleChange} name='state' />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicPlace">
-                                <Form.Label>ciudad</Form.Label>
-                                <Form.Control type="text" onChange={handleChange} name='city' />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicLanguage">
-                                <Form.Label>codigo postal</Form.Label>
-                                <Form.Control type="text"  onChange={handleChange} name='postCode' />
-                            </Form.Group>
+            
+                                
+                                              
+                                               
+                                                 
+                                               
+                                
+                        
+
+
+            
+
+
+
+
+
+                                    
+                                        
+
+                           
                             
-                            <Button onClick={handleSubmit} variant="dark" type="submit">
-                                Siguiente Paso
-            </Button>
 
-                        </Form>
-                    </div>
-                </span>
-            </Row>
-        </Card>
+                           
 
-
-    );
-};
+                            
+                            
                             
                             
 
