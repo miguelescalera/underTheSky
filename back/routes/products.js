@@ -37,16 +37,10 @@ router.post("/getUserProducts", (req, res) => {
       id: req.body.productId
     }
   })
-<<<<<<< HEAD
-  .then((product)=>{
-    res.json(product)
-  })
-=======
     .then((product) => {
       console.log("userProducst:", product)
       res.json(product)
     })
->>>>>>> bb48273be9d772c200878aa76c17bf50be0176a8
 })
  
 
