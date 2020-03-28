@@ -59,6 +59,7 @@ const cartButton={
           <Nav.Link><Link style={navFont} to="/products/getProducts">Productos</Link></Nav.Link>
           <Nav.Link><Link style={navFont} to="/register" >Register</Link></Nav.Link>
           <Nav.Link><Link style={navFont} to="/Login" >login</Link></Nav.Link>
+<<<<<<< HEAD
           <div>
             <span style={cartLength}>{cart.length}</span>
           <Nav.Link><Link style={cartButton}to="/cart" >cart</Link></Nav.Link>
@@ -66,6 +67,13 @@ const cartButton={
         </Nav>
         <Form inline>
         </Form>
+=======
+          <Nav.Link><Link style={navFont}to="/cart" >cart</Link></Nav.Link>
+        </Nav>
+        <Form inline>
+        </Form>
+
+>>>>>>> bb48273be9d772c200878aa76c17bf50be0176a8
       </Navbar>
     </div>
   );

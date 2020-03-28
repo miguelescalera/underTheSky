@@ -3,9 +3,9 @@ const router = express.Router();
 const Product = require("../models/product");
 const ProductData = require("../models/productData");
 const User = require("../models/user")
-const Size =require("../models/size")
-const Frame =require("../models/frame")
-const Style =require("../models/style")
+const Size = require("../models/size")
+const Frame = require("../models/frame")
+const Style = require("../models/style")
 
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
@@ -31,36 +31,48 @@ router.put("/modifyDataProduct",function(req,res){
     .catch(err=>console.log("error:",err))
 })
 
-router.post("/getUserProducts",(req,res)=>{
+router.post("/getUserProducts", (req, res) => {
   Product.findOne({
-    where:{
-      id:req.body.productId
+    where: {
+      id: req.body.productId
     }
   })
+<<<<<<< HEAD
   .then((product)=>{
     res.json(product)
   })
+=======
+    .then((product) => {
+      console.log("userProducst:", product)
+      res.json(product)
+    })
+>>>>>>> bb48273be9d772c200878aa76c17bf50be0176a8
 })
  
 
 
 
-router.post("/getProductFSS",(req,res)=>{
+
+
   
+
+router.post("/getProductFSS", (req, res) => {
+  console.log("BODY:", req.body)
+
   Size.findByPk(req.body.sizeId)
-  .then((size)=>{
-    Frame.findByPk(req.body.frameId)
-    .then((frame)=>{
-        Style.findByPk(req.body.styleId)
-        .then((style)=>{
-            res.send({
-              size:size,
-              frame:frame,
-              style:style
+    .then((size) => {
+      Frame.findByPk(req.body.frameId)
+        .then((frame) => {
+          Style.findByPk(req.body.styleId)
+            .then((style) => {
+              res.send({
+                size: size,
+                frame: frame,
+                style: style
+              })
             })
         })
     })
-  })
 })
 
 router.post("/newProductData", function (req, res) {
@@ -103,28 +115,35 @@ router.get("/getProducts", function (req, res) {
     })
 })
 
+router.get('/styles/:id', function (req, res, next) {
+  Style.findByPk(req.params.id)
+    .then(data => res.send(data))
+    .catch(() => console.log('el archivo no esta'))
+})
+
+
+router.post("/getAllfss", function (req, res) {
+  console.log("entre")
+  Frame.findAll().then(frames => {
+    console.log("fffffffffffff", frames)
+    Style.findAll().then(styles => {
+      Size.findAll().then(sizes => {
+        res.send({
+          frames: frames,
+          styles: styles,
+          sizes: sizes
+        })
+      })
+    })
+  })
+})
+
 
 router.get("/:id", function (req, res) {
   Product.findByPk(req.params.id).then(function (product) {
     res.json(product);
   });
 });
-
-router.post("/getAllfss",function(req,res){
-  console.log("entre")
- Frame.findAll().then(frames=>{
-   console.log("fffffffffffff",frames)
-   Style.findAll().then(styles=>{
-     Size.findAll().then(sizes=>{
-       res.send({
-         frames:frames,
-         styles:styles,
-         sizes:sizes
-       })
-     })
-   })
- })
-})
 
 
 
