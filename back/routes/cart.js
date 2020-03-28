@@ -7,6 +7,8 @@ const Product = require("../models/product")
 
 
 
+ 
+
 router.get("/getDataProducts",function(req,res){
     
     ProductData.findAll({
@@ -14,10 +16,19 @@ router.get("/getDataProducts",function(req,res){
             userId:req.user.id
         }
     }).then((productsData)=>{
-        res.json(productsData)
+        const dataToSend = productsData.sort(function (a, b) {
+             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(); 
+         });
+      
+         res.json(dataToSend)
+        })
     })
-})
-  
+        
+
+
+
+
+
         
     
                 

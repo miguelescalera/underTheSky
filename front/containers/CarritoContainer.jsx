@@ -48,10 +48,13 @@ handleSubmit(id){
 }
 
 handleQuantity(id,quantity){
-    console.log("ID:",id)
-    console.log("quantity:",quantity)
-this.props.modifyDataProduct(id,quantity)
+   
+    if(quantity>=1){
+        this.props.modifyDataProduct(id,quantity)
+    }
+       
 }
+
 
     render(){
         return (
