@@ -26,6 +26,10 @@ ProductData.init({
         validate: {
             isEmail: true
         }
+    },
+    quantity:{
+        type: Sequelize.INTEGER,
+        defaultValue:1
     }
 
 
