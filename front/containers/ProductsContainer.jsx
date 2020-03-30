@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Products from "../components/Products";
-import { fetchStyle } from '../actions/productsActions'
+import { selectStyle } from '../actions/productsActions'
 
 // ACCIONES 
 import {
@@ -12,7 +12,7 @@ import { runInThisContext } from "vm";
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    fetchStyle: (data) => { dispatch(fetchStyle(data)) }
+    selectStyle: (data) => { dispatch(selectStyle(data)) }
   };
 };
 
@@ -144,7 +144,9 @@ class ProductsContainer extends React.Component {
   }
 
   handleClick(e) {
-    this.props.fetchStyle(e)
+    this.props.selectStyle(e)
+    console.log('HoLA ES EL SELECT STYLE',e);
+    
     this.props.history.push('/product')
   }
 
