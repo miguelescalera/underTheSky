@@ -151,7 +151,7 @@ class ProductsContainer extends React.Component {
   render() {
     return (
       <div>
-        <h3 className="d-flex justify-content-center" style={{ marginBlockStart: "1rem" }}>Nuestros estilos</h3>
+        <h3 className="titulopagina">Nuestros estilos</h3>
         <Products products={displays} handleClick={this.handleClick} cart={this.props.cart} />
       </div>
     );

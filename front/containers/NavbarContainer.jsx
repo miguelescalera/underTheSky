@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from "../components/Navbar"
 import { connect } from "react-redux";
+import Headroom from 'react-headroom'
 
 
 const mapStateToProps = (state, ownprops) => {
@@ -19,11 +20,11 @@ const mapStateToProps = (state, ownprops) => {
 
     render(){
         return (
-            <div>
+            <Headroom>
                 <Navbar
                     cart={this.props.cart}
                 />
-            </div>
+            </Headroom>
         )
     }
 }

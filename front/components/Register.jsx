@@ -18,25 +18,17 @@ export default ({handleChange, handleClick}) => {
   const divFormStyle = {
     justifyContent: 'center',
     marginBlockEnd: "5rem",
-    marginBlockStart: "5rem",
     maxWidth: "400px"
     
   }
 
-  const containerStyles={
-    
-    alignItems:'center',
-backgroundColor:'rgba(0,0,0,0)',
-  border: '1px solid rgba(0,0,0,0)',
-  marginBlockStart:'5rem'
-  
-  }
+
 
 
 
   return (
 
-    <Card style={containerStyles}>
+    <Card className="form-container">
       <Row>
       <span>
         <div style={divFormStyle}>
@@ -60,7 +52,7 @@ backgroundColor:'rgba(0,0,0,0)',
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" onChange={handleChange} name='password' />
             </Form.Group>
-            <Button onClick={handleClick} variant="dark" type="submit">
+            <Button onClick={handleClick} className='boton-solido' type="submit">
               Registrar
             </Button>
             <Link to="/login">

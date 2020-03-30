@@ -19,31 +19,24 @@ export default ({ handleChange, handleSubmit }) => {
     const divFormStyle = {
         justifyContent: 'center',
         marginBlockEnd: "5rem",
-        marginBlockStart: "5rem",
         maxWidth: "400px"
 
     }
 
-    const containerStyles = {
 
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0)',
-        border: '1px solid rgba(0,0,0,0)',
-        marginBlockStart:'5rem'
-    }
 
 
 
     return (
 
-        <Card style={containerStyles}>
+        <Card className='form-container'>
             <Row>
                 <span>
                     <div style={divFormStyle}>
                         <Form style={formStyle} >
                             <Form.Group controlId="formDateContent">
                                 <Form.Label>Fecha del Evento</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre o DD/MM/AAAA" onChange={handleChange} name='date' />
+                                <Form.Control type="text" placeholder="DD/MM/AAAA" onChange={handleChange} name='date'  />
                             </Form.Group>
                             <Form.Group controlId="formBasicPhrase">
                                 <Form.Label>Nombre o Frase</Form.Label>
@@ -69,7 +62,7 @@ export default ({ handleChange, handleSubmit }) => {
                                 </Form.Text>
                             </Form.Group>
 
-                            <Button onClick={handleSubmit} variant="dark" type="submit">
+                            <Button onClick={handleSubmit} className="boton-outline" type="submit">
                                 Siguiente Paso
             </Button>
 

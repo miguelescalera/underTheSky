@@ -11,6 +11,8 @@ import RegisterContainer from "../containers/RegisterContainer"
 import FormDataContainer from '../containers/FormDataContainer'
 import CarritoContainer from "../containers/CarritoContainer"
 import CheckoutContainer from "../containers/CheckoutContainer"
+import Img from 'react-bootstrap/Image'
+import '../../back/public/global.css'
 
 const mapStateToProps = state => {
   return {};
@@ -20,6 +22,23 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
+
+
+const generalBackground = {
+
+  position: 'fixed',
+  backgroundImage: 'url(/src/img/fondo-general.png)',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'repeat',
+  backgroundAttachment: 'scroll',
+  backgroundPosition: 'center',
+  height: '100vh',
+  top: 0,
+  left: 0,
+  width: '100vw',
+  zIndex: -5,
+}
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +47,8 @@ class Main extends React.Component {
   render() {
     return (
       <div id="main">
+        {/* <Img id="fondo-general" src="/src/img/fondo-general.png"></Img> */}
+        <div id="fondo" style={generalBackground}></div>
         <NavbarContainer />
         <Switch>
           <Route path="/home" exact component={LandingContainer} />
