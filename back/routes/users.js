@@ -11,8 +11,8 @@ router.get("/:id", function(req, res) {
 
 
 router.post("/register", function(req, res) {
-  User.create(req.body).then(function() {
-    res.sendStatus(201).send(req.body);
+  User.create(req.body).then(function(user) {
+    res.json(user);
   });
 });
   
@@ -31,6 +31,7 @@ router.post("/login", function(req, res, next) {
 
     req.login(user, loginErr => {
       if (loginErr) {
+        console.log("login err: ",loginErr)
         return next(loginErr);
       }
      

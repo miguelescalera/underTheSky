@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form"
 import FormControl from "react-bootstrap/FormControl"
 import Image from "react-bootstrap/Image";
 
-export default ({cart}) => {
+export default ({cart,handelLogout,emailUser}) => {
 
 const cartLength={
   backgroundColor: "#000000a6",
@@ -45,7 +45,14 @@ const cartButton={
     color: "#6d6d6d"
 
   }
-
+const loginLogout=()=>{
+  if(emailUser){
+   return  <span onClick ={handelLogout}style={navFont}>logout</span>
+  }
+  else{
+  return <Link style={navFont} to="/Login" >login</Link>
+  }
+}
 
 
 
@@ -58,7 +65,7 @@ const cartButton={
         <Nav className="mr-auto">
           <Nav.Link><Link style={navFont} to="/products/getProducts">Productos</Link></Nav.Link>
           <Nav.Link><Link style={navFont} to="/register" >Register</Link></Nav.Link>
-          <Nav.Link><Link style={navFont} to="/Login" >login</Link></Nav.Link>
+          <Nav.Link>{loginLogout()}</Nav.Link>
           <div>
             <span style={cartLength}>{cart.length}</span>
           <Nav.Link><Link style={cartButton}to="/cart" >cart</Link></Nav.Link>

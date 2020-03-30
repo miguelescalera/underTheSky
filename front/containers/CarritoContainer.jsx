@@ -13,7 +13,8 @@ const mapStateToProps=(state,ownProps)=>{
     return{
        dataProduct:state.cart.dataProducts,
        userProduct:state.cart.allproductsUser,
-       fss:state.cart.fss
+       fss:state.cart.fss,
+       userEmail:state.user.user.email
     }
 }
 
@@ -35,7 +36,10 @@ const mapDispatchToProps=(dispatch)=>{
          this.handleQuantity= this.handleQuantity.bind(this)
      }
 componentDidMount(){
-    this.props.getCart()
+    if(this.props.userEmail){
+        this.props.getCart()
+    }
+
 }
 
 handleDelete(id){
