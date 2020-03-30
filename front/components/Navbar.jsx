@@ -9,8 +9,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-
-export default ({ cart, hidden }) => {
+export default ({cart,handelLogout,emailUser, hidden}) => {
 
   const [expanded, setExpanded] = useState(false);
 
@@ -51,9 +50,18 @@ export default ({ cart, hidden }) => {
   };
 
   const navBarMenu = {
-    height: "10rem",
     textAlign: "center"
   };
+  
+const loginLogout=()=>{
+  if(emailUser){
+   return  <span onClick ={handelLogout}style={navFont}>logout</span>
+  }
+  else{
+  return <Link style={navFont} to="/Login" >login</Link>
+  }
+}
+
 
   const navButton = {
     color:'#ec7263',
@@ -119,41 +127,6 @@ export default ({ cart, hidden }) => {
         </Navbar.Collapse>
       </Navbar>
 
-      {/* <Navbar style={navBarStyle} expand="lg">
-        <Link to="/home">
-          <Image
-            style={navLogo}
-            src={"http://undertheskydeco.com/images/logo1.png"}
-          />
-        </Link>
-
-        <Nav className="mr-auto">
-          <Nav.Link>
-            <Link style={navFont} to="/products/getProducts">
-              Productos
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link style={navFont} to="/register">
-              Register
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link style={navFont} to="/Login">
-              login
-            </Link>
-          </Nav.Link>
-          <div>
-            <span style={cartLength}>{cart.length}</span>
-            <Nav.Link>
-              <Link style={cartButton} to="/cart">
-                cart
-              </Link>
-            </Nav.Link>
-          </div>
-        </Nav>
-        <Form inline></Form>
-      </Navbar> */}
     </div>
   );
-};
+  };

@@ -1,16 +1,20 @@
 import React from "react";
 import Login from "../components/Login";
 import { connect } from "react-redux";
-import {userLogin} from "../actions/LoginAction"
+import {userLogin,addLogin} from "../actions/LoginAction"
+import {encrypt} from "../actions/RegisterAction"
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    userLogin: (user)=>{dispatch(userLogin(user))}
+    addLogin: (user)=>{dispatch(addLogin(user))}
   };
 };
 
 const mapStateToProps = (state, ownprops) => {
-  return {};
+  return {
+    
+
+  };
 };
 
 class LoginContainer extends React.Component {
@@ -18,10 +22,17 @@ class LoginContainer extends React.Component {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      alertNull: false,
+      alertPass: false,
+      checkbox:false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkboxLogin= this.checkboxLogin.bind(this)
+  }
+  checkboxLogin(){
+    this.setState({checkbox:!this.state.checkbox})
   }
 
   handleChange(e) {
@@ -34,18 +45,43 @@ class LoginContainer extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log("esty en el handleSubmit",this.state)
     e.preventDefault();
-    this.props.userLogin(this.state)
-    this.props.history.push("/home")
+    if(this.state.checkbox){
+     let encryptPass=encrypt(this.state.password)
+      localStorage.setItem("email",this.state.email)
+      localStorage.setItem("pass",encryptPass)
+      }
+    if(this.state.password.length === 0 ||this.state.email.length === 0){
+      this.setState({alertNull:true})
+      this.setState({alertPass:false})
+    }
+    else{
+      userLogin(this.state).then((user)=>{
+      if(user.data.success===false){
+          this.setState({alertPass:true})
+          this.setState({alertNull:false})
+      }else{
+        this.props.addLogin(user.data)
+        this.props.history.push("/home")
+
+      }
+        
+      })
+     
+    }
   }
+    
 
   render() {
+  
     return (
       <div>
         <Login
           handleChange={this.handleChange}
+          checkboxLogin={this.checkboxLogin}
           handleSubmit={this.handleSubmit}
+          alertNull={this.state.alertNull}
+          alertPass={this.state.alertPass}
         />
       </div>
     );
@@ -53,3 +89,4 @@ class LoginContainer extends React.Component {
 }
 
 export default connect(null, mapDispatchToProps)(LoginContainer);
+

@@ -23,10 +23,8 @@ class RegisterContainer extends React.Component {
   }
 
   handleClick(evento) {
-    console.log("entre", evento);
     evento.preventDefault();
     userRegister(this.state);
-    //aca va el history push para redirigir al login
     this.props.history.push("/login");
   }
 
