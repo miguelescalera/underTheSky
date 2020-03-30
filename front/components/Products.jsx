@@ -2,6 +2,7 @@ import React from "react";
 import TarjetaProducto from "./TarjetaProducto";
 import Container from "react-bootstrap/Container";
 
+
 export default ({ products, handleClick }) => {
   const resultTarj = {
     display: "flex",
@@ -22,9 +23,11 @@ export default ({ products, handleClick }) => {
   return (
     <div>
       <Container className="d-flex justify-content-center" style={resultTarj}>
-        {products.map(product => {
+        {products.map((product, index) => {
+          console.log('HOLA ESTOY MAPEANDO ESTE', product);
+          
           return (
-            <span style={tarj}>
+            <span key={index} style={tarj}>
               <TarjetaProducto product={product} handleClick={handleClick} />
             </span>
           );

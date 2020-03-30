@@ -22,7 +22,7 @@ const botonSelecc = {
 
 
   return (
-    <div key={product.id} >
+    <div  >
       <Card className="tarjetaproducto">
         <Link to={`/products/${product.id}`}>
           <Card.Img variant="top" src={product.imgURL} />

@@ -108,7 +108,7 @@ export default ({
                 <ToggleButton
                   value={e.id}
                   className="toggle-outline"
-                  onClick={() => handleSize(e.id)}
+                  onClick={() => handleFrame(e.id)}
                   name="13x18"
                 >
                   {e.name}

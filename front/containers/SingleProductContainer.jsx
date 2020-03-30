@@ -23,8 +23,8 @@ class SingleProductContainer extends React.Component {
     super(props);
     this.state = {
       digital: true,
-      frameId: "",
-      sizeId: "",
+      frameId: 1,
+      sizeId: 1,
       styleId: 1
     };
     this.handleFrame = this.handleFrame.bind(this);
@@ -34,34 +34,34 @@ class SingleProductContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log("ESTE ES EL STYLE", this.props.style);
     this.props.getAllfss();
   }
   handleFrame(id) {
+    console.log("CONSOLE LOG DE ID DEL FRAME", id);
+
+    
     this.setState({ frameId: id });
   }
   handleSize(id) {
+    console.log("CONSOLE LOG DE ID DEL size", id);
+
     this.setState({ sizeId: id });
   }
   handleColor(id) {
-    console.log("id:", id);
   }
   handleClick(e) {
-    console.log("entre", e);
     e.preventDefault();
     this.props.fetchNewProduct({
       digital: this.state.digital,
       frameId: this.state.frameId,
       sizeId: this.state.sizeId,
-      styleId: this.props.style.id
+      styleId: this.props.style
     });
     this.props.history.push("/productData");
   }
 
   render() {
-    console.log("frame", this.props.sizes);
-    console.log("size", this.props.frames);
-    console.log("style", this.props.styles);
+
     return (
       <div>
         <h3 className="titulopagina">Personalizalo</h3>
