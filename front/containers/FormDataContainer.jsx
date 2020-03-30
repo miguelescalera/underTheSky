@@ -61,6 +61,7 @@ class FormDataContainer extends React.Component {
     render() {
         return (
             <div>
+                <h3 className="titulopagina">Información</h3>
                 <FormData
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}

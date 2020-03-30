@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from "../components/Navbar"
 import { connect } from "react-redux";
+import Headroom from 'react-headroom'
 import {logoutUser,userLogin,addLogin} from "../actions/LoginAction"
 import {getCart,dataProducts,allproductsUser,fss} from "../actions/cartActions"
 import {decrypt} from "../actions/RegisterAction"
@@ -62,13 +63,13 @@ const mapDispatchToProps=(dispatch)=>{
 
     render(){
         return (
-            <div>
+            <Headroom>
                 <Navbar
                     cart={this.props.cart}
                     emailUser={this.props.emailUser}
                     handelLogout={this.handelLogout}
                 />
-            </div>
+            </Headroom>
         )
     }
 }
