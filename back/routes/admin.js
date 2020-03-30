@@ -7,6 +7,7 @@ const Order = require("../models/order")
 const User = require("../models/user")
 const Product = require("../models/product")
 const Display= require("../models/display")
+const ProductData = require("../models/productData")
 
 
 
@@ -131,6 +132,14 @@ router.delete("/deleteUser",function(req,res){
     .then(res.sendStatus(204))
 })
 ///////////PRODUCTS////////////////////////
+router.get("/getAllDataProducts", function(req,res){
+    ProductData.findAll()
+    .then(allproductdata=>{
+        res.json(allproductdata)
+    })
+})
+
+
 
 
 router.delete("/deleteProduct",function(req,res){

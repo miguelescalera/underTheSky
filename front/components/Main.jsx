@@ -9,6 +9,8 @@ import SingleProductContainer from "../containers/SingleProductContainer"
 import LoginContainer from "../containers/LoginContainer";
 import RegisterContainer from "../containers/RegisterContainer"
 import FormDataContainer from '../containers/FormDataContainer'
+import AdminOrdenesContainer from "../containers/AdminOrdenesContainer";
+import AdminUsersContainer from "../containers/AdminUsersContainer"
 
 const mapStateToProps = state => {
   return {};
@@ -35,7 +37,8 @@ class Main extends React.Component {
           <Route path="/register" exact component={RegisterContainer} />
           <Route path="/product" exact component={SingleProductContainer} />
           <Route path='/productData' exact component={FormDataContainer} />
-
+          <Route path='/admin/getOrders' exact component={AdminOrdenesContainer} />
+          <Route path='/admin/getUsers' exact component={AdminUsersContainer} />
           <Redirect from="/" to="/home" />
         </Switch>
         <FooterContainer />

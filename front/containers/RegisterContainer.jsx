@@ -8,8 +8,8 @@ import {connect} from "react-redux"
 
 
 class RegisterContainer extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             firstName:"",
             lastName:"",
@@ -32,7 +32,7 @@ handleClick(evento){
     evento.preventDefault()
     userRegister(this.state)
     //aca va el history push para redirigir al login
-    // this.props.history.push("/login")
+    this.props.history.push("/login")
 }
 
 
