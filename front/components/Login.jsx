@@ -4,9 +4,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
+import Alert from "react-bootstrap/Alert"
 
-
-export default ({ handleChange, handleSubmit }) => {
+export default ({ handleChange, handleSubmit,alertNull, alertPass,checkboxLogin}) => {
 
 
   const formStyle = {
@@ -40,6 +40,12 @@ export default ({ handleChange, handleSubmit }) => {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
           </Form.Group>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check style={{display:"inline-block"}} type="checkbox" name="checkbox" onChange={checkboxLogin}/>
+            <span >recordar usuario</span>
+         </Form.Group>
+          {alertNull?( <Alert variant="warning">Por favor completá los campos.</Alert>): null}
+          {alertPass?(<Alert variant="warning">Usuario o contraseña incorrectos.</Alert>):null}
           <Button variant="dark" type="submit" style={{marginBlockStart:'1rem'}} onClick={handleSubmit}>
             Iniciar Sesión
         </Button>
