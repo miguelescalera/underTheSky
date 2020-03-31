@@ -1,6 +1,6 @@
 import React from "react"
 import AdminUsers from "../components/AdminUsers"
-import {getUsers} from "../actions/adminActions"
+import {getUsers, changeStatus} from "../actions/adminActions"
 import {connect} from "react-redux"
 
 const mapStateToProps = state => {
@@ -13,10 +13,20 @@ const mapDispatchToProps = function(dispatch){
   }
 };
 
+
 class AdminUsersContainer extends React.Component{
     constructor(props){
         super(props)
+        this.handleStatus=this.handleStatus.bind(this)
     }
+
+
+
+    handleStatus(type, userid) {
+        console.log("estos son los datos pasados", type,userid)
+        changeStatus(type, userid)
+      }
+    
 
 
     componentDidMount(){
@@ -27,7 +37,9 @@ class AdminUsersContainer extends React.Component{
         const usuarios=this.props.users
         return(
             <div>
-                <AdminUsers usuarios={usuarios} />
+                <AdminUsers usuarios={usuarios} 
+                handleStatus={this.handleStatus}
+                />
             </div>
         )
     }

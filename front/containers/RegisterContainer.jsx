@@ -1,50 +1,44 @@
-import React from "react"
-import Register from "../components/Register"
-import {userRegister} from "../actions/RegisterAction"
-import {connect} from "react-redux"
+import React from "react";
+import Register from "../components/Register";
+import { userRegister } from "../actions/RegisterAction";
+import { connect } from "react-redux";
 
+class RegisterContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
+  handleChange(e) {
+    let value = e.target.value;
+    let key = e.target.name;
+    this.setState({ [key]: value });
+  }
 
+  handleClick(evento) {
+    evento.preventDefault();
+    userRegister(this.state);
+    this.props.history.push("/login");
+  }
 
+  render() {
+    return (
+      <div>
+        <h3 className="titulopagina">Registro</h3>
 
-class RegisterContainer extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            firstName:"",
-            lastName:"",
-            email:"",
-            password:""
-        }
-        this.handleChange=this.handleChange.bind(this)
-        this.handleClick=this.handleClick.bind(this)
-
-    }
-
-handleChange(e) {
-    let value = e.target.value
-    let key = e.target.name
-    this.setState({ [key]: value })
+        <Register
+          handleChange={this.handleChange}
+          handleClick={this.handleClick}
+        />
+      </div>
+    );
+  }
 }
-
-handleClick(evento){
-    console.log("entre", evento)
-    evento.preventDefault()
-    userRegister(this.state)
-    //aca va el history push para redirigir al login
-    this.props.history.push("/login")
-}
-
-
-
-        render(){
-        return(
-            <div>
-                <Register 
-                handleChange={this.handleChange}
-                handleClick={this.handleClick}/>
-            </div>
-        )
-    }
-}
-export default connect (null, null)(RegisterContainer)
+export default connect(null, null)(RegisterContainer);

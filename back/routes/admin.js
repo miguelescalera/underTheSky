@@ -124,6 +124,19 @@ router.get("/getUsers",function(req,res){
     })
 })
 
+router.put("/addAdmin", function(req,res){
+    User.findByPk(req.body.userId)
+    .then( function (user){
+        user.update({type:req.body.type})
+        .then(function(newstatus){
+            console.log("type modificado back")
+            res.json(newstatus)
+        })
+    })
+})
+
+
+
 router.delete("/deleteUser",function(req,res){
     User.findByPk(req.body.userId)
     .then((user)=>{

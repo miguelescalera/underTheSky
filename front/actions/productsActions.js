@@ -1,5 +1,5 @@
 import axios from "axios"
-import { SELECTED_PRODUCT, ALL_PRODUCTS, ALL_FSS } from "../constans"
+import { SELECTED_PRODUCT, ALL_PRODUCTS, ALL_FSS, SELECT_STYLE } from "../constans"
 
 export const Allfss = (Allfss) => ({
     type: ALL_FSS,
@@ -7,7 +7,7 @@ export const Allfss = (Allfss) => ({
 })
 
 
-export const SelectedProducts = Product => ({
+export const SelectedProducts = (Product) => ({
     type: SELECTED_PRODUCT,
     Product
 })
@@ -17,10 +17,16 @@ export const AllProducts = allProducts => ({
     allProducts
 })
 
+export const selectStyle = selectedStyle => ({
+    type: SELECT_STYLE,
+    selectedStyle
+
+})
+
 
 export const fetchNewProduct = (body) => dispatch => {
     return axios.post("/api/products/newProduct", body)
-        .then(res => res.data)
+        .then(res =>  res.data)
         .then(result => dispatch(SelectedProducts(result)))
 }
 
@@ -36,4 +42,12 @@ export const getAllfss = () => dispatch => {
         .then(res => res.data)
         .then(result => dispatch(Allfss(result)))
         .catch((err => console.log("err:", err)))
+}
+
+
+export const fetchStyle = (styleId) => dispatch => {
+    console.log('esto es conseguime estilo')
+    axios.get(`/api/products/styles/${styleId}`)
+        .then(res => res.data)
+        .then(style => { console.log('esto es el estilo', style), dispatch(selectStyle(style)) })
 }

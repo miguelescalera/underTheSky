@@ -1,110 +1,112 @@
-const Style= require("./models/style")
-const Size= require("./models/size")
-const Frame= require("./models/frame")
-const Orders = require("./models/order")
-
-// const { 
-//   Display,
-//   Style
-//  } = require("./models/index.js");
-
-
-
+const Style = require("./models/style");
+const Size = require("./models/size");
+const Frame = require("./models/frame");
+const DataProduct = require("./models/productData");
+const Product = require("./models/product");
+const user = require("./models/user");
+const faker = require("faker");
+const Orders = require("./models/order");
 
 Orders.create({
   address: "alalallalalalla 123"
-}).then(console.log("orden creada"))
-
-
+}).then(console.log("orden creada"));
 
 const styles = [
-  
   {
-    name:'classic',
-    color: 'blanco'
+    name: "classic",
+    color: "blanco"
   },
-   {
-    name:'classic',
-    color: 'negro'
+  {
+    name: "classic",
+    color: "negro"
   },
-  {  
-    name:'classic',
-    color: 'gris'
+  {
+    name: "classic",
+    color: "gris"
   }
-]
+];
 
-const frames= [
-{
-name:"madera",
-price:200
-},
-{
-name:"negro",
-price:200
-},
-{
-name:"blanco",
-price:200
-}
-
-]
-
-const sizes= [
+const frames = [
   {
-    name:"13x18",
-    price:200
+    name: "madera",
+    price: 200
   },
   {
-    name:"30x40",
-    price:300
+    name: "negro",
+    price: 200
   },
   {
-    name:"50x70",
-    price:400
+    name: "blanco",
+    price: 200
   }
-]
+];
 
-frames.map((e)=>{
-  console.log("elemento:",e)
-  Frame.create(
-    e
-  )
-  .then(newStyle => {
-    console.log("added", newStyle);
-  })
-  .catch(err=>console.error(err));
-})
+const sizes = [
+  {
+    name: "13x18",
+    price: 200
+  },
+  {
+    name: "30x40",
+    price: 300
+  },
+  {
+    name: "50x70",
+    price: 400
+  }
+];
 
+frames.map(e => {
+  console.log("elemento:", e);
+  Frame.create(e)
+    .then(newStyle => {
+      console.log("added", newStyle);
+    })
+    .catch(err => console.error(err));
+});
 
-sizes.map((e)=>{
-  console.log("elemento:",e)
-  Size.create(
-    e
-  )
-  .then(newStyle => {
-    console.log("added", newStyle);
-  })
-  .catch(err=>console.error(err));
-})
+sizes.map(e => {
+  console.log("elemento:", e);
+  Size.create(e)
+    .then(newStyle => {
+      console.log("added", newStyle);
+    })
+    .catch(err => console.error(err));
+});
 
+styles.map(e => {
+  console.log("elemento:", e);
+  Style.create(e)
+    .then(newStyle => {
+      console.log("added", newStyle);
+    })
+    .catch(err => console.error(err));
+});
 
-styles.map((e)=>{
-  console.log("elemento:",e)
-  Style.create(
-    e
-  )
-  .then(newStyle => {
-    console.log("added", newStyle);
-  })
-  .catch(err=>console.error(err));
-})
-
+/*
+ 
+ for (let i = 0; i < 6; i++) {
+   DataProduct.create({
+     date:faker.date.past(),
+     content:faker.lorem.text(),
+     name:faker.name.firstName(),
+     time:"12.00",
+     language:"español",
+     emailClient:faker.internet.email(),
+     userId:1,
+     productId: i
+   }).then(()=>{
+     console.log("done data product!")
+   }).catch(err=>console.log("error:",err))
+ }
+ 
+ */
 
 //apartir de aca esta comentado
 
 // const addDisplay = async function({ imgURL, styleId }) {
 //   const styles = [
-  
+
 //     (classic = {
 //       name:'classic',
 //       color: 'esperanza'
@@ -140,7 +142,7 @@ styles.map((e)=>{
 //         where: {
 //           name: input.styleId,
 //         }
-//       }).then(style => 
+//       }).then(style =>
 //         Display.setStyleId(style.id))
 //         .catch(console.log)
 
@@ -150,8 +152,7 @@ styles.map((e)=>{
 //   ;
 // };
 
-
-//SEED DE >>------> DISPLAY 
+//SEED DE >>------> DISPLAY
 // function addDisplay({ imgURL, styleId }) {
 //   Display.create({
 //     imgURL,
@@ -163,9 +164,8 @@ styles.map((e)=>{
 //     .catch(console.log);
 // }
 
-
 // const styles = [
-  
+
 //   (classic = {
 //     name:'classic',
 //     color: 'esperanza'
@@ -187,8 +187,6 @@ styles.map((e)=>{
 //     color: 'esperanza'
 //   }),
 // ]
-
-
 
 // const displays = [
 //   (display = {
@@ -212,7 +210,6 @@ styles.map((e)=>{
 //     styleId: 5,
 //   }),
 
-
 //   (display = {
 //     imgURL: 'https://gradientjoy.com/250x350?id=20',
 //     styleId: 1,
@@ -233,7 +230,6 @@ styles.map((e)=>{
 //     imgURL: 'https://gradientjoy.com/250x350?id=39',
 //     styleId: 5,
 //   }),
-
 
 //   (display = {
 //     imgURL: 'https://gradientjoy.com/250x350?id=20',

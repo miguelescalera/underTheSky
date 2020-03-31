@@ -14,24 +14,16 @@ import Col from "react-bootstrap/Col";
 const TarjetaProducto = function ({ product, handleClick }) {
 
 
-  const card = {
-    width:"100%",
-    boxShadow :'8px 8px 15px -10px rgba(0,0,0,0.39)',
-    borderRadius: "0px",
-  }
-
-  const name = {
-    whiteSpace: "nowrap",
-    overflowX: "hidden",
-    overflowY : 'hidden',
-
-  }
 
 
-  
+const botonSelecc = {
+  fontSize:'0.7rem'
+}
+
+
   return (
-    <div key={product.id} >
-      <Card style={ card }>
+    <div  >
+      <Card className="tarjetaproducto">
         <Link to={`/products/${product.id}`}>
           <Card.Img variant="top" src={product.imgURL} />
         </Link>
@@ -39,17 +31,17 @@ const TarjetaProducto = function ({ product, handleClick }) {
           <Row>
             <Col >
               <Link to={`/products/${product.id}`} >
-                <Card.Title style={name}>{product.name}</Card.Title>
+                <Card.Title className="titulotarjeta"  >{product.name.charAt(0).toUpperCase() + product.name.slice(1)}</Card.Title>
               </Link>
             </Col>
           </Row>
-         
-          <Row>
 
-            <Col md={3} style={{height:"3rem"}}>
-              <span>
-              <Button variant="dark" onClick={() => 
-                handleClick()} >Seleccionar</Button>
+          <Row style={{justifyContent:'center'}}>
+
+            <Col >
+              <span >
+                <Button className="boton-outline" style={botonSelecc} onClick={() =>
+                  handleClick(product.styleId)} >Elegir</Button>
               </span>
             </Col>
           </Row>

@@ -10,13 +10,15 @@ const mapDispatchToProps = (dispatch, state) => {
 };
 
 const mapStateToProps = (state, ownprops) => {
-    return {};
+    return {
+        product: state.products.selectedProduct,
+    };
 };
 
 
 class FormDataContainer extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             date: '',
             content: '',
@@ -24,7 +26,7 @@ class FormDataContainer extends React.Component {
             time: '',
             language: '',
             emailClient: ''
-            
+
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -41,13 +43,25 @@ class FormDataContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.createDataProduct(this.state)
+        console.log('Las Props', this.props)
+        this.props.createDataProduct(
+            {
+                date: this.state.date,
+                content: this.state.content,
+                name: this.state.name,
+                time: this.state.time,
+                language: this.state.language,
+                emailClient: this.state.emailClient,
+                productId: this.props.product.id
+            }
+        )
         this.props.history.push("/home")
     }
 
     render() {
         return (
             <div>
+                <h3 className="titulopagina">Información</h3>
                 <FormData
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}
@@ -57,4 +71,4 @@ class FormDataContainer extends React.Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(FormDataContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FormDataContainer);

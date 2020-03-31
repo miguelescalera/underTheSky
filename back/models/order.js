@@ -12,7 +12,28 @@ Order.init(
         address: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        city:{
+            type:Sequelize.STRING,
+            allowNull: false
+        },
+        country:{
+            type:Sequelize.STRING,
+            allowNull: false
+        },
+        state:{
+            type:Sequelize.STRING,
+            allowNull: false
+        },
+        postCode:{
+            type:Sequelize.STRING,
+            allowNull: false
+        },
+        transactionNumber:{
+            type:Sequelize.INTEGER,
+            defaultValue:0
         }
+            
 
     }, { sequelize, modelName: 'order' });
 

@@ -9,21 +9,20 @@ export const addLogin = user => ({
 
 
 
-export const userLogin = user => dispatch =>
-  axios.post("/api/users/login", {email: user.email, password: user.password})
-  .then(user => {
-    dispatch(addLogin(user.data))
-    return user.data;
-    }
-  );
+export const userLogin = user => {
+  return axios.post("/api/users/login", {email: user.email, password: user.password})
+  
+}
+
 
   export const logoutUser = () => dispatch =>
   axios.post("/api/users/logout")
   .then(()=> {
     dispatch(addLogin({}))
-    return user.data;
-    }
-  );
+  }
+);
+    
+  
 
   export const deleteUser = () => dispatch =>
   axios.delete("/api/users/delete")

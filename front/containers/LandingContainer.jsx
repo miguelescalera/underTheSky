@@ -2,6 +2,26 @@ import React from 'react'
 import Landing from '../components/Landing'
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import {getCart} from "../actions/cartActions"
+import {addLogin} from "../actions/LoginAction"
+
+
+const mapStateToProps = (state, ownprops) => {
+  return {
+     
+      emailUser: state.user.user.email
+  };
+};
+
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+      getCart: ()=>dispatch(getCart()),
+      addLogin: (user)=>dispatch(addLogin(user))
+    };
+  };
+
+
 
 
 class LandingContainer extends React.Component {
@@ -11,32 +31,38 @@ class LandingContainer extends React.Component {
 
     }
 
-    handleClick(e) {
-        this.props.history.push('/products/getproducts')
-      }
-
-    render() {
-        return (
-                <Landing handleClick={this.handleClick} />
-        )
+  componentDidMount(){
+    if(this.props.emailUser){
+      this.props.getCart()
     }
+  }
+  handleClick(e) {
+      this.props.history.push('/products/getproducts')
+    }
+
+  render() {
+      return (
+              <Landing handleClick={this.handleClick} />
+      )
+  }
 }
 
-const mapStateToProps = function(state) {
-    return {
-        // Aqui traes props desde el store de react-redux
-    };
-  };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        //Aqui envias cosas al store
-    };
-  };
+
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(LandingContainer)
+);
+
+    
+   
+        
   
-  
-  
-  export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(LandingContainer)
-  );
+    
+    
+
+     
+      
+        
+
 

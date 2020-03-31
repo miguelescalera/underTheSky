@@ -5,16 +5,31 @@ const Order = require("../models/order")
 const Product = require("../models/product")
 
 
-router.get("/",function(req,res){
+
+
+ 
+
+router.get("/getDataProducts",function(req,res){
+    
     ProductData.findAll({
         where:{
             userId:req.user.id
         }
     }).then((productsData)=>{
-        res.send(productsData)
+        const dataToSend = productsData.sort(function (a, b) {
+             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(); 
+         });
+      
+         res.json(dataToSend)
+        })
     })
-})
-  
+        
+
+
+
+
+
+        
     
                 
                 
@@ -24,8 +39,8 @@ router.get("/",function(req,res){
 
 
 
-router.delete("/delete",function(req,res){
-    ProductData.findByPk(req.body.id)
+router.delete("/delete/:id",function(req,res){
+    ProductData.findByPk(req.params.id)
     .then((productData)=>{
         productData.destroy()
     }).then(()=>{

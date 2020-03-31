@@ -2,11 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Products from "../components/Products";
+import { selectStyle } from '../actions/productsActions'
 
 // ACCIONES 
 import {
   getDisplays
 } from "../actions/adminActions";
+import { runInThisContext } from "vm";
+
+const mapDispatchToProps = (dispatch, state) => {
+  return {
+    selectStyle: (data) => { dispatch(selectStyle(data)) }
+  };
+};
+
+const mapStateToProps = (state, ownprops) => {
+  return {};
+};
 
 
 
@@ -125,29 +137,29 @@ const displays = [
 //     };
 // };
 
-
-
-
-
-
 class ProductsContainer extends React.Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this)
   }
 
-
   handleClick(e) {
+    this.props.selectStyle(e)
+    console.log('HoLA ES EL SELECT STYLE',e);
+    
     this.props.history.push('/product')
   }
 
   render() {
     return (
       <div>
-        <h3 className="d-flex justify-content-center" style={{ marginBlockStart: "1rem" }}>Nuestros estilos</h3>
+        <h3 className="titulopagina">Nuestros estilos</h3>
         <Products products={displays} handleClick={this.handleClick} cart={this.props.cart} />
       </div>
     );
   }
 }
-export default connect()(ProductsContainer);
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
