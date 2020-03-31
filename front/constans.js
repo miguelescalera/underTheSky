@@ -20,3 +20,4 @@ export const ALL_FSS="ALL_FSS"
 
 
 
+export const SELECT_STYLE = "SELECT_STYLE";
