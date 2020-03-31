@@ -4,17 +4,17 @@ import { Container } from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse'
 import Button from "react-bootstrap/Button"
 
-// faltan las props para recibir las ordenes en los parentesis de default ({Ordenes})
 export default () => {
     const [open, setOpen] = useState(false);
 
   return (
-    <div style={{marginBlockStart:"6rem"}} >
+    <div style={{marginBlockStart:"3rem"}} >
         <Container style={{display:"flex", flexDirection:"column", alignItems:"center"}} >
-        <input type="text"/><Button type="submit">Buscar</Button>
+        <input type="text"/><Button type="submit" >Buscar</Button>
         </Container>
- {/* {ordenes.map(orden=>{ */}
-     {/* return( */}
+
+
+
       <Container style={{marginBlockStart:"2rem"}} >
         <Card>
           <Card.Title>Orden N°001</Card.Title>
@@ -23,8 +23,7 @@ export default () => {
           {/* agregar un boton para modificar el estado */}
           <h6>Email:pepito@grillo.com</h6> {/* {order.email} */}
           <h6>Direccion: av siempreviva 2222</h6> {/* {order.adress} */}
-          <h6>Total:$ 2500 </h6> {/* falta poner el precio total de la orden total */}
-          
+          <h6>Total:$ 2500 </h6> {/* falta poner el precio total de la orden total */} 
           <>
       <Button
         onClick={() => setOpen(!open)}
@@ -46,13 +45,8 @@ export default () => {
         </tr>
       </Collapse>
     </>
-
-
         </Card>
       </Container>
-    {/* )
-    })
-} */}
     </div>
   );
 };
