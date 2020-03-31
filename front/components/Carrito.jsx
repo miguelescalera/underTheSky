@@ -18,6 +18,9 @@ export default ({
   handleQuantity
 }) => {
 
+  console.log("dataProduct Carrito",dataProduct)
+    console.log("userProduct Carrito",userProduct)
+    console.log("fss Carrito",fss)
   
   const [show, setShow] = useState(false);
   
@@ -40,7 +43,7 @@ export default ({
           allData=[]
         }
   
-  
+  console.log("ALL DATA:",allData)
     const CheckoutButton={
       marginTop:"5%",
       marginBottom:"10%",

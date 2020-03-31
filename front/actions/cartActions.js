@@ -1,23 +1,15 @@
 import axios from "axios"
-import {DATA_PRODUCTS,ALL_PRODUCT_USER,FSS} from "../constans"
+import {CART} from "../constans"
 
-export const dataProducts = (dataProducts) => ({
-    type: DATA_PRODUCTS,
-    dataProducts
-  });
-    
-
-  export const allproductsUser = (allproductsUser) => ({
-    type: ALL_PRODUCT_USER,
-    allproductsUser
-  });
-    
-    
-
-  export const fss = (fss) => ({
-    type: FSS,
+export const cart = (dataProducts,allproductsUser,fss) => ({
+    type: CART,
+    dataProducts,
+    allproductsUser,
     fss
   });
+    
+
+  
    
 
 
@@ -28,14 +20,14 @@ export const dataProducts = (dataProducts) => ({
       return axios.get("/api/cart/getDataProducts")
   .then(allDataProducts => {
 
-    dispatch(dataProducts(allDataProducts.data))
+   
     const products=allDataProducts.data.map((e)=>{
-
+   
       return axios.post("/api/products/getUserProducts",{productId:e.productId})
     })
       axios.all(products).then((allProductsUser)=>{
         
-        dispatch(allproductsUser(allProductsUser))
+       
         const FSS= allProductsUser.map((e)=>{
           return axios.post("/api/products/getProductFSS",e.data)
         })
@@ -43,7 +35,11 @@ export const dataProducts = (dataProducts) => ({
         axios.all(FSS)
         .then((allFss)=>{
          
-        dispatch(fss(allFss))
+          dispatch(cart(
+            allDataProducts.data,
+            allProductsUser,
+            allFss
+            ))
       })
     })
   }
@@ -54,41 +50,50 @@ export const dataProducts = (dataProducts) => ({
 
 
 export const getCart = () => dispatch =>
-    axios.get("/api/cart/getDataProducts")
-  .then(allDataProducts => {
-    console.log("allDataProducts:",allDataProducts)
-    dispatch(dataProducts(allDataProducts.data))
-    
-    const products=allDataProducts.data.map((e)=>{
-      return axios.post("/api/products/getUserProducts",{productId:e.productId})
+axios.get("/api/cart/getDataProducts")
+.then(allDataProducts => {
+  const products=allDataProducts.data.map((e)=>{
+    return axios.post("/api/products/getUserProducts",{productId:e.productId})
+  })
+  
+  axios.all(products).then((allProductsUser)=>{
+    const FSS= allProductsUser.map((e)=>{
+    return axios.post("/api/products/getProductFSS",e.data)
+  })
+  axios.all(FSS)
+  .then((allFss)=>{
+    dispatch(cart(
+      allDataProducts.data,
+      allProductsUser,
+      allFss
+      ))
     })
+  })
+});
+
+ 
     
-      axios.all(products).then((allProductsUser)=>{
-        console.log("allProductsUser:",allProductsUser)
-        dispatch(allproductsUser(allProductsUser))
+      
+    
+      
+      
+       
         
-        const FSS= allProductsUser.map((e)=>{
-          return axios.post("/api/products/getProductFSS",e.data)
-        })
-          
-        axios.all(FSS)
-        .then((allFss)=>{
-          console.log("allFss:",allFss)
-        dispatch(fss(allFss))
-      })
-    })
-  }
-);
+        
 
 
 
-export const modifyDataProduct =(id,quantity)=> dispatch =>{
+export const modifyDataProduct =(id,quantity,allProductsUser,allFss)=> dispatch =>{
   axios.put("/api/products/modifyDataProduct",{quantity:quantity,productDataId:id})
   .then((newData)=>{
     console.log("nuevaData: ",newData)
     axios.get(`/api/cart/getDataProducts`)
     .then(alldataProducts => {
-      dispatch(dataProducts(alldataProducts.data))
+      dispatch(cart(
+        alldataProducts.data,
+        allProductsUser,
+        allFss
+        ))
     })
   })
  }

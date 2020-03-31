@@ -25,6 +25,7 @@ export const selectStyle = selectedStyle => ({
 
 
 export const fetchNewProduct = (body) => dispatch => {
+    console.log("BODY FETCH NE PRODUCT",body)
     return axios.post("/api/products/newProduct", body)
         .then(res =>  res.data)
         .then(result => dispatch(SelectedProducts(result)))
