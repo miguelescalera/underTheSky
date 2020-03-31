@@ -17,8 +17,8 @@ export const fetchProductData = (productId) => dispatch => {
 export const createDataProduct = (data) => dispatch => {
     axios.post("/api/products/nuevoproducto", data)
         .then(res => res.data)
-        .then(productData => dispatch(dataProduct(productData)))
-    
-    } 
+        .then(productData => { dispatch(dataProduct(productData)); return productData })
+
+}
 
 
