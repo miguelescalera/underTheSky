@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 import { connect } from "react-redux";
 import Headroom from 'react-headroom'
 import {logoutUser,userLogin,addLogin} from "../actions/LoginAction"
-import {getCart,dataProducts,allproductsUser,fss} from "../actions/cartActions"
+import {getCart,cart} from "../actions/cartActions"
 import {decrypt} from "../actions/RegisterAction"
 
 
@@ -19,12 +19,11 @@ const mapDispatchToProps=(dispatch)=>{
     return{
         getCart: ()=>dispatch(getCart()),
         logoutUser: ()=>dispatch(logoutUser()),
-        dataProducts: ()=>dispatch(dataProducts([])),
-        allproductsUser: ()=>dispatch(allproductsUser([])),
-        fss: ()=>dispatch(fss([])),
+        cart: ()=>dispatch(cart([],[],[])),
         addLogin:(user)=>dispatch(addLogin(user))
     }
 }
+        
 
 
  class NavbarContainer extends React.Component{
@@ -53,9 +52,8 @@ const mapDispatchToProps=(dispatch)=>{
        localStorage.removeItem("pass")
        localStorage.removeItem("email")
        this.props.logoutUser()
-       this.props.dataProducts()
-       this.props.allproductsUser()
-       this.props.fss()
+       this.props.cart()
+       
     }
      
      
