@@ -1,4 +1,4 @@
-import {ALL_PRODUCT_USER,DATA_PRODUCTS,FSS} from "../constans"
+import {CART} from "../constans"
 const initialState = {
   dataProducts:[],
   allproductsUser:[],
@@ -7,16 +7,17 @@ const initialState = {
 
   export default (state = initialState, action) => {
     switch (action.type) {
-      case ALL_PRODUCT_USER: 
-         return Object.assign({}, state, {allproductsUser:action.allproductsUser});
-      case DATA_PRODUCTS: 
-         return Object.assign({}, state, {dataProducts: action.dataProducts });
-      case FSS: 
-         return Object.assign({}, state, {fss:action.fss});
+      case CART: 
+         return Object.assign({}, state, {
+            allproductsUser:action.allproductsUser,
+            dataProducts: action.dataProducts,
+            fss:action.fss
+         });
          default: 
          return state;
         }
       }
+      
       
       
       

@@ -21,6 +21,7 @@ router.post('/nuevoproducto', function (req, res) {
         productData.setProduct(product);
         productData.setUser(user);
         res.json(productData);
+        console.log("DATA PTODUCT TERMINADO:",productData)
       });
     });
   });
