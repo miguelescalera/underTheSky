@@ -7,6 +7,7 @@ const Order = require("../models/order")
 const User = require("../models/user")
 const Product = require("../models/product")
 const Display= require("../models/display")
+const ProductData = require("../models/productData")
 
 
 
@@ -123,6 +124,19 @@ router.get("/getUsers",function(req,res){
     })
 })
 
+router.put("/addAdmin", function(req,res){
+    User.findByPk(req.body.userId)
+    .then( function (user){
+        user.update({type:req.body.type})
+        .then(function(newstatus){
+            console.log("type modificado back")
+            res.json(newstatus)
+        })
+    })
+})
+
+
+
 router.delete("/deleteUser",function(req,res){
     User.findByPk(req.body.userId)
     .then((user)=>{
@@ -131,6 +145,14 @@ router.delete("/deleteUser",function(req,res){
     .then(res.sendStatus(204))
 })
 ///////////PRODUCTS////////////////////////
+router.get("/getAllDataProducts", function(req,res){
+    ProductData.findAll()
+    .then(allproductdata=>{
+        res.json(allproductdata)
+    })
+})
+
+
 
 
 router.delete("/deleteProduct",function(req,res){

@@ -5,7 +5,8 @@ import {
   GET_DISPLAY,
   GET_FRAME,
   GET_SIZE,
-  GET_STYLE} from "../constans"
+  GET_STYLE,
+  DATA_PRODUCTS} from "../constans"
 
 /*-----------------ACTIONS-------------------------*/
 export const allOrders = allOrder => ({
@@ -37,6 +38,11 @@ export const allStyle = allStyle => ({
     type: GET_STYLE,
     allStyle
   });  
+
+export const allDataProducts = allDataProducts=>({
+  type: DATA_PRODUCTS,
+  allDataProducts
+})  
 /*-----------------ORDERS FETCH---------------------*/
 
 export const getOrders=() => dispatch =>
@@ -68,6 +74,12 @@ export const getUsers=() => dispatch =>
     }
   );
 
+  export const changeStatus = function(usertype,idUser){
+    axios.post(`/api/private/addAdmin`,{type:usertype,userId:idUser})
+  }
+
+
+
 
 export const deleteUser=(user) => 
   axios.delete("/api/admin/deleteUser",{userId:user.id})
@@ -75,6 +87,13 @@ export const deleteUser=(user) =>
 
 
 /*--------------------PRODUCTS----------------------------*/
+export const fetchDataProducts=()=>dispatch=>{
+  axios.get("/api/admin/getAllDataProducts")
+  .then(dataproducts=>{
+    dispatch(allDataProducts(dataproducts.data))
+    return dataproducts.data;
+  })
+}
 
 export const deleteProduct=(product) => 
   axios.delete("/api/admin/deleteProduct",{productId:product.id})

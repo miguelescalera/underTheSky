@@ -9,10 +9,9 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
-  console.log('CREANDO DATA', req.body);
+  console.log('CREANDO DATA', req.body); feature/localStorage
   ProductData.create(req.body)
-    .then(productData => res.send(productData))
-});
+    .then(productData => res.send(productData))});
 
 //   ProductData.create(req.body).then(productData => {
 //     User.findByPk(req.user.id).then(user => {
