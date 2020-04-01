@@ -57,7 +57,7 @@ export default ({
       </Container>
       <Container className="d-flex justify-content-center">
         {!sizes ? (
-          <Spinner animation="border" role="status">
+          <Spinner animation="border" role="status" variant='light'>
             <span className="sr-only">Loading...</span>
           </Spinner>
         ) : (
@@ -98,7 +98,7 @@ export default ({
       </Container>
       <Container className="d-flex justify-content-center">
         {!frames ? (
-          <Spinner animation="border" role="status">
+          <Spinner animation="border" role="status" variant='light'>
             <span className="sr-only">Loading...</span>
           </Spinner>
         ) : (

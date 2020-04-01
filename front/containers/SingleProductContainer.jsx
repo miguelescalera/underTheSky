@@ -62,7 +62,7 @@ class SingleProductContainer extends React.Component {
             digital: true,
             frameId: this.state.frameId,
             sizeId: this.state.sizeId,
-            styleId: this.props.style
+            styleId: parseInt(this.props.style)
         })
             .then((product) => localStorage.setItem('selectedProduct', product.id))
             .then(() => this.props.history.push("/productData"))

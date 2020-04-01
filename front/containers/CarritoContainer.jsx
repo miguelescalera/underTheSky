@@ -1,5 +1,5 @@
-import React from "react"
-import Carrito from "../components/Carrito"
+import React from "react";
+import Carrito from "../components/Carrito";
 import { connect } from "react-redux";
 import {getCart,deleteProductData, modifyDataProduct,cartWithoutUser} from "../actions/cartActions"
 import {IdsForOrders} from "../actions/orderActions"
@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container'
 import CheckoutCart from "../components/CheckoutCart"
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 
 
 const mapStateToProps=(state,ownProps)=>{
@@ -28,17 +29,17 @@ const mapDispatchToProps=(dispatch)=>{
     }
 }
 
- class NavbarContainer extends React.Component{
-     constructor(props){
-         super()
+class NavbarContainer extends React.Component {
+  constructor(props) {
+    super();
 
-         this.handleDelete= this.handleDelete.bind(this)
-         this.handleSubmit= this.handleSubmit.bind(this)
-         this.handleQuantity= this.handleQuantity.bind(this)
-     }
-componentDidMount(){
-    if(this.props.userEmail){
-        this.props.getCart()
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleQuantity = this.handleQuantity.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.userEmail) {
+      this.props.getCart();
     }
     else{
         let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
@@ -47,20 +48,18 @@ componentDidMount(){
             dataProduct:dataProduct,
             product:products
         })
-    }
+    }}
        
        
 
-}
+  handleDelete(id) {
+    this.props.deleteProductData(id);
+  }
 
-handleDelete(id){
-this.props.deleteProductData(id)
-}
-
-handleSubmit(id){
-    this.props.IdsForOrders(id)
-    this.props.history.push("/cart/checkout")
-}
+  handleSubmit(id) {
+    this.props.IdsForOrders(id);
+    this.props.history.push("/cart/checkout");
+  }
 
 handleQuantity(id,quantity){
    console.log("this.props.userEmail",this.props.userEmail)
@@ -73,44 +72,32 @@ handleQuantity(id,quantity){
             !!this.props.userEmail
             )
     }
-       
+  }
+
+  render() {
+    return (
+      <div>
+        <Container className="carrito-vistageneral">
+          <CheckoutCart
+            dataProduct={this.props.dataProduct}
+            userProduct={this.props.userProduct}
+            fss={this.props.fss}
+            handleDelete={this.handleDelete}
+            handleSubmit={this.handleSubmit}
+          />
+
+          <Carrito
+            dataProduct={this.props.dataProduct}
+            userProduct={this.props.userProduct}
+            fss={this.props.fss}
+            handleDelete={this.handleDelete}
+            handleSubmit={this.handleSubmit}
+            handleQuantity={this.handleQuantity}
+          />
+        </Container>
+      </div>
+    );
+  }
 }
-
-
-    render(){
-        return (
-            <div>
-                    
-                <Container>
-                <Row>
-                <Col xs lg="8">
-                    <Carrito
-                    dataProduct={this.props.dataProduct}
-                    userProduct={this.props.userProduct}
-                    fss={this.props.fss}
-                    handleDelete={this.handleDelete}
-                    handleSubmit={this.handleSubmit}
-                    handleQuantity={this.handleQuantity}
-                    />
-                </Col>
-                <Col xs lg="4">
-                    <CheckoutCart
-                    dataProduct={this.props.dataProduct}
-                    userProduct={this.props.userProduct}
-                    fss={this.props.fss}
-                    handleDelete={this.handleDelete}
-                    handleSubmit={this.handleSubmit}
-                    
-                    />
-                </Col>
-                    
-                </Row>
-                </Container>
-                
-            </div>
-        )
-    }
-}
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
