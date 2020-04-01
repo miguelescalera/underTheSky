@@ -85,7 +85,7 @@ router.post("/newProduct", function (req, res) {
       // digital: req.body.digital,
       frameId: req.body.frameId,
       sizeId: req.body.sizeId,
-      styleId: req.body.styleId
+      styleId: parseInt(req.body.styleId)
     }
   }).spread(function (product, created) {
     res.json(product);

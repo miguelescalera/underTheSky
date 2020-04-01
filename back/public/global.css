@@ -83,17 +83,25 @@ a:hover {
   border-radius: 0.2rem;
 }
 
-.boton-outline:hover {
+.boton-outline:hover  {
   background-color: #febe72;
   color: #161515;
   border-color: #febe72;
   border-radius: 0.2rem;
 }
 
-.boton-outline:active {
+.boton-outline:active{
   background-color: #ec7263 !important;
   color: #161515 !important;
   border-color: #ec7263 !important;
+  border-radius: 0.2rem !important;
+}
+
+.boton-outline:focus{
+  background-color: #ec7263 !important;
+  color: #161515 !important;
+  border-color: #ec7263 !important;
+  box-shadow: 0 0 0.3rem 0.2rem rgba(0,0,0,0.5)!important;
   border-radius: 0.2rem !important;
 }
 
@@ -174,7 +182,7 @@ a:hover {
 }
 
 .focus {
-  box-shadow: 0 0 0 0.2rem rgba(236, 114, 99, 0.5) !important;
+  box-shadow: 0 0 0.7rem 0.2rem rgba(0,0,0,0.5)  !important;
 }
 
 input:-webkit-autofill,
