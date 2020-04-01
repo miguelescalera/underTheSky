@@ -115,6 +115,11 @@ const loginLogout=()=>{
             <Nav.Link>
               {loginLogout()}
             </Nav.Link>
+            <Nav.Link>
+              <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
+                Admin
+              </Link>
+            </Nav.Link>
             <div>
               <span style={cartLength}>{cartItems.length}</span>
               <Nav.Link>
@@ -122,6 +127,7 @@ const loginLogout=()=>{
                   Cart
                 </Link>
               </Nav.Link>
+        
             </div>
           </Nav>
         </Navbar.Collapse>

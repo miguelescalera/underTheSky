@@ -1,14 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDataProduct,dataProduct } from "../actions/productDataActions"
-import {getCart} from "../actions/cartActions"
+import { createDataProduct, dataProduct } from "../actions/productDataActions"
+import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
+import { getCart } from "../actions/cartActions"
+
 const mapDispatchToProps = (dispatch, state) => {
     return {
         dataProduct: (data) => dispatch(dataProduct(data)),
-            getCart: () => dispatch(getCart()) 
-        }
+        selectedProducts: (product) => dispatch(fetchProduct(product)),
+        getCart: () => dispatch(getCart()),
+
     };
+}
 
 
 const mapStateToProps = (state, ownprops) => {
@@ -37,6 +41,13 @@ class FormDataContainer extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    componentDidMount() {
+        let product = JSON.parse(localStorage.getItem('selectedStyle'))
+        if (product) {
+            this.props.selectedProducts(product)
+        }
+
+    }
 
 componentDidMount(){
     console.log("arrOfData didmoutn",arrOfData)
@@ -53,6 +64,7 @@ componentDidMount(){
 
     handleSubmit(e) {
         e.preventDefault();
+
         
         createDataProduct(
              {
@@ -96,16 +108,7 @@ componentDidMount(){
      }).then(()=>this.props.history.push("/cart"))
  }
       
-            
-        
-            
-               
-
-           
-            
-      
-
-    render() {
+  render() {
         return (
             <div>
                 <h3 className="titulopagina">Información</h3>

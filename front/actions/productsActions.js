@@ -25,10 +25,12 @@ export const selectStyle = selectedStyle => ({
 
 
 export const fetchNewProduct = (body) => dispatch => {
-    
+
+    console.log('eso es el body del front', body)
+
     return axios.post("/api/products/newProduct", body)
-        .then(res =>  res.data)
-        .then(result => dispatch(SelectedProducts(result)))
+        .then(res => res.data)
+        .then(result => { dispatch(SelectedProducts(result)); return result })
 }
 
 export const getAllProducts = () => {
@@ -51,4 +53,12 @@ export const fetchStyle = (styleId) => dispatch => {
     axios.get(`/api/products/styles/${styleId}`)
         .then(res => res.data)
         .then(style => {  dispatch(selectStyle(style)) })
+}
+
+
+export const fetchProduct = (id) => dispatch => {
+    console.log('eso es el body del front')
+    return axios.get(`/api/products/${id}`)
+        .then(res => res.data)
+        .then(result => { dispatch(SelectedProducts(result)) })
 }
