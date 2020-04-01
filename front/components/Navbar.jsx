@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -7,10 +7,9 @@ import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 import { Container, Row, Col } from "react-bootstrap";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-export default ({cartItems,handelLogout,emailUser, hidden}) => {
-
+export default ({ cartItems, handelLogout, emailUser, hidden }) => {
   const [expanded, setExpanded] = useState(false);
 
   const cartLength = {
@@ -52,28 +51,53 @@ export default ({cartItems,handelLogout,emailUser, hidden}) => {
   const navBarMenu = {
     textAlign: "center"
   };
-  
-const loginLogout=()=>{
-  if(emailUser){
-   return  <span onClick ={handelLogout}style={navFont}>logout</span>
-  }
-  else{
-  return <Link style={navFont} to="/Login" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
-  Login
-</Link>
-  }
-}
 
+  const loginLogout = () => {
+    if (emailUser) {
+      return (
+        <span
+          onClick={() => {
+            handelLogout();
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150);
+          }}
+          style={navFont}
+        >
+          logout
+        </span>
+      );
+    } else {
+      return (
+        <Link
+          style={navFont}
+          to="/Login"
+          onClick={() =>
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150)
+          }
+        >
+          Login
+        </Link>
+      );
+    }
+  };
 
   const navButton = {
-    color:'#ec7263',
-    border:'none'
-  }
+    color: "#ec7263",
+    border: "none"
+  };
   let viewState = hidden ? hidden : null;
 
   return (
     <div>
-      <Navbar className={viewState} style={navBarStyle} expand="lg" expanded={expanded}>
+      <Navbar
+        className={viewState}
+        style={navBarStyle}
+        expand="lg"
+        expanded={expanded}
+      >
         {/* <Navbar.Brand  > */}
 
         <Col
@@ -95,7 +119,11 @@ const loginLogout=()=>{
             />
           </Link>
         </Col>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" style={navButton} onClick={() => setExpanded(expanded ? false : "expanded")}>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          style={navButton}
+          onClick={() => setExpanded(expanded ? false : "expanded")}
+        >
           <FontAwesomeIcon icon={faEllipsisV} />
         </Navbar.Toggle>
 
@@ -103,22 +131,44 @@ const loginLogout=()=>{
         <Navbar.Collapse id="basic-navbar-nav" style={navBarMenu}>
           <Nav className="mr-auto">
             <Nav.Link>
-              <Link style={navFont} to="/products/getProducts" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
+              <Link
+                style={navFont}
+                to="/products/getProducts"
+                onClick={() =>
+                  setTimeout(() => {
+                    setExpanded(false);
+                  }, 150)
+                }
+              >
                 Productos
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link style={navFont} to="/register" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
+              <Link
+                style={navFont}
+                to="/register"
+                onClick={() =>
+                  setTimeout(() => {
+                    setExpanded(false);
+                  }, 150)
+                }
+              >
                 Register
               </Link>
             </Nav.Link>
-            <Nav.Link>
-              {loginLogout()}
-            </Nav.Link>
+            <Nav.Link>{loginLogout()}</Nav.Link>
             <div>
               <span style={cartLength}>{cartItems.length}</span>
               <Nav.Link>
-                <Link style={cartButton} to="/cart" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
+                <Link
+                  style={cartButton}
+                  to="/cart"
+                  onClick={() =>
+                    setTimeout(() => {
+                      setExpanded(false);
+                    }, 150)
+                  }
+                >
                   Cart
                 </Link>
               </Nav.Link>
@@ -126,7 +176,6 @@ const loginLogout=()=>{
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
     </div>
   );
-  };
+};
