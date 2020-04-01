@@ -10,7 +10,7 @@ import {decrypt} from "../actions/RegisterAction"
 
 const mapStateToProps = (state, ownprops) => {
     return {
-        cart:state.cart.dataProducts,
+        cartItems:state.cart.dataProducts,
         emailUser: state.user.user.email
     };
 };
@@ -63,7 +63,7 @@ const mapDispatchToProps=(dispatch)=>{
         return (
             <Headroom>
                 <Navbar
-                    cart={this.props.cart}
+                    cartItems={this.props.cartItems}
                     emailUser={this.props.emailUser}
                     handelLogout={this.handelLogout}
                 />
