@@ -41,7 +41,7 @@ class NavbarContainer extends React.Component {
     if (this.props.userEmail) {
       this.props.getCart();
     }
-    else{
+    else if(JSON.parse(localStorage.getItem("dataWithoutUser"))){
         let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
         let products=JSON.parse(localStorage.getItem("productWithoutUser"))
         this.props.cartWithoutUser({
