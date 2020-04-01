@@ -1,35 +1,33 @@
 import React from "react";
 import Carrito from "../components/Carrito";
 import { connect } from "react-redux";
-import {
-  getCart,
-  deleteProductData,
-  modifyDataProduct
-} from "../actions/cartActions";
-import { IdsForOrders } from "../actions/orderActions";
-import Container from "react-bootstrap/Container";
-import CheckoutCart from "../components/CheckoutCart";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import {getCart,deleteProductData, modifyDataProduct,cartWithoutUser} from "../actions/cartActions"
+import {IdsForOrders} from "../actions/orderActions"
+import Container from 'react-bootstrap/Container'
+import CheckoutCart from "../components/CheckoutCart"
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    dataProduct: state.cart.dataProducts,
-    userProduct: state.cart.allproductsUser,
-    fss: state.cart.fss,
-    userEmail: state.user.user.email
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getCart: () => dispatch(getCart()),
-    deleteProductData: id => dispatch(deleteProductData(id)),
-    IdsForOrders: id => dispatch(IdsForOrders(id)),
-    modifyDataProduct: (id, quantity, product, fss) =>
-      dispatch(modifyDataProduct(id, quantity, product, fss))
-  };
-};
+
+const mapStateToProps=(state,ownProps)=>{
+    return{
+       dataProduct:state.cart.dataProducts,
+       userProduct:state.cart.allproductsUser,
+       fss:state.cart.fss,
+       userEmail:state.user.user.email
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        getCart: ()=>dispatch(getCart()),
+        cartWithoutUser: (data)=>dispatch(cartWithoutUser(data)),
+        deleteProductData:(id)=>dispatch(deleteProductData(id)),
+        IdsForOrders:(id)=>dispatch(IdsForOrders(id)),
+        modifyDataProduct:(id,quantity,product,fss,user)=>dispatch(modifyDataProduct(id,quantity,product,fss,user))
+    }
+}
 
 class NavbarContainer extends React.Component {
   constructor(props) {
@@ -43,7 +41,16 @@ class NavbarContainer extends React.Component {
     if (this.props.userEmail) {
       this.props.getCart();
     }
-  }
+    else{
+        let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
+        let products=JSON.parse(localStorage.getItem("productWithoutUser"))
+        this.props.cartWithoutUser({
+            dataProduct:dataProduct,
+            product:products
+        })
+    }}
+       
+       
 
   handleDelete(id) {
     this.props.deleteProductData(id);
@@ -54,14 +61,16 @@ class NavbarContainer extends React.Component {
     this.props.history.push("/cart/checkout");
   }
 
-  handleQuantity(id, quantity) {
-    if (quantity >= 1) {
-      this.props.modifyDataProduct(
-        id,
-        quantity,
-        this.props.userProduct,
-        this.props.fss
-      );
+handleQuantity(id,quantity){
+   console.log("this.props.userEmail",this.props.userEmail)
+    if(quantity>=1){
+        this.props.modifyDataProduct(
+            id,
+            quantity,
+            this.props.userProduct,
+            this.props.fss,
+            !!this.props.userEmail
+            )
     }
   }
 

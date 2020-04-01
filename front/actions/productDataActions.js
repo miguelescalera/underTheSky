@@ -18,6 +18,10 @@ export const createDataProduct = (data) => {
     return axios.post("/api/products/nuevoproducto", data)
 } 
         
+
+
+
+
        
     
 

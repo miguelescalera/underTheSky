@@ -14,13 +14,20 @@ router.post("/addOrder",function(req,res){
                     where:{
                             userId:req.user.id,
                             status:req.body.status,
-                            address:req.body.address
+                            address:req.body.address,
+                            postCode:req.body.postCode,
+                            transactionNumber:req.body.transactionNumber,
+                            city:req.body.city,
+                            country:req.body.country,
+                            state:req.body.state
                     }
                 }).spread(function(order,created){
+                    console.log("order",order)
+                    console.log("productdata",productData)
                     productData.setOrder(order)
-                    productData.setUser(user)
                     res.json(order)
                 })
+                    
 
 
 
