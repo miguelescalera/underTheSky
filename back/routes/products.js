@@ -9,6 +9,7 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
+
   console.log('CREANDO DATA', req.body);
   console.log('userrrrr', req.user)
   ProductData.create(req.body)
@@ -18,12 +19,15 @@ router.post('/nuevoproducto', function (req, res) {
 })
 
 
+
 router.get("/productData/:id", function (req, res) {
   ProductData.findByPk(req.params.id).then(data => res.send(data));
 });
 
+
 router.put("/modifyDataProduct", function (req, res) {
   console.log("BODY:", req.body);
+
   ProductData.update(
     { quantity: req.body.quantity },
     { returning: true, where: { id: req.body.productDataId } }
@@ -46,7 +50,7 @@ router.post("/getUserProducts", (req, res) => {
 });
 
 router.post("/getProductFSS", (req, res) => {
-  console.log("BODY:", req.body);
+  
 
   Size.findByPk(req.body.sizeId).then(size => {
     Frame.findByPk(req.body.frameId).then(frame => {

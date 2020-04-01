@@ -1,7 +1,7 @@
 import React from "react"
 import Carrito from "../components/Carrito"
 import { connect } from "react-redux";
-import {getCart,deleteProductData, modifyDataProduct} from "../actions/cartActions"
+import {getCart,deleteProductData, modifyDataProduct,cartWithoutUser} from "../actions/cartActions"
 import {IdsForOrders} from "../actions/orderActions"
 import Container from 'react-bootstrap/Container'
 import CheckoutCart from "../components/CheckoutCart"
@@ -21,9 +21,10 @@ const mapStateToProps=(state,ownProps)=>{
 const mapDispatchToProps=(dispatch)=>{
     return{
         getCart: ()=>dispatch(getCart()),
+        cartWithoutUser: (data)=>dispatch(cartWithoutUser(data)),
         deleteProductData:(id)=>dispatch(deleteProductData(id)),
         IdsForOrders:(id)=>dispatch(IdsForOrders(id)),
-        modifyDataProduct:(id,quantity,product,fss)=>dispatch(modifyDataProduct(id,quantity,product,fss))
+        modifyDataProduct:(id,quantity,product,fss,user)=>dispatch(modifyDataProduct(id,quantity,product,fss,user))
     }
 }
 
@@ -39,6 +40,16 @@ componentDidMount(){
     if(this.props.userEmail){
         this.props.getCart()
     }
+    else{
+        let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
+        let products=JSON.parse(localStorage.getItem("productWithoutUser"))
+        this.props.cartWithoutUser({
+            dataProduct:dataProduct,
+            product:products
+        })
+    }
+       
+       
 
 }
 
@@ -52,9 +63,15 @@ handleSubmit(id){
 }
 
 handleQuantity(id,quantity){
-   
+   console.log("this.props.userEmail",this.props.userEmail)
     if(quantity>=1){
-        this.props.modifyDataProduct(id,quantity,this.props.userProduct,this.props.fss)
+        this.props.modifyDataProduct(
+            id,
+            quantity,
+            this.props.userProduct,
+            this.props.fss,
+            !!this.props.userEmail
+            )
     }
        
 }

@@ -18,9 +18,12 @@ const mapDispatchToProps = (dispatch, state) => {
 const mapStateToProps = (state, ownprops) => {
     return {
         product: state.products.selectedProduct,
+        userEmail: state.user.user.email
     };
 };
 
+let arrOfData=[]
+let arrOfProduct=[]
 
 class FormDataContainer extends React.Component {
     constructor(props) {
@@ -32,8 +35,8 @@ class FormDataContainer extends React.Component {
             time: '',
             language: '',
             emailClient: ''
-
-
+            
+            
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,6 +49,11 @@ class FormDataContainer extends React.Component {
 
     }
 
+componentDidMount(){
+    console.log("arrOfData didmoutn",arrOfData)
+    console.log("arrOfProduct didmoutn",arrOfProduct)
+}
+
     handleChange(e) {
         const key = e.target.name;
         const value = e.target.value;
@@ -56,25 +64,51 @@ class FormDataContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
+        
         createDataProduct(
-            {
-                date: this.state.date,
-                content: this.state.content,
-                name: this.state.name,
-                time: this.state.time,
-                language: this.state.language,
-                emailClient: this.state.emailClient,
-                productId: this.props.product.id
+             {
+                 date: this.state.date,
+                 content: this.state.content,
+                 name: this.state.name,
+                 time: this.state.time,
+                 language: this.state.language,
+                 emailClient: this.state.emailClient,
+                 productId: this.props.product.id
+             }
+         ).then((res)=>{
+             this.props.dataProduct(res.data)
+             if(!this.props.userEmail){
+                let dataWithoutUser=res.data
+                let productWithoutUser=this.props.product
+    
+    
+                if(arrOfData.length!==0){
+                    arrOfProduct=JSON.parse(localStorage.getItem("productWithoutUser"))
+                    arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
+    
+                    arrOfProduct.push(productWithoutUser)
+                    arrOfData.push(dataWithoutUser)
+    
+                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+                    localStorage.setItem("productWithoutUser",JSON.stringify(arrOfProduct))
+                }
+                else{
+                    arrOfData.push(dataWithoutUser)
+                    arrOfProduct.push(productWithoutUser)
+                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+                    localStorage.setItem("productWithoutUser",JSON.stringify(arrOfProduct))
+                }
             }
-        ).then((res) => this.props.dataProduct(res.data))
-            .then(() => {
-                this.props.getCart()
-            }).then(() => this.props.history.push("/cart"))
-    }
-
-
-
-    render() {
+        })
+     .then(()=>{
+         if(this.props.userEmail){
+             this.props.getCart()
+         }
+     }).then(()=>this.props.history.push("/cart"))
+ }
+      
+  render() {
         return (
             <div>
                 <h3 className="titulopagina">Información</h3>

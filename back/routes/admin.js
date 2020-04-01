@@ -122,7 +122,9 @@ router.get("/getUsers", function (req, res) {
         })
 })
 
-router.put("/addAdmin", function (req, res) {
+
+router.post("/addAdmin", function(req,res){
+    console.log("entre al back")
     User.findByPk(req.body.userId)
         .then(function (user) {
             user.update({ type: req.body.type })
@@ -134,13 +136,13 @@ router.put("/addAdmin", function (req, res) {
 })
 
 
-
-router.delete("/deleteUser", function (req, res) {
-    User.findByPk(req.body.userId)
-        .then((user) => {
-            user.destroy
-        })
-        .then(res.sendStatus(204))
+router.delete("/deleteUser/:id",function(req,res){
+    const id=req.params.id;
+    User.findByPk(id)
+    .then(user=>{
+        user.destroy()
+    })
+    .then(res.sendStatus(204))
 })
 ///////////PRODUCTS////////////////////////
 router.get("/getAllDataProducts", function (req, res) {

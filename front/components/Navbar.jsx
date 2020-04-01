@@ -9,7 +9,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-export default ({cart,handelLogout,emailUser, hidden}) => {
+export default ({cartItems,handelLogout,emailUser, hidden}) => {
 
   const [expanded, setExpanded] = useState(false);
 
@@ -121,7 +121,7 @@ const loginLogout=()=>{
               </Link>
             </Nav.Link>
             <div>
-              <span style={cartLength}>{cart.length}</span>
+              <span style={cartLength}>{cartItems.length}</span>
               <Nav.Link>
                 <Link style={cartButton} to="/cart" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
                   Cart

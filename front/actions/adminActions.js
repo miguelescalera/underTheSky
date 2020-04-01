@@ -75,15 +75,20 @@ export const getUsers = () => dispatch =>
     }
     );
 
-export const changeStatus = function (usertype, idUser) {
-  axios.post(`/api/private/addAdmin`, { type: usertype, userId: idUser })
+
+  export const changeStatus = function(usertype,idUser){
+    axios.post(`/api/admin/addAdmin`,{type:usertype,userId:idUser})
+  }
+
+
+
+
+
+
+export const deleteUser=(idUser) => {
+  axios.delete(`/api/admin/deleteUser/${idUser}`)
 }
 
-
-
-
-export const deleteUser = (user) =>
-  axios.delete("/api/admin/deleteUser", { userId: user.id })
 
 
 

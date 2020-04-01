@@ -10,10 +10,11 @@ export const GET_DISPLAY = "GET_DISPLAY"
 export const GET_FRAME = "GET_FRAME"
 export const GET_SIZE = "GET_SIZE"
 export const GET_STYLE = "GET_STYLE"
-export const ORDER_IN_PROCESS = "ORDER_IN_PROCESS"
-export const ID_FOR_ORDERS = "ID_FOR_ORDERS"
-export const DATA_PRODUCT = "DATA_PRODUCT"
-export const SELECT_STYLE = 'SELECT_STYLE'
-export const ALL_FSS = "ALL_FSS"
-export const DATA_PRODUCTS = "DATA_PRODUCTS"
+
+export const ORDER_IN_PROCESS="ORDER_IN_PROCESS"
+export const ID_FOR_ORDERS= "ID_FOR_ORDERS"
+export const DATA_PRODUCT= "DATA_PRODUCT"
+export const SELECT_STYLE='SELECT_STYLE'
+export const ALL_FSS="ALL_FSS"
+export const DATA_PRODUCTS ="DATA_PRODUCTS"
 
