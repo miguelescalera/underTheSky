@@ -18,9 +18,7 @@ export default ({
   handleQuantity
 }) => {
 
-  console.log("dataProduct Carrito",dataProduct)
-    console.log("userProduct Carrito",userProduct)
-    console.log("fss Carrito",fss)
+  
   
   const [show, setShow] = useState(false);
   

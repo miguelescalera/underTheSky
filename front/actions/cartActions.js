@@ -19,34 +19,33 @@ export const cart = (dataProducts,allproductsUser,fss) => ({
 
       return axios.get("/api/cart/getDataProducts")
   .then(allDataProducts => {
-
-   
     const products=allDataProducts.data.map((e)=>{
-   
       return axios.post("/api/products/getUserProducts",{productId:e.productId})
     })
-      axios.all(products).then((allProductsUser)=>{
-        
-       
-        const FSS= allProductsUser.map((e)=>{
-          return axios.post("/api/products/getProductFSS",e.data)
-        })
-          
-        axios.all(FSS)
-        .then((allFss)=>{
-         
-          dispatch(cart(
-            allDataProducts.data,
-            allProductsUser,
-            allFss
-            ))
+    axios.all(products).then((allProductsUser)=>{
+      const FSS= allProductsUser.map((e)=>{
+        return axios.post("/api/products/getProductFSS",e.data)
+      })
+      axios.all(FSS)
+      .then((allFss)=>{
+        dispatch(cart(
+          allDataProducts.data,
+          allProductsUser,
+          allFss
+          ))
       })
     })
-  }
-);
+  })
 })
+}
+      
+      
+   
+        
+        
+       
+          
     
-  }
 
 
 export const getCart = () => dispatch =>
@@ -55,7 +54,6 @@ axios.get("/api/cart/getDataProducts")
   const products=allDataProducts.data.map((e)=>{
     return axios.post("/api/products/getUserProducts",{productId:e.productId})
   })
-  
   axios.all(products).then((allProductsUser)=>{
     const FSS= allProductsUser.map((e)=>{
     return axios.post("/api/products/getProductFSS",e.data)
@@ -70,11 +68,62 @@ axios.get("/api/cart/getDataProducts")
     })
   })
 });
+  
 
+
+export const modifyDataProduct =(id,quantity,allProductsUser,allFss,user)=> dispatch =>{
+  console.log("user del modify",user)
+  axios.put("/api/products/modifyDataProduct",{quantity:quantity,productDataId:id})
+  .then((newData)=>{
+    if(user){
+      axios.get(`/api/cart/getDataProducts`)
+      .then(alldataProducts => {
+        dispatch(cart(
+          alldataProducts.data,
+          allProductsUser,
+          allFss
+          ))
+      })
+    }
+    else{
+      let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
+      dataProduct.map((e)=>{
+        if(e.id===newData.data.id){
+          e.quantity=quantity
+        }
+      })
+      dispatch(cart(
+        dataProduct,
+        allProductsUser,
+        allFss
+        ))
+      localStorage.setItem("dataWithoutUser",JSON.stringify(dataProduct))
+
+    }
+  })
+}
+      
+
+ 
+          
+    
  
     
       
-    
+ export const cartWithoutUser = (data)=>dispatch =>{
+   const FSS= data.product.map((e)=>{
+      return axios.post("/api/products/getProductFSS",e)
+    })
+    axios.all(FSS).then((allfss)=>{
+      dispatch(cart(
+        data.dataProduct,
+        data.product,
+        allfss
+          ))
+        })
+      }    
+     
+      
       
       
        
@@ -83,19 +132,5 @@ axios.get("/api/cart/getDataProducts")
 
 
 
-export const modifyDataProduct =(id,quantity,allProductsUser,allFss)=> dispatch =>{
-  axios.put("/api/products/modifyDataProduct",{quantity:quantity,productDataId:id})
-  .then((newData)=>{
-    console.log("nuevaData: ",newData)
-    axios.get(`/api/cart/getDataProducts`)
-    .then(alldataProducts => {
-      dispatch(cart(
-        alldataProducts.data,
-        allProductsUser,
-        allFss
-        ))
-    })
-  })
- }
       
    

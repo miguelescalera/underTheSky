@@ -9,30 +9,28 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
-  console.log('CREANDO DATA', req.body);
-  
-  // ProductData.create(req.body)
-//     .then(productData => res.send(productData))
-// });
-  
   ProductData.create(req.body).then(productData => {
-    User.findByPk(req.user.id).then(user => {
-      Product.findByPk(req.body.productId).then(product => {
-        productData.setProduct(product);
-        productData.setUser(user);
-        res.json(productData);
-        console.log("DATA PTODUCT TERMINADO:",productData)
-      });
+    Product.findByPk(req.body.productId).then(product => {
+      productData.setProduct(product);
+      if(req.user)productData.setUser(req.user.id);
+      console.log("product data finish",productData)
+      res.json(productData);
     });
   });
 });
+      
+ 
+  
+  
+  
+  
 
 router.get("/productData/:id", function(req, res) {
   ProductData.findByPk(req.params.id).then(data => res.send(data));
 });
 
 router.put("/modifyDataProduct", function(req, res) {
-  console.log("BODY:", req.body);
+ 
   ProductData.update(
     { quantity: req.body.quantity },
     { returning: true, where: { id: req.body.productDataId } }
@@ -55,7 +53,7 @@ router.post("/getUserProducts", (req, res) => {
 });
 
 router.post("/getProductFSS", (req, res) => {
-  console.log("BODY:", req.body);
+  
 
   Size.findByPk(req.body.sizeId).then(size => {
     Frame.findByPk(req.body.frameId).then(frame => {

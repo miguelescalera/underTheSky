@@ -10,7 +10,7 @@ const Product = require("../models/product")
  
 
 router.get("/getDataProducts",function(req,res){
-    
+    console.log("USER",req.user)
     ProductData.findAll({
         where:{
             userId:req.user.id
