@@ -63,7 +63,7 @@ export default ({ handleChange, handleSubmit }) => {
                             </Form.Group>
 
                             <Button onClick={handleSubmit} className="boton-outline" type="submit">
-                                Siguiente Paso
+                                Continuar
             </Button>
 
                         </Form>

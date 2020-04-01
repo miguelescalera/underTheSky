@@ -111,6 +111,8 @@ export const modifyDataProduct =(id,quantity,allProductsUser,allFss,user)=> disp
     
       
  export const cartWithoutUser = (data)=>dispatch =>{
+   console.log(data.product);
+   
    const FSS= data.product.map((e)=>{
       return axios.post("/api/products/getProductFSS",e)
     })

@@ -156,7 +156,14 @@ export default ({ cartItems, handelLogout, emailUser, hidden }) => {
                 Register
               </Link>
             </Nav.Link>
-            <Nav.Link>{loginLogout()}</Nav.Link>
+            <Nav.Link>
+              {loginLogout()}
+            </Nav.Link>
+            <Nav.Link>
+              <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
+                Admin
+              </Link>
+            </Nav.Link>
             <div>
               <span style={cartLength}>{cartItems.length}</span>
               <Nav.Link>
@@ -172,6 +179,7 @@ export default ({ cartItems, handelLogout, emailUser, hidden }) => {
                   Cart
                 </Link>
               </Nav.Link>
+        
             </div>
           </Nav>
         </Navbar.Collapse>

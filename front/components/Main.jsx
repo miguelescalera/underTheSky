@@ -15,6 +15,8 @@ import CarritoContainer from "../containers/CarritoContainer";
 import CheckoutContainer from "../containers/CheckoutContainer";
 import Img from "react-bootstrap/Image";
 import "../../back/public/global.css";
+import AdminPoroductsContainer from '../containers/AdminProductsContainer'
+import Admin from '../components/Admin'
 
 const mapStateToProps = state => {
   return {};
@@ -63,6 +65,8 @@ class Main extends React.Component {
           <Route path="/productData" exact component={FormDataContainer} />
           <Route path="/cart" exact component={CarritoContainer} />
           <Route path="/cart/checkout" exact component={CheckoutContainer} />
+          <Route path="/addProducts" exact component={AdminPoroductsContainer} />
+          <Route path="/eladmin" exact component={Admin} />
           <Route
             path="/admin/getOrders"
             exact

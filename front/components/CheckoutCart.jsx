@@ -63,7 +63,7 @@ export default ({ dataProduct, userProduct, fss, handleSubmit }) => {
         </ListGroup.Item>
         <ListGroup.Item style={{ textAlign: "center" }}>
           <Button onClick={() => handleSubmit(dataProductsIds)} className="boton-outline">
-            checkout all product
+            Finalizar compra
           </Button>
         </ListGroup.Item>
       </ListGroup>

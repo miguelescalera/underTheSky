@@ -16,13 +16,7 @@ export const fetchProductData = (productId) => dispatch => {
 /*data es un objeto que debe contener: fecha,lugar,etc... y  el productId(id del producto que contiene el marco,tamaño,etc)*/
 export const createDataProduct = (data) => {
     return axios.post("/api/products/nuevoproducto", data)
-} 
-        
+}
 
-
-
-
-       
-    
 
 
