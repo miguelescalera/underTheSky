@@ -1,15 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDataProduct } from "../actions/productDataActions"
+import { createDataProduct, dataProduct } from "../actions/productDataActions"
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
+import { getCart } from "../actions/cartActions"
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
-        createDataProduct: (data) => dispatch(createDataProduct(data)),
-        selectedProducts: (product) => dispatch(fetchProduct(product))
+        dataProduct: (data) => dispatch(dataProduct(data)),
+        selectedProducts: (product) => dispatch(fetchProduct(product)),
+        getCart: () => dispatch(getCart()),
+
     };
-};
+}
+
 
 const mapStateToProps = (state, ownprops) => {
     return {
@@ -52,8 +56,7 @@ class FormDataContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('Las Props', this.props)
-        this.props.createDataProduct(
+        createDataProduct(
             {
                 date: this.state.date,
                 content: this.state.content,
@@ -63,9 +66,13 @@ class FormDataContainer extends React.Component {
                 emailClient: this.state.emailClient,
                 productId: this.props.product.id
             }
-        )
-        this.props.history.push("/home")
+        ).then((res) => this.props.dataProduct(res.data))
+            .then(() => {
+                this.props.getCart()
+            }).then(() => this.props.history.push("/cart"))
     }
+
+
 
     render() {
         return (

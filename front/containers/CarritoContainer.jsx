@@ -23,7 +23,7 @@ const mapDispatchToProps=(dispatch)=>{
         getCart: ()=>dispatch(getCart()),
         deleteProductData:(id)=>dispatch(deleteProductData(id)),
         IdsForOrders:(id)=>dispatch(IdsForOrders(id)),
-        modifyDataProduct:(id,quantity)=>dispatch(modifyDataProduct(id,quantity))
+        modifyDataProduct:(id,quantity,product,fss)=>dispatch(modifyDataProduct(id,quantity,product,fss))
     }
 }
 
@@ -54,7 +54,7 @@ handleSubmit(id){
 handleQuantity(id,quantity){
    
     if(quantity>=1){
-        this.props.modifyDataProduct(id,quantity)
+        this.props.modifyDataProduct(id,quantity,this.props.userProduct,this.props.fss)
     }
        
 }

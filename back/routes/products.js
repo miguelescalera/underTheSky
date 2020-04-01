@@ -10,20 +10,13 @@ const Style = require("../models/style");
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
   console.log('CREANDO DATA', req.body);
+  console.log('userrrrr', req.user)
   ProductData.create(req.body)
-    .then(productData => res.send(productData))
-});
+    .then(productData => { productData.setUser(req.user.id); res.send(productData) })
 
-//   ProductData.create(req.body).then(productData => {
-//     User.findByPk(req.user.id).then(user => {
-//       Product.findByPk(req.body.productId).then(product => {
-//         productData.setProduct(product);
-//         productData.setUser(user);
-//         res.json(productData);
-//       });
-//     });
-//   });
-// });
+
+})
+
 
 router.get("/productData/:id", function (req, res) {
   ProductData.findByPk(req.params.id).then(data => res.send(data));

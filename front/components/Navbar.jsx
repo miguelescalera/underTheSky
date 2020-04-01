@@ -58,7 +58,9 @@ const loginLogout=()=>{
    return  <span onClick ={handelLogout}style={navFont}>logout</span>
   }
   else{
-  return <Link style={navFont} to="/Login" >login</Link>
+  return <Link style={navFont} to="/Login" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
+  Login
+</Link>
   }
 }
 
@@ -111,8 +113,11 @@ const loginLogout=()=>{
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link style={navFont} to="/Login" onClick={() => setTimeout(() => {setExpanded(false)}, 150)}>
-                Login
+              {loginLogout()}
+            </Nav.Link>
+            <Nav.Link>
+              <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
+                Admin
               </Link>
             </Nav.Link>
             <div>
@@ -122,6 +127,7 @@ const loginLogout=()=>{
                   Cart
                 </Link>
               </Nav.Link>
+        
             </div>
           </Nav>
         </Navbar.Collapse>
