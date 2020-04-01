@@ -4,26 +4,34 @@ import { Container } from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse'
 import Button from "react-bootstrap/Button"
 
-export default () => {
+export default ({orders,DataProducts,users}) => {
     const [open, setOpen] = useState(false);
 
-  return (
-    <div style={{marginBlockStart:"3rem"}} >
-        <Container style={{display:"flex", flexDirection:"column", alignItems:"center"}} >
-        <input type="text"/><Button type="submit" >Buscar</Button>
-        </Container>
-
-
-
-      <Container style={{marginBlockStart:"2rem"}} >
+    console.log("true o false",users[0])
+  const allOrders = ()=>{
+    if(users[0]){
+     return orders.map((e,i)=>{
+       let dataProduct= DataProducts.filter(f=>{
+         return f.orderId===e.id
+       })
+       dataProduct=dataProduct[0]
+       console.log("dataProduct",dataProduct)
+       let allusers=users.filter(u=>{
+         return e.userId===u.id
+        })
+        allusers=allusers[0]
+        
+       
+       return(
+        <Container style={{marginBlockStart:"2rem"}} >
         <Card>
-          <Card.Title>Orden N°001</Card.Title>
-          <h6>User: Pepito Grillo </h6> {/* {order.firstName + order.lastName} */}
-          <h6>Estado: En Proceso </h6> {/* {order.status} */}  
-          {/* agregar un boton para modificar el estado */}
-          <h6>Email:pepito@grillo.com</h6> {/* {order.email} */}
-          <h6>Direccion: av siempreviva 2222</h6> {/* {order.adress} */}
-          <h6>Total:$ 2500 </h6> {/* falta poner el precio total de la orden total */} 
+       <Card.Title>Orden N° {i+1}</Card.Title>
+          <h6>User: {allusers.firstName+" "+ allusers.lastName} </h6> 
+          <h6>Estado:{e.status} </h6> <Button>cambiar estado de orden</Button>
+       <h6>Email:{allusers.email}</h6>
+          <h6>Direccion: {e.address}</h6> 
+          <h6>Total:$ 2500 </h6> 
+         
           <>
       <Button
         onClick={() => setOpen(!open)}
@@ -35,10 +43,10 @@ export default () => {
       <Collapse in={open}>
         <tr style={{flexDirection:"column-reverse"}} >
             <h6>Cuadro: 0032</h6>
-            <h6>Momento: 12:32 12/12/12</h6>
-            <h6>Lugar: Buenos Aires</h6>
-            <h6>Frase: llalalalalalalal</h6>
-            <h6>Idioma: Español</h6>
+       <h6>Momento:{dataProduct.date + " "+dataProduct.time} </h6>
+            <h6>Lugar: Buenos Aires</h6>{/*lugar no existe en el modelo, agregarlo despues*/}
+            <h6>Frase:{dataProduct.content}</h6>
+       <h6>Idioma: {dataProduct.language} </h6>
             <h6>Marco: Blanco</h6>
             <h6>Estilo: Minimalista</h6>
             <h6>Tamaño: 13x18</h6>
@@ -47,6 +55,26 @@ export default () => {
     </>
         </Card>
       </Container>
+       )
+     })
+    }
+    else{
+      return(
+        <h5>cargando ordenes</h5>
+      )
+    }
+  }
+
+
+  return (
+    <div style={{marginBlockStart:"3rem"}} >
+        <Container style={{display:"flex", flexDirection:"column", alignItems:"center"}} >
+        <input type="text"/><Button type="submit" >Buscar</Button>
+        </Container>
+        {allOrders()}
     </div>
   );
 };
+
+      
+     

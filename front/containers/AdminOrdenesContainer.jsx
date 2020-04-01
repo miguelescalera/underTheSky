@@ -1,24 +1,49 @@
 import React from "react"
 import AdminOrdenes from "../components/AdminOrdenes"
 import {connect} from "react-redux"
+import { getOrders, fetchDataProducts,getUsers} from "../actions/adminActions"
 
-
+const mapStateToProps = state => {
+        return {
+           Orders: state.admin.allOrders, 
+           DataProducts: state.admin.allDataProducts,
+           users:state.admin.allUsers
+         }
+};
+    
+    const mapDispatchToProps = function(dispatch){  
+      return {
+        getOrders: () => dispatch(getOrders()),
+        getUsers: () => dispatch(getUsers()),
+        fetchDataProducts:()=>dispatch(fetchDataProducts())
+      }
+     };
 
 
 class AdminOrdenesContainer extends React.Component{
     constructor(props){
         super(props)
     }
-
+    componentDidMount(){
+              this.props.getOrders()
+              this.props.getUsers()
+              this.props.fetchDataProducts()
+            }
+      
     render(){
+       
         return(
             <div>
-                <AdminOrdenes />
+                <AdminOrdenes
+                orders={this.props.Orders}
+                DataProducts={this.props.DataProducts}
+                users={this.props.users}
+                />
             </div>
         )
     }
 }
-export default connect (null,null)(AdminOrdenesContainer)
+export default connect (mapStateToProps,mapDispatchToProps)(AdminOrdenesContainer)
 
 
 
