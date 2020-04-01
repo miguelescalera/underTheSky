@@ -23,7 +23,15 @@
 .form-control {
   background-color: rgba(40, 38, 36, 0.6);
   border-color: #d3cec4;
-  color: #161515;
+  color: #febe7e;
+}
+
+.form-control:focus {
+  color: #d3cec4;
+  background-color: rgba(40, 38, 36, 0.6);
+  border-color: #ec7263;
+  outline: 0;
+  box-shadow: 0 0 0.3rem 0.2rem rgba(0,0,0,0.5);
 }
 
 .text-muted {
