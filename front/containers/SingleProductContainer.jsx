@@ -1,7 +1,14 @@
 import React from "react";
 import SingleProduct from "../components/SingleProduct";
 import { connect } from "react-redux";
-import { getAllfss, fetchNewProduct, selectStyle, SelectedProducts } from "../actions/productsActions";
+import { getAllfss,
+     fetchNewProduct, 
+     selectStyle, 
+     SelectedProducts 
+     ,selectFrame,
+     selectSize,
+     Allfss
+    } from "../actions/productsActions";
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,9 +22,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        selectFrame: (frame) => dispatch(selectFrame(frame)),
+        selectSize: (size) => dispatch(selectSize(size)),
+        selectStyle: data => dispatch(selectStyle(data)),
         getAllfss: () => dispatch(getAllfss()),
         fetchNewProduct: data => dispatch(fetchNewProduct(data)),
-        selectStyle: data => dispatch(selectStyle(data))
+        Allfss:data => dispatch(Allfss(data))
     };
 };
 
@@ -31,31 +41,39 @@ class SingleProductContainer extends React.Component {
             styleId: 1
         };
         this.handleFrame = this.handleFrame.bind(this);
-        this.handleColor = this.handleColor.bind(this);
         this.handleSize = this.handleSize.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
+        
 
     componentDidMount() {
-        this.props.getAllfss();
+        this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+            this.props.selectFrame(result.data.frames[0])
+            this.props.selectSize(result.data.sizes[0])
+        })
+           
         let styleId = localStorage.getItem('selectedStyle')
         if (styleId) {
             this.props.selectStyle(styleId)
         }
+       
     }
-    handleFrame(id) {
-        console.log("CONSOLE LOG DE ID DEL FRAME", id);
-        this.setState({ frameId: id });
-        console.log
-    }
-    handleSize(id) {
-        console.log("CONSOLE LOG DE ID DEL size", id);
-        this.setState({ sizeId: id });
-        console.log('este es el state', this.state.sizeId)
 
+
+    handleFrame(frame) {
+        this.props.selectFrame(frame)
     }
-    handleColor(id) {
+       
+    handleSize(size) {
+       this.props.selectSize(size)
     }
+        
+       
+    
+
+   
     handleClick(e) {
         e.preventDefault();
         this.props.fetchNewProduct({

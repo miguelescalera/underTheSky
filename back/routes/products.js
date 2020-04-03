@@ -93,11 +93,7 @@ router.post("/newProduct", function (req, res) {
   });
 });
 
-router.get("/getProducts", function (req, res) {
-  Product.findAll().then(function (products) {
-    res.json(products);
-  });
-});
+
 
 router.get("/styles/:id", function (req, res, next) {
   Style.findByPk(req.params.id)

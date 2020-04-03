@@ -9,9 +9,11 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-export default ({ cartItems, handelLogout, emailUser, hidden }) => {
+export default ({ cartItems, handelLogout, User, hidden }) => {
   const [expanded, setExpanded] = useState(false);
-
+  
+  
+  
   const cartLength = {
     backgroundColor: "#000000a6",
     width: "18px",
@@ -52,8 +54,18 @@ export default ({ cartItems, handelLogout, emailUser, hidden }) => {
     textAlign: "center"
   };
 
+  const isAdmin= ()=>{
+    if(User.type==="admin"){
+      return(
+        <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
+                Admin
+        </Link>
+      )
+    }
+  } 
+
   const loginLogout = () => {
-    if (emailUser) {
+    if (User.email) {
       return (
         <span
           onClick={() => {
@@ -160,9 +172,7 @@ export default ({ cartItems, handelLogout, emailUser, hidden }) => {
               {loginLogout()}
             </Nav.Link>
             <Nav.Link>
-              <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
-                Admin
-              </Link>
+              {isAdmin()}
             </Nav.Link>
             <div>
               <span style={cartLength}>{cartItems.length}</span>

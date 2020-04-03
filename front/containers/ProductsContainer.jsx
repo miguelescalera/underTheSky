@@ -17,7 +17,9 @@ const mapDispatchToProps = (dispatch, state) => {
 };
 
 const mapStateToProps = (state, ownprops) => {
-  return {};
+  return {
+    selecteStyle:state.products.selectedStyle
+  };
 };
 
 
@@ -142,12 +144,23 @@ class ProductsContainer extends React.Component {
     super();
     this.handleClick = this.handleClick.bind(this)
   }
+  componentWillReaceiveProps(nextProps) {
+    if(this.props.selecteStyle!==nextProps.selecteStyle){
+      console.log("nextProps",nextProps)
+    }
+
+  }
 
   handleClick(e) {
+    console.log("CLICK!",e)
     this.props.selectStyle(e)
-    localStorage.setItem('selectedStyle', e)
-    this.props.history.push('/product')
+    console.log("this.props.selecteStyle",this.props.selecteStyle)
+    if(this.props.selecteStyle.name){
+      localStorage.setItem('selectedStyle', e)
+      this.props.history.push('/product')
+    }
   }
+
 
   render() {
     return (

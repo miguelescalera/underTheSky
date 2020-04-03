@@ -49,7 +49,7 @@ passport.use(
       passwordField: "password"
     },
     function(email, password, done) {
-      console.log("PASSPORT!!!!", email, password);
+    
       User.findOne({ where: { email } })
         .then(user => {
           if (!user) {

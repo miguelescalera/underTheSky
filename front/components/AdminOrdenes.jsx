@@ -1,34 +1,47 @@
 import React, {useState}from "react";
 import Card from "react-bootstrap/Card";
-import { Container } from "react-bootstrap";
 import Collapse from 'react-bootstrap/Collapse'
 import Button from "react-bootstrap/Button"
+import ListGroup from 'react-bootstrap/ListGroup'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 
-export default ({orders,DataProducts,users}) => {
+
+export default ({
+  selectedOrder,
+  DataProducts,
+  users,
+  envio,
+  estadoDeCompra,
+  handleChange,
+  handleSelectedOrder
+}) => {
     const [open, setOpen] = useState(false);
 
-    console.log("true o false",users[0])
+   
   const allOrders = ()=>{
-    if(users[0]){
-     return orders.map((e,i)=>{
+    
+    if(selectedOrder[0]&&DataProducts[0]&&users){
+     return selectedOrder.map((e,i)=>{
        let dataProduct= DataProducts.filter(f=>{
          return f.orderId===e.id
        })
-       dataProduct=dataProduct[0]
-       console.log("dataProduct",dataProduct)
-       let allusers=users.filter(u=>{
+     
+     
+       let orderUser=users.filter(u=>{
          return e.userId===u.id
         })
-        allusers=allusers[0]
-        
-       
+        orderUser=orderUser[0]
+
+      
        return(
-        <Container style={{marginBlockStart:"2rem"}} >
+        <Container >
         <Card>
        <Card.Title>Orden N° {i+1}</Card.Title>
-          <h6>User: {allusers.firstName+" "+ allusers.lastName} </h6> 
+          <h6>User: {orderUser.firstName+" "+ orderUser.lastName} </h6> 
           <h6>Estado:{e.status} </h6> <Button>cambiar estado de orden</Button>
-       <h6>Email:{allusers.email}</h6>
+       <h6>Email:{orderUser.email}</h6>
           <h6>Direccion: {e.address}</h6> 
           <h6>Total:$ 2500 </h6> 
          
@@ -41,15 +54,29 @@ export default ({orders,DataProducts,users}) => {
         Detalles De La Orden
       </Button>
       <Collapse in={open}>
-        <tr style={{flexDirection:"column-reverse"}} >
-            <h6>Cuadro: 0032</h6>
-       <h6>Momento:{dataProduct.date + " "+dataProduct.time} </h6>
-            <h6>Lugar: Buenos Aires</h6>{/*lugar no existe en el modelo, agregarlo despues*/}
-            <h6>Frase:{dataProduct.content}</h6>
-       <h6>Idioma: {dataProduct.language} </h6>
-            <h6>Marco: Blanco</h6>
-            <h6>Estilo: Minimalista</h6>
-            <h6>Tamaño: 13x18</h6>
+        <tr>
+       <h6>esta orden contiene {dataProduct.length} productos</h6>
+       <Container>
+          <Row> 
+              {dataProduct.map((e,i)=>{
+                return(
+                  <Col xs={3}>
+                    <Card style={{ marginLeft:'2%',marginRight:"2%"}}>
+                    <ListGroup variant="flush" style={{color:"black" }}>
+                      <ListGroup.Item>Momento:{e.date + " "+e.time}</ListGroup.Item>
+                      <ListGroup.Item>Lugar: Buenos Aires</ListGroup.Item>
+                      <ListGroup.Item>Frase:{e.content}</ListGroup.Item>
+                      <ListGroup.Item>Idioma: {e.language}</ListGroup.Item>
+                      <ListGroup.Item>Marco: Blanco</ListGroup.Item>
+                      <ListGroup.Item>Estilo: Minimalista</ListGroup.Item>
+                      <ListGroup.Item>Tamaño: 13x18</ListGroup.Item>
+                    </ListGroup>
+                  </Card>
+                  </Col>
+                )
+              })}
+          </Row>
+       </Container>
         </tr>
       </Collapse>
     </>
@@ -65,16 +92,40 @@ export default ({orders,DataProducts,users}) => {
     }
   }
 
+          
+
+
 
   return (
-    <div style={{marginBlockStart:"3rem"}} >
-        <Container style={{display:"flex", flexDirection:"column", alignItems:"center"}} >
-        <input type="text"/><Button type="submit" >Buscar</Button>
+    <div>
+        <Container>
+        <input type="text"/><Button type="submit" >Buscar</Button><br/>
+        <h3>filtrar por </h3>
+          <form >
+          <label style={{color:"white"}}>
+            envio:
+            <select value ={envio} name="envio" onChange={handleChange}>
+              <option value="todos">todos</option>
+              <option value= {false}>a domicilio</option>
+              <option value= {true} >en punto de entrega</option>
+            </select>
+          </label>
+          <label style={{color:"white"}}>
+            estado de la compra:
+            <select value ={estadoDeCompra} name="estadoDeCompra" onChange={handleChange}>
+              <option value="todos">todos</option>
+              <option value="inprocess">en proceso</option>
+              <option value="delivered">enviada</option>
+            </select>
+          </label>
+          <button onClick={handleSelectedOrder}>buscar</button>
+        </form>
         </Container>
         {allOrders()}
     </div>
   );
 };
+              
 
       
      
