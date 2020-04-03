@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDataProduct, dataProduct } from "../actions/productDataActions"
+import { createDataProduct, dataProduct} from "../actions/productDataActions"
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
 import { getCart } from "../actions/cartActions"
@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch, state) => {
         dataProduct: (data) => dispatch(dataProduct(data)),
         selectedProducts: (product) => dispatch(fetchProduct(product)),
         getCart: () => dispatch(getCart()),
-
+        
     };
 }
 
@@ -49,10 +49,7 @@ class FormDataContainer extends React.Component {
 
     }
 
-componentDidMount(){
-    console.log("arrOfData didmoutn",arrOfData)
-    console.log("arrOfProduct didmoutn",arrOfProduct)
-}
+
 
     handleChange(e) {
         const key = e.target.name;

@@ -3,13 +3,18 @@ const Size = require("./models/size");
 const Frame = require("./models/frame");
 const DataProduct = require("./models/productData");
 const Product = require("./models/product");
-const user = require("./models/user");
+const User = require("./models/user");
 const faker = require("faker");
 const Orders = require("./models/order");
 
-Orders.create({
-  address: "alalallalalalla 123"
-}).then(console.log("orden creada"));
+let dataUser={}
+let dataOrders={}
+let dataProduct={}
+
+const productData=[]
+const ordersData=[]
+const usersData=[]
+
 
 const styles = [
   {
@@ -56,8 +61,88 @@ const sizes = [
   }
 ];
 
+for (let i = 0; i < 10; i++) {
+  
+  dataUser={
+    type:"normal",
+    firstName:faker.name.findName(),
+    lastName:faker.name.lastName(),
+    email:faker.internet.email(),
+    password:"123"
+  }
+  usersData.push(dataUser)
+  
+  
+  dataOrders={
+    address:faker.address.streetAddress() ,
+    city:faker.address.city(),
+    country:faker.address.country(),
+    state:faker.address.state(),
+    postCode:faker.address.zipCode(),
+    transactionNumber:123,
+  
+  }
+  ordersData.push(dataOrders)
+
+  dataProduct={
+    place:"buenos aires",
+    date:"21/03/2002",
+    content:"bla bla bla",
+    name:faker.name.firstName(),
+    time:"12.00",
+    language:"español",
+    emailClient:faker.internet.email(),
+    userId:1,
+   
+  }
+  productData.push(dataProduct)
+}
+
+Style.bulkCreate(styles,{validate:true})
+.then(()=>{
+  Size.bulkCreate(sizes,{validate:true})
+  .then(()=>{
+    Frame.bulkCreate(frames,{validate:true})
+    .then(()=>{
+      User.bulkCreate(usersData,{validate:true})
+      .then(()=>{
+        Orders.bulkCreate(ordersData,{validate:true})
+        .then(()=>{
+          DataProduct.bulkCreate(productData,{validate:true})
+         
+        })
+      })
+    })
+  })
+})
+                        
+  
+
+
+
+
+
+
+
+
+User.create({
+  type:"admin",
+  firstName:faker.name.findName(),
+  lastName:faker.name.lastName(),
+  email:"alan@alan.com",
+  password:"123"
+}).then(()=>{console.log("user admin created")})
+
+
+
+
+  
+
+
+
+/*
 frames.map(e => {
-  console.log("elemento:", e);
+ 
   Frame.create(e)
     .then(newStyle => {
       console.log("added", newStyle);
@@ -66,7 +151,7 @@ frames.map(e => {
 });
 
 sizes.map(e => {
-  console.log("elemento:", e);
+ 
   Size.create(e)
     .then(newStyle => {
       console.log("added", newStyle);
@@ -75,13 +160,58 @@ sizes.map(e => {
 });
 
 styles.map(e => {
-  console.log("elemento:", e);
+
   Style.create(e)
     .then(newStyle => {
       console.log("added", newStyle);
     })
     .catch(err => console.error(err));
 });
+*/
+
+
+
+
+
+    
+
+/*
+Frame.findAll()
+.then(frames=>{
+  Style.findAll()
+  .then(styles=>{
+    Size.findAll()
+    .then(sizes=>{
+      frames.map(f=>{
+        styles.map(st=>{
+          sizes.map(si=>{
+            Product.create({
+              digital:false,
+              sizeId:si.id,
+              frameId:f.id,
+              styleId:st.id
+            }).then(product=>{
+              DataProduct.create({
+                date:"21/03/2002",
+                content:"bla bla bla",
+                name:faker.name.firstName(),
+                time:"12.00",
+                language:"español",
+                emailClient:faker.internet.email(),
+                userId:1,
+                productId: product.id
+              })
+            })
+          })
+        })
+      })
+    })
+  })
+})
+              
+*/
+  
+
 
 /*
  

@@ -24,8 +24,6 @@ export default ({ products, handleClick }) => {
     <div>
       <Container className="d-flex justify-content-center" style={resultTarj}>
         {products.map((product, index) => {
-          console.log('HOLA ESTOY MAPEANDO ESTE', product);
-          
           return (
             <span key={index} style={tarj}>
               <TarjetaProducto product={product} handleClick={handleClick} />
@@ -36,3 +34,5 @@ export default ({ products, handleClick }) => {
     </div>
   );
 };
+         
+          

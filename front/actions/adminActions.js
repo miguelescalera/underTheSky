@@ -6,7 +6,9 @@ import {
   GET_FRAME,
   GET_SIZE,
   GET_STYLE,
-  DATA_PRODUCTS
+  DATA_PRODUCTS,
+  GET_PRODUCTS,
+  SELECTED_ORDERS
 } from "../constans"
 
 /*-----------------ACTIONS-------------------------*/
@@ -44,12 +46,24 @@ export const allDataProducts = allDataProducts => ({
   type: DATA_PRODUCTS,
   allDataProducts
 })
+export const allProducts = allProducts => ({
+  type: GET_PRODUCTS,
+  allProducts
+})
+
+export const selectedOrders = selectedOrders => ({
+  type: SELECTED_ORDERS,
+  selectedOrders
+})
+
+
 /*-----------------ORDERS FETCH---------------------*/
 
 export const getOrders = () => dispatch =>
   axios.get("/api/admin/getOrders")
     .then(order => {
       dispatch(allOrders(order.data))
+      dispatch(selectedOrders(order.data))
       return order.data;
     }
     );
@@ -104,7 +118,11 @@ export const fetchDataProducts = () => dispatch => {
 export const deleteProduct = (product) =>
   axios.delete("/api/admin/deleteProduct", { productId: product.id })
 
-
+export const fetchAllProducts = ()=> dispatch=>{
+  axios.get("/api/admin/getProducts").then(allproducts=>{
+      dispatch(allProducts(allproducts.data))
+  })
+}
 
 /*-------------------DISPLAY----------------------------------*/
 export const getDisplays = () => dispatch =>

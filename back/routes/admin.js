@@ -104,8 +104,9 @@ router.put("/changeStatus", function (req, res) {
 
 
 
-router.delete("/deleteOrder", function () {
-    Order.findByPk(req.body.orderId)
+router.delete("/deleteOrder/:id", function (req,res) {
+    console.log("params",req.params)
+    Order.findByPk(req.params.id)
         .then(function (order) {
             order.destroy()
         })
@@ -152,6 +153,11 @@ router.get("/getAllDataProducts", function (req, res) {
         })
 })
 
+router.get("/getProducts", function (req, res) {
+    Product.findAll().then(function (products) {
+      res.json(products);
+    });
+  });
 
 
 
