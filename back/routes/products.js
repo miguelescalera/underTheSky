@@ -39,6 +39,8 @@ router.put("/modifyDataProduct", function (req, res) {
     .catch(err => console.log("error:", err));
 });
 
+
+
 router.post("/getUserProducts", (req, res) => {
   Product.findOne({
     where: {

@@ -144,22 +144,19 @@ class ProductsContainer extends React.Component {
     super();
     this.handleClick = this.handleClick.bind(this)
   }
-  componentWillReaceiveProps(nextProps) {
-    if(this.props.selecteStyle!==nextProps.selecteStyle){
-      console.log("nextProps",nextProps)
-    }
-
-  }
+  
 
   handleClick(e) {
-    console.log("CLICK!",e)
-    this.props.selectStyle(e)
-    console.log("this.props.selecteStyle",this.props.selecteStyle)
-    if(this.props.selecteStyle.name){
-      localStorage.setItem('selectedStyle', e)
+    this.props.selectStyle({imgURL: 'https://i.imgur.com/qGGi3DF.png',
+    styleId: 5,
+    name: "zodiac"})
+   
       this.props.history.push('/product')
-    }
+    
   }
+    
+    
+     
 
 
   render() {

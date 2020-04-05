@@ -7,10 +7,7 @@ ProductData.init({
         type: Sequelize.STRING,
         allowNull: false
     },
-    place:{
-        type:Sequelize.STRING,
-        allowNull: false
-    },
+    
     content: {
         type: Sequelize.STRING,
         allowNull: false
@@ -49,6 +46,9 @@ ProductData.init({
     },
     style:{
         type:Sequelize.STRING
+    },
+    price:{
+        type:Sequelize.INTEGER
     }
 
 

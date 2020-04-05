@@ -14,9 +14,9 @@ const mapStateToProps = state => {
            Orders: state.admin.allOrders, 
            DataProducts: state.admin.allDataProducts,
            users:state.admin.allUsers,
-           allProducts:state.admin.allProducts,
            selectedOrder:state.admin.selectedOrders
          }
+           
 };
     
     const mapDispatchToProps = function(dispatch){  

@@ -18,7 +18,10 @@ const mapDispatchToProps = (dispatch, state) => {
 const mapStateToProps = (state, ownprops) => {
     return {
         product: state.products.selectedProduct,
-        userEmail: state.user.user.email
+        userEmail: state.user.user.email,
+        selectedStyle:state.products.selectedStyle,
+        selectedFrame: state.products.selectedFrame,
+        selectedSize:state.products.selectedSize,
     };
 };
 
@@ -29,26 +32,24 @@ class FormDataContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            digital:"",
             date: '',
             content: '',
             name: '',
             time: '',
             language: '',
-            emailClient: ''
+            emailClient: '',
+            size:"",
+            style:"",
+            color:"",
+            frame:"",
             
             
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount() {
-        let product = JSON.parse(localStorage.getItem('selectedStyle'))
-        if (product) {
-            this.props.selectedProducts(product)
-        }
-
-    }
-
+    
 
 
     handleChange(e) {
@@ -71,40 +72,45 @@ class FormDataContainer extends React.Component {
                  time: this.state.time,
                  language: this.state.language,
                  emailClient: this.state.emailClient,
-                 productId: this.props.product.id
+                 digital:false,//cambiar esto,digital debe estar en el store
+                 size:this.props.selectedSize.name,
+                 frame:this.props.selectedFrame.name,
+                 style:this.props.selectedStyle.name,
+                 price:this.props.selectedSize.price
              }
          ).then((res)=>{
              this.props.dataProduct(res.data)
              if(!this.props.userEmail){
                 let dataWithoutUser=res.data
-                let productWithoutUser=this.props.product
-    
-    
                 if(arrOfData.length!==0){
-                    arrOfProduct=JSON.parse(localStorage.getItem("productWithoutUser"))
+                   
                     arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
-    
-                    arrOfProduct.push(productWithoutUser)
                     arrOfData.push(dataWithoutUser)
-    
                     localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-                    localStorage.setItem("productWithoutUser",JSON.stringify(arrOfProduct))
+                 
                 }
                 else{
                     arrOfData.push(dataWithoutUser)
-                    arrOfProduct.push(productWithoutUser)
                     localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-                    localStorage.setItem("productWithoutUser",JSON.stringify(arrOfProduct))
                 }
             }
+                   
         })
-     .then(()=>{
-         if(this.props.userEmail){
-             this.props.getCart()
-         }
-     }).then(()=>this.props.history.push("/cart"))
- }
-      
+        .then(()=>{
+            if(this.props.userEmail){
+                this.props.getCart()
+            }
+          }).then(()=>this.props.history.push("/cart"))
+          }
+         
+               
+    
+    
+              
+            
+        
+
+    
   render() {
         return (
             <div>

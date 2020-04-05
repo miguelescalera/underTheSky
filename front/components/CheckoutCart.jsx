@@ -2,27 +2,13 @@ import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-export default ({ dataProduct, userProduct, fss, handleSubmit }) => {
-  console.log("dataProduct", dataProduct);
-  console.log("userProduct", userProduct);
-  console.log("fss", fss);
+export default ({ dataProduct, handleSubmit }) => {
+  
 
   const dataProductsIds = [];
-  let allData = [];
+  
   let total = 0;
-  if (userProduct[0] && fss[0]) {
-    for (let i = 0; i < dataProduct.length; i++) {
-      console.log("estoy en el for:", dataProduct, userProduct, fss);
-      allData.push({
-        dataProduct: dataProduct[i],
-        userProduct: userProduct[i].data,
-        fss: fss[i].data
-      });
-      dataProductsIds.push(dataProduct[i].id);
-    }
-  } else {
-    allData = [];
-  }
+  
 
   const styleCheckout = {
     display: "flex",
@@ -40,16 +26,16 @@ export default ({ dataProduct, userProduct, fss, handleSubmit }) => {
                 <strong>Precio</strong>
               </div>
             </ListGroup.Item>
-        {allData.map((e, i) => {
-          console.log("buscando el price", e);
-          total += e.fss.size.price * e.dataProduct.quantity;
+        {dataProduct.map((e, i) => {
+         
+          total += e.price * e.quantity;
           return (
             <ListGroup.Item>
               <div style={styleCheckout}>
                 <span>{i + 1}</span>
-                <span>{e.fss.style.name}</span>
-                <span>x{e.dataProduct.quantity} </span>
-                <strong>${e.fss.size.price * e.dataProduct.quantity}</strong>
+                <span>{e.style}</span>
+                <span>x{e.quantity} </span>
+                <strong>${e.price * e.quantity}</strong>
               </div>
             </ListGroup.Item>
           );

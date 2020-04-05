@@ -94,6 +94,7 @@ router.get("/getOrders", function (req, res) {
 
 
 router.put("/changeStatus", function (req, res) {
+    console.log("BODY.",req.body)
     Order.findByPk(req.body.orderId).then(function (order) {
         order.update({ status: req.body.status })
             .then(function (newOrder) {
