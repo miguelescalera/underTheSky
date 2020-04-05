@@ -13,11 +13,10 @@ import Col from 'react-bootstrap/Col'
 const mapStateToProps=(state,ownProps)=>{
     return{
        dataProduct:state.cart.dataProducts,
-       userProduct:state.cart.allproductsUser,
-       fss:state.cart.fss,
        userEmail:state.user.user.email
+      }
     }
-}
+       
 
 const mapDispatchToProps=(dispatch)=>{
     return{
@@ -25,7 +24,7 @@ const mapDispatchToProps=(dispatch)=>{
         cartWithoutUser: (data)=>dispatch(cartWithoutUser(data)),
         deleteProductData:(id)=>dispatch(deleteProductData(id)),
         IdsForOrders:(id)=>dispatch(IdsForOrders(id)),
-        modifyDataProduct:(id,quantity,product,fss,user)=>dispatch(modifyDataProduct(id,quantity,product,fss,user))
+        modifyDataProduct:(id,quantity,user)=>dispatch(modifyDataProduct(id,quantity,user))
     }
 }
 
@@ -43,12 +42,10 @@ class NavbarContainer extends React.Component {
     }
     else if(JSON.parse(localStorage.getItem("dataWithoutUser"))){
         let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
-        let products=JSON.parse(localStorage.getItem("productWithoutUser"))
-        this.props.cartWithoutUser({
-            dataProduct:dataProduct,
-            product:products
-        })
-    }}
+        this.props.cartWithoutUser(dataProduct)
+      }}
+       
+    
        
        
 
@@ -62,17 +59,16 @@ class NavbarContainer extends React.Component {
   }
 
 handleQuantity(id,quantity){
-   console.log("this.props.userEmail",this.props.userEmail)
-    if(quantity>=1){
-        this.props.modifyDataProduct(
-            id,
-            quantity,
-            this.props.userProduct,
-            this.props.fss,
-            !!this.props.userEmail
-            )
-    }
-  }
+  if(quantity>=1){
+      this.props.modifyDataProduct(
+          id,
+          quantity,
+          !!this.props.userEmail
+          )
+        }
+      }
+         
+
 
   render() {
     return (
@@ -80,24 +76,24 @@ handleQuantity(id,quantity){
         <Container className="carrito-vistageneral">
           <CheckoutCart
             dataProduct={this.props.dataProduct}
-            userProduct={this.props.userProduct}
-            fss={this.props.fss}
             handleDelete={this.handleDelete}
             handleSubmit={this.handleSubmit}
           />
-
           <Carrito
             dataProduct={this.props.dataProduct}
-            userProduct={this.props.userProduct}
-            fss={this.props.fss}
             handleDelete={this.handleDelete}
             handleSubmit={this.handleSubmit}
             handleQuantity={this.handleQuantity}
-          />
+            />
         </Container>
       </div>
+           
+           
     );
   }
 }
+           
+           
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);

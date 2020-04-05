@@ -93,7 +93,11 @@ for (let i = 0; i < 10; i++) {
     language:"español",
     emailClient:faker.internet.email(),
     userId:1,
-   
+    digital:false,
+    size:"10X30",
+    frame:"negro",
+    style:"minimalista",
+    price:200
   }
   productData.push(dataProduct)
 }

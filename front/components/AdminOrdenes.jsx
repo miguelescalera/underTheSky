@@ -1,11 +1,11 @@
 import React, {useState}from "react";
-import Card from "react-bootstrap/Card";
 import Collapse from 'react-bootstrap/Collapse'
 import Button from "react-bootstrap/Button"
-import ListGroup from 'react-bootstrap/ListGroup'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
+
+
 
 
 export default ({
@@ -23,6 +23,7 @@ export default ({
   const allOrders = ()=>{
     
     if(selectedOrder[0]&&DataProducts[0]&&users){
+      
      return selectedOrder.map((e,i)=>{
        let dataProduct= DataProducts.filter(f=>{
          return f.orderId===e.id
@@ -34,65 +35,71 @@ export default ({
         })
         orderUser=orderUser[0]
 
-      
+     
        return(
-        <Container >
-        <Card>
-       <Card.Title>Orden N° {i+1}</Card.Title>
-          <h6>User: {orderUser.firstName+" "+ orderUser.lastName} </h6> 
-          <h6>Estado:{e.status} </h6> <Button>cambiar estado de orden</Button>
-       <h6>Email:{orderUser.email}</h6>
-          <h6>Direccion: {e.address}</h6> 
-          <h6>Total:$ 2500 </h6> 
-         
-          <>
-      <Button
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
-      >
-        Detalles De La Orden
-      </Button>
-      <Collapse in={open}>
-        <tr>
-       <h6>esta orden contiene {dataProduct.length} productos</h6>
-       <Container>
-          <Row> 
-              {dataProduct.map((e,i)=>{
-                return(
-                  <Col xs={3}>
-                    <Card style={{ marginLeft:'2%',marginRight:"2%"}}>
-                    <ListGroup variant="flush" style={{color:"black" }}>
-                      <ListGroup.Item>Momento:{e.date + " "+e.time}</ListGroup.Item>
-                      <ListGroup.Item>Lugar: Buenos Aires</ListGroup.Item>
-                      <ListGroup.Item>Frase:{e.content}</ListGroup.Item>
-                      <ListGroup.Item>Idioma: {e.language}</ListGroup.Item>
-                      <ListGroup.Item>Marco: Blanco</ListGroup.Item>
-                      <ListGroup.Item>Estilo: Minimalista</ListGroup.Item>
-                      <ListGroup.Item>Tamaño: 13x18</ListGroup.Item>
-                    </ListGroup>
-                  </Card>
-                  </Col>
-                )
-              })}
-          </Row>
-       </Container>
-        </tr>
-      </Collapse>
-    </>
-        </Card>
-      </Container>
-       )
-     })
-    }
-    else{
-      return(
-        <h5>cargando ordenes</h5>
-      )
-    }
-  }
+         <div style={{backgroundColor:"white", marginBottom:"5%"}}>
+
+              <Container >
+            
+                <h3>Orden N° {e.id}</h3> 
+                <h6>User: {orderUser?orderUser.firstName+" "+ orderUser.lastName:"usuario no registrado"} </h6> 
+                <span>Estado:{e.status} </span> <button>cambiar estado de orden</button>
+                <h6>Email:{dataProduct.emailClient}</h6>
+                <h6>Direccion: {e.address}</h6> 
+                <h6>Total:$ 2500 </h6> 
+              
+                <>
+            <Button
+              onClick={() => setOpen(!open)}
+              aria-controls="example-collapse-text"
+              aria-expanded={open}
+            >
+              Detalles De La Orden
+            </Button>
+            <Collapse in={open}>
+              <tr>
+       <h6>esta orden contiene {dataProduct.length} {dataProduct.length>1?<span>productos</span>:<span>producto</span>}</h6>
+            <Container>
+              <Row> 
+                    {dataProduct.map((e,i)=>{
+                      return(
+                        <Col lg={3}>
+                          <div>
+                            <ul >
+                              <li><strong>Momento:</strong>{e.date + " "+e.time}</li>
+                              <li><strong>Frase o lugar:</strong>{e.content}</li>
+                              <li><strong>Idioma:</strong>{e.language}</li>
+                              <li><strong>Marco: </strong>{e.frame}</li>
+                              <li><strong>Estilo:</strong>{e.style}</li>
+                              <li><strong>Tamaño:</strong>{e.size}</li>
+                            </ul>
+                          </div>
+                        </Col>
+
+                       
+                          
+                              )
+                            })}
+                    </Row>
+                </Container>
+                  </tr>
+                </Collapse>
+              </>
+                  
+                </Container>
+            </div>
+          )
+        })
+        }
+        else{
+          return(
+            <h5>cargando ordenes</h5>
+          )
+        }
+      }
 
           
+                     
 
 
 
@@ -100,7 +107,7 @@ export default ({
     <div>
         <Container>
         <input type="text"/><Button type="submit" >Buscar</Button><br/>
-        <h3>filtrar por </h3>
+        <h3 style={{color:"white"}}>filtrar por</h3>
           <form >
           <label style={{color:"white"}}>
             envio:
@@ -109,7 +116,7 @@ export default ({
               <option value= {false}>a domicilio</option>
               <option value= {true} >en punto de entrega</option>
             </select>
-          </label>
+          </label> <br/>
           <label style={{color:"white"}}>
             estado de la compra:
             <select value ={estadoDeCompra} name="estadoDeCompra" onChange={handleChange}>

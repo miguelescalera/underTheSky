@@ -15,8 +15,10 @@ const mapStateToProps = (state, ownProps) => {
     return {
         frames: state.products.Allfss.frames,
         sizes: state.products.Allfss.sizes,
-        style: state.products.selectedStyle,
-        selectedProduct: state.products.SelectedProduct
+       
+        selectedStyle:state.products.selectedStyle,
+        selectedFrame: state.products.selectedFrame,
+        selectedSize:state.products.selectedSize,
     };
 };
 
@@ -54,9 +56,9 @@ class SingleProductContainer extends React.Component {
             this.props.selectSize(result.data.sizes[0])
         })
            
-        let styleId = localStorage.getItem('selectedStyle')
-        if (styleId) {
-            this.props.selectStyle(styleId)
+        let style = localStorage.getItem('selectedStyle')
+        if (style) {
+            this.props.selectStyle(style)
         }
        
     }
@@ -76,14 +78,10 @@ class SingleProductContainer extends React.Component {
    
     handleClick(e) {
         e.preventDefault();
-        this.props.fetchNewProduct({
-            digital: true,
-            frameId: this.state.frameId,
-            sizeId: this.state.sizeId,
-            styleId: parseInt(this.props.style)
-        })
-            .then((product) => localStorage.setItem('selectedProduct', product.id))
-            .then(() => this.props.history.push("/productData"))
+        localStorage.setItem('selectedStyle',JSON.stringify(this.props.selectedStyle))
+        localStorage.setItem('selectedFrame',JSON.stringify(this.props.selectedFrame))
+        localStorage.setItem('selectedSize',JSON.stringify(this.props.selectedSize))
+            this.props.history.push("/productData")
 
     }
 

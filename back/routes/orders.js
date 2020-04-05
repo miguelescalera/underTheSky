@@ -22,20 +22,40 @@ router.post("/addOrder",function(req,res){
                             state:req.body.state
                     }
                 }).spread(function(order,created){
-                    console.log("order",order)
-                    console.log("productdata",productData)
                     productData.setOrder(order)
                     res.json(order)
                 })
-                    
+            })
+        })
+    })
+                   
+   router.post("/modifyOrder",function(req,res){
+       console.log("BODY:",req.body)
+        Order.findByPk(req.body.orderId)
+        .then(order=>{
+            ProductData.findByPk(req.body.productDataId)
+            .then(productData=>{
+                if(req.body.userId){
+                    User.findByPk(req.body.userId)
+                    .then(user=>{
+                        console.log("USER:",user)
+                        order.setUser(user)
+                    })
+                }
+                productData.setOrder(order)
+                res.json({
+                    order:order,
+                    productData:productData
+                })
+            })
+        })
+
+   })                 
 
 
 
 
                 
-            })
-        })
-    })
                 
     
                    
