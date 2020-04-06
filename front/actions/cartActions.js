@@ -34,7 +34,7 @@ axios.get("/api/cart/getDataProducts")
   });
   
   export const modifyDataProduct =(id,quantity,user)=> dispatch =>{
-    axios.put("/api/products/modifyDataProduct",{quantity:quantity,productDataId:id})
+    axios.put("/api/products/modifyQuantity",{quantity:quantity,productDataId:id})
     .then((newData)=>{
       if(user){
         axios.get(`/api/cart/getDataProducts`)

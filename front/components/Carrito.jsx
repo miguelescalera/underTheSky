@@ -20,11 +20,12 @@ export default ({
   dataProduct,
   handleDelete,
   handleSubmit,
-  handleQuantity
+  handleQuantity,
+  handleEditData
 }) => {
   
   
-  
+ 
   
   const [show, setShow] = useState(false);
 
@@ -52,9 +53,9 @@ export default ({
       <Container>
         {dataProduct.map((e, i) => {
           quantity = e.quantity;
-
+          console.log("data:",e)
           return (
-            <Container className="carrito-contenedor-productos">
+            <Container className="carrito-contenedor-productos" >
               {/* ESTILO */}
               {/* ESTILO */}
               {/* ESTILO */}
@@ -144,33 +145,18 @@ export default ({
                       <FontAwesomeIcon icon={faTrashAlt} />
                     </button>
                   </Row>
-                  <Row>
+                 
                     {/* BOTON DETALLE */}
                     {/* BOTON DETALLE */}
                     {/* BOTON DETALLE */}
                     {/* BOTON DETALLE */}
-                    <button className="boton-icono" onClick={handleShow}>
-                      <FontAwesomeIcon icon={faInfoCircle} />
-                    </button>{" "}
-                    <br />
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Body>
-                        <Container>
-                          <Row>
+                   
+                    
+                       
                             <h4>{e.style} </h4>
-                            <img
-                              style={{ width: "50%" }}
-                              src="https://i.imgur.com/Usradoq.png"
-                              alt=""
-                            />
-                            <br />
-                            <strong>size: </strong>
-                            {e.size} <br />
-                            <strong>frame: </strong>
-                            {e.frame} <br />
-                            <strong>color: </strong>
-                            {e.color} <br />
-                            <h5>${e.price}</h5>
+                            
+                           
+                           
                             <ListGroup variant="flush">
                               <ListGroup.Item style={styleModal}>
                                 <strong>date: </strong> {e.date}
@@ -200,18 +186,10 @@ export default ({
                                   display: "inline"
                                 }}
                               >
-                                <Button variant="dark">edit data</Button>
+                                <Button variant="dark" onClick={()=>handleEditData(e)}>edit data</Button>
                               </ListGroup.Item>
                             </ListGroup>
-                          </Row>
-                        </Container>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+                       
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
@@ -222,7 +200,7 @@ export default ({
                     >
                       checkout
                     </Button>
-                  </Row>
+                
                 </Col>
               </Row>
             </Container>
@@ -232,3 +210,7 @@ export default ({
 
   );
 };
+                      
+                    
+                        
+                        

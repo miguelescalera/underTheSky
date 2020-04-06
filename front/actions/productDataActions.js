@@ -18,5 +18,7 @@ export const createDataProduct = (data) => {
     return axios.post("/api/products/nuevoproducto", data)
 }
 
-
+export const modifyData = (data)=>{
+    return axios.put("/api/products/modifyData",data)
+}
 

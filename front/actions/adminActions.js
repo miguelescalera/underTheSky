@@ -69,7 +69,7 @@ export const getOrders = () => dispatch =>
     );
 
 export const changeStatusOrder = (order) =>
-  axios.put("/api/admin/chageStatus", { orderId: order.id, status: order.status })
+  axios.put("/api/admin/changeStatus", { orderId: order.id, status: order.status })
     .then((newOrder) => {
       return newOrder
     })
@@ -91,7 +91,7 @@ export const getUsers = () => dispatch =>
 
 
   export const changeStatus = function(usertype,idUser){
-    axios.post(`/api/admin/addAdmin`,{type:usertype,userId:idUser})
+    return axios.post(`/api/admin/addAdmin`,{type:usertype,userId:idUser})
   }
 
 
