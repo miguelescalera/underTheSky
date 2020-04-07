@@ -17,6 +17,7 @@ import Img from "react-bootstrap/Image";
 import "../../back/public/global.css";
 import AdminPoroductsContainer from '../containers/AdminProductsContainer'
 import Admin from '../components/Admin'
+import FileUpload from './FileUpload'
 
 const mapStateToProps = state => {
   return {};
@@ -72,6 +73,7 @@ class Main extends React.Component {
             exact
             component={AdminOrdenesContainer}
           />
+          <Route path='/tuvieja' exact component={FileUpload} />
           <Route path="/admin/getUsers" exact component={AdminUsersContainer} />
           <Redirect from="/" to="/home" />
         </Switch>

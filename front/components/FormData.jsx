@@ -5,9 +5,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card'
 import Row from "react-bootstrap/Row";
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
 
 
-export default ({ handleChange, handleSubmit }) => {
+export default ({ handleChange, handleSubmit, date, onChange }) => {
 
 
     const formStyle = {
@@ -23,6 +25,10 @@ export default ({ handleChange, handleSubmit }) => {
 
     }
 
+    const calendarStyle = {
+        backgroundColor: '#00B1E1'
+    }
+
 
 
 
@@ -36,7 +42,11 @@ export default ({ handleChange, handleSubmit }) => {
                         <Form style={formStyle} >
                             <Form.Group controlId="formDateContent">
                                 <Form.Label>Fecha del Evento</Form.Label>
-                                <Form.Control type="text" placeholder="DD/MM/AAAA" onChange={handleChange} name='date'  />
+                                <Calendar
+                                    style={calendarStyle}
+                                    onChange={onChange}
+                                    className="react-calendar"
+                                />
                             </Form.Group>
                             <Form.Group controlId="formBasicPhrase">
                                 <Form.Label>Nombre o Frase</Form.Label>
@@ -44,7 +54,7 @@ export default ({ handleChange, handleSubmit }) => {
                             </Form.Group>
                             <Form.Group controlId="formBasicTime">
                                 <Form.Label>Hora del Evento</Form.Label>
-                                <Form.Control type="text" placeholder="00:00" onChange={handleChange} name='time' />
+                                <Form.Control type="time" placeholder="00:00" onChange={handleChange} name='time' />
                             </Form.Group>
                             <Form.Group controlId="formBasicPlace">
                                 <Form.Label>Lugar del Evento</Form.Label>

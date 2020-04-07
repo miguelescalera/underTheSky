@@ -8,6 +8,7 @@ const User = require("../models/user")
 const Product = require("../models/product")
 const Display = require("../models/display")
 const ProductData = require("../models/productData")
+const fileUpload = require('express-fileupload')
 
 
 
@@ -94,7 +95,7 @@ router.get("/getOrders", function (req, res) {
 
 
 router.put("/changeStatus", function (req, res) {
-    console.log("BODY.",req.body)
+    console.log("BODY.", req.body)
     Order.findByPk(req.body.orderId).then(function (order) {
         order.update({ status: req.body.status })
             .then(function (newOrder) {
@@ -105,8 +106,8 @@ router.put("/changeStatus", function (req, res) {
 
 
 
-router.delete("/deleteOrder/:id", function (req,res) {
-    console.log("params",req.params)
+router.delete("/deleteOrder/:id", function (req, res) {
+    console.log("params", req.params)
     Order.findByPk(req.params.id)
         .then(function (order) {
             order.destroy()
@@ -125,7 +126,7 @@ router.get("/getUsers", function (req, res) {
 })
 
 
-router.post("/addAdmin", function(req,res){
+router.post("/addAdmin", function (req, res) {
     console.log("entre al back")
     User.findByPk(req.body.userId)
         .then(function (user) {
@@ -138,13 +139,13 @@ router.post("/addAdmin", function(req,res){
 })
 
 
-router.delete("/deleteUser/:id",function(req,res){
-    const id=req.params.id;
+router.delete("/deleteUser/:id", function (req, res) {
+    const id = req.params.id;
     User.findByPk(id)
-    .then(user=>{
-        user.destroy()
-    })
-    .then(res.sendStatus(204))
+        .then(user => {
+            user.destroy()
+        })
+        .then(res.sendStatus(204))
 })
 ///////////PRODUCTS////////////////////////
 router.get("/getAllDataProducts", function (req, res) {
@@ -156,9 +157,9 @@ router.get("/getAllDataProducts", function (req, res) {
 
 router.get("/getProducts", function (req, res) {
     Product.findAll().then(function (products) {
-      res.json(products);
+        res.json(products);
     });
-  });
+});
 
 
 
@@ -192,6 +193,11 @@ router.delete("/deleteDisplay", function (req, res) {
         .then(function () {
             res.sendStatus(200)
         })
+})
+
+
+router.post('/tuvieja', function (req, res) {
+    console.log('le pego a esta', req.files)
 })
 
 module.exports = router

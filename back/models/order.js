@@ -9,35 +9,35 @@ Order.init(
             type: Sequelize.ENUM('cart', 'delivered', 'inprocess', 'printing'),
             defaultValue: 'inprocess'
         },
-        deliveryPoint:{
-            type:Sequelize.BOOLEAN,
-            defaultValue:true
+        deliveryPoint: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: true
         },
         address: {
             type: Sequelize.STRING,
-          
+
         },
-        city:{
-            type:Sequelize.STRING,
-         
+        city: {
+            type: Sequelize.STRING,
+
         },
-        country:{
-            type:Sequelize.STRING,
-            
+        country: {
+            type: Sequelize.STRING,
+
         },
-        state:{
-            type:Sequelize.STRING,
-           
+        state: {
+            type: Sequelize.STRING,
+
         },
-        postCode:{
-            type:Sequelize.STRING,
-           
+        postCode: {
+            type: Sequelize.STRING,
+
         },
-        transactionNumber:{
-            type:Sequelize.INTEGER,
-            defaultValue:0
+        transactionNumber: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         }
-            
+
 
     }, { sequelize, modelName: 'order' });
 

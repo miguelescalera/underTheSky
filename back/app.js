@@ -10,6 +10,7 @@ const { User } = require("./models/index");
 const routes = require("./routes");
 const volleyball = require("volleyball");
 const path = require("path");
+const fileUpload=require('express-fileupload')
 
 function isLogedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -48,8 +49,8 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    function(email, password, done) {
-    
+    function (email, password, done) {
+
       User.findOne({ where: { email } })
         .then(user => {
           if (!user) {
@@ -66,25 +67,26 @@ passport.use(
 );
 
 //Serialize
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
   User.findByPk(id).then(user => done(null, user));
 });
 
 //Rutas de back
 app.use("/api", routes);
+app.use(fileUpload())
 
 //servimos el index
-app.use("/*", function(req, res, next) {
+app.use("/*", function (req, res, next) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-db.sync({ force: false }).then(function() {
+db.sync({ force: false }).then(function () {
   console.log("database ready");
-  app.listen("3000", function() {
+  app.listen("3000", function () {
     console.log("Server on port 3000");
   });
 });
