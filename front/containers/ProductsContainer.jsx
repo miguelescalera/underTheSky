@@ -147,13 +147,16 @@ class ProductsContainer extends React.Component {
   
 
   handleClick(e) {
-    this.props.selectStyle({imgURL: 'https://i.imgur.com/qGGi3DF.png',
-    styleId: 5,
-    name: "zodiac"})
-   
-      this.props.history.push('/product')
-    
+    const style={
+      imgURL: 'https://i.imgur.com/qGGi3DF.png',
+      styleId: 5,
+      name: "zodiac"
+    }
+    this.props.selectStyle(style)
+    this.props.history.push('/product')
   }
+   
+    
     
     
      

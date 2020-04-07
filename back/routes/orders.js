@@ -35,20 +35,20 @@ router.post("/addOrder",function(req,res){
         .then(order=>{
             ProductData.findByPk(req.body.productDataId)
             .then(productData=>{
-                if(req.body.userId){
-                    User.findByPk(req.body.userId)
-                    .then(user=>{
-                        console.log("USER:",user)
-                        order.setUser(user)
-                    })
-                }
+                User.findByPk(req.body.userId)
+                .then(user=>{
+                    order.setUser(user)
+                })
                 productData.setOrder(order)
+                
                 res.json({
                     order:order,
                     productData:productData
                 })
             })
         })
+           
+                
 
    })                 
 
