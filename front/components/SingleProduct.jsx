@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import Switch from "react-switch";
 
 export default ({
   handleSize,
@@ -13,19 +14,11 @@ export default ({
   sizes,
   frames,
   styles,
-  handleClick
+  handleClick,
+  digital,
+  handleDigital
 }) => {
 
-  
-
-  // crear estado para selected frame 
-
-
-
-   
-  console.log("sizes", sizes);
-  console.log("frames", frames);
-  console.log("styles", styles);
 
   const singleStyle = {
     marginBlockEnd: "5rem",
@@ -33,6 +26,18 @@ export default ({
     flexDirection: "column",
     textAlign: "center"
   };
+
+
+  const toggleDigital =()=>{
+    if(digital){
+      return {
+        display:"none"
+      }
+    }
+   
+  }
+
+
 
   return (
     <div style={singleStyle}>
@@ -75,9 +80,18 @@ export default ({
           </Card.Body>
         </Card>
       </Container>
+
+        <label style={{color:"white"}}>
+          ¿quieres el producto en formato digital?
+          <span>
+          <Switch onChange={handleDigital} checked={digital} />
+          </span>
+        </label>
+
           {/* ver como puede llegar el estilo del cuadro */}
 
       <h4>Estilo Minimal Hardcode</h4>
+
 
 
       {/* //AQUI ES EL PRIMER RENDER VARIABLE (TAMANO) */}
@@ -127,9 +141,36 @@ export default ({
       {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
       {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
       {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
+      <div style={toggleDigital()}>
       <Container className="d-flex justify-content-center singleproduct-variable">
         <h4>Marco</h4>
       </Container>
+
+        <Container className="d-flex justify-content-center">
+          {!frames ? (
+            <Spinner animation="border" role="status" variant='light'>
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          ) : (
+            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+              {frames.map(e => {
+                return (
+                  <ToggleButton
+                    value={e.id}
+                    className="toggle-outline"
+                    onClick={() => handleFrame(e)}
+                    name="13x18"
+                  >
+                    {e.name}
+                  </ToggleButton>
+                );
+              })}
+            </ToggleButtonGroup>
+          )}
+        </Container>
+      </div>
+
+
       <Container className="d-flex justify-content-center">
         {!frames ? (
           <Spinner animation="border" role="status" variant="light">
@@ -152,6 +193,7 @@ export default ({
           </ToggleButtonGroup>
         )}
       </Container>
+
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}

@@ -5,7 +5,8 @@ import {
         ALL_FSS, 
         SELECT_STYLE,
         SELECT_FRAME,
-        SELECT_SIZE
+        SELECT_SIZE,
+        DIGITAL
      } from "../constans"
 
 export const Allfss = (Allfss) => ({
@@ -38,6 +39,10 @@ export const selectSize = selectedSize => ({
     type: SELECT_SIZE,
     selectedSize
 
+})
+export const selectDigital = digital =>({
+    type:DIGITAL,
+    digital
 })
 
 

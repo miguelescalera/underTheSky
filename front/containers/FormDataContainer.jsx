@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { createDataProduct, dataProduct,modifyData} from "../actions/productDataActions"
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
-import { getCart } from "../actions/cartActions"
+import { getCart,cartWithoutUser} from "../actions/cartActions"
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
-       
+        cartWithoutUser: (data)=>dispatch(cartWithoutUser(data)),
         dataProduct: (data) => dispatch(dataProduct(data)),
         selectedProducts: (product) => dispatch(fetchProduct(product)),
         getCart: () => dispatch(getCart()),
@@ -23,7 +23,12 @@ const mapStateToProps = (state, ownprops) => {
         userEmail: state.user.user.email,
         selectedStyle: state.products.selectedStyle,
         selectedFrame: state.products.selectedFrame,
+
+        selectedSize:state.products.selectedSize,
+        digital:state.products.digital,
+
         selectedSize: state.products.selectedSize,
+
     };
 };
 
@@ -70,33 +75,43 @@ class FormDataContainer extends React.Component {
 
 
         createDataProduct(
-            {
-                date: this.state.date,
-                content: this.state.content,
-                name: this.state.name,
-                time: this.state.time,
-                language: this.state.language,
-                emailClient: this.state.emailClient,
-                digital: false,//cambiar esto,digital debe estar en el store
-                size: this.props.selectedSize.name,
-                frame: this.props.selectedFrame.name,
-                style: this.props.selectedStyle.name,
-                price: this.props.selectedSize.price
-            }
-        ).then((res) => {
-            this.props.dataProduct(res.data)
-            if (!this.props.userEmail) {
-                let dataWithoutUser = res.data
-                if (arrOfData.length !== 0) {
 
-                    arrOfData = JSON.parse(localStorage.getItem("dataWithoutUser"))
+             {
+                 date: this.state.date,
+                 content: this.state.content,
+                 name: this.state.name,
+                 time: this.state.time,
+                 language: this.state.language,
+                 emailClient: this.state.emailClient,
+                 digital:this.props.digital,
+                 size:this.props.selectedSize.name,
+                 frame:this.props.selectedFrame.name,
+                 style:this.props.selectedStyle.name,
+                 price:this.props.selectedSize.price
+             }
+         ).then((res)=>{
+             this.props.dataProduct(res.data)
+             if(!this.props.userEmail){
+                let dataWithoutUser=res.data
+                
+                if(arrOfData.length!==0){
+                   
+                    arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
                     arrOfData.push(dataWithoutUser)
-                    localStorage.setItem("dataWithoutUser", JSON.stringify(arrOfData))
+                    this.props.cartWithoutUser(arrOfData)
+                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+                 
+
 
                 }
                 else {
                     arrOfData.push(dataWithoutUser)
+
+                    this.props.cartWithoutUser(arrOfData)
+                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+
                     localStorage.setItem("dataWithoutUser", JSON.stringify(arrOfData))
+
                 }
             }
 
@@ -114,6 +129,7 @@ class FormDataContainer extends React.Component {
     }
          
           render() {
+              
                 return (
                     <div>
                         <h3 className="titulopagina">Información</h3>
