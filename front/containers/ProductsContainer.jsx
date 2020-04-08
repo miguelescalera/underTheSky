@@ -6,21 +6,28 @@ import { selectStyle } from '../actions/productsActions'
 
 // ACCIONES 
 import {
-  getDisplays
-} from "../actions/adminActions";
+  getAllStyles,
+  allStyles
+} from "../actions/productsActions";
+
+
 import { runInThisContext } from "vm";
 
-const mapDispatchToProps = (dispatch, state) => {
-  return {
-    selectStyle: (data) => { dispatch(selectStyle(data)) }
-  };
-};
 
 const mapStateToProps = (state, ownprops) => {
   return {
-    selecteStyle:state.products.selectedStyle
+    styles:state.products.allStyles
   };
 };
+
+const mapDispatchToProps = (dispatch, state) => {
+  return {
+    allStyles:data => dispatch(allStyles(data))
+
+
+  };
+};
+
 
 
 
@@ -41,96 +48,6 @@ const displays = [
     styleId: 3,
     name: "polaroid"
   },
-  {
-    imgURL: 'https://i.imgur.com/fT8oOE8.png',
-    styleId: 4,
-    name: "full color"
-  },
-  {
-    imgURL: 'https://i.imgur.com/qGGi3DF.png',
-    styleId: 5,
-    name: "zodiac"
-  },
-
-
-  {
-    imgURL: 'https://i.imgur.com/Usradoq.png',
-    styleId: 1,
-    name: "classic"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oDx7xxC.png',
-    styleId: 2,
-    name: "minimalista"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oH886qa.png',
-    styleId: 3,
-    name: "polaroid"
-  },
-  {
-    imgURL: 'https://i.imgur.com/fT8oOE8.png',
-    styleId: 4,
-    name: "full color"
-  },
-  {
-    imgURL: 'https://i.imgur.com/qGGi3DF.png',
-    styleId: 5,
-    name: "zodiac"
-  },
-
-
-  {
-    imgURL: 'https://i.imgur.com/Usradoq.png',
-    styleId: 1,
-    name: "classic"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oDx7xxC.png',
-    styleId: 2,
-    name: "minimalista"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oH886qa.png',
-    styleId: 3,
-    name: "polaroid"
-  },
-  {
-    imgURL: 'https://i.imgur.com/fT8oOE8.png',
-    styleId: 4,
-    name: "full color"
-  },
-  {
-    imgURL: 'https://i.imgur.com/qGGi3DF.png',
-    styleId: 5,
-    name: "zodiac"
-  },
-
-  {
-    imgURL: 'https://i.imgur.com/Usradoq.png',
-    styleId: 1,
-    name: "classic"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oDx7xxC.png',
-    styleId: 2,
-    name: "minimalista"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oH886qa.png',
-    styleId: 3,
-    name: "polaroid"
-  },
-  {
-    imgURL: 'https://i.imgur.com/fT8oOE8.png',
-    styleId: 4,
-    name: "full color"
-  },
-  {
-    imgURL: 'https://i.imgur.com/qGGi3DF.png',
-    styleId: 5,
-    name: "zodiac"
-  },
 ];
 
 // const mapStateToProps = function (state) {
@@ -144,10 +61,22 @@ const style={
   name: "zodiac"
 }
 class ProductsContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleClick = this.handleClick.bind(this)
   }
+
+  componentDidMount() {
+    console.log('hola, este es el estado',this.props.styles)
+
+    getAllStyles()
+    .then(result=>{
+      console.log('EEEE este es el resulti', result);
+      
+        this.props.allStyles(result.data)
+
+    })
+}
   
 
   handleClick(e) {
@@ -168,7 +97,7 @@ class ProductsContainer extends React.Component {
     return (
       <div>
         <h3 className="titulopagina">Nuestros estilos</h3>
-        <Products products={displays} handleClick={this.handleClick} cart={this.props.cart} />
+        <Products products={displays} handleClick={this.handleClick} cart={this.props.cart} styles={this.props.styles} />
       </div>
     );
   }

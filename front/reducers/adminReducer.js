@@ -17,7 +17,7 @@ const initialState = {
     alldisplay:[],
     allFrames:[],
     allSizes:[],
-    allStyles:[],
+    allStyle:[],
     allDataProducts:[],
     allProducts:[],
     selectedOrders:[]
@@ -36,7 +36,7 @@ const initialState = {
       case GET_SIZE: 
          return Object.assign({}, state, { allSizes: action.allSize });
       case GET_STYLE: 
-         return Object.assign({}, state, { allStyles: action.allStyle });
+         return Object.assign({}, state, { allStyle: action.allStyle });
       case DATA_PRODUCTS: 
          return Object.assign({}, state, { allDataProducts: action.allDataProducts });
       case GET_PRODUCTS: 

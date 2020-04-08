@@ -118,10 +118,19 @@ router.get("/styles/:id", function (req, res, next) {
     .catch(() => console.log("el archivo no esta"));
 });
 
+router.post("/getAllStyles", function (req, res) {
+  console.log("entre a todos los estilos");
+  Style.findAll().then(allStyles=>{
+    console.log('aquii estan los estilos',allStyles);
+
+    res.send(
+      allStyles,
+    )
+  })
+});
+
 router.post("/getAllfss", function (req, res) {
-  console.log("entre");
   Frame.findAll().then(frames => {
-    console.log("fffffffffffff", frames);
     Style.findAll().then(styles => {
       Size.findAll().then(sizes => {
         res.send({
