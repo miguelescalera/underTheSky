@@ -6,15 +6,14 @@ import FormDataContainer from "./FormDataContainer"
 import CarritoContainer from "./CarritoContainer"
 import CheckoutContainer from "./CheckoutContainer"
 
-const steps = [
-    {name: 'StepOne', component: <SingleProductContainer/>},
-    {name: 'StepTwo', component: <FormDataContainer/>}
-];
+
 
 class StepWizardContainer extends React.Component{
     constructor(){
         super()
     }
+
+
 
     render(){
         return(

@@ -91,7 +91,7 @@ export default ({
                     <strong>Tamaño: </strong> {e.size}
                   </Row>
                   <Row>
-                    <strong>Marco: </strong> {e.frame}
+                    <strong>{e.digital?<span>digital</span>: <span>marco: </span> } </strong>{e.frame}
                   </Row>
                   <Row>
                     <strong>Color: </strong>
@@ -196,13 +196,6 @@ export default ({
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
                     
-                    <Button
-                      className="boton-outline-small"
-                      onClick={() => handleSubmit([e.id])}
-                    >
-                      checkout
-                    </Button>
-                
                 </Col>
               </Row>
             </Container>
@@ -212,6 +205,7 @@ export default ({
 
   );
 };
+                   
                       
                     
                         

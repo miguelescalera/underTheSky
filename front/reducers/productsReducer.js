@@ -6,7 +6,9 @@ import {
   SELECT_FRAME,
   SELECT_SIZE,
   ALL_STYLES,
+  DIGITAL
 } from "../constans";
+
 
 const initialState = {
   selectedProduct: {},
@@ -16,6 +18,7 @@ const initialState = {
   selectedFrame: {},
   selectedSize: {},
   allStyles: [],
+  digital:false
 };
 
 export default (state = initialState, action) => {
@@ -33,7 +36,9 @@ export default (state = initialState, action) => {
     case SELECT_FRAME:
       return Object.assign({}, state, { selectedFrame: action.selectedFrame });
     case SELECT_SIZE:
-      return Object.assign({}, state, { selectedSize: action.selectedSize });
+      return Object.assign({}, state, { selectedSize: action.selectedSize })
+    case DIGITAL:
+        return Object.assign({}, state, { digital: action.digital })
     default:
       return state;
   }
