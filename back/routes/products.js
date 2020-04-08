@@ -79,7 +79,6 @@ router.post("/newProductData", function (req, res) {
 });
 
 router.post("/newProduct", function (req, res) {
-  console.log('esto es el body', req.body)
   Product.findOrCreate({
     where: {
       // digital: req.body.digital,

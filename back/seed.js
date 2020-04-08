@@ -11,35 +11,35 @@ Orders.create({
   address: "alalallalalalla 123"
 }).then(console.log("orden creada"));
 
-const styles = [
-  {
-    name: "classic",
-    color: "blanco"
-  },
-  {
-    name: "classic",
-    color: "negro"
-  },
-  {
-    name: "classic",
-    color: "gris"
-  }
-];
+// const styles = [
+//   {
+//     name: "classic",
+//     color: "blanco"
+//   },
+//   {
+//     name: "classic",
+//     color: "negro"
+//   },
+//   {
+//     name: "classic",
+//     color: "gris"
+//   }
+// ];
 
-const frames = [
-  {
-    name: "madera",
-    price: 200
-  },
-  {
-    name: "negro",
-    price: 200
-  },
-  {
-    name: "blanco",
-    price: 200
-  }
-];
+// const frames = [
+//   {
+//     name: "madera",
+//     price: 200
+//   },
+//   {
+//     name: "negro",
+//     price: 200
+//   },
+//   {
+//     name: "blanco",
+//     price: 200
+//   }
+// ];
 
 const sizes = [
   {
@@ -56,14 +56,14 @@ const sizes = [
   }
 ];
 
-frames.map(e => {
-  console.log("elemento:", e);
-  Frame.create(e)
-    .then(newStyle => {
-      console.log("added", newStyle);
-    })
-    .catch(err => console.error(err));
-});
+// frames.map(e => {
+//   console.log("elemento:", e);
+//   Frame.create(e)
+//     .then(newStyle => {
+//       console.log("added", newStyle);
+//     })
+//     .catch(err => console.error(err));
+// });
 
 sizes.map(e => {
   console.log("elemento:", e);
@@ -74,14 +74,14 @@ sizes.map(e => {
     .catch(err => console.error(err));
 });
 
-styles.map(e => {
-  console.log("elemento:", e);
-  Style.create(e)
-    .then(newStyle => {
-      console.log("added", newStyle);
-    })
-    .catch(err => console.error(err));
-});
+// styles.map(e => {
+//   console.log("elemento:", e);
+//   Style.create(e)
+//     .then(newStyle => {
+//       console.log("added", newStyle);
+//     })
+//     .catch(err => console.error(err));
+// });
 
 /*
  
