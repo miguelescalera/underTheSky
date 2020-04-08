@@ -49,6 +49,7 @@ class FormDataContainer extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.PreviousStep= this.PreviousStep.bind(this)
     }
     
 
@@ -100,8 +101,13 @@ class FormDataContainer extends React.Component {
             if(this.props.userEmail){
                 this.props.getCart()
             }
-          }).then(()=>this.props.history.push("/cart"))
-          }
+          }).then(()=>this.props.nextStep())
+    }
+
+    PreviousStep(e){
+        e.preventDefault()
+        this.props.previousStep()
+    }
          
           render() {
                 return (
@@ -110,6 +116,7 @@ class FormDataContainer extends React.Component {
                         <FormData
                             handleChange={this.handleChange}
                             handleSubmit={this.handleSubmit}
+                            PreviousStep={this.PreviousStep}
                             state={this.state}
                         />
                     </div>

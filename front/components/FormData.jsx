@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card'
 import Row from "react-bootstrap/Row";
 
 
-export default ({ handleChange, handleSubmit,state }) => {
+export default ({ handleChange, handleSubmit,state,PreviousStep }) => {
 
 
     const formStyle = {
@@ -61,11 +61,14 @@ export default ({ handleChange, handleSubmit,state }) => {
                                     Nunca compartiremos tu Email
                                 </Form.Text>
                             </Form.Group>
-
+                            <Button onClick={PreviousStep} className="boton-outline" type="submit">
+                                atras
+                            </Button>
                             <Button onClick={handleSubmit} className="boton-outline" type="submit">
                                 Continuar
-            </Button>
-
+                            </Button>
+                            
+                            
                         </Form>
                     </div>
                 </span>
