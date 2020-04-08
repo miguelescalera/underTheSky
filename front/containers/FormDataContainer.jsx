@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { createDataProduct, dataProduct,modifyData} from "../actions/productDataActions"
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
@@ -11,7 +12,7 @@ const mapDispatchToProps = (dispatch, state) => {
         dataProduct: (data) => dispatch(dataProduct(data)),
         selectedProducts: (product) => dispatch(fetchProduct(product)),
         getCart: () => dispatch(getCart()),
-        
+
     };
 }
 
@@ -20,38 +21,39 @@ const mapStateToProps = (state, ownprops) => {
     return {
         product: state.products.selectedProduct,
         userEmail: state.user.user.email,
-        selectedStyle:state.products.selectedStyle,
+        selectedStyle: state.products.selectedStyle,
         selectedFrame: state.products.selectedFrame,
-        selectedSize:state.products.selectedSize,
+        selectedSize: state.products.selectedSize,
     };
 };
 
-let arrOfData=[]
-let arrOfProduct=[]
+let arrOfData = []
+let arrOfProduct = []
 
 class FormDataContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            digital:"",
+            digital: "",
             date: '',
             content: '',
             name: '',
             time: '',
             language: '',
             emailClient: '',
-            size:"",
-            style:"",
-            color:"",
-            frame:"",
-            
-            
+            size: "",
+            style: "",
+            color: "",
+            frame: "",
+
+
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange=this.onChange.bind(this);
         this.PreviousStep= this.PreviousStep.bind(this)
     }
-    
+
 
 
     handleChange(e) {
@@ -61,41 +63,43 @@ class FormDataContainer extends React.Component {
             [key]: value
         });
     }
+    onChange = date => this.setState({ date })
 
     handleSubmit(e) {
         e.preventDefault();
 
-        
+
         createDataProduct(
-             {
-                 date: this.state.date,
-                 content: this.state.content,
-                 name: this.state.name,
-                 time: this.state.time,
-                 language: this.state.language,
-                 emailClient: this.state.emailClient,
-                 digital:false,//cambiar esto,digital debe estar en el store
-                 size:this.props.selectedSize.name,
-                 frame:this.props.selectedFrame.name,
-                 style:this.props.selectedStyle.name,
-                 price:this.props.selectedSize.price
-             }
-         ).then((res)=>{
-             this.props.dataProduct(res.data)
-             if(!this.props.userEmail){
-                let dataWithoutUser=res.data
-                if(arrOfData.length!==0){
-                   
-                    arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
+            {
+                date: this.state.date,
+                content: this.state.content,
+                name: this.state.name,
+                time: this.state.time,
+                language: this.state.language,
+                emailClient: this.state.emailClient,
+                digital: false,//cambiar esto,digital debe estar en el store
+                size: this.props.selectedSize.name,
+                frame: this.props.selectedFrame.name,
+                style: this.props.selectedStyle.name,
+                price: this.props.selectedSize.price
+            }
+        ).then((res) => {
+            this.props.dataProduct(res.data)
+            if (!this.props.userEmail) {
+                let dataWithoutUser = res.data
+                if (arrOfData.length !== 0) {
+
+                    arrOfData = JSON.parse(localStorage.getItem("dataWithoutUser"))
                     arrOfData.push(dataWithoutUser)
-                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-                 
+                    localStorage.setItem("dataWithoutUser", JSON.stringify(arrOfData))
+
                 }
-                else{
+                else {
                     arrOfData.push(dataWithoutUser)
-                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+                    localStorage.setItem("dataWithoutUser", JSON.stringify(arrOfData))
                 }
             }
+
         })
         .then(()=>{
             if(this.props.userEmail){
@@ -117,6 +121,9 @@ class FormDataContainer extends React.Component {
                             handleChange={this.handleChange}
                             handleSubmit={this.handleSubmit}
                             PreviousStep={this.PreviousStep}
+                            onChange={this.onChange}
+                             date={this.state.date}
+
                             state={this.state}
                         />
                     </div>

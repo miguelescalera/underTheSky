@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const fileUpload = require('express-fileupload')
 const fs = require("fs");
 
 const multer = require("multer");
@@ -130,6 +131,7 @@ router.get("/getOrders", function (req, res) {
 });
 
 router.put("/changeStatus", function (req, res) {
+    console.log("BODY.", req.body)
     Order.findByPk(req.body.orderId).then(function (order) {
         order.update({ status: req.body.status })
             .then(function (newOrder) {
@@ -141,7 +143,8 @@ router.put("/changeStatus", function (req, res) {
 
 
 
-router.delete("/deleteOrder/:id", function (req,res) {
+router.delete("/deleteOrder/:id", function (req, res) {
+    console.log("params", req.params)
     Order.findByPk(req.params.id)
         .then(function (order) {
             order.destroy()
@@ -154,29 +157,35 @@ router.delete("/deleteOrder/:id", function (req,res) {
 
 /////////////////USERS/////////////////////
 router.get("/getUsers", function (req, res) {
-  User.findAll().then(function (users) {
-    res.json(users);
-  });
-});
+    User.findAll()
+        .then(function (users) {
+            res.json(users)
+        })
+})
+
 
 router.post("/addAdmin", function (req, res) {
-  console.log("entre al back");
-  User.findByPk(req.body.userId).then(function (user) {
-    user.update({ type: req.body.type }).then(function (newstatus) {
-      console.log("type modificado back");
-      res.json(newstatus);
-    });
-  });
-});
+    console.log("entre al back")
+    User.findByPk(req.body.userId)
+        .then(function (user) {
+            user.update({ type: req.body.type })
+                .then(function (newstatus) {
+                    console.log("type modificado back")
+                    res.json(newstatus)
+                })
+        })
+})
+
 
 router.delete("/deleteUser/:id", function (req, res) {
-  const id = req.params.id;
-  User.findByPk(id)
-    .then((user) => {
-      user.destroy();
-    })
-    .then(res.sendStatus(204));
-});
+    const id = req.params.id;
+    User.findByPk(id)
+        .then(user => {
+            user.destroy()
+        })
+        .then(res.sendStatus(204))
+})
+
 ///////////PRODUCTS////////////////////////
 router.get("/getAllDataProducts", function (req, res) {
     ProductData.findAll()
@@ -187,9 +196,9 @@ router.get("/getAllDataProducts", function (req, res) {
 
 router.get("/getProducts", function (req, res) {
     Product.findAll().then(function (products) {
-      res.json(products);
+        res.json(products);
     });
-  });
+});
 
 
 
@@ -223,5 +232,6 @@ router.delete("/deleteDisplay", function (req, res) {
       res.sendStatus(200);
     });
 });
+
 
 module.exports = router;
