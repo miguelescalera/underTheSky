@@ -3,7 +3,7 @@ import TarjetaProducto from "./TarjetaProducto";
 import Container from "react-bootstrap/Container";
 
 
-export default ({ products, handleClick }) => {
+export default ({ products, handleClick, styles }) => {
   const resultTarj = {
     display: "flex",
     flexWrap: "wrap",
@@ -19,14 +19,17 @@ export default ({ products, handleClick }) => {
     width: "45%",
     maxWidth: "250px"
   };
+  
+
+  // console.log('EEEEHEHH AQUI HACES EL MAP', styles.map((style, index)=>{console.log(style.name, index)}));
 
   return (
     <div>
       <Container className="d-flex justify-content-center" style={resultTarj}>
-        {products.map((product, index) => {
+        {styles.map((style, index) => {
           return (
             <span key={index} style={tarj}>
-              <TarjetaProducto product={product} handleClick={handleClick} />
+              <TarjetaProducto style={style} handleClick={handleClick} />
             </span>
           );
         })}
