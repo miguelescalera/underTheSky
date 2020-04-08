@@ -38,8 +38,11 @@ class NavbarContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
     this.handleEditData = this.handleEditData.bind(this)
+    this.PreviousStep= this.PreviousStep.bind(this)
   }
+  
   componentDidMount() {
+    console.log("render")
     if (this.props.userEmail) {
       this.props.getCart();
     }
@@ -49,6 +52,7 @@ class NavbarContainer extends React.Component {
       }
     }
        
+  
     
        
        
@@ -71,10 +75,10 @@ class NavbarContainer extends React.Component {
      
 
 handleSubmit(id) {
-  console.log("length.:",this.props.dataProduct.length)
+ console.log("length:",this.props.dataProduct.length)
     if(this.props.dataProduct.length){
       this.props.IdsForOrders(id);
-      this.props.history.push("/cart/checkout");
+      this.props.nextStep()
     }
   }
 
@@ -93,6 +97,11 @@ handleEditData(data){
   this.props.dataToEdit(data)
   this.props.history.push("/cart/editData");
 }
+
+PreviousStep(e){
+  e.preventDefault()
+  this.props.previousStep()
+}
  
 
   render() {
@@ -110,6 +119,7 @@ handleEditData(data){
             handleSubmit={this.handleSubmit}
             handleQuantity={this.handleQuantity}
             handleEditData={this.handleEditData}
+            PreviousStep={this.PreviousStep}
             />
         </Container>
       </div>

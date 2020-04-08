@@ -12,6 +12,7 @@ router.post('/nuevoproducto', function (req, res) {
   ProductData.create(req.body)
   .then(productData => { 
    if(req.user) productData.setUser(req.user.id); 
+   console.log("PRODUCTO CREADO:",productData)
     res.send(productData) })
   })
 

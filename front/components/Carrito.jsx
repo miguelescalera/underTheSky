@@ -21,7 +21,8 @@ export default ({
   handleDelete,
   handleSubmit,
   handleQuantity,
-  handleEditData
+  handleEditData,
+  
 }) => {
   
   
@@ -53,7 +54,7 @@ export default ({
       <Container>
         {dataProduct.map((e, i) => {
           quantity = e.quantity;
-          console.log("data:",e)
+       
           return (
             <Container className="carrito-contenedor-productos" >
               {/* ESTILO */}
@@ -194,9 +195,10 @@ export default ({
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
+                    
                     <Button
                       className="boton-outline-small"
-                      onClick={() => handleSubmit([e.dataProduct.id])}
+                      onClick={() => handleSubmit([e.id])}
                     >
                       checkout
                     </Button>
