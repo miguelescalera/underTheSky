@@ -25,7 +25,7 @@ class RegisterContainer extends React.Component {
   handleClick(evento) {
     evento.preventDefault();
     userRegister(this.state);
-    this.props.history.push("/login");
+    this.props.history.push("/home");
   }
 
   render() {
