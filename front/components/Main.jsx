@@ -13,10 +13,12 @@ import AdminOrdenesContainer from "../containers/AdminOrdenesContainer";
 import AdminUsersContainer from "../containers/AdminUsersContainer";
 import CarritoContainer from "../containers/CarritoContainer";
 import CheckoutContainer from "../containers/CheckoutContainer";
+import EditDataContainer from "../containers/EditDataContainer"
 import Img from "react-bootstrap/Image";
 import "../../back/public/global.css";
 import AdminPoroductsContainer from '../containers/AdminProductsContainer'
 import Admin from '../components/Admin'
+import StepWizardContainer from "../containers/StepWizardContainer"
 
 const mapStateToProps = state => {
   return {};
@@ -58,13 +60,14 @@ class Main extends React.Component {
             exact
             component={ProductsContainer}
           />
-          <Route path="/products" exact component={SingleProductContainer} />
+          <Route path="/products" exact component={StepWizardContainer} />
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/register" exact component={RegisterContainer} />
-          <Route path="/product" exact component={SingleProductContainer} />
+          <Route path="/product" exact component={StepWizardContainer} />
           <Route path="/productData" exact component={FormDataContainer} />
           <Route path="/cart" exact component={CarritoContainer} />
           <Route path="/cart/checkout" exact component={CheckoutContainer} />
+          <Route path="/cart/editData" exact component={EditDataContainer} />
           <Route path="/addProducts" exact component={AdminPoroductsContainer} />
           <Route path="/eladmin" exact component={Admin} />
           <Route

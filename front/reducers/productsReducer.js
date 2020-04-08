@@ -1,11 +1,20 @@
-import { SELECTED_PRODUCT, ALL_PRODUCTS, ALL_FSS, SELECT_STYLE } from "../constans"
+import { 
+  SELECTED_PRODUCT, 
+  ALL_PRODUCTS, 
+  ALL_FSS, 
+  SELECT_STYLE,
+  SELECT_FRAME,
+  SELECT_SIZE
+ } from "../constans"
 
 
 const initialState = {
   selectedProduct: {},
   AllProducts: [],
   Allfss: [],
-  selectedStyle: {}
+  selectedStyle: {},
+  selectedFrame:{},
+  selectedSize:{}
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +27,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { Allfss: action.Allfss })
     case SELECT_STYLE:
       return Object.assign({}, state, { selectedStyle: action.selectedStyle })
+    case SELECT_FRAME:
+      return Object.assign({}, state, { selectedFrame: action.selectedFrame })
+    case SELECT_SIZE:
+      return Object.assign({}, state, { selectedSize: action.selectedSize })
     default:
       return state;
   }

@@ -5,7 +5,9 @@ import {
   GET_FRAME,
   GET_SIZE,
   GET_STYLE,
-  DATA_PRODUCTS
+  DATA_PRODUCTS,
+  GET_PRODUCTS,
+  SELECTED_ORDERS
 } from "../constans"
 
 
@@ -16,7 +18,9 @@ const initialState = {
     allFrames:[],
     allSizes:[],
     allStyles:[],
-    allDataProducts:[]
+    allDataProducts:[],
+    allProducts:[],
+    selectedOrders:[]
   }
 
   export default (state = initialState, action) => {
@@ -35,6 +39,10 @@ const initialState = {
          return Object.assign({}, state, { allStyles: action.allStyle });
       case DATA_PRODUCTS: 
          return Object.assign({}, state, { allDataProducts: action.allDataProducts });
+      case GET_PRODUCTS: 
+         return Object.assign({}, state, { allProducts: action.allProducts });
+      case SELECTED_ORDERS: 
+         return Object.assign({}, state, { selectedOrders: action.selectedOrders });
          default: 
             return state;
        }

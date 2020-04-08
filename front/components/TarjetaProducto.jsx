@@ -15,7 +15,7 @@ const TarjetaProducto = function ({ product, handleClick }) {
 
 
 
-
+console.log("TRAJETA PRODUCTO_:",product)
 const botonSelecc = {
   fontSize:'0.7rem'
 }
@@ -41,7 +41,7 @@ const botonSelecc = {
             <Col >
               <span >
                 <Button className="boton-outline" style={botonSelecc} onClick={() =>
-                  handleClick(product.styleId)} >Elegir</Button>
+                  handleClick(product)} >Elegir</Button>
               </span>
             </Col>
           </Row>

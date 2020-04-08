@@ -130,22 +130,27 @@ router.get("/getOrders", function (req, res) {
 });
 
 router.put("/changeStatus", function (req, res) {
-  Order.findByPk(req.body.orderId).then(function (order) {
-    order.update({ status: req.body.status }).then(function (newOrder) {
-      res.json(newOrder);
-    });
-  });
-});
-
-router.delete("/deleteOrder", function () {
-  Order.findByPk(req.body.orderId)
-    .then(function (order) {
-      order.destroy();
+    Order.findByPk(req.body.orderId).then(function (order) {
+        order.update({ status: req.body.status })
+            .then(function (newOrder) {
+                res.json(newOrder)
+            })
     })
-    .then(function () {
-      res.sendStatus(200);
-    });
-});
+})
+   
+
+
+
+router.delete("/deleteOrder/:id", function (req,res) {
+    Order.findByPk(req.params.id)
+        .then(function (order) {
+            order.destroy()
+        })
+        .then(function () {
+            res.sendStatus(200)
+        })
+})
+    
 
 /////////////////USERS/////////////////////
 router.get("/getUsers", function (req, res) {
@@ -174,10 +179,19 @@ router.delete("/deleteUser/:id", function (req, res) {
 });
 ///////////PRODUCTS////////////////////////
 router.get("/getAllDataProducts", function (req, res) {
-  ProductData.findAll().then((allproductdata) => {
-    res.json(allproductdata);
+    ProductData.findAll()
+        .then(allproductdata => {
+            res.json(allproductdata)
+        })
+})
+
+router.get("/getProducts", function (req, res) {
+    Product.findAll().then(function (products) {
+      res.json(products);
+    });
   });
-});
+
+
 
 router.delete("/deleteProduct", function (req, res) {
   Product.findByPk(req.body.productId)

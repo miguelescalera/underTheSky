@@ -9,14 +9,16 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
-
-  console.log('CREANDO DATA', req.body);
-  console.log('userrrrr', req.user)
   ProductData.create(req.body)
-    .then(productData => { productData.setUser(req.user.id); res.send(productData) })
+  .then(productData => { 
+   if(req.user) productData.setUser(req.user.id); 
+   console.log("PRODUCTO CREADO:",productData)
+    res.send(productData) })
+  })
+
+  
 
 
-})
 
 
 
@@ -25,9 +27,7 @@ router.get("/productData/:id", function (req, res) {
 });
 
 
-router.put("/modifyDataProduct", function (req, res) {
-  console.log("BODY:", req.body);
-
+router.put("/modifyQuantity", function (req, res) {
   ProductData.update(
     { quantity: req.body.quantity },
     { returning: true, where: { id: req.body.productDataId } }
@@ -37,6 +37,25 @@ router.put("/modifyDataProduct", function (req, res) {
     })
     .catch(err => console.log("error:", err));
 });
+
+
+router.put("/modifyData", function (req, res) {
+  console.log("BODY:",req.body)
+  ProductData.update(
+    req.body,
+    { returning: true, where: { id: req.body.id } }
+  )
+    .then(([rowsUpdate, [updatedData]]) => {
+      res.json(updatedData);
+    })
+    .catch(err => console.log("error:", err));
+});
+    
+ 
+
+
+
+
 
 router.post("/getUserProducts", (req, res) => {
   Product.findOne({
@@ -91,11 +110,7 @@ router.post("/newProduct", function (req, res) {
   });
 });
 
-router.get("/getProducts", function (req, res) {
-  Product.findAll().then(function (products) {
-    res.json(products);
-  });
-});
+
 
 router.get("/styles/:id", function (req, res, next) {
   Style.findByPk(req.params.id)

@@ -34,6 +34,12 @@ class CheckoutContainer extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    handleEncuentro(e){
+        console.log("llega al handleEncontro")
+        e.preventDefault()
+    }
+
+
     handleChange(e) {
         const key = e.target.name;
         const value = e.target.value;
@@ -52,6 +58,7 @@ class CheckoutContainer extends React.Component {
         return (
             <div>
                 <Checkout
+                    handleEncuentro={this.handleEncuentro}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}
                     userEmail={this.props.userEmail}

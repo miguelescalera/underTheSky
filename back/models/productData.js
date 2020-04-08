@@ -7,11 +7,14 @@ ProductData.init({
         type: Sequelize.STRING,
         allowNull: false
     },
+    
     content: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     time: {
         type: Sequelize.STRING,
@@ -30,6 +33,22 @@ ProductData.init({
     quantity:{
         type: Sequelize.INTEGER,
         defaultValue:1
+    },
+    digital:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:false
+    },
+    size:{
+        type:Sequelize.STRING
+    },
+    frame:{
+        type:Sequelize.STRING
+    },
+    style:{
+        type:Sequelize.STRING
+    },
+    price:{
+        type:Sequelize.INTEGER
     }
 
 

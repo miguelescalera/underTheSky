@@ -18,39 +18,24 @@ import {
 
 export default ({
   dataProduct,
-  userProduct,
-  fss,
   handleDelete,
   handleSubmit,
-  handleQuantity
-}) => {
-  console.log("dataProduct Carrito", dataProduct);
-  console.log("userProduct Carrito", userProduct);
-  console.log("fss Carrito", fss);
-
+  handleQuantity,
+  handleEditData,
   
+}) => {
+  
+  
+ 
   
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  let allData = [];
+  
   let quantity = 1;
 
-  if (userProduct[0] && fss[0]) {
-    for (let i = 0; i < dataProduct.length; i++) {
-      allData.push({
-        dataProduct: dataProduct[i],
-        userProduct: userProduct[i].data,
-        fss: fss[i].data
-      });
-    }
-  } else {
-    allData = [];
-  }
-
-  console.log("ALL DATA:", allData);
-
+  
   const quantityStyle = {
     display: "inline-block",
     marginLeft: "3%",
@@ -62,14 +47,16 @@ export default ({
     justifyContent: "space-between"
   };
 
+ 
+
   return (
-
+    
       <Container>
-        {allData.map((e, i) => {
-          quantity = e.dataProduct.quantity;
-
+        {dataProduct.map((e, i) => {
+          quantity = e.quantity;
+       
           return (
-            <Container className="carrito-contenedor-productos">
+            <Container className="carrito-contenedor-productos" >
               {/* ESTILO */}
               {/* ESTILO */}
               {/* ESTILO */}
@@ -77,7 +64,7 @@ export default ({
               <Row>
                 <div>
                   <h4 style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
-                    {e.fss.style.name}{" "}
+                    {e.style}{" "}
                   </h4>
                 </div>
               </Row>
@@ -101,17 +88,17 @@ export default ({
                   {/* INFORMACION */}
                   {/* INFORMACION */}
                   <Row>
-                    <strong>Tamaño: </strong> {e.fss.size.name}
+                    <strong>Tamaño: </strong> {e.size}
                   </Row>
                   <Row>
-                    <strong>Marco: </strong> {e.fss.frame.name}
+                    <strong>Marco: </strong> {e.frame}
                   </Row>
                   <Row>
                     <strong>Color: </strong>
-                    {e.fss.style.color}
+                    {e.color}
                   </Row>
                   <Row>
-                    <h5>${e.fss.size.price * quantity}</h5>
+                    <h5>${e.price * quantity}</h5>
                   </Row>
 
                   <Row>
@@ -124,8 +111,8 @@ export default ({
                       className="boton-icono"
                       onClick={() => {
                         handleQuantity(
-                          e.dataProduct.id,
-                          e.dataProduct.quantity - 1
+                          e.id,
+                          e.quantity - 1
                         );
                       }}
                     >
@@ -136,8 +123,8 @@ export default ({
                       className="boton-icono"
                       onClick={() => {
                         handleQuantity(
-                          e.dataProduct.id,
-                          e.dataProduct.quantity + 1
+                          e.id,
+                          e.quantity + 1
                         );
                       }}
                     >
@@ -153,60 +140,45 @@ export default ({
                     <button
                       className="boton-icono"
                       onClick={() => {
-                        handleDelete(e.dataProduct.id);
+                        handleDelete(e.id);
                       }}
                     >
                       <FontAwesomeIcon icon={faTrashAlt} />
                     </button>
                   </Row>
-                  <Row>
+                 
                     {/* BOTON DETALLE */}
                     {/* BOTON DETALLE */}
                     {/* BOTON DETALLE */}
                     {/* BOTON DETALLE */}
-                    <button className="boton-icono" onClick={handleShow}>
-                      <FontAwesomeIcon icon={faInfoCircle} />
-                    </button>{" "}
-                    <br />
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Body>
-                        <Container>
-                          <Row>
-                            <h4>{e.fss.style.name} </h4>
-                            <img
-                              style={{ width: "50%" }}
-                              src="https://i.imgur.com/Usradoq.png"
-                              alt=""
-                            />
-                            <br />
-                            <strong>size: </strong>
-                            {e.fss.size.name} <br />
-                            <strong>frame: </strong>
-                            {e.fss.frame.name} <br />
-                            <strong>color: </strong>
-                            {e.fss.style.color} <br />
-                            <h5>${e.fss.size.price}</h5>
+                   
+                    
+                       
+                            <h4>{e.style} </h4>
+                            
+                           
+                           
                             <ListGroup variant="flush">
                               <ListGroup.Item style={styleModal}>
-                                <strong>date: </strong> {e.dataProduct.date}
+                                <strong>date: </strong> {e.date}
                               </ListGroup.Item>
 
                               <ListGroup.Item style={styleModal}>
-                                <strong>name: </strong> {e.dataProduct.name}
+                                <strong>name: </strong> {e.name}
                               </ListGroup.Item>
 
                               <ListGroup.Item style={styleModal}>
                                 <strong>content: </strong>{" "}
-                                {e.dataProduct.content}
+                                {e.content}
                               </ListGroup.Item>
 
                               <ListGroup.Item style={styleModal}>
-                                <strong>time: </strong> {e.dataProduct.time}
+                                <strong>time: </strong> {e.time}
                               </ListGroup.Item>
 
                               <ListGroup.Item style={styleModal}>
                                 <strong>email: </strong>{" "}
-                                {e.dataProduct.emailClient}
+                                {e.emailClient}
                               </ListGroup.Item>
 
                               <ListGroup.Item
@@ -215,29 +187,22 @@ export default ({
                                   display: "inline"
                                 }}
                               >
-                                <Button variant="dark">edit data</Button>
+                                <Button variant="dark" onClick={()=>handleEditData(e)}>edit data</Button>
                               </ListGroup.Item>
                             </ListGroup>
-                          </Row>
-                        </Container>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+                       
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
                     {/* CHECKOUT */}
+                    
                     <Button
                       className="boton-outline-small"
-                      onClick={() => handleSubmit([e.dataProduct.id])}
+                      onClick={() => handleSubmit([e.id])}
                     >
                       checkout
                     </Button>
-                  </Row>
+                
                 </Col>
               </Row>
             </Container>
@@ -247,3 +212,7 @@ export default ({
 
   );
 };
+                      
+                    
+                        
+                        
