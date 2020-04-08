@@ -150,6 +150,8 @@ export const getFrame = () => dispatch =>
 
 export const newFrame = (newFrame) =>
   axios.post("/api/admin/newFrame", newFrame)
+  .catch(err=>console.log(err)
+  )
 
 
 export const deleteFrame = (frame) =>
@@ -181,8 +183,11 @@ export const getStyle = () => dispatch =>
       return style.data;
     }
     );
+
 export const newStyle = (newStyle) =>
   axios.post("/api/admin/newStyle", newStyle)
+  .catch(err=>console.log(err)
+  )
 
 
 export const deleteStyle = (style) =>
