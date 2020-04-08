@@ -81,8 +81,8 @@ class SingleProductContainer extends React.Component {
         localStorage.setItem('selectedStyle',JSON.stringify(this.props.selectedStyle))
         localStorage.setItem('selectedFrame',JSON.stringify(this.props.selectedFrame))
         localStorage.setItem('selectedSize',JSON.stringify(this.props.selectedSize))
-            this.props.history.push("/productData")
-
+           this.props.nextStep()
+       
     }
 
     render() {

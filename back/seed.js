@@ -7,142 +7,122 @@ const User = require("./models/user");
 const faker = require("faker");
 const Orders = require("./models/order");
 
-let dataUser={}
-let dataOrders={}
-let dataProduct={}
+let dataUser = {};
+let dataOrders = {};
+let dataProduct = {};
 
-const productData=[]
-const ordersData=[]
-const usersData=[]
+const productData = [];
+const ordersData = [];
+const usersData = [];
 
+// const styles = [
+//   {
+//     name: "classic",
+//     color: "blanco"
+//   },
+//   {
+//     name: "classic",
+//     color: "negro"
+//   },
+//   {
+//     name: "classic",
+//     color: "gris"
+//   }
+// ];
 
-const styles = [
-  {
-    name: "classic",
-    color: "blanco"
-  },
-  {
-    name: "classic",
-    color: "negro"
-  },
-  {
-    name: "classic",
-    color: "gris"
-  }
-];
-
-const frames = [
-  {
-    name: "madera",
-    price: 200
-  },
-  {
-    name: "negro",
-    price: 200
-  },
-  {
-    name: "blanco",
-    price: 200
-  }
-];
+// const frames = [
+//   {
+//     name: "madera",
+//     price: 200
+//   },
+//   {
+//     name: "negro",
+//     price: 200
+//   },
+//   {
+//     name: "blanco",
+//     price: 200
+//   }
+// ];
 
 const sizes = [
   {
     name: "13x18",
-    price: 200
+    price: 200,
   },
   {
     name: "30x40",
-    price: 300
+    price: 300,
   },
   {
     name: "50x70",
-    price: 400
-  }
+    price: 400,
+  },
 ];
 
 for (let i = 0; i < 10; i++) {
-  
-  dataUser={
-    type:"normal",
-    firstName:faker.name.findName(),
-    lastName:faker.name.lastName(),
-    email:faker.internet.email(),
-    password:"123"
-  }
-  usersData.push(dataUser)
-  
-  
-  dataOrders={
-    address:faker.address.streetAddress() ,
-    city:faker.address.city(),
-    country:faker.address.country(),
-    state:faker.address.state(),
-    postCode:faker.address.zipCode(),
-    transactionNumber:123,
-  
-  }
-  ordersData.push(dataOrders)
+  dataUser = {
+    type: "normal",
+    firstName: faker.name.findName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: "123",
+  };
+  usersData.push(dataUser);
 
-  dataProduct={
-    place:"buenos aires",
-    date:"21/03/2002",
-    content:"bla bla bla",
-    name:faker.name.firstName(),
-    time:"12.00",
-    language:"español",
-    emailClient:faker.internet.email(),
-    userId:1,
-    digital:false,
-    size:"10X30",
-    frame:"negro",
-    style:"minimalista",
-    price:200
-  }
-  productData.push(dataProduct)
+  dataOrders = {
+    address: faker.address.streetAddress(),
+    city: faker.address.city(),
+    country: faker.address.country(),
+    state: faker.address.state(),
+    postCode: faker.address.zipCode(),
+    transactionNumber: 123,
+  };
+  ordersData.push(dataOrders);
+
+  dataProduct = {
+    place: "buenos aires",
+    date: "21/03/2002",
+    content: "bla bla bla",
+    name: faker.name.firstName(),
+    time: "12.00",
+    language: "español",
+    emailClient: faker.internet.email(),
+    userId: 1,
+    digital: false,
+    size: "10X30",
+    frame: "negro",
+    style: "minimalista",
+    price: 200,
+  };
+  productData.push(dataProduct);
 }
 
-Style.bulkCreate(styles,{validate:true})
-.then(()=>{
-  Size.bulkCreate(sizes,{validate:true})
-  .then(()=>{
-    Frame.bulkCreate(frames,{validate:true})
-    .then(()=>{
-      User.bulkCreate(usersData,{validate:true})
-      .then(()=>{
-        Orders.bulkCreate(ordersData,{validate:true})
-        .then(()=>{
-          DataProduct.bulkCreate(productData,{validate:true})
-         
-        })
-      })
-    })
-  })
-})
-                        
-  
+Size.bulkCreate(sizes, { validate: true }).then((res) => {
+  console.log(res);
+});
 
+User.bulkCreate(usersData, { validate: true }).then((res) => {
+  console.log(res);
+});
 
+Orders.bulkCreate(ordersData, { validate: true }).then((res) => {
+  console.log(res);
+});
 
-
-
-
-
+DataProduct.bulkCreate(productData, { validate: true }).then((res) => {
+  console.log(res);
+});
 
 User.create({
-  type:"admin",
-  firstName:faker.name.findName(),
-  lastName:faker.name.lastName(),
-  email:"alan@alan.com",
-  password:"123"
-}).then(()=>{console.log("user admin created")})
-
-
-
-
-  
-
-
+  type: "admin",
+  firstName: faker.name.findName(),
+  lastName: faker.name.lastName(),
+  email: "alan@alan.com",
+  password: "123",
+}).then(() => {
+  console.log("user admin created");
+});
 
 /*
 frames.map(e => {
@@ -172,12 +152,6 @@ styles.map(e => {
     .catch(err => console.error(err));
 });
 */
-
-
-
-
-
-    
 
 /*
 Frame.findAll()
@@ -214,8 +188,6 @@ Frame.findAll()
 })
               
 */
-  
-
 
 /*
  

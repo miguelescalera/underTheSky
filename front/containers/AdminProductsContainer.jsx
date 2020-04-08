@@ -3,7 +3,7 @@ import Login from "../components/Login";
 import { connect } from "react-redux";
 import { userLogin, addLogin } from "../actions/LoginAction"
 import { encrypt } from "../actions/RegisterAction"
-import { Tabs, Tab } from 'react-bootstrap'
+import { Tabs, Tab,FormFile } from 'react-bootstrap'
 import AddFrame from "../components/AddFrame";
 import AddSize from '../components/AddSize'
 import AddStyle from '../components/AddStyle'
@@ -28,25 +28,41 @@ class AdminProductsContainer extends React.Component {
         super();
         this.state = {
             size: "",
-            sizePrice: "",
+            sizePrice: 0,
             frame: "",
-            framePrice: '',
+            framePrice: 0,
+            frameImg:null,
             styleName: '',
-            color: ''
+            styleColor: '',
+            styleImg:null,
+            styleTipo:'',
+            styleSigno:'n/a'
 
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSizeSubmit = this.handleSizeSubmit.bind(this)
         this.handleStyleSubmit = this.handleStyleSubmit.bind(this)
+        this.handleFile = this.handleFile.bind(this)
+        this.handleStyleFile = this.handleStyleFile.bind(this)
+
     }
+
+
     checkboxLogin() {
         this.setState({ checkbox: !this.state.checkbox })
     }
 
+    handleFile(e){
+        console.log(e.target.files[0]);
+        this.setState({frameImg:e.target.files[0]})
+    }
+
     handleChange(e) {
+        
         const key = e.target.name;
         const value = e.target.value;
+        console.log(e.target.name, e.target.value);
         this.setState({
             [key]: value
         });
@@ -54,13 +70,18 @@ class AdminProductsContainer extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
-        console.log('hola papu, gracias')
-        newFrame({
-            name: this.state.frame,
-            price: this.state.framePrice
-        })
+        e.preventDefault();        
+        const frameUpload = new FormData()
+        frameUpload.append("frameImg", this.state.frameImg)
+        frameUpload.append("frame", this.state.frame)
+        frameUpload.append("framePrice", this.state.framePrice)
+
+        
+        newFrame(frameUpload)
+        this.props.history.push("/eladmin");
+ 
     }
+
 
     handleSizeSubmit(e) {
         e.preventDefault();
@@ -69,15 +90,28 @@ class AdminProductsContainer extends React.Component {
             name: this.state.size,
             price: this.state.sizePrice
         })
+        this.props.history.push("/eladmin");
+
+    }
+
+    handleStyleFile(e){
+        console.log(e.target.files[0]);
+        this.setState({styleImg:e.target.files[0]})
     }
 
     handleStyleSubmit(e) {
+
         e.preventDefault();
-        console.log('hola papu, gracias')
-        newStyle({
-            name: this.state.styleName,
-            price: this.state.color
-        })
+        const styleUpload = new FormData()
+        styleUpload.append("styleImg", this.state.styleImg)
+        styleUpload.append("styleName", this.state.styleName)
+        styleUpload.append("styleColor", this.state.styleColor)
+        styleUpload.append("styleTipo", this.state.styleTipo)
+        styleUpload.append("styleSigno", this.state.styleSigno)
+
+        newStyle(styleUpload)
+        this.props.history.push("/eladmin");
+
     }
 
 
@@ -85,26 +119,30 @@ class AdminProductsContainer extends React.Component {
 
         return (
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                <Tab eventKey="frame" title="Add Frame">
+                <Tab eventKey="frame" title="Agregar marco">
                     <AddFrame handleChange={this.handleChange}
                         checkboxLogin={this.checkboxLogin}
                         handleSubmit={this.handleSubmit}
+                        handleFile={this.handleFile}
                         alertNull={this.state.alertNull}
                         alertPass={this.state.alertPass} />
                 </Tab>
-                <Tab eventKey="size" title="Add Size">
+                <Tab eventKey="size" title="Agregar tamaño">
                     <AddSize handleChange={this.handleChange}
                         checkboxLogin={this.checkboxLogin}
                         handleSizeSubmit={this.handleSizeSubmit}
                         alertNull={this.state.alertNull}
                         alertPass={this.state.alertPass} />
                 </Tab>
-                <Tab eventKey="style" title="Add Style">
+                <Tab eventKey="style" title="Agregar estilo">
                     <AddStyle handleChange={this.handleChange}
+                        handleStyleFile = {this.handleStyleFile}
                         checkboxLogin={this.checkboxLogin}
-                        handleStyleeSubmit={this.handleStyleSubmit}
+                        handleStyleSubmit={this.handleStyleSubmit}
                         alertNull={this.state.alertNull}
-                        alertPass={this.state.alertPass} />
+                        alertPass={this.state.alertPass}
+                        styleName={this.state.styleName}
+                        styleImg={this.state.styleImg} />
                 </Tab>
 
             </Tabs>

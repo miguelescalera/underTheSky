@@ -69,7 +69,7 @@ export const getOrders = () => dispatch =>
     );
 
 export const changeStatusOrder = (order) =>
-  axios.put("/api/admin/chageStatus", { orderId: order.id, status: order.status })
+  axios.put("/api/admin/changeStatus", { orderId: order.id, status: order.status })
     .then((newOrder) => {
       return newOrder
     })
@@ -91,7 +91,7 @@ export const getUsers = () => dispatch =>
 
 
   export const changeStatus = function(usertype,idUser){
-    axios.post(`/api/admin/addAdmin`,{type:usertype,userId:idUser})
+    return axios.post(`/api/admin/addAdmin`,{type:usertype,userId:idUser})
   }
 
 
@@ -150,6 +150,8 @@ export const getFrame = () => dispatch =>
 
 export const newFrame = (newFrame) =>
   axios.post("/api/admin/newFrame", newFrame)
+  .catch(err=>console.log(err)
+  )
 
 
 export const deleteFrame = (frame) =>
@@ -181,8 +183,11 @@ export const getStyle = () => dispatch =>
       return style.data;
     }
     );
+
 export const newStyle = (newStyle) =>
   axios.post("/api/admin/newStyle", newStyle)
+  .catch(err=>console.log(err)
+  )
 
 
 export const deleteStyle = (style) =>

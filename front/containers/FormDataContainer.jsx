@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDataProduct, dataProduct } from "../actions/productDataActions"
+
+import { createDataProduct, dataProduct,modifyData} from "../actions/productDataActions"
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
 import { getCart } from "../actions/cartActions"
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
+       
         dataProduct: (data) => dispatch(dataProduct(data)),
         selectedProducts: (product) => dispatch(fetchProduct(product)),
         getCart: () => dispatch(getCart()),
@@ -49,6 +51,7 @@ class FormDataContainer extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange=this.onChange.bind(this);
+        this.PreviousStep= this.PreviousStep.bind(this)
     }
 
 
@@ -98,34 +101,43 @@ class FormDataContainer extends React.Component {
             }
 
         })
-            .then(() => {
-                if (this.props.userEmail) {
-                    this.props.getCart()
-                }
-            }).then(() => this.props.history.push("/cart"))
+        .then(()=>{
+            if(this.props.userEmail){
+                this.props.getCart()
+            }
+          }).then(()=>this.props.nextStep())
     }
 
-
-
-
-
-
-
-
-
-    render() {
-        return (
-            <div>
-                <h3 className="titulopagina">Información</h3>
-                <FormData
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                    onChange={this.onChange}
-                    date={this.state.date}
-                />
-            </div>
-        );
+    PreviousStep(e){
+        e.preventDefault()
+        this.props.previousStep()
     }
-}
+         
+          render() {
+                return (
+                    <div>
+                        <h3 className="titulopagina">Información</h3>
+                        <FormData
+                            handleChange={this.handleChange}
+                            handleSubmit={this.handleSubmit}
+                            PreviousStep={this.PreviousStep}
+                            onChange={this.onChange}
+                             date={this.state.date}
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormDataContainer);
+                            state={this.state}
+                        />
+                    </div>
+                );
+            }
+        }
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(FormDataContainer);
+               
+    
+                   
+    
+              
+            
+        
+
+    

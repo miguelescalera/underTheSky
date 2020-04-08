@@ -6,7 +6,8 @@ import {
         fetchDataProducts,
         getUsers,
         fetchAllProducts,
-        selectedOrders
+        selectedOrders,
+        changeStatusOrder
     } from "../actions/adminActions"
 
 const mapStateToProps = state => {
@@ -39,6 +40,7 @@ class AdminOrdenesContainer extends React.Component{
         }
         this.handleSelectedOrder=this.handleSelectedOrder.bind(this)
         this.handleChange=this.handleChange.bind(this)
+        this.handleStatus=this.handleStatus.bind(this)
     }
     handleChange(e){
         
@@ -66,7 +68,13 @@ class AdminOrdenesContainer extends React.Component{
             })
         }
     }
-
+    handleStatus(id,status){
+        changeStatusOrder(id,status)
+        .then(()=>{
+            this.props.getOrders()
+        })
+    }
+      
         
     handleSelectedOrder(e){
         e.preventDefault()
@@ -120,6 +128,7 @@ class AdminOrdenesContainer extends React.Component{
                 estadoDeCompra={this.state.estadoDeCompra}
                 handleSelectedOrder={this.handleSelectedOrder}
                 handleChange={this.handleChange}
+                handleStatus={this.handleStatus}
                 />
             </div>
         )

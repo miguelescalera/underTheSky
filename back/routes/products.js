@@ -12,6 +12,7 @@ router.post('/nuevoproducto', function (req, res) {
   ProductData.create(req.body)
   .then(productData => { 
    if(req.user) productData.setUser(req.user.id); 
+   console.log("PRODUCTO CREADO:",productData)
     res.send(productData) })
   })
 
@@ -26,9 +27,7 @@ router.get("/productData/:id", function (req, res) {
 });
 
 
-router.put("/modifyDataProduct", function (req, res) {
-  console.log("BODY:", req.body);
-
+router.put("/modifyQuantity", function (req, res) {
   ProductData.update(
     { quantity: req.body.quantity },
     { returning: true, where: { id: req.body.productDataId } }
@@ -38,6 +37,23 @@ router.put("/modifyDataProduct", function (req, res) {
     })
     .catch(err => console.log("error:", err));
 });
+
+
+router.put("/modifyData", function (req, res) {
+  console.log("BODY:",req.body)
+  ProductData.update(
+    req.body,
+    { returning: true, where: { id: req.body.id } }
+  )
+    .then(([rowsUpdate, [updatedData]]) => {
+      res.json(updatedData);
+    })
+    .catch(err => console.log("error:", err));
+});
+    
+ 
+
+
 
 
 
@@ -82,7 +98,6 @@ router.post("/newProductData", function (req, res) {
 });
 
 router.post("/newProduct", function (req, res) {
-  console.log('esto es el body', req.body)
   Product.findOrCreate({
     where: {
       // digital: req.body.digital,

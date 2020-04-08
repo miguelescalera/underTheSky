@@ -9,7 +9,8 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 
 
-export default ({ handleChange, handleSubmit, date, onChange }) => {
+
+export default ({ handleChange, handleSubmit,state,PreviousStep,date, onChange }) => {
 
 
     const formStyle = {
@@ -47,35 +48,40 @@ export default ({ handleChange, handleSubmit, date, onChange }) => {
                                     onChange={onChange}
                                     className="react-calendar"
                                 />
+
                             </Form.Group>
                             <Form.Group controlId="formBasicPhrase">
                                 <Form.Label>Nombre o Frase</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre o Evento" onChange={handleChange} name='name' />
+                                <Form.Control type="text" placeholder="Nombre o Evento" onChange={handleChange} name='name' value={state.name}/>
                             </Form.Group>
                             <Form.Group controlId="formBasicTime">
                                 <Form.Label>Hora del Evento</Form.Label>
-                                <Form.Control type="time" placeholder="00:00" onChange={handleChange} name='time' />
+                                <Form.Control type="time" placeholder="00:00" onChange={handleChange} name='time' value={state.time} />
+
                             </Form.Group>
                             <Form.Group controlId="formBasicPlace">
                                 <Form.Label>Lugar del Evento</Form.Label>
-                                <Form.Control type="text" placeholder="Buenos Aires, Argentina" onChange={handleChange} name='content' />
+                                <Form.Control type="text" placeholder="Buenos Aires, Argentina" onChange={handleChange} name='content'value={state.content} />
                             </Form.Group>
                             <Form.Group controlId="formBasicLanguage">
                                 <Form.Label>Idioma</Form.Label>
-                                <Form.Control type="text" placeholder="Idioma" onChange={handleChange} name='language' />
+                                <Form.Control type="text" placeholder="Idioma" onChange={handleChange} name='language'value={state.language} />
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="Email" onChange={handleChange} name='emailClient' />
+                                <Form.Control type="email" placeholder="Email" onChange={handleChange} name='emailClient' value={state.emailClient}/>
                                 <Form.Text className="text-muted">
                                     Nunca compartiremos tu Email
                                 </Form.Text>
                             </Form.Group>
-
+                            <Button onClick={PreviousStep} className="boton-outline" type="submit">
+                                atras
+                            </Button>
                             <Button onClick={handleSubmit} className="boton-outline" type="submit">
                                 Continuar
-            </Button>
-
+                            </Button>
+                            
+                            
                         </Form>
                     </div>
                 </span>

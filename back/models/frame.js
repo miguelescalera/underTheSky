@@ -1,20 +1,34 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db/index.js');
+const Sequelize = require("sequelize");
+const sequelize = require("../db/index.js");
 
-class Frame extends Sequelize.Model { }
-Frame.init({
+class Frame extends Sequelize.Model {}
+Frame.init(
+  {
     name: {
-        type: Sequelize.STRING,
-        allowNull: false
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     price: {
-        type: Sequelize.INTEGER,
-    }
+      type: Sequelize.INTEGER,
+    },
+    imgType: {
+      type: Sequelize.STRING,
+    },
+    imgName: {
+      type: Sequelize.STRING,
+    },
+    imgData: {
+      type: Sequelize.BLOB("long"),
+      allowNull: false,
 
+    },
+    imgPath: {
+      type: Sequelize.STRING,
+      allowNull: false,
 
-
-}, { sequelize, modelName: 'frame' });
+    },
+  },
+  { sequelize, modelName: "frame" }
+);
 
 module.exports = Frame;
-
-
