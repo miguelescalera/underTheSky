@@ -4,7 +4,8 @@ import {
   ALL_FSS, 
   SELECT_STYLE,
   SELECT_FRAME,
-  SELECT_SIZE
+  SELECT_SIZE,
+  DIGITAL
  } from "../constans"
 
 
@@ -14,7 +15,8 @@ const initialState = {
   Allfss: [],
   selectedStyle: {},
   selectedFrame:{},
-  selectedSize:{}
+  selectedSize:{},
+  digital:false
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +33,8 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { selectedFrame: action.selectedFrame })
     case SELECT_SIZE:
       return Object.assign({}, state, { selectedSize: action.selectedSize })
+    case DIGITAL:
+        return Object.assign({}, state, { digital: action.digital })
     default:
       return state;
   }

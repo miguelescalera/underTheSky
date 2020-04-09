@@ -20,4 +20,5 @@ export const SELECT_STYLE='SELECT_STYLE'
 export const SELECT_FRAME='SELECT_FRAME'
 export const SELECT_SIZE='SELECT_SIZE'
 export const ALL_FSS="ALL_FSS"
+export const DIGITAL = "DIGITAL"
 

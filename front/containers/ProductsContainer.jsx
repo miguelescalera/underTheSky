@@ -139,6 +139,10 @@ const displays = [
 //     };
 // };
 
+const style={
+  styleId: 5,
+  name: "zodiac"
+}
 class ProductsContainer extends React.Component {
   constructor() {
     super();
@@ -147,14 +151,12 @@ class ProductsContainer extends React.Component {
   
 
   handleClick(e) {
-    const style={
-      imgURL: 'https://i.imgur.com/qGGi3DF.png',
-      styleId: 5,
-      name: "zodiac"
-    }
-    this.props.selectStyle(style)
-    this.props.history.push('/product')
+      
+   localStorage.setItem("selectedStyle",JSON.stringify(style))
+   this.props.history.push('/product')
+    
   }
+    
    
     
     
