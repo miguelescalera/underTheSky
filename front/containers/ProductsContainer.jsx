@@ -22,7 +22,8 @@ const mapStateToProps = (state, ownprops) => {
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    allStyles:data => dispatch(allStyles(data))
+    allStyles:data => dispatch(allStyles(data)),
+    selectStyle: data=>dispatch(selectStyle(data))
 
 
   };
@@ -32,34 +33,8 @@ const mapDispatchToProps = (dispatch, state) => {
 
 
 
-const displays = [
-  {
-    imgURL: 'https://i.imgur.com/Usradoq.png',
-    styleId: 1,
-    name: "classic"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oDx7xxC.png',
-    styleId: 2,
-    name: "minimalista"
-  },
-  {
-    imgURL: 'https://i.imgur.com/oH886qa.png',
-    styleId: 3,
-    name: "polaroid"
-  },
-];
 
-// const mapStateToProps = function (state) {
-//     return {
-//         products: state.products.getDisplays,
-//     };
-// };
 
-const style={
-  styleId: 5,
-  name: "zodiac"
-}
 class ProductsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -67,25 +42,26 @@ class ProductsContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('hola, este es el estado',this.props.styles)
-
     getAllStyles()
     .then(result=>{
-      console.log('EEEE este es el resulti', result);
-      
-        this.props.allStyles(result.data)
-
+      this.props.allStyles(result.data)
     })
-}
+  }
+      
+      
+
+    
+
   
 
-  handleClick(e) {
-      
-   localStorage.setItem("selectedStyle",JSON.stringify(style))
+  handleClick(style) {
+    console.log("style",style)
+    this.props.selectStyle(style)
    this.props.history.push('/product')
     
   }
     
+      
    
     
     
@@ -97,7 +73,7 @@ class ProductsContainer extends React.Component {
     return (
       <div>
         <h3 className="titulopagina">Nuestros estilos</h3>
-        <Products products={displays} handleClick={this.handleClick} cart={this.props.cart} styles={this.props.styles} />
+        <Products handleClick={this.handleClick} cart={this.props.cart} styles={this.props.styles} />
       </div>
     );
   }

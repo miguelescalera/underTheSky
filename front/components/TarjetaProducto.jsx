@@ -39,7 +39,7 @@ console.log( 'ACAAAAAAAAAAAAAAAAAAAA', imgurl)
                 <Button
                   className="boton-outline"
                   style={botonSelecc}
-                  onClick={() => handleClick(product)}
+                  onClick={() => handleClick(style)}
                 >
                   Elegir
                 </Button>
