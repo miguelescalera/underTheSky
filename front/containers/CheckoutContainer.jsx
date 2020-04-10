@@ -1,12 +1,14 @@
 import React from "react";
 import Checkout from "../components/Checkout";
 import { connect } from "react-redux";
-import { orderInProcess } from "../actions/orderActions"
+import { orderInProcess, PuntoDeEncuentro } from "../actions/orderActions"
+import {addNewOrder, getPuntoDeEncuentro} from "../actions/orderActions"
 
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
-        orderInProcess: (data) => { dispatch(orderInProcess(data)) }
+        addNewOrder: (data) => { dispatch(addNewOrder(data)) },
+        getPuntoDeEncuentro: () => { dispatch(getPuntoDeEncuentro()) }
     };
 };
 
@@ -14,7 +16,9 @@ const mapStateToProps = (state, ownprops) => {
     return {
         userEmail:state.user.user.email,
         nameUser:state.user.user.firstName,
-        lastNameUser:state.user.user.lastName
+        lastNameUser:state.user.user.lastName,
+        PuntoDeEncuentro:state.orders.PuntoDeEncuentro,
+        idsForOrders:state.orders.idsForOrders
     };
 };
 
@@ -28,15 +32,25 @@ class CheckoutContainer extends React.Component {
             state:"",
             city:"",
             postCode:"",
+            productDataId:""
+            
            
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEncuentro= this.handleEncuentro.bind(this)
     }
 
-    handleEncuentro(e){
-        console.log("llega al handleEncontro")
-        e.preventDefault()
+    componentDidMount(){
+       this.props.getPuntoDeEncuentro()
+    }
+
+
+    handleEncuentro(id){
+        this.props.idsForOrders.map(e=>{
+            this.props.addNewOrder({PuntoDeEncuentro:id, deliveryPoint:true, productDataId:e})
+        })
+        console.log("este es mi id crack",id)
     }
 
 
@@ -50,14 +64,25 @@ class CheckoutContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.orderInProcess(this.state)
-        //this.props.history.push("/pay")
+        this.props.idsForOrders.map(e=>{
+            this.props.addNewOrder({address:this.state.address,
+            country:this.state.country,
+            state:this.state.state,
+            city:this.state.city,
+            postCode:this.state.postCode,
+            productDataId:e,
+            deliveryPoint:false})
+
+        })
     }
 
     render() {
+        console.log("stadooo",this.state)
+        console.log("idsss",this.props.idsForOrders)
         return (
             <div>
                 <Checkout
+                    PuntoDeEncuentro={this.props.PuntoDeEncuentro}
                     handleEncuentro={this.handleEncuentro}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}

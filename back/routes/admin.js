@@ -8,6 +8,7 @@ const User = require("../models/user")
 const Product = require("../models/product")
 const Display = require("../models/display")
 const ProductData = require("../models/productData")
+const PuntoDeEncuentro = require("../models/puntoDeEncuentro")
 
 
 
@@ -193,5 +194,25 @@ router.delete("/deleteDisplay", function (req, res) {
             res.sendStatus(200)
         })
 })
+///////////////// PUNTOS DE ENCUENTRO /////////////
+router.post("/newPunto", function(req, res){
+    console.log("entre papaaaaaaa")
+    PuntoDeEncuentro.create(req.body)
+    .then(function(){
+        res.send("punto creado papa")
+    })
+})
+
+router.post("/deletePunto",function(req,res){
+    console.log("esty en la ruta",req.body)
+    const id=req.body.id
+    PuntoDeEncuentro.findByPk(id)
+    .then(punto=>{
+        punto.destroy()
+    })
+    .then(res.sendStatus(204))
+})
+
+
 
 module.exports = router
