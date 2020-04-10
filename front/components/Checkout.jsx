@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import Collapse from "react-bootstrap/Collapse";
 
 export default ({
+  PuntoDeEncuentro,
   handleEncuentro,
   handleChange,
   handleSubmit,
@@ -19,13 +20,15 @@ export default ({
   const formStyle = {
     width: "15rem"
   };
-
+ 
+  console.log("esto es mi puntod de encuentro",PuntoDeEncuentro)
+ 
 
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(false)
 
   return (
-    <Container style={{ justifyContent: "center" }}>
+    <Container>
       <>
         <Button
           className="boton-outline"
@@ -35,6 +38,18 @@ export default ({
         >
           Envio a Domicilio
         </Button>
+
+
+        <Button
+          className="boton-outline"
+          onClick={() => setCount(!count)}
+          aria-controls="PuntoDeEncuentro"
+          aria-expanded={count}
+        >
+          Puntos De Encuentro
+        </Button>
+
+
         <Collapse in={open}>
           <div id="formularioEntrega">
             <Card className="form-container">
@@ -107,49 +122,27 @@ export default ({
             </Card>
           </div>
         </Collapse>
-      </>
 
-      <>
-        <Button
-          className="boton-outline"
-          onClick={() => setCount(!count)}
-          aria-controls="PuntoDeEncuentro"
-          aria-expanded={count}
-        >
-          Puntos De Encuentro
-        </Button>
         <Collapse in={count}>
           <div id="PuntoDeEncuentro">
-            
+   {PuntoDeEncuentro.map(P=>{
+     return(
             <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src="https://destinosturisticos.hiperarticulos.com/wp-content/uploads/2014/05/lugares-tur%C3%ADsticos-de-Argentina-3.jpg" />
               <Card.Body>
-                <Card.Title>Obelisto</Card.Title>
-                <Card.Text>
-
-              <a href="javascript:window.open('https://www.google.com/maps/place/Carlos+Pellegrini+400,+C1035+CABA,+Argentina/@-34.6037558,-58.3831455,17z/data=!3m1!4b1!4m5!3m4!1s0x95bccacf19e1c387:0x76463c3144cdb09a!8m2!3d-34.6037602!4d-58.3809568','','toolbar=yes');void 0"> Carlos Pellegrini 400, C1035 CABA, Argentina</a>
-
-                </Card.Text>
-                <Button  type="submit" variant="primary" onclick={handleEncuentro}>Seleccionar Punto</Button>
+                <Card.Title>Lugar: {P.place}</Card.Title>
+                <Card.Text>Direccion: {P.address} </Card.Text>
+                <Card.Text>Barrio: {P.neighborhood }</Card.Text>
+                <Card.Text>Horario De Atencion: {P.Attention }</Card.Text>
+                <Button variant="primary" onClick={()=>handleEncuentro(P.id)}>Seleccionar Punto</Button>
               </Card.Body>
             </Card>
-
-            <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src="https://lh5.googleusercontent.com/p/AF1QipNGqmgcbuFqm7iMjqCc5pYNF61pgkbDwArCZ_zp=w408-h276-k-no" />
-              <Card.Body>
-                <Card.Title>Hipódromo de Palermo</Card.Title>
-                <Card.Text>
-
-              <a href="javascript:window.open('https://www.google.com/maps/place/Av.+del+Libertador+4101,+Buenos+Aires,+Argentina/@-34.5694302,-58.4284819,17z/data=!3m1!4b1!4m5!3m4!1s0x95bcb5a28d3a80cf:0x2fdeabf59282a490!8m2!3d-34.5694346!4d-58.4262932');void 0"> Av. del Libertador 4101, C1426 CABA, Argentina </a>
-
-                </Card.Text>
-                <Button type="submit"  variant="primary" onclick={handleEncuentro} >Seleccionar Punto</Button>
-              </Card.Body>
-            </Card>
-
+     )
+      })}
           </div>
         </Collapse>
+
       </>
+
     </Container>
   );
 };

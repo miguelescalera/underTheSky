@@ -27,6 +27,10 @@ export default () => (
             <Link to="/admin/getUsers">
                 <p style={{ color: "#6b4856" }}>Usuarios</p>
             </Link>
+
+            <Link to="/admin/newPunto">
+                <p style={{ color: "#6b4856" }}>Puntos de Encuentro</p>
+            </Link>
         </div>
     </div>
 );

@@ -1,5 +1,5 @@
 import axios from "axios"
-import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS} from "../constans"
+import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO} from "../constans"
 
 export const orderInProcess = orderInProcess => ({
     type: ORDER_IN_PROCESS,
@@ -10,18 +10,37 @@ export const orderInProcess = orderInProcess => ({
     type: ORDER,
     order
   });
+  export const PuntoDeEncuentro = PuntoDeEncuentro =>({
+    type: PUNTO_ENCUENTRO,
+    PuntoDeEncuentro
+  })
   
 export const IdsForOrders=idsForOrders=>({
   type:ID_FOR_ORDERS,
   idsForOrders
 })
 
+
 export const addNewOrder = (dataOrder) => dispatch =>
-  axios.post("/api/orders/addOrder",dataOrder)
+  axios.post("/api/orders/addOrder", dataOrder)
   .then(order => {
     dispatch(newOrder(order.data))
     return order.data;
     }
   );
 
+export const addPunto =(data)=>{
+  axios.post("/api/admin/newPunto",{address:data.address, place:data.place, neighborhood:data.neighborhood, Attention:data.Attention} )
+}
+
+export const deletePunto = (id) =>
+  axios.post("/api/admin/deletePunto", { id:id })
+
+
+
+  export const getPuntoDeEncuentro= ()=>dispatch=>
+  axios.get("/api/orders/getPuntoDeEncuentro")
+  .then(puntos=>{
+    dispatch(PuntoDeEncuentro(puntos.data)) 
+  })
   
