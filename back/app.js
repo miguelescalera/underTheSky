@@ -10,7 +10,7 @@ const { User } = require("./models/index");
 const routes = require("./routes");
 const volleyball = require("volleyball");
 const path = require("path");
-const fileUpload=require('express-fileupload')
+const fileUpload = require('express-fileupload')
 
 function isLogedIn(req, res, next) {
   if (req.isAuthenticated()) {
