@@ -1,57 +1,105 @@
-import React from 'react'
-import { Link } from "react-router-dom"
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Card from 'react-bootstrap/Card'
-import Container from 'react-bootstrap/Container'
-import Alert from "react-bootstrap/Alert"
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Form,
+  Button,
+  Card,
+  Container,
+  FormControl,
+  FormFile,
 
-export default ({ handleChange, handleSubmit, alertNull, alertPass, checkboxLogin }) => {
+  //   FormFileInput,
+  //   FormFileLabel
+} from "react-bootstrap";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileImport,
+  faPaperPlane,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+<FontAwesomeIcon icon={faPaperPlane} />
 
-    const formStyle = {
-        width: "18rem",
-        height: '110%',
-        padding: "3rem",
-        borderRadius: "0px",
-        boxShadow: '8px 8px 15px -10px rgba(0,0,0,0.39)',
-    }
+import Alert from "react-bootstrap/Alert";
 
-    const divFormStyle = {
-        display: "flex",
-        justifyContent: 'center',
-        marginBlockEnd: "5rem",
-        marginBlockStart: "5rem"
-    }
+export default ({
+  handleChange,
+  handleSubmit,
+  handleFile,
+}) => {
+  const formStyle = {
+    width: "80%",
+    maxWidth: "800px",
+    height: "110%",
+    padding: "3rem",
+    borderRadius: "0px",
+    boxShadow: "8px 8px 15px -10px rgba(0,0,0,0.39)",
+  };
 
-    return (
-        <div style={divFormStyle}>
-            <Card style={formStyle} className="login-container">
-                <h3 className="d-flex justify-content-center" style={{ marginBlockEnd: "1rem" }}>Agrega un tipo de marco</h3>
-                <Form  >
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Tipo de marco</Form.Label>
-                        <Form.Control type="email" placeholder="Madera" name="frame" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Precio</Form.Label>
-                        <Form.Control type="number" placeholder="$0" name="framePrice" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
-                    </Form.Group>
-                    {/* {alertNull ? (<Alert variant="warning">Por favor completá los campos.</Alert>) : null}
-                    {alertPass ? (<Alert variant="warning">Usuario o contraseña incorrectos.</Alert>) : null} */}
-                    <Button className="boton-solido" type="submit" style={{ marginBlockStart: '0.5rem', marginBlockEnd: '1rem' }} onClick={handleSubmit}>
-                        Agregar
-        </Button>
+  const divFormStyle = {
+    display: "flex",
+    justifyContent: "center",
+    marginBlockEnd: "5rem",
+    marginBlockStart: "5rem",
+  };
 
-                </Form>
-                <Container style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }} >
-                </Container>
+  return (
+    <div style={divFormStyle}>
+      <Card style={formStyle} className="login-container">
+        <h3
+          className="d-flex justify-content-center"
+          style={{ marginBlockEnd: "1rem" }}
+        >
+          Agrega un tipo de marco
+        </h3>
 
+        <Form
+          type="submit"
+          name="frameImg"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
+          <Form.Group>
+            <Form.Label>Tipo de marco</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Madera"
+              name="frame"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-            </Card>
+          <Form.Group>
+            <Form.Label>Precio</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="$0"
+              name="framePrice"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        </div>
-    )
-}
+          <FormFile id="frameImg" name="frameImg">
+            <FormFile.Label data-browse="Subir Archivo">
+              <FontAwesomeIcon icon={faSearch} />{" "}
+            </FormFile.Label>
+            <FormFile.Input
+              id="frameImg"
+              onChange={handleFile}
+              className="boton-outline"
+            />
+          </FormFile>
+
+          <Button
+            className="boton-outline"
+            type="submit"
+            style={{ marginBlockStart: "0.5rem", marginBlockEnd: "1rem" }}
+            onClick={handleSubmit}
+          >
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </Button>
+        </Form>
+      </Card>
+    </div>
+  );
+};

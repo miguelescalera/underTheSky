@@ -1,13 +1,15 @@
 import React from "react";
 import SingleProduct from "../components/SingleProduct";
 import { connect } from "react-redux";
+
 import { getAllfss,
      fetchNewProduct, 
      selectStyle, 
      SelectedProducts 
      ,selectFrame,
      selectSize,
-     Allfss
+     Allfss,
+     selectDigital
     } from "../actions/productsActions";
 
 
@@ -24,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        selectedDigital:(bool)=>dispatch(selectDigital(bool)),
         selectFrame: (frame) => dispatch(selectFrame(frame)),
         selectSize: (size) => dispatch(selectSize(size)),
         selectStyle: data => dispatch(selectStyle(data)),
@@ -37,73 +40,92 @@ class SingleProductContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            digital: true,
-            frameId: 1,
-            sizeId: 1,
-            styleId: 1
+            digital: false,
+           
         };
         this.handleFrame = this.handleFrame.bind(this);
         this.handleSize = this.handleSize.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleDigital= this.handleDigital.bind(this)
     }
         
 
     componentDidMount() {
+        
         this.props.getAllfss()
         .then(result=>{
             this.props.Allfss(result.data)
             this.props.selectFrame(result.data.frames[0])
             this.props.selectSize(result.data.sizes[0])
+            localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
         })
            
-        let style = localStorage.getItem('selectedStyle')
+        let style =JSON.parse(localStorage.getItem('selectedStyle'))
         if (style) {
             this.props.selectStyle(style)
         }
        
     }
-
-
+    
     handleFrame(frame) {
-        this.props.selectFrame(frame)
-    }
-       
+            this.props.selectFrame(frame)
+            localStorage.setItem('selectedFrame',JSON.stringify(frame))
+      }
     handleSize(size) {
-       this.props.selectSize(size)
+            this.props.selectSize(size)
+        }
+    handleDigital(){
+            this.setState({digital:!this.state.digital})
+            
+        }
+         
+    handleClick(e) {
+            e.preventDefault();
+            localStorage.setItem('selectedStyle',JSON.stringify(this.props.selectedStyle))
+            localStorage.setItem('selectedSize',JSON.stringify(this.props.selectedSize))
+            this.props.selectedDigital(this.state.digital)
+            if(this.state.digital){
+                this.props.selectFrame({})
+            }
+            else{
+                this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")))
+            }
+               this.props.nextStep()
+        }
+                
+            
+        render() {
+    
+            return (
+                <div>
+                    <h3 className="titulopagina">Personalizalo</h3>
+                    <SingleProduct
+                        handleColor={this.handleColor}
+                        handleSize={this.handleSize}
+                        handleFrame={this.handleFrame}
+                        sizes={this.props.sizes}
+                        frames={this.props.frames}
+                        styles={this.props.styles}
+                        handleClick={this.handleClick}
+                        digital={this.state.digital}
+                        handleDigital={this.handleDigital}
+                    />
+                </div>
+            );
+        }
     }
+    
+  
+
+        
         
        
     
 
    
-    handleClick(e) {
-        e.preventDefault();
-        localStorage.setItem('selectedStyle',JSON.stringify(this.props.selectedStyle))
-        localStorage.setItem('selectedFrame',JSON.stringify(this.props.selectedFrame))
-        localStorage.setItem('selectedSize',JSON.stringify(this.props.selectedSize))
-            this.props.history.push("/productData")
+        
 
-    }
 
-    render() {
-
-        return (
-            <div>
-                <h3 className="titulopagina">Personalizalo</h3>
-
-                <SingleProduct
-                    handleColor={this.handleColor}
-                    handleSize={this.handleSize}
-                    handleFrame={this.handleFrame}
-                    sizes={this.props.sizes}
-                    frames={this.props.frames}
-                    styles={this.props.styles}
-                    handleClick={this.handleClick}
-                />
-            </div>
-        );
-    }
-}
 
 export default connect(
     mapStateToProps,

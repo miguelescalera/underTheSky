@@ -47,7 +47,7 @@ export default ({
           orderUser=orderUser[0]
           
          
-          dateOrder= moment(orderUser.createdAt).format('DD/MM/YYYY')
+          dateOrder= moment(e.createdAt).format('DD/MM/YYYY')
              
      
           return(

@@ -124,22 +124,9 @@ export const fetchAllProducts = ()=> dispatch=>{
   })
 }
 
-/*-------------------DISPLAY----------------------------------*/
-export const getDisplays = () => dispatch =>
-  axios.get("/api/admin/getDisplay")
-    .then(display => {
-      dispatch(allDisplay(display.data))
-      return display.data;
-    }
-    );
 
-export const newDisplay = (newDisplay) =>
-  axios.post("/api/admin/newDisplay", newDisplay)
 
-export const deleteDisplay = (display) =>
-  axios.delete("/api/admin/deleteDisplay", { displayId: display.id })
-
-/*--------------------FRAME/SIZE/STYLE---------------------------*/
+/*--------------------FRAME---------------------------*/
 export const getFrame = () => dispatch =>
   axios.get("/api/admin/getFrame")
     .then(frame => {
@@ -150,12 +137,14 @@ export const getFrame = () => dispatch =>
 
 export const newFrame = (newFrame) =>
   axios.post("/api/admin/newFrame", newFrame)
+  .catch(err=>console.log(err)
+  )
 
 
 export const deleteFrame = (frame) =>
   axios.delete("/api/admin/deleteFrame", { frameId: frame.id })
 
-/*---------------------------------------------------------*/
+/*---------------------------SIZE------------------------------*/
 
 export const getSize = () => dispatch =>
   axios.get("/api/admin/getSize")
@@ -173,16 +162,21 @@ export const deleteSize = (size) =>
   axios.delete("/api/admin/deleteSize", { sizeId: size.id })
 
 
-/*------------------------------------------------------------*/
+/*-------------------------STYLES-----------------------------------*/
 export const getStyle = () => dispatch =>
+console.log('hola soy getstyle');
+
   axios.get("/api/admin/getStyle")
     .then(style => {
       dispatch(allStyle(style.data))
       return style.data;
     }
     );
+
 export const newStyle = (newStyle) =>
   axios.post("/api/admin/newStyle", newStyle)
+  .catch(err=>console.log(err)
+  )
 
 
 export const deleteStyle = (style) =>

@@ -38,7 +38,9 @@ class NavbarContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
     this.handleEditData = this.handleEditData.bind(this)
+    this.PreviousStep= this.PreviousStep.bind(this)
   }
+  
   componentDidMount() {
     if (this.props.userEmail) {
       this.props.getCart();
@@ -48,78 +50,86 @@ class NavbarContainer extends React.Component {
         this.props.cartWithoutUser(dataProduct)
       }
     }
+   
        
-    
-       
-       
-
   handleDelete(id) {
-    this.props.deleteProductData(id);
-    if(!this.props.userEmail){
-      let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
-     
-      dataProduct.map((e,i)=>{
-        if(e.id===id){
-          dataProduct.splice(i,1)
-        }
-      })
-      localStorage.setItem("dataWithoutUser",JSON.stringify(dataProduct))
-      this.props.cartWithoutUser(dataProduct)
+      this.props.deleteProductData(id);
+      if(!this.props.userEmail){
+        let dataProduct= JSON.parse(localStorage.getItem("dataWithoutUser"))
+       
+        dataProduct.map((e,i)=>{
+          if(e.id===id){
+            dataProduct.splice(i,1)
+          }
+        })
+        localStorage.setItem("dataWithoutUser",JSON.stringify(dataProduct))
+        this.props.cartWithoutUser(dataProduct)
+      }
     }
-  }
-
-     
-
-handleSubmit(id) {
-  console.log("length.:",this.props.dataProduct.length)
-    if(this.props.dataProduct.length){
-      this.props.IdsForOrders(id);
-      this.props.history.push("/cart/checkout");
-    }
-  }
-
-
-handleQuantity(id,quantity){
-  if(quantity>=1){
-      this.props.modifyDataProduct(
-          id,
-          quantity,
-          !!this.props.userEmail
-          )
+  
+    
+  handleSubmit(id) {
+     console.log("length:",this.props.dataProduct.length)
+        if(this.props.dataProduct.length){
+          this.props.IdsForOrders(id);
+          this.props.nextStep()
         }
       }
-         
-handleEditData(data){
-  this.props.dataToEdit(data)
-  this.props.history.push("/cart/editData");
-}
- 
+       
+  handleQuantity(id,quantity){
+        if(quantity>=1){
+            this.props.modifyDataProduct(
+                id,
+                quantity,
+                !!this.props.userEmail
+                )
+              }
+            }
+               
+  handleEditData(data){
+        this.props.dataToEdit(data)
+        this.props.history.push("/cart/editData");
+      }
+      
+  PreviousStep(e){
+        e.preventDefault()
+        this.props.previousStep()
+      }
+       
+      
+        render() {
+          return (
+            <div>
+              <Container className="carrito-vistageneral">
+                <CheckoutCart
+                  dataProduct={this.props.dataProduct}
+                  handleDelete={this.handleDelete}
+                  handleSubmit={this.handleSubmit}
+                />
+                <Carrito
+                  dataProduct={this.props.dataProduct}
+                  handleDelete={this.handleDelete}
+                  handleSubmit={this.handleSubmit}
+                  handleQuantity={this.handleQuantity}
+                  handleEditData={this.handleEditData}
+                  PreviousStep={this.PreviousStep}
+                  />
+              </Container>
+            </div>
+                 
+                 
+          );
+        }
+      }
+                 
+                 
+      
+      
+      export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
+       
 
-  render() {
-    return (
-      <div>
-        <Container className="carrito-vistageneral">
-          <CheckoutCart
-            dataProduct={this.props.dataProduct}
-            handleDelete={this.handleDelete}
-            handleSubmit={this.handleSubmit}
-          />
-          <Carrito
-            dataProduct={this.props.dataProduct}
-            handleDelete={this.handleDelete}
-            handleSubmit={this.handleSubmit}
-            handleQuantity={this.handleQuantity}
-            handleEditData={this.handleEditData}
-            />
-        </Container>
-      </div>
-           
-           
-    );
-  }
-}
-           
-           
+
+     
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
+

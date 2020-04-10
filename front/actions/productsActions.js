@@ -5,7 +5,9 @@ import {
         ALL_FSS, 
         SELECT_STYLE,
         SELECT_FRAME,
-        SELECT_SIZE
+        SELECT_SIZE,
+        ALL_STYLES,
+        DIGITAL
      } from "../constans"
 
 export const Allfss = (Allfss) => ({
@@ -13,6 +15,10 @@ export const Allfss = (Allfss) => ({
     Allfss
 })
 
+export const allStyles = (allStyles) => ({
+    type: ALL_STYLES,
+    allStyles
+})
 
 export const SelectedProducts = (Product) => ({
     type: SELECTED_PRODUCT,
@@ -39,6 +45,10 @@ export const selectSize = selectedSize => ({
     selectedSize
 
 })
+export const selectDigital = digital =>({
+    type:DIGITAL,
+    digital
+})
 
 
 export const fetchNewProduct = (body) => dispatch => {
@@ -59,6 +69,9 @@ export const getAllfss = () => dispatch => {
     return axios.post("/api/products/getAllfss")
 }
   
+export const getAllStyles = () => {
+    return axios.post("/api/products/getAllStyles")
+}
         
 
 
