@@ -19,7 +19,7 @@ const email = (email, content) => {
     from: 'undertheskydeco024@gmail.com',
     to: `${email}`,
     subject: 'Creaste un nuevo usuario',
-    text: `Felicidades ${content}! Ya tenés una cuenta de Marccello`
+    text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`
   };
   console.log("sending email", mailOptions);
   transporter.sendMail(mailOptions, function (error, info) {

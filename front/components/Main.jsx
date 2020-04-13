@@ -18,9 +18,12 @@ import Img from "react-bootstrap/Image";
 import "../../back/public/global.css";
 import AdminPoroductsContainer from '../containers/AdminProductsContainer'
 import Admin from '../components/Admin'
+
+import PuntoDeEncuentroContainer from "../containers/PuntoDeEncuentroContainer";
 import StepWizardContainer from "../containers/StepWizardContainer"
 import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
 import EditUserContainer from "../containers/EditUserContainer"
+
 
 
 const mapStateToProps = state => {
@@ -69,8 +72,17 @@ class Main extends React.Component {
           <Route path="/cart/editData" exact component={EditDataContainer} />
           <Route path="/addProducts" exact component={AdminPoroductsContainer} />
           <Route path="/eladmin" exact component={Admin} />
+
           <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
           <Route path="/admin/getOrders" exact component={AdminOrdenesContainer}/>
+
+          <Route
+            path="/admin/getOrders"
+            exact
+            component={AdminOrdenesContainer}
+          />
+          <Route path="/admin/newPunto" exact component={PuntoDeEncuentroContainer} />
+
           <Route path="/admin/getUsers" exact component={AdminUsersContainer} />
           <Route path="/editProfile" exact component={EditUserContainer} />
           <Redirect from="/" to="/home" />

@@ -27,7 +27,7 @@ export default ({ dataProduct, handleSubmit }) => {
               </div>
             </ListGroup.Item>
         {dataProduct.map((e, i) => {
-         
+         dataProductsIds.push(e.id)
           total += e.price * e.quantity;
           return (
             <ListGroup.Item>
