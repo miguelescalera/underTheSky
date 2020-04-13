@@ -19,6 +19,9 @@ import "../../back/public/global.css";
 import AdminPoroductsContainer from '../containers/AdminProductsContainer'
 import Admin from '../components/Admin'
 import StepWizardContainer from "../containers/StepWizardContainer"
+import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
+import EditUserContainer from "../containers/EditUserContainer"
+
 
 const mapStateToProps = state => {
   return {};
@@ -55,11 +58,7 @@ class Main extends React.Component {
         <NavbarContainer />
         <Switch>
           <Route path="/home" exact component={LandingContainer} />
-          <Route
-            path="/products/getProducts"
-            exact
-            component={ProductsContainer}
-          />
+          <Route path="/products/getProducts" exact component={ProductsContainer}/>
           <Route path="/products" exact component={StepWizardContainer} />
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/register" exact component={RegisterContainer} />
@@ -70,12 +69,10 @@ class Main extends React.Component {
           <Route path="/cart/editData" exact component={EditDataContainer} />
           <Route path="/addProducts" exact component={AdminPoroductsContainer} />
           <Route path="/eladmin" exact component={Admin} />
-          <Route
-            path="/admin/getOrders"
-            exact
-            component={AdminOrdenesContainer}
-          />
+          <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
+          <Route path="/admin/getOrders" exact component={AdminOrdenesContainer}/>
           <Route path="/admin/getUsers" exact component={AdminUsersContainer} />
+          <Route path="/editProfile" exact component={EditUserContainer} />
           <Redirect from="/" to="/home" />
         </Switch>
         <FooterContainer />

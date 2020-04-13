@@ -38,19 +38,41 @@ router.post("/addOrder",function(req,res){
                 User.findByPk(req.body.userId)
                 .then(user=>{
                     order.setUser(user)
+                    productData.setUser(user)
                 })
                 productData.setOrder(order)
-                
                 res.json({
                     order:order,
                     productData:productData
                 })
             })
         })
+    })   
+    
+    router.get("/userOrders",(req,res)=>{
+        Order.findAll({
+            where:{
+                userId:req.user.id
+        }}).then(orders=>{
+            ProductData.findAll({
+                where:{
+                    userId:req.user.id
+                }
+            }).then(productData=>{
+                res.send({
+                    orders:orders,
+                    productData:productData
+                })
+            })
+        })
+    })
+       
+
+
+                
            
                 
 
-   })                 
 
 
 

@@ -81,15 +81,21 @@ router.post("/logout", function (req, res) {
 });
 
 
-router.put("/modify", function (req, res) {
-  User.findByPk(req.user.id)
-    .then(function (user) {
-      user.update(req.body);
-    })
-    .then(function (newUser) {
-      res.json(newUser);
-    });
-});
+router.put("/modify", function (req, res,next) {
+  User.update(
+   req.body,
+    {returning: true,where:{
+      id:req.user.id
+    }}
+  )
+  .then(function([ rowsUpdate, [newUser] ]) {
+    res.json(newUser)
+  })
+  .catch(next)
+ })
+
+  
+      
 
 router.delete("/delete", function (req, res) {
   User.findByPk(req.user.id)
