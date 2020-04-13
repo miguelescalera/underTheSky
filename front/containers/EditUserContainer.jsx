@@ -26,9 +26,9 @@ class EditUserContainer extends React.Component{
             inputLastName:false,
             inputEmail:false,
             inputPassword:false,
-            fisrtName:"",
-            lastName:"",
-            email:"",
+            firstName:this.props.user.firstName,
+            lastName:this.props.user.lastName,
+            email:this.props.user.email,
             alert:false,
             newPassword:"",
             repeatPassword:"",
@@ -44,7 +44,6 @@ class EditUserContainer extends React.Component{
         }
             
 
-    
 
 
 componentDidUpdate(prevProps, prevState) {
@@ -56,6 +55,7 @@ componentDidUpdate(prevProps, prevState) {
         })
     }
   }
+    
 
   
   
@@ -68,6 +68,7 @@ componentDidUpdate(prevProps, prevState) {
     }   
 
     changeName(){
+        //this.forceUpdate()
         this.setState({
             inputName:!this.state.inputName,
             inputLastName:false,
