@@ -1,5 +1,9 @@
 import axios from "axios"
-import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO} from "../constans"
+
+
+
+import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO,USER_ORDERS} from "../constans"
+
 
 export const orderInProcess = orderInProcess => ({
     type: ORDER_IN_PROCESS,
@@ -19,6 +23,10 @@ export const IdsForOrders=idsForOrders=>({
   type:ID_FOR_ORDERS,
   idsForOrders
 })
+export const userOrders=userOrders=>({
+  type:USER_ORDERS,
+  userOrders
+})
 
 
 export const addNewOrder = (dataOrder) => dispatch =>
@@ -28,6 +36,12 @@ export const addNewOrder = (dataOrder) => dispatch =>
     return order.data;
     }
   );
+
+
+export const getOrderUser =()=>dispatch=>{
+  axios.get("/api/orders/userOrders")
+  .then(orders=>dispatch(userOrders(orders.data)))
+} 
 
 export const addPunto =(data)=>{
   axios.post("/api/admin/newPunto",{address:data.address, place:data.place, neighborhood:data.neighborhood, Attention:data.Attention} )
@@ -44,3 +58,4 @@ export const deletePunto = (id) =>
     dispatch(PuntoDeEncuentro(puntos.data)) 
   })
   
+

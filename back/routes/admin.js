@@ -193,6 +193,7 @@ router.delete("/deleteUser/:id", function (req, res) {
 router.get("/getAllDataProducts", function (req, res) {
     ProductData.findAll()
         .then(allproductdata => {
+          console.log("allproductdata",allproductdata)
             res.json(allproductdata)
         })
 })
