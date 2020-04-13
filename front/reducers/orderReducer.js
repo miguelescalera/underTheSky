@@ -1,6 +1,6 @@
 
 
-=======
+
 import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO,USER_ORDERS} from "../constans"
 import { PuntoDeEncuentro } from "../actions/orderActions";
 
@@ -10,12 +10,12 @@ const initialState = {
     order:{},
     orderInProcess:{},
     idsForOrders:[],
-
     userOrders:{},
-
     PuntoDeEncuentro:[]
+   }
 
-  }
+
+
    
 
   export default (state = initialState, action) => {

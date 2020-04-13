@@ -82,6 +82,7 @@ router.post("/logout", function (req, res) {
 
 
 router.put("/modify", function (req, res,next) {
+  console.log("USER:",req.user)
   User.update(
    req.body,
     {returning: true,where:{

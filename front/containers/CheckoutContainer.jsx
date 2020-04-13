@@ -3,7 +3,8 @@ import Checkout from "../components/Checkout";
 import { connect } from "react-redux";
 import { orderInProcess, PuntoDeEncuentro } from "../actions/orderActions"
 import {addNewOrder, getPuntoDeEncuentro} from "../actions/orderActions"
-
+import {withRouter} from "react-router-dom"
+import {modifyData}from "../actions/productDataActions"
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
@@ -11,6 +12,7 @@ const mapDispatchToProps = (dispatch, state) => {
         getPuntoDeEncuentro: () => { dispatch(getPuntoDeEncuentro()) }
     };
 };
+        
 
 const mapStateToProps = (state, ownprops) => {
     return {
@@ -50,7 +52,7 @@ class CheckoutContainer extends React.Component {
         this.props.idsForOrders.map(e=>{
             this.props.addNewOrder({PuntoDeEncuentro:id, deliveryPoint:true, productDataId:e})
         })
-        console.log("este es mi id crack",id)
+        
     }
 
 
@@ -64,6 +66,7 @@ class CheckoutContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        
         this.props.idsForOrders.map(e=>{
             this.props.addNewOrder({address:this.state.address,
             country:this.state.country,
@@ -72,8 +75,11 @@ class CheckoutContainer extends React.Component {
             postCode:this.state.postCode,
             productDataId:e,
             deliveryPoint:false})
+            modifyData({bought:true,id:e})
 
         })
+        
+        this.props.history.push("/")
     }
 
     render() {
@@ -96,4 +102,4 @@ class CheckoutContainer extends React.Component {
     
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer))
