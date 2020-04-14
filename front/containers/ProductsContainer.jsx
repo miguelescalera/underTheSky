@@ -7,16 +7,16 @@ import { selectStyle } from '../actions/productsActions'
 // ACCIONES 
 import {
   getAllStyles,
-  allStyles
+  allStyles,
 } from "../actions/productsActions";
 
 
 import { runInThisContext } from "vm";
 
-
 const mapStateToProps = (state, ownprops) => {
   return {
-    styles:state.products.allStyles
+    styles:state.products.allStyles,
+    selectedStyle:state.products.selectedStyle
   };
 };
 
@@ -28,12 +28,6 @@ const mapDispatchToProps = (dispatch, state) => {
 
   };
 };
-
-
-
-
-
-
 
 class ProductsContainer extends React.Component {
   constructor(props) {
@@ -47,27 +41,14 @@ class ProductsContainer extends React.Component {
       this.props.allStyles(result.data)
     })
   }
-      
-      
 
-    
-
-  
 
   handleClick(style) {
-    console.log("style",style)
     this.props.selectStyle(style)
    this.props.history.push('/product')
-    
-  }
-    
-      
    
     
-    
-    
-     
-
+  }
 
   render() {
     return (
