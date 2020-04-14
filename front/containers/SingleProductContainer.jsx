@@ -58,14 +58,12 @@ class SingleProductContainer extends React.Component {
             this.props.selectFrame(result.data.frames[0])
             this.props.selectSize(result.data.sizes[0])
             localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
+            localStorage.setItem('selectedSize',JSON.stringify(result.data.sizes[0]))
         })
-           
-        let style =JSON.parse(localStorage.getItem('selectedStyle'))
-        if (style) {
-            this.props.selectStyle(style)
-        }
-       
     }
+           
+        
+       
     
     handleFrame(frame) {
             this.props.selectFrame(frame)
@@ -73,6 +71,7 @@ class SingleProductContainer extends React.Component {
       }
     handleSize(size) {
             this.props.selectSize(size)
+            localStorage.setItem('selectedSize',JSON.stringify(size))
         }
     handleDigital(){
             this.setState({digital:!this.state.digital})
@@ -95,7 +94,6 @@ class SingleProductContainer extends React.Component {
                 
             
         render() {
-    
             return (
                 <div>
                     <h3 className="titulopagina">Personalizalo</h3>
@@ -114,6 +112,7 @@ class SingleProductContainer extends React.Component {
             );
         }
     }
+ 
     
   
 

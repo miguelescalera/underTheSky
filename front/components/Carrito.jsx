@@ -22,6 +22,7 @@ export default ({
   handleSubmit,
   handleQuantity,
   handleEditData,
+  Styles
   
 }) => {
   
@@ -53,7 +54,14 @@ export default ({
     
       <Container>
         {dataProduct.map((e, i) => {
+         
+          let selectedStyle= Styles.filter(f=>{
+            return f.id===e.styleId
+          })
+          let imgurl = selectedStyle[0]?selectedStyle[0].imgPath.toString().split("/public")[1]:null
+         console.log("selectedStyle:",selectedStyle)
           quantity = e.quantity;
+         
        
           return (
             <Container className="carrito-contenedor-productos" >
@@ -77,9 +85,11 @@ export default ({
 
                   <img
                     style={{ width: "100%" }}
-                    src="https://i.imgur.com/Usradoq.png"
+                    src={imgurl}
                     alt=""
                   />
+
+
                 </Col>
 
                 <Col className="carrito-info">
@@ -95,7 +105,7 @@ export default ({
                   </Row>
                   <Row>
                     <strong>Color: </strong>
-                    {e.color}
+                    {selectedStyle[0]?selectedStyle[0].color:null}
                   </Row>
                   <Row>
                     <h5>${e.price * quantity}</h5>
@@ -188,6 +198,7 @@ export default ({
                                 }}
                               >
                                 <Button variant="dark" onClick={()=>handleEditData(e)}>edit data</Button>
+                                
                               </ListGroup.Item>
                             </ListGroup>
                        

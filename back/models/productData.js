@@ -44,9 +44,7 @@ ProductData.init({
     frame:{
         type:Sequelize.STRING
     },
-    style:{
-        type:Sequelize.STRING
-    },
+   
     price:{
         type:Sequelize.INTEGER
     },
