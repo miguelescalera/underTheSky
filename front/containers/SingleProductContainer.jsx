@@ -2,53 +2,62 @@ import React from "react";
 import SingleProduct from "../components/SingleProduct";
 import { connect } from "react-redux";
 
-import { getAllfss,
-     fetchNewProduct, 
-     selectStyle, 
-     SelectedProducts 
-     ,selectFrame,
-     selectSize,
-     Allfss,
-     selectDigital
-    } from "../actions/productsActions";
-
+import {
+  getAllfss,
+  fetchNewProduct,
+  selectStyle,
+  SelectedProducts,
+  selectFrame,
+  selectSize,
+  Allfss,
+  selectDigital,
+} from "../actions/productsActions";
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        frames: state.products.Allfss.frames,
-        sizes: state.products.Allfss.sizes,
-       
-        selectedStyle:state.products.selectedStyle,
-        selectedFrame: state.products.selectedFrame,
-        selectedSize:state.products.selectedSize,
-    };
+  return {
+    frames: state.products.Allfss.frames,
+    sizes: state.products.Allfss.sizes,
+
+    selectedStyle: state.products.selectedStyle,
+    selectedFrame: state.products.selectedFrame,
+    selectedSize: state.products.selectedSize,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        selectedDigital:(bool)=>dispatch(selectDigital(bool)),
-        selectFrame: (frame) => dispatch(selectFrame(frame)),
-        selectSize: (size) => dispatch(selectSize(size)),
-        selectStyle: data => dispatch(selectStyle(data)),
-        getAllfss: () => dispatch(getAllfss()),
-        fetchNewProduct: data => dispatch(fetchNewProduct(data)),
-        Allfss:data => dispatch(Allfss(data))
-    };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedDigital: (bool) => dispatch(selectDigital(bool)),
+    selectFrame: (frame) => dispatch(selectFrame(frame)),
+    selectSize: (size) => dispatch(selectSize(size)),
+    selectStyle: (data) => dispatch(selectStyle(data)),
+    getAllfss: () => dispatch(getAllfss()),
+    fetchNewProduct: (data) => dispatch(fetchNewProduct(data)),
+    Allfss: (data) => dispatch(Allfss(data)),
+  };
 };
 
 class SingleProductContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            digital: false,
-           
-        };
-        this.handleFrame = this.handleFrame.bind(this);
-        this.handleSize = this.handleSize.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleDigital= this.handleDigital.bind(this)
-    }
-        
+  constructor(props) {
+    super(props);
+    this.state = {
+      digital: false,
+      selectedFrame: {
+        id: 0,
+        name: "frameless",
+        price: 0,
+        imgType: "image/png",
+        imgName: "dummy.png",
+        imgData: { type: "Buffer", data: Array(4004) },
+        imgPath:
+        '/public/src/img/dummy.png'
+      },
+    };
+    this.handleFrame = this.handleFrame.bind(this);
+    this.handleSize = this.handleSize.bind(this);
+    this.handleClick = this.handleClick.bind(this)
+    this.handleDigital = this.handleDigital.bind(this);
+  }
+
 
     componentDidMount() {
         
@@ -116,17 +125,10 @@ class SingleProductContainer extends React.Component {
     
   
 
-        
-        
-       
-    
-
-   
-        
-
+ 
 
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SingleProductContainer);

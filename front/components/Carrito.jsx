@@ -170,7 +170,7 @@ export default ({
                            
                             <ListGroup variant="flush">
                               <ListGroup.Item style={styleModal}>
-                                <strong>date: </strong> {e.date}
+                                <strong>date: </strong> {e.date.slice(0,10)}
                               </ListGroup.Item>
 
                               <ListGroup.Item style={styleModal}>
