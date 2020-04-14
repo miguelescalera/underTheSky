@@ -26,6 +26,22 @@ router.get("/getDataProducts",function(req,res){
     })
 })
 
+router.get("/getDigitalProduct",function(req,res){
+    
+    ProductData.findAll({
+        where: {
+            userId: req.user.id,
+            bought:false,
+            digital:true
+        }
+    }).then((productsData) => {
+        const dataToSend = productsData.sort(function (a, b) {
+            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        });
+
+        res.json(dataToSend)
+    })
+})
 
 
 

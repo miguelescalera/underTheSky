@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import {withRouter} from "react-router-dom"
 import { createDataProduct, dataProduct,modifyData} from "../actions/productDataActions"
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
@@ -87,7 +87,8 @@ class FormDataContainer extends React.Component {
                  size:this.props.selectedSize.name,
                  frame:this.props.selectedFrame.name,
                  style:this.props.selectedStyle.name,
-                 price:this.props.selectedSize.price
+                 price:this.props.selectedSize.price,
+                 styleId:this.props.selectedStyle.id
              }
          ).then((res)=>{
              this.props.dataProduct(res.data)
@@ -120,8 +121,12 @@ class FormDataContainer extends React.Component {
             if(this.props.userEmail){
                 this.props.getCart()
             }
-          }).then(()=>this.props.nextStep())
-    }
+          }).then(()=>{
+              this.props.nextStep()
+            })
+        }
+          
+           
 
     PreviousStep(e){
         e.preventDefault()
@@ -147,7 +152,7 @@ class FormDataContainer extends React.Component {
             }
         }
         
-        export default connect(mapStateToProps, mapDispatchToProps)(FormDataContainer);
+        export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormDataContainer))
                
     
                    

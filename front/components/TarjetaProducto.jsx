@@ -10,11 +10,11 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const TarjetaProducto = function ({ style, handleClick }) {
+const TarjetaProducto = function ({ styleProduc, handleClick }) {
   const botonSelecc = {
     fontSize: "0.7rem",
   };
-const imgurl = style.imgPath.toString().split("/public")[1]
+const imgurl = styleProduc.imgPath.toString().split("/public")[1]
 console.log( 'ACAAAAAAAAAAAAAAAAAAAA', imgurl)
   return (
     <div>
@@ -24,11 +24,11 @@ console.log( 'ACAAAAAAAAAAAAAAAAAAAA', imgurl)
           <Row>
             <Col>
                 <Card.Text className="titulotarjeta">
-                  {style.name.charAt(0).toUpperCase() + style.name.slice(1)}
+                  {styleProduc.name.charAt(0).toUpperCase() + styleProduc.name.slice(1)}
                 </Card.Text>
                 <Card.Text className="titulotarjeta">
-                {style.color.charAt(0).toUpperCase()+style.color.slice(1)}
-                {style.name === 'zodiac' ? ' - ' +style.signo.charAt(0).toUpperCase()+style.signo.slice(1):null}
+                {styleProduc.color.charAt(0).toUpperCase()+styleProduc.color.slice(1)}
+                {styleProduc.name === 'zodiac' ? ' - ' +styleProduc.signo.charAt(0).toUpperCase()+styleProduc.signo.slice(1):null}
                 </Card.Text>
             </Col>
           </Row>
@@ -39,7 +39,7 @@ console.log( 'ACAAAAAAAAAAAAAAAAAAAA', imgurl)
                 <Button
                   className="boton-outline"
                   style={botonSelecc}
-                  onClick={() => handleClick(style)}
+                  onClick={() => handleClick(styleProduc)}
                 >
                   Elegir
                 </Button>

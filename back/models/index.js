@@ -13,7 +13,7 @@ const PuntoDeEncuentro = require("./puntoDeEncuentro")
 ProductData.belongsTo(Product);
 ProductData.belongsTo(Order);
 ProductData.belongsTo(User);
-ProductData.belongsTo(Product);
+ProductData.belongsTo(Style);
 
 
 
