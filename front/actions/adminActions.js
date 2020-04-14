@@ -180,4 +180,4 @@ export const newStyle = (newStyle) =>
 
 
 export const deleteStyle = (style) =>
-  axios.delete("/api/admin/deleteStyle", { styleId: style.id })
+  axios.delete(`/api/admin/deleteStyle/${style}`)

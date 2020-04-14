@@ -116,8 +116,9 @@ router.post("/newStyle", upload.single("styleImg"), function (req, res) {
   });
 });
  
-router.delete("/deleteStyle", function (req, res) {
-  Style.findByPk(req.body.id)
+router.delete("/deleteStyle/:id", function (req, res) {
+  console.log("IDSSS", req.params.id)
+  Style.findByPk(req.params.id)
     .then(function (style) {
       style.destroy();
     })

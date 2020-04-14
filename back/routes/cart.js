@@ -5,17 +5,13 @@ const Order = require("../models/order")
 const Product = require("../models/product")
 
 
-
-
-
-
 router.get("/getDataProducts",function(req,res){
     console.log("USER",req.user)
 
     ProductData.findAll({
         where: {
             userId: req.user.id,
-            bougth:false
+            bought:false
         }
     }).then((productsData) => {
         const dataToSend = productsData.sort(function (a, b) {
@@ -25,20 +21,6 @@ router.get("/getDataProducts",function(req,res){
         res.json(dataToSend)
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 router.delete("/delete/:id", function (req, res) {

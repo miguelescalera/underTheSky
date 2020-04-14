@@ -10,9 +10,7 @@ import {
   allStyles
 } from "../actions/productsActions";
 
-
 import { runInThisContext } from "vm";
-
 
 const mapStateToProps = (state, ownprops) => {
   return {
@@ -29,12 +27,6 @@ const mapDispatchToProps = (dispatch, state) => {
   };
 };
 
-
-
-
-
-
-
 class ProductsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -48,26 +40,12 @@ class ProductsContainer extends React.Component {
     })
   }
       
-      
-
-    
-
-  
-
   handleClick(style) {
     console.log("style",style)
     this.props.selectStyle(style)
    this.props.history.push('/product')
     
   }
-    
-      
-   
-    
-    
-    
-     
-
 
   render() {
     return (
@@ -78,7 +56,6 @@ class ProductsContainer extends React.Component {
     );
   }
 }
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
