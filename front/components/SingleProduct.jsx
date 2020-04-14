@@ -19,6 +19,7 @@ export default ({
   handleDigital,
   selectedStyle,
   selectedFrame,
+  toggleDefault
 }) => {
   const singleStyle = {
     marginBlockEnd: "5rem",
@@ -156,7 +157,7 @@ export default ({
               <span className="sr-only">Loading...</span>
             </Spinner>
           ) : (
-            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+            <ToggleButtonGroup type="radio" name="options" defaultValue={0} value={toggleDefault}>
               {frames.map((e) => {
                 return (
                   <ToggleButton

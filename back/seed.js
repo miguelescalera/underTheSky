@@ -66,3 +66,12 @@ User.create({
 });
 
 
+User.create({
+  type: "admin",
+  firstName: 'rafael',
+  lastName: 'romero',
+  email: "ra@ro.com",
+  password: "1",
+}).then(() => {
+  console.log("user admin created");
+});

@@ -41,6 +41,7 @@ class SingleProductContainer extends React.Component {
     super(props);
     this.state = {
       digital: false,
+      toggleDefault:0,
       selectedFrame: {
         id: 0,
         name: "frameless",
@@ -59,12 +60,14 @@ class SingleProductContainer extends React.Component {
   }
 
 
+
+      
     componentDidMount() {
         
         this.props.getAllfss()
         .then(result=>{
             this.props.Allfss(result.data)
-            this.props.selectFrame(result.data.frames[0])
+            // this.props.selectFrame(result.data.frames[0])
             this.props.selectSize(result.data.sizes[0])
             localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
             localStorage.setItem('selectedSize',JSON.stringify(result.data.sizes[0]))
@@ -76,15 +79,30 @@ class SingleProductContainer extends React.Component {
     
     handleFrame(frame) {
             this.props.selectFrame(frame)
+            this.setState({
+              selectedFrame: frame,
+            });
             localStorage.setItem('selectedFrame',JSON.stringify(frame))
       }
     handleSize(size) {
             this.props.selectSize(size)
             localStorage.setItem('selectedSize',JSON.stringify(size))
         }
-    handleDigital(){
-            this.setState({digital:!this.state.digital})
-            
+        handleDigital() {
+          this.setState({ 
+              digital: !this.state.digital,
+              toggleDefault:this.state.digital?0:this.props.selectedFrame.id,
+              selectedFrame: {
+                id: 0,
+                name: "frameless",
+                price: 0,
+                imgType: "image/png",
+                imgName: "dummy.png",
+                imgData: { type: "Buffer", data: Array(4004) },
+                imgPath:
+                '/public/src/img/dummy.png'
+              }
+           });
         }
          
     handleClick(e) {
@@ -103,22 +121,25 @@ class SingleProductContainer extends React.Component {
                 
             
         render() {
-            return (
-                <div>
-                    <h3 className="titulopagina">Personalizalo</h3>
-                    <SingleProduct
-                        handleColor={this.handleColor}
-                        handleSize={this.handleSize}
-                        handleFrame={this.handleFrame}
-                        sizes={this.props.sizes}
-                        frames={this.props.frames}
-                        styles={this.props.styles}
-                        handleClick={this.handleClick}
-                        digital={this.state.digital}
-                        handleDigital={this.handleDigital}
-                    />
-                </div>
-            );
+          return (
+            <div>
+              <h3 className="titulopagina">Personalizalo</h3>
+              <SingleProduct
+                handleColor={this.handleColor}
+                handleSize={this.handleSize}
+                handleFrame={this.handleFrame}
+                sizes={this.props.sizes}
+                frames={this.props.frames}
+                styles={this.props.styles}
+                handleClick={this.handleClick}
+                digital={this.state.digital}
+                handleDigital={this.handleDigital}
+                selectedStyle={this.props.selectedStyle}
+                selectedFrame={this.state.selectedFrame}
+                toggleDefault={this.state.toggleDefault}
+              />
+            </div>
+          );
         }
     }
  
