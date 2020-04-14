@@ -164,14 +164,14 @@ export const deleteSize = (size) =>
 
 /*-------------------------STYLES-----------------------------------*/
 export const getStyle = () => dispatch =>
-console.log('hola soy getstyle');
+axios.get("/api/admin/getStyle")
+  .then(style => {
+    dispatch(allStyle(style.data))
+    return style.data;
+  }
+  );
 
-  axios.get("/api/admin/getStyle")
-    .then(style => {
-      dispatch(allStyle(style.data))
-      return style.data;
-    }
-    );
+
 
 export const newStyle = (newStyle) =>
   axios.post("/api/admin/newStyle", newStyle)

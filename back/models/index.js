@@ -8,6 +8,7 @@ const Style = require("./style");
 const Size = require("./size");
 const ProductData = require("./productData");
 const Display = require("./display");
+const PuntoDeEncuentro = require("./puntoDeEncuentro")
 
 ProductData.belongsTo(Product);
 ProductData.belongsTo(Order);
@@ -22,6 +23,7 @@ Product.belongsTo(Style);
 Product.belongsTo(Size);
 
 Order.belongsTo(User);
+Order.belongsTo(PuntoDeEncuentro)
 
 Display.belongsTo(Style);
 
@@ -35,5 +37,5 @@ module.exports = {
   ProductData,
   Display,
   Order,
-  
+  PuntoDeEncuentro
 };

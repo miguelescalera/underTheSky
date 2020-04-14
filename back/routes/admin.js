@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const fileUpload = require('express-fileupload')
 const fs = require("fs");
 
@@ -23,6 +24,8 @@ const User = require("../models/user");
 const Product = require("../models/product");
 const Display = require("../models/display");
 const ProductData = require("../models/productData");
+const PuntoDeEncuentro = require("../models/puntoDeEncuentro")
+
 
 router.get("/getFrame", function (req, res) {
   Frame.findAll().then(function (frames) {
@@ -190,6 +193,7 @@ router.delete("/deleteUser/:id", function (req, res) {
 router.get("/getAllDataProducts", function (req, res) {
     ProductData.findAll()
         .then(allproductdata => {
+          console.log("allproductdata",allproductdata)
             res.json(allproductdata)
         })
 })
@@ -224,14 +228,35 @@ router.post("/newDisplay", function (req, res) {
   });
 });
 router.delete("/deleteDisplay", function (req, res) {
-  Display.findByPk(req.body.displayId)
-    .then(function (style) {
-      style.destroy();
+
+    Display.findByPk(req.body.displayId)
+        .then(function (style) {
+            style.destroy()
+        })
+        .then(function () {
+            res.sendStatus(200)
+        })
+})
+///////////////// PUNTOS DE ENCUENTRO /////////////
+router.post("/newPunto", function(req, res){
+    console.log("entre papaaaaaaa")
+    PuntoDeEncuentro.create(req.body)
+    .then(function(){
+        res.send("punto creado papa")
     })
-    .then(function () {
-      res.sendStatus(200);
-    });
-});
+})
+
+router.post("/deletePunto",function(req,res){
+    console.log("esty en la ruta",req.body)
+    const id=req.body.id
+    PuntoDeEncuentro.findByPk(id)
+    .then(punto=>{
+        punto.destroy()
+    })
+    .then(res.sendStatus(204))
+})
+
+
 
 
 module.exports = router;

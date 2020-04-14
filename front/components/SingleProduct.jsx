@@ -174,29 +174,8 @@ export default ({
         </Container>
       </div>
 
-      {/* 
-      <Container className="d-flex justify-content-center">
-        {!frames ? (
-          <Spinner animation="border" role="status" variant="light">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        ) : (
-          <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-            {frames.map(e => {
-              return (
-                <ToggleButton
-                  value={e.id}
-                  className="toggle-outline"
-                  onClick={() => handleFrame(e)}
-                  name="13x18"
-                >
-                  {e.name}
-                </ToggleButton>
-              );
-            })}
-          </ToggleButtonGroup>
-        )}
-      </Container> */}
+
+     
 
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}

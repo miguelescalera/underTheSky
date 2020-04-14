@@ -19,7 +19,7 @@ const email = (email, content) => {
     from: 'undertheskydeco024@gmail.com',
     to: `${email}`,
     subject: 'Creaste un nuevo usuario',
-    text: `Felicidades ${content}! Ya tenés una cuenta de Marccello`
+    text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`
   };
   console.log("sending email", mailOptions);
   transporter.sendMail(mailOptions, function (error, info) {
@@ -81,15 +81,22 @@ router.post("/logout", function (req, res) {
 });
 
 
-router.put("/modify", function (req, res) {
-  User.findByPk(req.user.id)
-    .then(function (user) {
-      user.update(req.body);
-    })
-    .then(function (newUser) {
-      res.json(newUser);
-    });
-});
+router.put("/modify", function (req, res,next) {
+  console.log("USER:",req.user)
+  User.update(
+   req.body,
+    {returning: true,where:{
+      id:req.user.id
+    }}
+  )
+  .then(function([ rowsUpdate, [newUser] ]) {
+    res.json(newUser)
+  })
+  .catch(next)
+ })
+
+  
+      
 
 router.delete("/delete", function (req, res) {
   User.findByPk(req.user.id)

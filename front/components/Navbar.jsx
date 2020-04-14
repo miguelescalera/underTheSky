@@ -5,14 +5,55 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col,NavDropdown } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-export default ({ cartItems, handelLogout, User, hidden }) => {
+import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+
+export default ({ 
+    cartItems,
+    handelLogout,
+    User,
+    hidden,
+    handlePerfil,
+    toggleDrop,
+    toggleDropdown
+   }) => {
   const [expanded, setExpanded] = useState(false);
   
+  const dropdown={
+    paddingTop:"8px",
+    position: "relative",
+    display: "inline-block"
+  }
   
+  let dropdownContent={
+    borderRadius:"5px",
+    width: "180px",
+    height: "245px",
+    marginTop:"27px",
+    display: "none",
+    position: "absolute",
+    backgroundColor: "#f9f9f9",
+    boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
+    padding: "12px 16px",
+    zIndex: "1"
+  }
+   
+  if(toggleDrop){
+    dropdownContent.display="block"
+  }
+  else{
+    dropdownContent.display="none"
+  }
+
+  if(User.email){
+    dropdown.display= "inline-block"
+  }
+  else{
+    dropdown.display= "none"
+  }
   
   const cartLength = {
     backgroundColor: "#000000a6",
@@ -55,47 +96,32 @@ export default ({ cartItems, handelLogout, User, hidden }) => {
     textAlign: "center"
   };
 
-  const isAdmin= ()=>{
-    if(User.type==="admin"){
-      return(
-        <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
-                Admin
-        </Link>
-      )
-    }
-  } 
+  
+
+ 
+
+
 
   const loginLogout = () => {
-    if (User.email) {
-      return (
-        <span
-          onClick={() => {
-            handelLogout();
-            setTimeout(() => {
-              setExpanded(false);
-            }, 150);
-          }}
-          style={navFont}
-        >
-          logout
-        </span>
-      );
-    } else {
+    if (!User.email) {
       return (
         <Link
-          style={navFont}
-          to="/Login"
-          onClick={() =>
-            setTimeout(() => {
-              setExpanded(false);
-            }, 150)
-          }
-        >
-          Login
-        </Link>
-      );
-    }
-  };
+        style={navFont}
+        to="/Login"
+        onClick={() =>
+          setTimeout(() => {
+            setExpanded(false);
+          }, 150)
+        }
+      >
+        Login
+      </Link>
+       );
+     } 
+   };
+       
+          
+
 
   const navButton = {
     color: "#ec7263",
@@ -172,29 +198,51 @@ export default ({ cartItems, handelLogout, User, hidden }) => {
             <Nav.Link>
               {loginLogout()}
             </Nav.Link>
-            <Nav.Link>
-              {isAdmin()}
+            <Nav.Link style={navFont}>
+                <div style={dropdown} onClick={toggleDropdown}>
+                  <span>mi perfil</span>
+                  <div style={dropdownContent}>
+                    <div style={{marginBottom:"15px",borderBottom:"solid 1px gray"}}>
+                      <span>{User.type==="admin"? <span style={{color:"blue"}}>administrador</span>:<br/>}</span>
+                      <h6><strong>{User.firstName+" "+User.lastName}</strong> </h6>
+                      <span>{User.email}</span><br/>
+                    </div>
+                    <div>
+                      <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
+                      {User.type==="admin"?<span>administrar productos</span>:<br/>}
+                      </Link>
+                    </div>
+                    <div style={{marginBottom:"15px"}}>
+                      <Link to="/usersOrders" ><span>ver tus compras</span></Link><br/>
+                      <Link to="/cart" ><span>ver tu carrito</span></Link><br/>
+                      <Link to="/editProfile"><span>editar perfil</span></Link><br/>
+                    </div>
+                    <div>
+                    <span onClick={() => {
+                            handelLogout();
+                            setTimeout(() => {
+                              setExpanded(false);
+                            }, 150);
+                        }}
+                style={navFont}
+              >
+                salir
+              </span >
+                    </div>
+                  </div>
+                </div>
             </Nav.Link>
-            <div>
-              <span style={cartLength}>{cartItems.length}</span>
-              <Nav.Link>
-                <Link
-                  style={cartButton}
-                  to="/cart"
-                  onClick={() =>
-                    setTimeout(() => {
-                      setExpanded(false);
-                    }, 150)
-                  }
-                >
-                  Cart
-                </Link>
-              </Nav.Link>
-        
-            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     </div>
   );
 };
+                  
+
+            
+
+              
+              
+            
+

@@ -54,6 +54,7 @@ User.addHook("beforeCreate", user => {
   user.password = user.hashPassword(user.password);
 });
 
+
 User.prototype.hashPassword = function(password) {
   return crypto
     .createHmac("sha1", this.salt)

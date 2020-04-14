@@ -49,6 +49,10 @@ ProductData.init({
     },
     price:{
         type:Sequelize.INTEGER
+    },
+    bought:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:false
     }
 
 
