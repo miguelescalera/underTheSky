@@ -18,6 +18,7 @@ import Img from "react-bootstrap/Image";
 import "../../back/public/global.css";
 import AdminPoroductsContainer from '../containers/AdminProductsContainer'
 import Admin from '../components/Admin'
+import checkoutDigitalContainer from "../containers/CheckoutDigitalContainer"
 import PuntoDeEncuentroContainer from "../containers/PuntoDeEncuentroContainer";
 import StepWizardContainer from "../containers/StepWizardContainer"
 import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
@@ -72,7 +73,7 @@ class Main extends React.Component {
           <Route path="/cart/editData" exact component={EditDataContainer} />
           <Route path="/addProducts" exact component={AdminPoroductsContainer} />
           <Route path="/eladmin" exact component={Admin} />
-
+          <Route path="/checkoutDigital" exact component={checkoutDigitalContainer} />
           <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
           <Route path="/admin/getOrders" exact component={AdminOrdenesContainer}/>
           <Route path="/gracias" exact component={GraciasContainer} />

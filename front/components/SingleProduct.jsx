@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import Switch from "react-switch";
-
+import Image from 'react-bootstrap/Image';
 export default ({
   handleSize,
   handleFrame,
@@ -16,29 +16,31 @@ export default ({
   styles,
   handleClick,
   digital,
-  handleDigital
+  handleDigital,
+  selectedStyle,
+  selectedFrame,
+  toggleDefault
 }) => {
-
-
   const singleStyle = {
     marginBlockEnd: "5rem",
     display: "flex",
     flexDirection: "column",
-    textAlign: "center"
+    textAlign: "center",
   };
 
-
-  const toggleDigital =()=>{
-    if(digital){
+  const toggleDigital = () => {
+    if (digital) {
       return {
-        display:"none"
-      }
+        display: "none",
+      };
     }
-   
-  }
+  };
 
+  
+  const imgurlPoster = selectedStyle.imgPath.toString().split("/public")[1];
 
-
+  console.log('PRERETURN SELECTED FRAMEEEEEEEEEE',selectedFrame);
+  
   return (
     <div style={singleStyle}>
       {/* //AQUI ESTA LA TARJETA */}
@@ -50,49 +52,52 @@ export default ({
         <Card className="singleproduct-card ">
           <Card.Body style={{ padding: "0px" }}>
             <div id="probuild-contenedor">
-              <Card.Img
-                id="probuild-marco"
-                style={{
-                  borderRadius: "0px",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  margin: 0,
-                  border: "none",
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "rgba(013, 130, 230, 0.5)",
-                }}
-                variant="top"
-                src="https://i.imgur.com/FpllLxM.png"
-              />
+
+
+                <Card.Img
+                  id="probuild-marco"
+                  style={{
+                    borderRadius: "0px",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    margin: 0,
+                    border: "none",
+                    width: "100%",
+                    height: "100%",
+                    zIndex: 4,
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                  }}
+                  variant="top"
+                  src={selectedFrame.imgPath.slice(7)}
+                />
+              
 
               <Card.Img
                 id="probuild-poster"
                 style={{
+                  zIndex: 1,
                   position: "relative",
-                  borderRadius: "0px"
+                  borderRadius: "0px",
                 }}
                 variant="top"
-                src="https://i.imgur.com/A4BIcNR.png"
+                src={imgurlPoster}
               />
             </div>
           </Card.Body>
         </Card>
       </Container>
 
-        <label style={{color:"white"}}>
-          ¿quieres el producto en formato digital?
-          <span>
+      <h4>{selectedStyle.name}</h4>
+
+      <label style={{ color: "white" }}>
+        ¿quieres el producto en formato digital?
+        <span>
           <Switch onChange={handleDigital} checked={digital} />
-          </span>
-        </label>
+        </span>
+      </label>
 
-          {/* ver como puede llegar el estilo del cuadro */}
-
-      <h4>Estilo Minimal Hardcode</h4>
-
-
+      {/* ver como puede llegar el estilo del cuadro */}
 
       {/* //AQUI ES EL PRIMER RENDER VARIABLE (TAMANO) */}
       {/* //AQUI ES EL PRIMER RENDER VARIABLE (TAMANO) */}
@@ -110,7 +115,7 @@ export default ({
           </Spinner>
         ) : (
           <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-            {sizes.map(e => {
+            {sizes.map((e) => {
               return (
                 <ToggleButton
                   value={e.id}
@@ -142,18 +147,18 @@ export default ({
       {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
       {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
       <div style={toggleDigital()}>
-      <Container className="d-flex justify-content-center singleproduct-variable">
-        <h4>Marco</h4>
-      </Container>
+        <Container className="d-flex justify-content-center singleproduct-variable">
+          <h4>Marco</h4>
+        </Container>
 
         <Container className="d-flex justify-content-center">
           {!frames ? (
-            <Spinner animation="border" role="status" variant='light'>
+            <Spinner animation="border" role="status" variant="light">
               <span className="sr-only">Loading...</span>
             </Spinner>
           ) : (
-            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-              {frames.map(e => {
+            <ToggleButtonGroup type="radio" name="options" defaultValue={0} value={toggleDefault}>
+              {frames.map((e) => {
                 return (
                   <ToggleButton
                     value={e.id}

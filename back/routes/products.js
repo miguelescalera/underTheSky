@@ -12,7 +12,7 @@ router.post('/nuevoproducto', function (req, res) {
   ProductData.create(req.body)
   .then(productData => { 
    if(req.user) productData.setUser(req.user.id); 
-   console.log("PRODUCTO CREADO:",productData)
+   productData.setStyle(req.body.styleId)
     res.send(productData) })
   })
 
@@ -77,7 +77,7 @@ router.post("/getProductFSS", (req, res) => {
         res.send({
           size: size,
           frame: frame,
-          style: style
+          // style: style
         });
       });
     });
@@ -150,4 +150,4 @@ router.get("/:id", function (req, res) {
     });
 });
 
-module.exports = router;
+module.exports = router

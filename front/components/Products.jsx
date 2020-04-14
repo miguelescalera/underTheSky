@@ -21,15 +21,14 @@ export default ({ products, handleClick, styles }) => {
   };
   
 
-  // console.log('EEEEHEHH AQUI HACES EL MAP', styles.map((style, index)=>{console.log(style.name, index)}));
 
   return (
     <div>
       <Container className="d-flex justify-content-center" style={resultTarj}>
-        {styles.map((style, index) => {
+        {styles.map((styleProduc, index) => {
           return (
             <span key={index} style={tarj}>
-              <TarjetaProducto style={style} handleClick={handleClick} />
+              <TarjetaProducto styleProduc={styleProduc} handleClick={handleClick} />
             </span>
           );
         })}

@@ -25,6 +25,18 @@ export const cart = (dataProducts) => ({
   })
 }
 
+
+export const getDigitalProducts=()=>dispatch=>
+axios.get("/api/cart/getDigitalProduct")
+.then(allDataProducts => {
+  dispatch(cart(
+    allDataProducts.data,
+    ))
+  });
+
+
+
+
 export const getCart = () => dispatch =>
 axios.get("/api/cart/getDataProducts")
 .then(allDataProducts => {

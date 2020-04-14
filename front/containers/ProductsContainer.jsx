@@ -7,14 +7,15 @@ import { selectStyle } from '../actions/productsActions'
 // ACCIONES 
 import {
   getAllStyles,
-  allStyles
+  allStyles,
 } from "../actions/productsActions";
 
 import { runInThisContext } from "vm";
 
 const mapStateToProps = (state, ownprops) => {
   return {
-    styles:state.products.allStyles
+    styles:state.products.allStyles,
+    selectedStyle:state.products.selectedStyle
   };
 };
 
@@ -22,8 +23,6 @@ const mapDispatchToProps = (dispatch, state) => {
   return {
     allStyles:data => dispatch(allStyles(data)),
     selectStyle: data=>dispatch(selectStyle(data))
-
-
   };
 };
 
@@ -39,11 +38,17 @@ class ProductsContainer extends React.Component {
       this.props.allStyles(result.data)
     })
   }
-      
-  handleClick(style) {
-    console.log("style",style)
-    this.props.selectStyle(style)
+
+
+
+  handleClick(selectedStyle) {
+    console.log("style",selectedStyle)
+    this.props.selectStyle(selectedStyle)
+    localStorage.setItem("selectedStyle",JSON.stringify(selectedStyle))
+
+ 
    this.props.history.push('/product')
+   
     
   }
 

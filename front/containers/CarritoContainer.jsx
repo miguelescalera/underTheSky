@@ -6,6 +6,8 @@ import {dataProduct} from "../actions/productDataActions"
 import {IdsForOrders} from "../actions/orderActions"
 import Container from 'react-bootstrap/Container'
 import CheckoutCart from "../components/CheckoutCart"
+import {withRouter} from "react-router-dom"
+import {allStyles,getAllStyles} from "../actions/productsActions"
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -14,13 +16,15 @@ import Col from 'react-bootstrap/Col'
 const mapStateToProps=(state,ownProps)=>{
     return{
        dataProduct:state.cart.dataProducts,
-       userEmail:state.user.user.email
+       userEmail:state.user.user.email,
+       Styles:state.products.allStyles
       }
     }
        
 
 const mapDispatchToProps=(dispatch)=>{
     return{
+        allStyles:data => dispatch(allStyles(data)),
         dataToEdit:(data)=>dispatch(dataProduct(data)),
         getCart: ()=>dispatch(getCart()),
         cartWithoutUser: (data)=>dispatch(cartWithoutUser(data)),
@@ -42,6 +46,10 @@ class NavbarContainer extends React.Component {
   }
   
   componentDidMount() {
+    getAllStyles()
+    .then(result=>{
+      this.props.allStyles(result.data)
+    })
     if (this.props.userEmail) {
       this.props.getCart();
     }
@@ -50,6 +58,7 @@ class NavbarContainer extends React.Component {
         this.props.cartWithoutUser(dataProduct)
       }
     }
+      
    
        
   handleDelete(id) {
@@ -68,13 +77,26 @@ class NavbarContainer extends React.Component {
     }
   
     
-  handleSubmit(id) {
-     console.log("length:",this.props.dataProduct.length)
-        if(this.props.dataProduct.length){
-          this.props.IdsForOrders(id);
+  handleSubmit(id,digital) {
+    if(this.props.dataProduct.length){
+      this.props.IdsForOrders(id);
+      localStorage.setItem("idForOrder",id)
+      if(digital){
+        this.props.history.push("/checkoutDigital")
+      }
+      else{
+        if(this.props.nextStep){
           this.props.nextStep()
         }
+        else{
+          this.props.history.push("/cart/checkout")
+        }
       }
+    }
+  }
+     
+
+
        
   handleQuantity(id,quantity){
         if(quantity>=1){
@@ -113,6 +135,7 @@ class NavbarContainer extends React.Component {
                   handleQuantity={this.handleQuantity}
                   handleEditData={this.handleEditData}
                   PreviousStep={this.PreviousStep}
+                  Styles={this.props.Styles}
                   />
               </Container>
             </div>
@@ -125,7 +148,7 @@ class NavbarContainer extends React.Component {
                  
       
       
-      export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
+      export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavbarContainer))
        
 
 

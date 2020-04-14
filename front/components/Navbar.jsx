@@ -8,6 +8,7 @@ import Image from "react-bootstrap/Image";
 import { Container, Row, Col,NavDropdown } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
 export default ({ 
@@ -69,7 +70,7 @@ export default ({
   const cartButton = {
     color: "#6d6d6d",
     color: "rgb(109, 109, 109)",
-    zIndex: "1"
+    zIndex: 10
   };
 
   const navLogo = {
@@ -83,7 +84,8 @@ export default ({
     top: 0,
     backgroundColor: "#282624",
     color: "#6d6d6d",
-    textAlign: "center"
+    textAlign: "center",
+    zIndex:11
   };
 
   const navFont = {
@@ -161,7 +163,7 @@ export default ({
           style={navButton}
           onClick={() => setExpanded(expanded ? false : "expanded")}
         >
-          <FontAwesomeIcon icon={faEllipsisV} />
+          <FontAwesomeIcon icon={faBars} />
         </Navbar.Toggle>
 
         {/* </Navbar.Brand> */}
