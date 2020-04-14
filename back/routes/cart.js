@@ -15,7 +15,7 @@ router.get("/getDataProducts",function(req,res){
     ProductData.findAll({
         where: {
             userId: req.user.id,
-            bougth:false
+            bought:false
         }
     }).then((productsData) => {
         const dataToSend = productsData.sort(function (a, b) {

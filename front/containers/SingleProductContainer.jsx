@@ -41,6 +41,7 @@ class SingleProductContainer extends React.Component {
     super(props);
     this.state = {
       digital: false,
+      toggleDefault:0,
       selectedFrame: {
         id: 0,
         name: "frameless",
@@ -63,7 +64,7 @@ class SingleProductContainer extends React.Component {
 
     this.props.getAllfss().then((result) => {
       this.props.Allfss(result.data);
-      this.props.selectFrame(result.data.frames[0])
+      // this.props.selectFrame(result.data.frames[0])
       this.props.selectSize(result.data.sizes[0])
       localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
     });
@@ -87,16 +88,17 @@ class SingleProductContainer extends React.Component {
   handleDigital() {
     this.setState({ 
         digital: !this.state.digital,
+        toggleDefault:this.state.digital?0:this.props.selectedFrame.id,
         selectedFrame: {
-            id: 3,
-            name: "verde",
-            price: 322,
-            imgType: "image/png",
-            imgName: "marco-verde.png",
-            imgData: { type: "Buffer", data: Array(4004) },
-            imgPath:
-            '/public/src/img/dummy.png'
-          }
+          id: 0,
+          name: "frameless",
+          price: 0,
+          imgType: "image/png",
+          imgName: "dummy.png",
+          imgData: { type: "Buffer", data: Array(4004) },
+          imgPath:
+          '/public/src/img/dummy.png'
+        }
      });
   }
 
@@ -135,6 +137,7 @@ class SingleProductContainer extends React.Component {
           handleDigital={this.handleDigital}
           selectedStyle={this.props.selectedStyle}
           selectedFrame={this.state.selectedFrame}
+          toggleDefault={this.state.toggleDefault}
         />
       </div>
     );

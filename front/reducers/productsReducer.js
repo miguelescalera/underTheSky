@@ -15,7 +15,16 @@ const initialState = {
   AllProducts: [],
   Allfss: [],
   selectedStyle: {},
-  selectedFrame: {},
+  selectedFrame: {
+    id: 0,
+    name: "frameless",
+    price: 0,
+    imgType: "image/png",
+    imgName: "dummy.png",
+    imgData: { type: "Buffer", data: Array(4004) },
+    imgPath:
+    '/public/src/img/dummy.png'
+  },
   selectedSize: {},
   allStyles: [],
   digital:false

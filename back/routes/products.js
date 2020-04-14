@@ -77,7 +77,7 @@ router.post("/getProductFSS", (req, res) => {
         res.send({
           size: size,
           frame: frame,
-          style: style
+          // style: style
         });
       });
     });
