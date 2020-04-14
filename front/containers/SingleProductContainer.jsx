@@ -58,88 +58,75 @@ class SingleProductContainer extends React.Component {
     this.handleDigital = this.handleDigital.bind(this);
   }
 
-  componentDidMount() {
-    console.log();
 
-    this.props.getAllfss().then((result) => {
-      this.props.Allfss(result.data);
-      this.props.selectFrame(result.data.frames[0])
-      this.props.selectSize(result.data.sizes[0])
-      localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
-    });
-
-    let style =JSON.parse(localStorage.getItem('selectedStyle'))
-    if (style) {
-        this.props.selectStyle(style)
+    componentDidMount() {
+        
+        this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+            this.props.selectFrame(result.data.frames[0])
+            this.props.selectSize(result.data.sizes[0])
+            localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
+            localStorage.setItem('selectedSize',JSON.stringify(result.data.sizes[0]))
+        })
     }
-  }
-
-  handleFrame(frame) {
-    this.props.selectFrame(frame);
-    this.setState({
-      selectedFrame: frame,
-    });
-    localStorage.setItem('selectedFrame',JSON.stringify(frame))
-  }
-  handleSize(size) {
-    this.props.selectSize(size);
-  }
-  handleDigital() {
-    this.setState({ 
-        digital: !this.state.digital,
-        selectedFrame: {
-            id: 3,
-            name: "verde",
-            price: 322,
-            imgType: "image/png",
-            imgName: "marco-verde.png",
-            imgData: { type: "Buffer", data: Array(4004) },
-            imgPath:
-            '/public/src/img/dummy.png'
-          }
-     });
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    localStorage.setItem(
-      "selectedStyle",
-      JSON.stringify(this.props.selectedStyle)
-    );
-    localStorage.setItem(
-      "selectedSize",
-      JSON.stringify(this.props.selectedSize)
-    );
-    this.props.selectedDigital(this.state.digital);
-    if (this.state.digital) {
-      this.props.selectFrame({});
-    } else {
-      this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")));
+           
+        
+       
+    
+    handleFrame(frame) {
+            this.props.selectFrame(frame)
+            localStorage.setItem('selectedFrame',JSON.stringify(frame))
+      }
+    handleSize(size) {
+            this.props.selectSize(size)
+            localStorage.setItem('selectedSize',JSON.stringify(size))
+        }
+    handleDigital(){
+            this.setState({digital:!this.state.digital})
+            
+        }
+         
+    handleClick(e) {
+            e.preventDefault();
+            localStorage.setItem('selectedStyle',JSON.stringify(this.props.selectedStyle))
+            localStorage.setItem('selectedSize',JSON.stringify(this.props.selectedSize))
+            this.props.selectedDigital(this.state.digital)
+            if(this.state.digital){
+                this.props.selectFrame({})
+            }
+            else{
+                this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")))
+            }
+               this.props.nextStep()
+        }
+                
+            
+        render() {
+            return (
+                <div>
+                    <h3 className="titulopagina">Personalizalo</h3>
+                    <SingleProduct
+                        handleColor={this.handleColor}
+                        handleSize={this.handleSize}
+                        handleFrame={this.handleFrame}
+                        sizes={this.props.sizes}
+                        frames={this.props.frames}
+                        styles={this.props.styles}
+                        handleClick={this.handleClick}
+                        digital={this.state.digital}
+                        handleDigital={this.handleDigital}
+                    />
+                </div>
+            );
+        }
     }
-    this.props.nextStep();
-  }
+ 
+    
+  
 
-  render() {
-    return (
-      <div>
-        <h3 className="titulopagina">Personalizalo</h3>
-        <SingleProduct
-          handleColor={this.handleColor}
-          handleSize={this.handleSize}
-          handleFrame={this.handleFrame}
-          sizes={this.props.sizes}
-          frames={this.props.frames}
-          styles={this.props.styles}
-          handleClick={this.handleClick}
-          digital={this.state.digital}
-          handleDigital={this.handleDigital}
-          selectedStyle={this.props.selectedStyle}
-          selectedFrame={this.state.selectedFrame}
-        />
-      </div>
-    );
-  }
-}
+ 
+
 
 export default connect(
   mapStateToProps,

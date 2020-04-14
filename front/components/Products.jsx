@@ -25,10 +25,10 @@ export default ({ products, handleClick, styles }) => {
   return (
     <div>
       <Container className="d-flex justify-content-center" style={resultTarj}>
-        {styles.map((style, index) => {
+        {styles.map((styleProduc, index) => {
           return (
             <span key={index} style={tarj}>
-              <TarjetaProducto style={style} handleClick={handleClick} />
+              <TarjetaProducto styleProduc={styleProduc} handleClick={handleClick} />
             </span>
           );
         })}
