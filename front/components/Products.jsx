@@ -21,7 +21,6 @@ export default ({ products, handleClick, styles }) => {
   };
   
 
-  // console.log('EEEEHEHH AQUI HACES EL MAP', styles.map((style, index)=>{console.log(style.name, index)}));
 
   return (
     <div>
