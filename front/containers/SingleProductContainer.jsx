@@ -62,7 +62,7 @@ class SingleProductContainer extends React.Component {
 
 
   componentDidMount() {
-
+    this.props.selectStyle(JSON.parse(localStorage.getItem('selectedStyle')))
     getAllfss()
       .then(result => {
         this.props.Allfss(result.data)
@@ -74,8 +74,6 @@ class SingleProductContainer extends React.Component {
   }
 
 
-
-
   handleFrame(frame) {
     this.props.selectFrame(frame)
     this.setState({
@@ -83,6 +81,28 @@ class SingleProductContainer extends React.Component {
     });
     localStorage.setItem('selectedFrame', JSON.stringify(frame))
   }
+  handleSize(size) {
+    this.props.selectSize(size)
+    localStorage.setItem('selectedSize', JSON.stringify(size))
+  }
+  handleDigital() {
+    this.setState({
+      digital: !this.state.digital,
+      toggleDefault: this.state.digital ? 0 : this.props.selectedFrame.id,
+      selectedFrame: {
+        id: 0,
+        name: "frameless",
+        price: 0,
+        imgType: "image/png",
+        imgName: "dummy.png",
+        imgData: { type: "Buffer", data: Array(4004) },
+        imgPath:
+          '/public/src/img/dummy.png'
+      }
+    })
+  }
+
+
   handleSize(size) {
     this.props.selectSize(size)
     localStorage.setItem('selectedSize', JSON.stringify(size))
@@ -133,7 +153,9 @@ class SingleProductContainer extends React.Component {
           handleClick={this.handleClick}
           digital={this.state.digital}
           handleDigital={this.handleDigital}
-          selectedStyle={this.state.selectedStyle}
+          selectedStyle={this.props.selectedStyle}
+          selectedSize={this.props.selectedSize}
+
           selectedFrame={this.state.selectedFrame}
           toggleDefault={this.state.toggleDefault}
         />
@@ -141,6 +163,8 @@ class SingleProductContainer extends React.Component {
     );
   }
 }
+
+
 
 
 

@@ -20,15 +20,14 @@ class StepWizardContainer extends React.Component {
 
 
 
-
     render() {
         return (
-            <div>
-                <StepWizard>
-                    <SingleProductContainer />
-                    <FormDataContainer />
-                    <CarritoContainer />
-                    <CheckoutContainer />
+            <div style={{ zIndex: '-1' }}>
+                <StepWizard style={{ zIndex: '-1' }}>
+                    <SingleProductContainer style={{ zIndex: '-1' }} />
+                    <FormDataContainer style={{ zIndex: '-1' }} />
+                    <CarritoContainer style={{ zIndex: '-1' }} />
+                    <CheckoutContainer style={{ zIndex: '-1' }} />
                 </StepWizard>
             </div>
         )
