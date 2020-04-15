@@ -16,7 +16,7 @@ export default ({ products, handleClick, styles }) => {
   const tarj = {
     padding: "3%",
 
-    width: "45%",
+    width: "50%",
     maxWidth: "250px"
   };
   

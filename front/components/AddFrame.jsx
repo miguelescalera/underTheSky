@@ -18,15 +18,11 @@ import {
   faPaperPlane,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-<FontAwesomeIcon icon={faPaperPlane} />
+<FontAwesomeIcon icon={faPaperPlane} />;
 
 import Alert from "react-bootstrap/Alert";
 
-export default ({
-  handleChange,
-  handleSubmit,
-  handleFile,
-}) => {
+export default ({ handleChange, handleSubmit, handleFile }) => {
   const formStyle = {
     width: "80%",
     maxWidth: "800px",
@@ -34,18 +30,26 @@ export default ({
     padding: "3rem",
     borderRadius: "0px",
     boxShadow: "8px 8px 15px -10px rgba(0,0,0,0.39)",
+    justifyContent:'center',
+    alignItems:'center',
   };
 
   const divFormStyle = {
     display: "flex",
     justifyContent: "center",
     marginBlockEnd: "5rem",
-    marginBlockStart: "5rem",
+    marginBlockStart: "0.5rem",
   };
 
+  const cardStyleAdd ={
+    justifyContent:'center',
+    alignItems:'center',
+  }
   return (
     <div style={divFormStyle}>
-      <Card style={formStyle} className="login-container">
+      <Card           style={formStyle}
+          className="login-container"
+          >
         <h3
           className="d-flex justify-content-center"
           style={{ marginBlockEnd: "1rem" }}
@@ -54,6 +58,7 @@ export default ({
         </h3>
 
         <Form
+
           type="submit"
           name="frameImg"
           encType="multipart/form-data"

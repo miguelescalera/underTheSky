@@ -7,10 +7,12 @@ export default () => {
     left: 0,
     bottom: 0,
     width: "100%",
-    backgroundColor: "#282624",
-    color: "#6d6d6d",
+    backgroundColor: "rgba(255, 254, 251, 1)",
+    color: "#102f51",
     textAlign: "center",
-    zIndex:10
+    zIndex:3,
+    boxShadow: '0px -8px 15px -10px rgba(0, 0, 0, 0.25)'
+
     
   }
 

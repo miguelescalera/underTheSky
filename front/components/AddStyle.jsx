@@ -29,13 +29,16 @@ export default ({
     padding: "3rem",
     borderRadius: "0px",
     boxShadow: "8px 8px 15px -10px rgba(0,0,0,0.39)",
+    justifyContent:'center',
+    alignItems:'center',
   };
 
   const divFormStyle = {
     display: "flex",
     justifyContent: "center",
+    alignItems:'center',
     marginBlockEnd: "5rem",
-    marginBlockStart: "5rem",
+    marginBlockStart: "0.5rem",
   };
 
   const isZodiac = function () {
@@ -65,7 +68,7 @@ export default ({
 
   return (
     <div style={divFormStyle}>
-      <Card style={formStyle} className="login-container">
+      <Card style={formStyle} className='login-container' >
         <h3
           className="d-flex justify-content-center"
           style={{ marginBlockEnd: "1rem" }}
