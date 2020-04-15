@@ -27,7 +27,8 @@ export default ({ handleChange, handleSubmit,state,PreviousStep,date, onChange }
     }
 
     const calendarStyle = {
-        backgroundColor: '#00B1E1'
+        backgroundColor: '#fffefb',
+        color:'#102f51'
     }
 
 
@@ -36,7 +37,7 @@ export default ({ handleChange, handleSubmit,state,PreviousStep,date, onChange }
 
     return (
 
-        <Card className='form-container'>
+        <Card style={{border:'none'}} className='form-container'>
             <Row>
                 <span>
                     <div style={divFormStyle}>

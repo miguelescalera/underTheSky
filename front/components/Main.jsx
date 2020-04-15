@@ -46,7 +46,7 @@ const generalBackground = {
   top: 0,
   left: 0,
   width: "100vw",
-  zIndex: -5
+  zIndex: -1
 };
 
 class Main extends React.Component {

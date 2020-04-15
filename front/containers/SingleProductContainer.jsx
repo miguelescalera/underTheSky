@@ -135,6 +135,8 @@ class SingleProductContainer extends React.Component {
                 digital={this.state.digital}
                 handleDigital={this.handleDigital}
                 selectedStyle={this.props.selectedStyle}
+                selectedSize={this.props.selectedSize}
+
                 selectedFrame={this.state.selectedFrame}
                 toggleDefault={this.state.toggleDefault}
               />

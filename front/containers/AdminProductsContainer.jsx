@@ -152,6 +152,7 @@ class AdminProductsContainer extends React.Component {
         })
     }
 
+
     handleDeleteSize (id){
         deleteSize(id)
         .then(()=>{
@@ -163,8 +164,13 @@ class AdminProductsContainer extends React.Component {
     }
 
     render() {
+        const tabStyle = {
+            marginBlockStart:'0rem'
+        }
+
         return (
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+            <Tabs className='tab-container' defaultActiveKey="profile" id="uncontrolled-tab-example">
+                
                 <Tab eventKey="frame" title="Agregar marco">
                     <AddFrame handleChange={this.handleChange}
                         checkboxLogin={this.checkboxLogin}
