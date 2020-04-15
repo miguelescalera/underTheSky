@@ -8,29 +8,35 @@ import CheckoutContainer from "./CheckoutContainer"
 
 
 
-class StepWizardContainer extends React.Component{
-    constructor(){
+
+
+
+
+
+class StepWizardContainer extends React.Component {
+    constructor() {
         super()
     }
 
 
 
-    render(){
-        return(
-                <div>
-                   <StepWizard>
-                            <SingleProductContainer />
-                            <FormDataContainer />
-                            <CarritoContainer />
-                            <CheckoutContainer />
-                    </StepWizard>
-                </div>
-                        )
-                    }
-                }
-                        
-                        
-                       
-                   
+
+    render() {
+        return (
+            <div>
+                <StepWizard>
+                    <SingleProductContainer />
+                    <FormDataContainer />
+                    <CarritoContainer />
+                    <CheckoutContainer />
+                </StepWizard>
+            </div>
+        )
+    }
+}
+
+
+
+
 
 export default connect()(StepWizardContainer);
