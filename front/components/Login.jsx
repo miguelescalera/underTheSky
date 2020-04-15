@@ -9,13 +9,6 @@ import Alert from "react-bootstrap/Alert"
 export default ({ handleChange, handleSubmit,alertNull, alertPass,checkboxLogin}) => {
 
 
-  const formStyle = {
-    width: "18rem",
-    height:'110%',
-    padding:"3rem",
-    borderRadius: "0px",
-    boxShadow :'8px 8px 15px -10px rgba(0,0,0,0.39)',
-  }
  
   const divFormStyle ={
     display:"flex",
@@ -26,7 +19,7 @@ export default ({ handleChange, handleSubmit,alertNull, alertPass,checkboxLogin}
 
   return (
     <div  style={divFormStyle}>
-      <Card style={formStyle} className="login-container">
+      <Card className="login-container">
       <h3 className="d-flex justify-content-center" style={{    marginBlockEnd: "1rem" }}>Iniciá sesión</h3>
         <Form  >
           <Form.Group controlId="formBasicEmail">

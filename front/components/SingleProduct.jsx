@@ -19,7 +19,8 @@ export default ({
   handleDigital,
   selectedStyle,
   selectedFrame,
-  toggleDefault
+  toggleDefault,
+  selectedSize
 }) => {
   const singleStyle = {
     marginBlockEnd: "5rem",
@@ -36,6 +37,9 @@ export default ({
     }
   };
 
+  const getPrice = () => {
+    return 0+selectedFrame.price+selectedSize.price
+  };
   
   const imgurlPoster = selectedStyle.imgPath.toString().split("/public")[1];
 
@@ -57,7 +61,7 @@ export default ({
                 <Card.Img
                   id="probuild-marco"
                   style={{
-                    borderRadius: "0px",
+                    borderRadius: "0.2rem",
                     position: "absolute",
                     top: 0,
                     left: 0,
@@ -65,8 +69,9 @@ export default ({
                     border: "none",
                     width: "100%",
                     height: "100%",
-                    zIndex: 4,
+                    zIndex: 1,
                     backgroundColor: "rgba(0, 0, 0, 0)",
+                    borderColor:'rgba(0,0,0,0)'
                   }}
                   variant="top"
                   src={selectedFrame.imgPath.slice(7)}
@@ -76,9 +81,11 @@ export default ({
               <Card.Img
                 id="probuild-poster"
                 style={{
-                  zIndex: 1,
+                  zIndex: 0,
                   position: "relative",
-                  borderRadius: "0px",
+                  borderRadius: "0.2rem",
+                  borderColor:'rgba(0,0,0,0)'
+
                 }}
                 variant="top"
                 src={imgurlPoster}
@@ -87,14 +94,21 @@ export default ({
           </Card.Body>
         </Card>
       </Container>
+      <h4 className="titulopagina">Estilo: {selectedStyle.name}</h4>
 
-      <h4>{selectedStyle.name}</h4>
 
-      <label style={{ color: "white" }}>
-        ¿quieres el producto en formato digital?
-        <span>
+      <label style={{ 
+        color: "#102f51",
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+
+        }}>
+        <p style={{marginBottom:'0'}}>¿quieres el producto en formato digital? </p>
+
+     
           <Switch onChange={handleDigital} checked={digital} />
-        </span>
+        
       </label>
 
       {/* ver como puede llegar el estilo del cuadro */}
@@ -157,7 +171,7 @@ export default ({
               <span className="sr-only">Loading...</span>
             </Spinner>
           ) : (
-            <ToggleButtonGroup type="radio" name="options" defaultValue={0} value={toggleDefault}>
+            <ToggleButtonGroup type="radio" name="options" defaultValue={toggleDefault} value={toggleDefault}>
               {frames.map((e) => {
                 return (
                   <ToggleButton
@@ -183,8 +197,18 @@ export default ({
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}
+      <Container >
+      <Container className="d-flex justify-content-center singleproduct-variable">
+          <h4>Confirmá tu cuadro</h4>
+        </Container>
+
+        <p style={{marginBottom:'0.2rem'}}><strong>Estilo:  </strong>{selectedStyle.name}</p>
+        <p style={{marginBottom:'0.2rem'}}><strong>Tamaño: </strong> {selectedSize.name}</p>
+        <p style={{marginBottom:'0.2rem'}}><strong>Marco:  </strong>{selectedFrame.name}</p>
+
+      </Container>
       <Container className="d-flex justify-content-center singleproduct-subtotal">
-        <h5>Subtotal: $400</h5> <br />
+            <p>Subtotal: ${getPrice()}</p> <br />
       </Container>
       {/* //BOTON A SIIGUIENTE PASO */}
       {/* //BOTON A SIIGUIENTE PASO */}
@@ -202,7 +226,7 @@ export default ({
           size="lg"
           onClick={handleClick}
         >
-          Siguiente Paso
+          Siguiente
         </Button>{" "}
       </Container>
     </div>

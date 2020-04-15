@@ -23,8 +23,6 @@ export default ({
   const [expanded, setExpanded] = useState(false);
   
   const dropdown={
-    paddingTop:"8px",
-    position: "relative",
     display: "inline-block"
   }
   
@@ -35,7 +33,7 @@ export default ({
     marginTop:"27px",
     display: "none",
     position: "absolute",
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#eae9e8",
     boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
     padding: "12px 16px",
     zIndex: "1"
@@ -82,18 +80,21 @@ export default ({
   const navBarStyle = {
     width: "100%",
     top: 0,
-    backgroundColor: "#282624",
+    backgroundColor: "#fffefb",
     color: "#6d6d6d",
     textAlign: "center",
-    zIndex:11
+    zIndex:11,
+    boxShadow: '8px 8px 15px -10px rgba(0, 0, 0, 0.25)'
+
   };
 
   const navFont = {
-    color: "#6d6d6d"
+    color: "#102f51"
   };
 
   const navBarMenu = {
-    textAlign: "center"
+    textAlign: "center",
+
   };
 
   
@@ -124,7 +125,7 @@ export default ({
 
 
   const navButton = {
-    color: "#ec7263",
+    color: "#d8a96d",
     border: "none"
   };
   let viewState = hidden ? hidden : null;
@@ -153,7 +154,7 @@ export default ({
               // md={4}
               // lg={6}
               style={navLogo}
-              src={"http://undertheskydeco.com/images/logo1.png"}
+              src={'/src/img/logo.svg'}
               fluid
             />
           </Link>
@@ -182,6 +183,7 @@ export default ({
                 Productos
               </Link>
             </Nav.Link>
+            
             <Nav.Link>
               <Link
                 style={navFont}
@@ -192,18 +194,17 @@ export default ({
                   }, 150)
                 }
               >
-                Register
+                Registrate
               </Link>
             </Nav.Link>
-            <Nav.Link>
-              {loginLogout()}
-            </Nav.Link>
+
+
             <Nav.Link style={navFont}>
                 <div style={dropdown} onClick={toggleDropdown}>
-                  <span>mi perfil</span>
+                  <span>Mi perfil</span>
                   <div style={dropdownContent}>
                     <div style={{marginBottom:"15px",borderBottom:"solid 1px gray"}}>
-                      <span>{User.type==="admin"? <span style={{color:"blue"}}>administrador</span>:<br/>}</span>
+                      <span>{User.type==="admin"? <span style={{color:"blue"}}>Administrador</span>:<br/>}</span>
                       <h6><strong>{User.firstName+" "+User.lastName}</strong> </h6>
                       <span>{User.email}</span><br/>
                     </div>
@@ -213,9 +214,9 @@ export default ({
                       </Link>
                     </div>
                     <div style={{marginBottom:"15px"}}>
-                      <Link to="/usersOrders" ><span>ver tus compras</span></Link><br/>
-                      <Link to="/cart" ><span>ver tu carrito</span></Link><br/>
-                      <Link to="/editProfile"><span>editar perfil</span></Link><br/>
+                      <Link to="/usersOrders" ><span>Ver tus compras</span></Link><br/>
+                      <Link to="/cart" ><span>Ver tu carrito</span></Link><br/>
+                      <Link to="/editProfile"><span>Editar perfil</span></Link><br/>
                     </div>
                     <div>
                     <span onClick={() => {
@@ -226,12 +227,16 @@ export default ({
                         }}
                 style={navFont}
               >
-                salir
+                Cerrar Sesión
               </span >
                     </div>
                   </div>
                 </div>
             </Nav.Link>
+            <Nav.Link>
+              {loginLogout()}
+            </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>

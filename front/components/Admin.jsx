@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 export default () => (
     <div
         style={{
-            backgroundColor: "#e0dedf",
+            backgroundColor: "#f7f4ed",
             height: "100%",
             position: "relative",
             left: "0px",
-            padding: "25px",
-            color: "#6b4856",
-            fontSize: "15px"
+            padding: "15px",
+            color: "#102f51",
+            fontSize: "15px",
+            textAlign:'center'
         }}
     >
         <div>
@@ -18,18 +19,18 @@ export default () => (
 
             <p style={{ fontWeight: "700" }}>ADMIN</p>
             <Link to="/admin/getOrders">
-                <p style={{ color: "#6b4856" }}>Órdenes</p>
+                <p>Órdenes</p>
             </Link>
             <Link to="/addProducts">
-                <p style={{ color: "#6b4856" }}>Agregar Variables</p>
+                <p>Agregar Variables</p>
             </Link>
 
             <Link to="/admin/getUsers">
-                <p style={{ color: "#6b4856" }}>Usuarios</p>
+                <p>Usuarios</p>
             </Link>
 
             <Link to="/admin/newPunto">
-                <p style={{ color: "#6b4856" }}>Puntos de Encuentro</p>
+                <p>Puntos de Encuentro</p>
             </Link>
         </div>
     </div>

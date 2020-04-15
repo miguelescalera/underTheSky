@@ -11,9 +11,9 @@ export default ({ usuarios, handleStatus, handleDelete }) => {
 
   return usuarios.map(usuario => {
     return (
-      <Container style={{ marginBlockStart: "7rem" }}>
-        <Card>
-          <Card.Title>Usuario N°{usuario.id}</Card.Title>
+      <Container>
+        <Card id='user-card'>
+          <Card.Title>Usuario N°  {usuario.id}</Card.Title>
           <h6>Nombre: {usuario.firstName + " " + usuario.lastName}</h6>
           <h6>Email: {usuario.email}</h6>
           <h6 name="usuario">
@@ -38,7 +38,7 @@ export default ({ usuarios, handleStatus, handleDelete }) => {
               </DropdownButton>
             )}
           </h6>
-          <Button type="submit" onClick={() => handleDelete(usuario.id)} >Eliminar Usuario</Button>
+          <Button className={'boton-solido'} type="submit" onClick={() => handleDelete(usuario.id)} >Eliminar Usuario</Button>
         </Card>
       </Container>
     );
