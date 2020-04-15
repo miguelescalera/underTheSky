@@ -23,6 +23,7 @@ import PuntoDeEncuentroContainer from "../containers/PuntoDeEncuentroContainer";
 import StepWizardContainer from "../containers/StepWizardContainer"
 import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
 import EditUserContainer from "../containers/EditUserContainer"
+import GraciasContainer from "../containers/GraciasContainer";
 
 
 
@@ -75,7 +76,7 @@ class Main extends React.Component {
           <Route path="/checkoutDigital" exact component={checkoutDigitalContainer} />
           <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
           <Route path="/admin/getOrders" exact component={AdminOrdenesContainer}/>
-
+          <Route path="/gracias" exact component={GraciasContainer} />
           <Route
             path="/admin/getOrders"
             exact

@@ -5,10 +5,6 @@ const Order = require("../models/order")
 const Product = require("../models/product")
 
 
-
-
-
-
 router.get("/getDataProducts",function(req,res){
     console.log("USER",req.user)
 
@@ -42,20 +38,6 @@ router.get("/getDigitalProduct",function(req,res){
         res.json(dataToSend)
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 router.delete("/delete/:id", function (req, res) {
     ProductData.findByPk(req.params.id)

@@ -52,7 +52,7 @@ class CheckoutContainer extends React.Component {
         this.props.idsForOrders.map(e=>{
             this.props.addNewOrder({PuntoDeEncuentro:id, deliveryPoint:true, productDataId:e})
         })
-        
+        this.props.history.push("/gracias")
     }
 
 
@@ -79,7 +79,7 @@ class CheckoutContainer extends React.Component {
 
         })
         
-        this.props.history.push("/")
+        this.props.history.push("/gracias")
     }
 
     render() {
