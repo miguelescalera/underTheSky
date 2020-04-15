@@ -125,7 +125,7 @@ export default ({
 
 
   const navButton = {
-    color: "#ec7263",
+    color: "#d8a96d",
     border: "none"
   };
   let viewState = hidden ? hidden : null;
