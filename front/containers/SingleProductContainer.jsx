@@ -149,7 +149,4 @@ class SingleProductContainer extends React.Component {
  
 
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleProductContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer);

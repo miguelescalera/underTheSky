@@ -65,7 +65,7 @@ export const getAllProducts = () => {
 }
         
 
-export const getAllfss = ()=> {
+export const getAllfss = ()=> dispatch => {
     return axios.post("/api/products/getAllfss")
 }
   

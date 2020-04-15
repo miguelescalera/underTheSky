@@ -142,7 +142,7 @@ export const newFrame = (newFrame) =>
 
 
 export const deleteFrame = (frame) =>
-  axios.delete("/api/admin/deleteFrame", { frameId: frame.id })
+  axios.delete(`/api/admin/deleteFrame/${frame}`)
 
 /*---------------------------SIZE------------------------------*/
 
@@ -159,7 +159,7 @@ export const newSize = (newSize) =>
 
 
 export const deleteSize = (size) =>
-  axios.delete("/api/admin/deleteSize", { sizeId: size.id })
+  axios.delete(`/api/admin/deleteSize/${size}`)
 
 
 /*-------------------------STYLES-----------------------------------*/

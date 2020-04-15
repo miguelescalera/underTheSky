@@ -1,29 +1,64 @@
-import React from "react"
+import React, {useState} from "react"
 import Card from "react-bootstrap/Card"
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
+import Collapse from 'react-bootstrap/Collapse'
 
- export default ({styles, Allfss, handleDelete})=>{
+ export default ({styles, frames, sizes, handleDeleteStyle, handleDeleteSize, handleDeleteFrame})=>{
    
-    const frames = Allfss.frames;
-    const sizes = Allfss.sizes
+    const [open, setOpen] = useState(false);
+    const [count, setCount] = useState(false)
+    const [press, setPress] = useState(false)
 
     const botonSelecc = {
         fontSize: "0.7rem",
       };
+      console.log("estilos",styles)
+      console.log("FRAMES",frames)
+      console.log("SIZESS",sizes)
  
-    console.log("estilos",styles)
-    console.log("FRAMES",frames)
-    console.log("SIZESS",sizes)
     return(
-        <Container>
-            <Row style={{ marginBlockStart: "5rem" }} >
+        <div style={{justifyContent:"center", marginBlockStart: "2rem", marginBlockEnd: "1rem"}} >
+            <Button
+                className="boton-outline"
+                style={botonSelecc}
+                style={{justifyContent:"center"}}
+                onClick={() => setOpen(!open)}
+                aria-controls="Estilos"
+                aria-expanded={open}
+            >
+                Estilos
+            </Button>
+            <Button
+                className="boton-outline"
+                style={botonSelecc}
+                style={{justifyContent:"center"}}
+                onClick={() => setCount(!count)}
+                aria-controls="Marcos"
+                aria-expanded={count}
+            >
+                Marcos
+            </Button>
+            <Button
+                className="boton-outline"
+                style={botonSelecc}
+                style={{justifyContent:"center"}}
+                onClick={() => setPress(!press)}
+                aria-controls="Tamaños"
+                aria-expanded={press}
+            >
+                Tamaños
+            </Button>
+
+            <Collapse in={open}>
+                <div id="Estilos">
+                <Container style={{ marginBlockStart: "5rem" }}  >
+            <Row >
         {styles.map((style)=>{
             return(
                 <Col xs={2} >
-            <div>
                 <Card className="tarjetaproducto">
                     <Card.Img variant="top" src={style.imgPath.toString().split("/public")[1]} />
                     <Card.Body>
@@ -45,7 +80,7 @@ import Container from "react-bootstrap/Container"
                             <Button
                             className="boton-outline"
                             style={botonSelecc}
-                            onClick={() =>handleDelete(style.id)}
+                            onClick={() =>handleDeleteStyle(style.id)}
                             >
                             Eliminar
                             </Button>
@@ -54,12 +89,84 @@ import Container from "react-bootstrap/Container"
                     </Row>
                     </Card.Body>
                 </Card>
-            </div>
             </Col>
             )
         })}
-        </Row>
+        </Row> 
         </Container>
+                </div>
+            </Collapse>
+
+            <Collapse in={count}>
+        <div id="Marcos">
+        <Container style={{marginBlockStart: "2rem"}} >
+            <Row>
+                {frames? frames.map((frame)=>{
+                    return(
+                <Col xs={1} >
+                    <Row>
+                    <Card.Img variant="top" src={frame.imgPath.toString().split("/public")[1]} />  
+                    {frame.name}
+                    </Row>
+                    <Row style={{ justifyContent: "center" }} >
+                        <Col>
+                            <span>
+                                <Button
+                                className="boton-outline"
+                                style={botonSelecc}
+                                onClick={() =>handleDeleteFrame(frame.id)}
+                                >
+                                Eliminar
+                                </Button>
+                            </span>
+                        </Col>
+                    </Row>
+                </Col>
+                )
+                } 
+                ):
+                <span>
+
+                </span>}
+            </Row>
+            </Container>
+        </div>
+      </Collapse>
+      <Collapse in={press}>
+        <div id="Tamaños">
+        <Container style={{marginBlockStart: "2rem"}}>
+            <Row>
+                {sizes? sizes.map(size=>{
+                    return(
+                <Col xs={2}>
+                    <Row>    
+                    {size.name}
+                    </Row>
+                    <Row style={{ justifyContent: "center" }} >
+                        <Col>
+                            <span>
+                                <Button
+                                className="boton-outline"
+                                style={botonSelecc}
+                                onClick={() =>handleDeleteSize(size.id)}
+                                >
+                                Eliminar
+                                </Button>
+                            </span>
+                        </Col>
+                    </Row>
+                </Col>
+                    )
+                }) :
+                <span></span>
+            }
+            </Row>
+        </Container>
+        </div>
+      </Collapse>
+
+        </div>
+
     )
 }
  

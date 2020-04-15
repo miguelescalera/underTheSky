@@ -7,7 +7,7 @@ import { Tabs, Tab,FormFile } from 'react-bootstrap'
 import AddFrame from "../components/AddFrame";
 import AddSize from '../components/AddSize'
 import AddStyle from '../components/AddStyle'
-import { newFrame, newSize, newStyle, deleteStyle} from '../actions/adminActions'
+import { newFrame, newSize, newStyle, deleteStyle, deleteFrame, deleteSize} from '../actions/adminActions'
 import EliminarPropiedades from "../components/EliminarPropiedades";
 import {getAllStyles, allStyles, Allfss, getAllfss} from "../actions/productsActions";
 
@@ -15,14 +15,16 @@ import {getAllStyles, allStyles, Allfss, getAllfss} from "../actions/productsAct
 const mapDispatchToProps = (dispatch, state) => {
     return {
         allStyles:data => dispatch(allStyles(data)),
-        Allfss: data => dispatch(Allfss(data))
+        getAllfss: () => dispatch(getAllfss()),
+        Allfss: (data) => dispatch(Allfss(data))
     }
 };
 
 const mapStateToProps = (state, ownprops) => {
     return {
         styles:state.products.allStyles,
-        Fss:state.products.Allfss
+        frames: state.products.Allfss.frames,
+        sizes: state.products.Allfss.sizes,
     }
 };
 
@@ -48,7 +50,9 @@ class AdminProductsContainer extends React.Component {
         this.handleStyleSubmit = this.handleStyleSubmit.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.handleStyleFile = this.handleStyleFile.bind(this)
-        this.handleDelete= this.handleDelete.bind(this)
+        this.handleDeleteStyle= this.handleDeleteStyle.bind(this)
+        this.handleDeleteSize=this.handleDeleteSize.bind(this)
+        this.handleDeleteFrame=this.handleDeleteFrame.bind(this)
     }
 
     componentDidMount() {
@@ -57,7 +61,7 @@ class AdminProductsContainer extends React.Component {
           this.props.allStyles(result.data)
         });
 
-       getAllfss()
+      this.props.getAllfss()
         .then(result=>{
             this.props.Allfss(result.data)
         }) 
@@ -128,7 +132,7 @@ class AdminProductsContainer extends React.Component {
         this.props.history.push("/eladmin");
     }
 
-    handleDelete(id){
+    handleDeleteStyle(id){
         deleteStyle(id)
         .then(()=>{ 
         getAllStyles()
@@ -136,6 +140,26 @@ class AdminProductsContainer extends React.Component {
           this.props.allStyles(result.data)
         })
     })
+    }
+
+    handleDeleteFrame (id){
+        deleteFrame(id)
+        .then(()=>{
+        this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+        }) 
+        })
+    }
+
+    handleDeleteSize (id){
+        deleteSize(id)
+        .then(()=>{
+        this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+        }) 
+        })
     }
 
     render() {
@@ -168,8 +192,11 @@ class AdminProductsContainer extends React.Component {
                 </Tab>
                 <Tab eventKey="Eliminar" title="Eliminar">
                     <EliminarPropiedades styles={this.props.styles}
-                    Allfss={this.props.Fss}
-                    handleDelete={this.handleDelete}/>
+                    frames={this.props.frames}
+                    sizes={this.props.sizes}
+                    handleDeleteStyle={this.handleDeleteStyle}
+                    handleDeleteFrame={this.handleDeleteFrame}
+                    handleDeleteSize={this.handleDeleteSize}/>
                 </Tab>
             </Tabs>
         );
