@@ -19,7 +19,7 @@ console.log( 'ACAAAAAAAAAAAAAAAAAAAA', imgurl)
   return (
     <div>
       <Card className="tarjetaproducto">
-          <Card.Img variant="top" src={imgurl} />
+          <Card.Img variant="top" src={imgurl} style={{marginBlockStart:'0.5px'}} />
         <Card.Body>
           <Row>
             <Col>

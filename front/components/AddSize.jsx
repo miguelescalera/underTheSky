@@ -23,7 +23,7 @@ export default ({ handleChange, handleSizeSubmit }) => {
     display: "flex",
     justifyContent: "center",
     marginBlockEnd: "5rem",
-    marginBlockStart: "5rem",
+    marginBlockStart: "0.5rem",
   };
 
   return (
