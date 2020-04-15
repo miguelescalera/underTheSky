@@ -52,9 +52,10 @@ router.post("/newFrame", upload.single("frameImg"), function (req, res) {
   });
 });
 
-router.delete("/deleteFrame", function (req, res) {
-  Frame.findByPk(req.body.frameId)
+router.delete("/deleteFrame/:frame", function (req, res) {
+  Frame.findByPk(req.params.frame)
     .then(function (frame) {
+      console.log("este es mi frame",frame)
       frame.destroy();
     })
     .then(function () {
@@ -74,8 +75,8 @@ router.post("/newSize", function (req, res) {
   });
 });
 
-router.delete("/deleteSize", function (req, res) {
-  Size.findByPk(req.body.sizeId)
+router.delete("/deleteSize/:size", function (req, res) {
+  Size.findByPk(req.params.size)
     .then(function (size) {
       size.destroy();
     })
@@ -116,8 +117,9 @@ router.post("/newStyle", upload.single("styleImg"), function (req, res) {
   });
 });
  
-router.delete("/deleteStyle", function (req, res) {
-  Style.findByPk(req.body.id)
+router.delete("/deleteStyle/:style", function (req, res) {
+  console.log("IDSSS", req.params.style)
+  Style.findByPk(req.params.style)
     .then(function (style) {
       style.destroy();
     })

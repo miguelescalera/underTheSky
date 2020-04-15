@@ -71,7 +71,9 @@ export const getAllProducts = () => {
 }
 
 
+
 export const getAllfss = () => {
+
     return axios.post("/api/products/getAllfss")
 }
 
