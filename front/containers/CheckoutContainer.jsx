@@ -34,14 +34,15 @@ class CheckoutContainer extends React.Component {
             state:"",
             city:"",
             postCode:"",
-            productDataId:""
-            
-           
+            productDataId:"",
+            deliveryPoint:false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEncuentro= this.handleEncuentro.bind(this)
     }
+            
+           
 
     componentDidMount(){
        this.props.getPuntoDeEncuentro()
@@ -49,11 +50,22 @@ class CheckoutContainer extends React.Component {
 
 
     handleEncuentro(id){
-        this.props.idsForOrders.map(e=>{
-            this.props.addNewOrder({PuntoDeEncuentro:id, deliveryPoint:true, productDataId:e})
+        this.props.addNewOrder({
+            order:{deliveryPoint:true},
+            productDataId:this.props.idsForOrders,
+            PuntoDeEncuentro:id
         })
+        this.props.idsForOrders.map(e=>{
+            modifyData({bought:true,id:e})
+        })
+
+
+        
+
         this.props.history.push("/gracias")
+
     }
+        
 
 
     handleChange(e) {
@@ -66,25 +78,24 @@ class CheckoutContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        
-        this.props.idsForOrders.map(e=>{
-            this.props.addNewOrder({address:this.state.address,
-            country:this.state.country,
-            state:this.state.state,
-            city:this.state.city,
-            postCode:this.state.postCode,
-            productDataId:e,
-            deliveryPoint:false})
-            modifyData({bought:true,id:e})
-
+        this.props.addNewOrder({
+            order:this.state,
+            productDataId:this.props.idsForOrders
         })
+        this.props.idsForOrders.map(e=>{
+            modifyData({bought:true,id:e})
+        })
+
+        localStorage.removeItem("dataWithoutUser")
+        this.props.history.push("/")
+
         
         this.props.history.push("/gracias")
+
     }
 
     render() {
-        console.log("stadooo",this.state)
-        console.log("idsss",this.props.idsForOrders)
+        
         return (
             <div>
                 <Checkout

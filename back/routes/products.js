@@ -9,6 +9,7 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
+  console.log("REQ.USER:",req.user)
   ProductData.create(req.body)
     .then(productData => {
       if (req.user) productData.setUser(req.user.id);

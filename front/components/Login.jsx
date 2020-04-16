@@ -33,10 +33,6 @@ export default ({ handleChange, handleSubmit,alertNull, alertPass,checkboxLogin}
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check style={{display:"inline-block"}} type="checkbox" name="checkbox" onChange={checkboxLogin}/>
-            <span >recordar usuario</span>
-         </Form.Group>
           {alertNull?( <Alert variant="warning">Por favor completá los campos.</Alert>): null}
           {alertPass?(<Alert variant="warning">Usuario o contraseña incorrectos.</Alert>):null}
           <Button className="boton-solido" type="submit" style={{marginBlockStart:'0.5rem', marginBlockEnd:'1rem'}} onClick={handleSubmit}>
@@ -53,10 +49,11 @@ export default ({ handleChange, handleSubmit,alertNull, alertPass,checkboxLogin}
         </Form>
         <Container style={{display:'flex', justifyContent:'flex-end', alignItems:'flex-end'}} >
         </Container>
-
-
       </Card>
 
     </div>
   )
 }
+        
+
+

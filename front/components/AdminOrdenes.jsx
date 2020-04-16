@@ -18,7 +18,8 @@ export default ({
   estadoDeCompra,
   handleChange,
   handleSelectedOrder,
-  handleStatus
+  handleStatus,
+  allStyles
 }) => {
 
   
@@ -32,26 +33,30 @@ export default ({
       return selectedOrder.map((e,i)=>{
 
           let total=0
-
+          let selectStyle=null
           let dataProduct= DataProducts.filter(f=>{
+            selectStyle= allStyles.filter(style=>{
+              return  style.id===f.styleId
+            }) 
               if(f.orderId===e.id){
                 total+=(f.price * f.quantity)
                 return f
               } 
             })
-
+          
+         
           let orderUser=users.filter(u=>{
               return e.userId===u.id
              })
 
           orderUser=orderUser[0]
+          dateOrder= moment(e.createdAt).format('DD/MM/YYYY')
           
          
-          dateOrder= moment(e.createdAt).format('DD/MM/YYYY')
              
      
           return(
-            <div style={{backgroundColor:"white", marginBottom:"5%"}}>
+            <div style={{backgroundColor:"white", marginBottom:"5%"}} key={i}>
                 <Container >
                   <h3>Orden N° {e.id}</h3> <strong>fecha:</strong><span>{dateOrder}</span>
                   <h6>User: {orderUser?orderUser.firstName+" "+ orderUser.lastName:"usuario no registrado"} </h6> 
@@ -85,12 +90,13 @@ export default ({
                                       <Col lg={3}>
                                         <div>
                                           <ul >
+                                            {e.digital? <strong>ESTE PRODUCTO ES DIGITAL</strong>: null }
                                             <li><strong>cantidad: </strong>{e.quantity}</li>
                                             <li><strong>Momento:</strong>{e.date + " "+e.time}</li>
                                             <li><strong>Frase o lugar:</strong>{e.content}</li>
                                             <li><strong>Idioma:</strong>{e.language}</li>
                                             <li><strong>Marco: </strong>{e.frame}</li>
-                                            <li><strong>Estilo:</strong>{e.style}</li>
+                                            <li><strong>Estilo:</strong>{selectStyle[0]?selectStyle[0].name:null}</li>
                                             <li><strong>Tamaño:</strong>{e.size}</li>
                                           </ul>
                                         </div>
