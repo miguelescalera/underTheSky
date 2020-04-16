@@ -70,8 +70,7 @@ export const getAllProducts = () => {
     return axios.get("/api/products/getProducts")
 }
 
-
-export const getAllfss = () => {
+export const getAllfss = () => dispatch => {
     return axios.post("/api/products/getAllfss")
 }
 
@@ -91,6 +90,12 @@ export const fetchStyle = (styleId) => dispatch => {
     axios.get(`/api/products/styles/${styleId}`)
         .then(res => res.data)
         .then(style => { dispatch(selectStyle(style)) })
+}
+
+export const fetchSize = (sizeId) => dispatch => {
+    console.log('esto es el conseguime tamano')
+    axios.get(`/api/products/size/${sizeId}`)
+        .then(res => dispatch(selectSize(res.data)))
 }
 
 

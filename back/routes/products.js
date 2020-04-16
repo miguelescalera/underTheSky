@@ -156,6 +156,14 @@ router.post("/getAllfss", function (req, res) {
   });
 });
 
+router.get('/size/:id', function (req, res) {
+  ('LE ESTOY PEGANDO AL BACK')
+  Size.findByPk(req.params.id)
+    .then(size => res.json(size))
+})
+
+
+
 router.get("/:id", function (req, res) {
   Product.findByPk(req.params.id)
     .then((product) => {
