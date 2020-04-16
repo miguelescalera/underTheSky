@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const fileUpload = require('express-fileupload')
+const fileUpload = require("express-fileupload");
 const fs = require("fs");
 
 const multer = require("multer");
@@ -24,8 +24,7 @@ const User = require("../models/user");
 const Product = require("../models/product");
 const Display = require("../models/display");
 const ProductData = require("../models/productData");
-const PuntoDeEncuentro = require("../models/puntoDeEncuentro")
-
+const PuntoDeEncuentro = require("../models/puntoDeEncuentro");
 
 router.get("/getFrame", function (req, res) {
   Frame.findAll().then(function (frames) {
@@ -47,20 +46,20 @@ router.post("/newFrame", upload.single("frameImg"), function (req, res) {
   Frame.create({
     name,
     price: framePrice,
-    imgName:req.file.originalname,
+    imgName: req.file.originalname,
     imgType: req.file.mimetype,
     imgData: fs.readFileSync(req.file.path),
-    imgPath: '/'+req.file.path,
+    imgPath: "/" + req.file.path,
   }).then((resolve) => {
     console.log(resolve);
-    res.redirect(200, '/addproducts');
+    res.redirect(200, "/addproducts");
   });
 });
 
 router.delete("/deleteFrame/:frame", function (req, res) {
   Frame.findByPk(req.params.frame)
     .then(function (frame) {
-      console.log("este es mi frame",frame)
+      console.log("este es mi frame", frame);
       frame.destroy();
     })
     .then(function () {
@@ -90,40 +89,81 @@ router.delete("/deleteSize/:size", function (req, res) {
     });
 });
 
+//////////////////////ESTILOS////////////////////////////////////
+
 router.get("/getStyle", function (req, res) {
   Style.findAll().then(function (styleId) {
     res.json(styleId);
   });
 });
 
-
-
 router.post("/newStyle", upload.single("styleImg"), function (req, res) {
-    console.log(req.body);
-    console.log(req.file);
-    
-    
-    let name = req.body.styleName.toLowerCase();
-    let color = req.body.styleColor.toLowerCase();
-    let tipografia = req.body.styleTipo.toLowerCase();
-    let signo = req.body.styleSigno.toLowerCase();
+  console.log("Ruta de creación de estilo->", req.body);
+  console.log("Ruta de creación de estilo, img->", req.file);
+  let name = req.body.styleName.toLowerCase();
+  let color = req.body.styleColor.toLowerCase();
+  let tipografia = req.body.styleTipo.toLowerCase();
+  let signo = req.body.styleSigno.toLowerCase();
   Style.create({
     name,
     color,
     signo,
     tipografia,
-    imgName:req.file.originalname,
-      imgType: req.file.mimetype,
-      imgData: fs.readFileSync(req.file.path),
-      imgPath: '/'+req.file.path,
+    imgName: req.file.originalname,
+    imgType: req.file.mimetype,
+    imgData: fs.readFileSync(req.file.path),
+    imgPath: "/" + req.file.path,
   }).then(function (resolve) {
     console.log(resolve);
     res.sendStatus(200);
   });
 });
- 
+
+router.put("/editStyle/:style", upload.single("styleImg"), function (req, res) {
+  console.log("Ruta de edición de estilo ->", req.params.style);
+  console.log("Ruta de edicion de estilo->", req.body);
+  console.log("Ruta de edicion de estilo, img->", req.file);
+  let name = req.body.styleName ? req.body.styleName.toLowerCase() : undefined;
+  let color = req.body.styleColor
+    ? req.body.styleColor.toLowerCase()
+    : undefined;
+  let tipografia = req.body.styleTipo
+    ? req.body.styleTipo.toLowerCase()
+    : undefined;
+  let signo = req.body.styleSigno
+    ? req.body.styleSigno.toLowerCase()
+    : undefined;
+  let imgName = req.file ? req.file.originalname : undefined;
+  let imgType = req.file ? req.file.mimetype : undefined;
+  let imgData = req.file ? fs.readFileSync(req.file.path) : undefined;
+  let imgPath = req.file ? "/" + req.file.path : undefined;
+  let id = req.params.style;
+  Style.update(
+    {
+      name,
+      color,
+      tipografia,
+      signo,
+      imgName,
+      imgType,
+      imgData,
+      imgPath,
+    },
+    {
+      where: {id},
+    }
+  )
+  .then(function (resolved) {
+    console.log('se actualizaron',resolved,'filas del modelo');
+
+    res.sendStatus(200);
+  });
+});
+
+///////estas andan
+
 router.delete("/deleteStyle/:style", function (req, res) {
-  console.log("IDSSS", req.params.style)
+  console.log("Ruta de eliminación de estilo ->", req.params.style);
   Style.findByPk(req.params.style)
     .then(function (style) {
       style.destroy();
@@ -141,77 +181,64 @@ router.get("/getOrders", function (req, res) {
 });
 
 router.put("/changeStatus", function (req, res) {
-    console.log("BODY.", req.body)
-    Order.findByPk(req.body.orderId).then(function (order) {
-        order.update({ status: req.body.status })
-            .then(function (newOrder) {
-                res.json(newOrder)
-            })
-    })
-})
-   
-
-
+  console.log("BODY.", req.body);
+  Order.findByPk(req.body.orderId).then(function (order) {
+    order.update({ status: req.body.status }).then(function (newOrder) {
+      res.json(newOrder);
+    });
+  });
+});
 
 router.delete("/deleteOrder/:id", function (req, res) {
-    console.log("params", req.params)
-    Order.findByPk(req.params.id)
-        .then(function (order) {
-            order.destroy()
-        })
-        .then(function () {
-            res.sendStatus(200)
-        })
-})
-    
-
-/////////////////USERS/////////////////////
-router.get("/getUsers", function (req, res) {
-    User.findAll()
-        .then(function (users) {
-            res.json(users)
-        })
-})
-
-
-router.post("/addAdmin", function (req, res) {
-    console.log("entre al back")
-    User.findByPk(req.body.userId)
-        .then(function (user) {
-            user.update({ type: req.body.type })
-                .then(function (newstatus) {
-                    console.log("type modificado back")
-                    res.json(newstatus)
-                })
-        })
-})
-
-
-router.delete("/deleteUser/:id", function (req, res) {
-    const id = req.params.id;
-    User.findByPk(id)
-        .then(user => {
-            user.destroy()
-        })
-        .then(res.sendStatus(204))
-})
-
-///////////PRODUCTS////////////////////////
-router.get("/getAllDataProducts", function (req, res) {
-    ProductData.findAll()
-        .then(allproductdata => {
-          console.log("allproductdata",allproductdata)
-            res.json(allproductdata)
-        })
-})
-
-router.get("/getProducts", function (req, res) {
-    Product.findAll().then(function (products) {
-        res.json(products);
+  console.log("params", req.params);
+  Order.findByPk(req.params.id)
+    .then(function (order) {
+      order.destroy();
+    })
+    .then(function () {
+      res.sendStatus(200);
     });
 });
 
+/////////////////USERS/////////////////////
+router.get("/getUsers", function (req, res) {
+  User.findAll().then(function (users) {
+    res.json(users);
+  });
+});
 
+router.post("/addAdmin", function (req, res) {
+  console.log("entre al back");
+  User.findByPk(req.body.userId).then(function (user) {
+    user.update({ type: req.body.type }).then(function (newstatus) {
+      console.log("type modificado back");
+      res.json(newstatus);
+    });
+  });
+});
+
+router.delete("/deleteUser/:id", function (req, res) {
+  const id = req.params.id;
+  User.findByPk(id)
+    .then((user) => {
+      user.destroy();
+    })
+    .then(res.sendStatus(204));
+});
+
+///////////PRODUCTS////////////////////////
+router.get("/getAllDataProducts", function (req, res) {
+  ProductData.findAll().then((allproductdata) => {
+    console.log("allproductdata", allproductdata);
+    res.json(allproductdata);
+  });
+});
+
+router.get("/getProducts", function (req, res) {
+  Product.findAll().then(function (products) {
+    res.json(products);
+  });
+});
 
 router.delete("/deleteProduct", function (req, res) {
   Product.findByPk(req.body.productId)
@@ -223,47 +250,44 @@ router.delete("/deleteProduct", function (req, res) {
     });
 });
 
-/////////DISPLAY//////////////////////
-router.get("/getDisplay", function (req, res) {
-  Display.findAll().then(function (display) {
-    res.json(display);
-  });
-});
-router.post("/newDisplay", function (req, res) {
-  Display.create(req.body).then(function () {
-    res.sendStatus(200);
-  });
-});
-router.delete("/deleteDisplay", function (req, res) {
+// /////////DISPLAY//////////////////////
+// router.get("/getDisplay", function (req, res) {
+//   Display.findAll().then(function (display) {
+//     res.json(display);
+//   });
+// });
+// router.post("/newDisplay", function (req, res) {
+//   Display.create(req.body).then(function () {
+//     res.sendStatus(200);
+//   });
+// });
 
-    Display.findByPk(req.body.displayId)
-        .then(function (style) {
-            style.destroy()
-        })
-        .then(function () {
-            res.sendStatus(200)
-        })
-})
+// router.delete("/deleteDisplay", function (req, res) {
+
+//     Display.findByPk(req.body.displayId)
+//         .then(function (style) {
+//             style.destroy()
+//         })
+//         .then(function () {
+//             res.sendStatus(200)
+//         })
+// })
 ///////////////// PUNTOS DE ENCUENTRO /////////////
-router.post("/newPunto", function(req, res){
-    console.log("entre papaaaaaaa")
-    PuntoDeEncuentro.create(req.body)
-    .then(function(){
-        res.send("punto creado papa")
+router.post("/newPunto", function (req, res) {
+  console.log("entre papaaaaaaa");
+  PuntoDeEncuentro.create(req.body).then(function () {
+    res.send("punto creado papa");
+  });
+});
+
+router.post("/deletePunto", function (req, res) {
+  console.log("esty en la ruta", req.body);
+  const id = req.body.id;
+  PuntoDeEncuentro.findByPk(id)
+    .then((punto) => {
+      punto.destroy();
     })
-})
-
-router.post("/deletePunto",function(req,res){
-    console.log("esty en la ruta",req.body)
-    const id=req.body.id
-    PuntoDeEncuentro.findByPk(id)
-    .then(punto=>{
-        punto.destroy()
-    })
-    .then(res.sendStatus(204))
-})
-
-
-
+    .then(res.sendStatus(204));
+});
 
 module.exports = router;

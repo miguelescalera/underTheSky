@@ -34,6 +34,7 @@ class AdminProductsContainer extends React.Component {
         this.state = {
             size: "",
             sizePrice: 0,
+            sizeType:'',
             frame: "",
             framePrice: 0,
             frameImg: null,
@@ -107,7 +108,8 @@ class AdminProductsContainer extends React.Component {
         console.log('hola papu, gracias')
         newSize({
             name: this.state.size,
-            price: this.state.sizePrice
+            price: this.state.sizePrice,
+            type:this.state.sizeType
         })
         this.props.history.push("/eladmin");
 
