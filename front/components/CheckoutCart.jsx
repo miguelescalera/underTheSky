@@ -47,11 +47,7 @@ export default ({ dataProduct, handleSubmit,PreviousStep,BackStep }) => {
             <strong>${total}</strong>
           </div>
         </ListGroup.Item>
-        {PreviousStep?<ListGroup.Item style={{ textAlign: "center" }}>
-          <Button onClick={() => BackStep()} className="boton-outline">
-            volver al paso anterior
-          </Button>
-        </ListGroup.Item> :null}
+        
         <ListGroup.Item style={{ textAlign: "center" }}>
           <Button onClick={() => handleSubmit(dataProductsIds)} className="boton-outline">
             Finalizar compra

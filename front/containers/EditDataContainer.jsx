@@ -18,12 +18,12 @@ const mapDispatchToProps = (dispatch, state) => {
 
 const mapStateToProps = (state, ownprops) => {
     return {
+        userEmail:state.user.user.email,
         dataToEdit: state.dataProducts.dataProduct
     };
 };
         
 
-let arrOfData=[]
 
 
 class FormDataContainer extends React.Component {
@@ -33,7 +33,8 @@ class FormDataContainer extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-  
+    
+    arrOfData=[]
 
 
     handleChange(e) {
@@ -49,24 +50,25 @@ class FormDataContainer extends React.Component {
         modifyData(this.state)
         .then((res)=>{
             this.props.dataProduct(res.data)
+            console.log("this.props.userEmail",this.props.userEmail)
             if(!this.props.userEmail){
                let dataWithoutUser=res.data
-               if(arrOfData.length!==1){
-                   arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
+               if(this.arrOfData.length!==1){
+                   this.arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
 
-                   arrOfData.map((e,i)=>{
+                   this.arrOfData.map((e,i)=>{
                        if(e.id===res.data.id){
-                           arrOfData.splice(i,1)
-                         arrOfData.push(dataWithoutUser)
+                           this.arrOfData.splice(i,1)
+                         this.arrOfData.push(dataWithoutUser)
                        }
                    })
                          
 
-                   localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+                   localStorage.setItem("dataWithoutUser",JSON.stringify(this.arrOfData))
                }
                else{
-                   arrOfData.push(dataWithoutUser)
-                   localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+                   this.arrOfData.push(dataWithoutUser)
+                   localStorage.setItem("dataWithoutUser",JSON.stringify(this.arrOfData))
                }
            }
        })

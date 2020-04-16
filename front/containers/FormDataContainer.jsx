@@ -121,7 +121,7 @@ class FormDataContainer extends React.Component {
                 this.props.getCart()
             }
         }).then(()=>{
-            this.props.nextStep()
+            this.props.history.push("/cart")
         })
     }
     PreviousStep(e){

@@ -37,13 +37,12 @@ componentDidMount(){
                 <StepWizard style={{ zIndex: '-1' }}>
                     <SingleProductContainer style={{ zIndex: '-1' }} />
                     <FormDataContainer style={{ zIndex: '-1' }} />
-                    <CarritoContainer style={{ zIndex: '-1' }} />
-                    <CheckoutContainer style={{ zIndex: '-1' }} />
                 </StepWizard>
             </div>
         )
     }
 }
+                    
 
 
 

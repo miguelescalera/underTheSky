@@ -1,9 +1,10 @@
 import React from "react"
 import {connect} from "react-redux"
 import ComprasUsuario from "../components/comprasUsuario"
-import {getOrderUser} from "../actions/orderActions"
+import {getOrderUser,getPuntoDeEncuentro} from "../actions/orderActions"
 const mapStateToProps= state =>{
     return {
+        puntosDeEncuentro:state.orders.PuntoDeEncuentro,
         orders:state.orders.userOrders,
         user:state.user.user,
         allStyles:state.products.allStyles
@@ -12,7 +13,7 @@ const mapStateToProps= state =>{
 
 const mapDispatchToProps = dispatch=>{
     return{
-       
+        getPuntoDeEncuentro:()=>dispatch(getPuntoDeEncuentro()),
         getOrderUser:()=>dispatch(getOrderUser())
     }
 }
@@ -23,6 +24,7 @@ constructor(){
 }
 componentDidMount(){
     this.props.getOrderUser()
+    this.props.getPuntoDeEncuentro()
    
 }
   
@@ -31,10 +33,16 @@ componentDidMount(){
 
 render(){
     return(
-<ComprasUsuario orders={this.props.orders} user={this.props.user} allStyles={this.props.allStyles}/>
+<ComprasUsuario 
+    orders={this.props.orders}
+    user={this.props.user}
+    allStyles={this.props.allStyles}
+    puntosDeEncuentro={this.props.puntosDeEncuentro}
+    />
         )
     }
 }
+   
 
 export default connect (mapStateToProps,mapDispatchToProps)(perfilUser)
     

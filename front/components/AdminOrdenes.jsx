@@ -22,6 +22,14 @@ export default ({
   allStyles
 }) => {
 
+const styleFilter={
+  width:"50%",
+  marginLeft:"25%",
+  borderBottom:"solid 1px gray",
+  marginBottom:"20%"
+}
+
+
   
     const [open, setOpen] = useState(false);
     let dateOrder= ""
@@ -123,33 +131,46 @@ export default ({
                
                        return (
                          <div>
+                           <div style={styleFilter}>
+                                <h3 style={{textAlign:"center"}}>filtrar por</h3>
+                                <form >
                              <Container>
-                             <input type="text"/><Button type="submit" >Buscar</Button><br/>
-                             <h3 style={{color:"white"}}>filtrar por</h3>
-                               <form >
-                               <label style={{color:"white"}}>
-                                 envio:
-                                 <select value ={envio} name="envio" onChange={handleChange}>
-                                   <option value="todos">todos</option>
-                                   <option value= {false}>a domicilio</option>
-                                   <option value= {true} >en punto de entrega</option>
-                                 </select>
-                               </label> <br/>
-                               <label style={{color:"white"}}>
-                                 estado de la compra:
-                                 <select value ={estadoDeCompra} name="estadoDeCompra" onChange={handleChange}>
-                                   <option value="todos">todos</option>
-                                   <option value="inprocess">en proceso</option>
-                                   <option value="delivered">enviada</option>
-                                 </select>
-                               </label>
-                               <button onClick={handleSelectedOrder}>buscar</button>
-                             </form>
+                             <Row>  
+                              <Col xs={6}>
+                                <span>envio:</span><br/>
+                                <span>estado de la compra:</span>
+                              </Col>
+                              <Col xs={6}>
+                              <select value ={envio} name="envio" onChange={handleChange}>
+                                      <option value="todos">todos</option>
+                                      <option value= {false}>a domicilio</option>
+                                      <option value= {true} >en punto de entrega</option>
+                                    </select>
+                                  <br/>
+                                  <select value ={estadoDeCompra} name="estadoDeCompra" onChange={handleChange}>
+                                      <option value="todos">todos</option>
+                                      <option value="inprocess">en proceso</option>
+                                      <option value="delivered">enviada</option>
+                                    </select>
+                              </Col>
+                                  <button style={{textAlign:"center"}} onClick={handleSelectedOrder}>buscar</button>
+                             </Row> 
                              </Container>
+                                </form>
+                           </div>
                              {allOrders()}
                          </div>
                        );
                      };
+                                  
+                                  
+
+                                
+                                    
+                                   
+                                  
+                                    
+                                    
                  
                        
                       
