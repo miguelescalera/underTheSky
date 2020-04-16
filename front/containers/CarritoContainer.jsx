@@ -42,7 +42,8 @@ class NavbarContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
     this.handleEditData = this.handleEditData.bind(this)
-    this.PreviousStep= this.PreviousStep.bind(this)
+    this.BackStep= this.BackStep.bind(this)
+    this.BackStep=this.BackStep.bind(this)
   }
   
   componentDidMount() {
@@ -113,13 +114,15 @@ class NavbarContainer extends React.Component {
         this.props.history.push("/cart/editData");
       }
       
-  PreviousStep(e){
-        e.preventDefault()
-        this.props.previousStep()
-      }
+  BackStep(){
+    this.props.previousStep()
+  }
+
+       
        
       
         render() {
+          
           return (
             <div>
               <Container className="carrito-vistageneral">
@@ -127,6 +130,8 @@ class NavbarContainer extends React.Component {
                   dataProduct={this.props.dataProduct}
                   handleDelete={this.handleDelete}
                   handleSubmit={this.handleSubmit}
+                  BackStep={this.BackStep}
+                  PreviousStep={this.props.previousStep}
                 />
                 <Carrito
                   dataProduct={this.props.dataProduct}

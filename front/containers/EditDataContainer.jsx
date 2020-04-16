@@ -48,35 +48,35 @@ class FormDataContainer extends React.Component {
         e.preventDefault();
         modifyData(this.state)
         .then((res)=>{
-            console.log("RES:",res)
-             this.props.dataProduct(res.data)
-             if(!this.props.userEmail){
-                let dataWithoutUser=res.data
-                if(arrOfData.length!==1){
-                    arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
+            this.props.dataProduct(res.data)
+            if(!this.props.userEmail){
+               let dataWithoutUser=res.data
+               if(arrOfData.length!==1){
+                   arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
 
-                    arrOfData.map((e,i)=>{
-                        if(e.id===res.data.id){
-                            arrOfData.splice(i,1)
-                          arrOfData.push(dataWithoutUser)
-                        }
-                    })
-                          
+                   arrOfData.map((e,i)=>{
+                       if(e.id===res.data.id){
+                           arrOfData.splice(i,1)
+                         arrOfData.push(dataWithoutUser)
+                       }
+                   })
+                         
 
-                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-                }
-                else{
-                    arrOfData.push(dataWithoutUser)
-                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-                }
-            }
-        })
-        .then(()=>{
-            if(this.props.userEmail){
-                this.props.getCart()
-            }
-          }).then(()=>this.props.history.push("/cart"))
-          }
+                   localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+               }
+               else{
+                   arrOfData.push(dataWithoutUser)
+                   localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
+               }
+           }
+       })
+       .then(()=>{
+           if(this.props.userEmail){
+               this.props.getCart()
+           }
+         }).then(()=>this.props.history.push("/cart"))
+         }
+         
 
           render() {
                 return (
