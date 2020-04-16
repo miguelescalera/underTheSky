@@ -72,6 +72,8 @@ class SingleProductContainer extends React.Component {
             localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
             localStorage.setItem('selectedSize',JSON.stringify(result.data.sizes[0]))
         })
+
+        
     }
            
         
@@ -119,8 +121,15 @@ class SingleProductContainer extends React.Component {
                this.props.nextStep()
         }
                 
-            
+       scrollUp(){
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+       }   
+
         render() {
+          this.scrollUp()
           return (
             <div>
               <h3 className="titulopagina">Personalizalo</h3>

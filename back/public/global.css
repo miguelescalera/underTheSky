@@ -23,10 +23,11 @@
 .form-control {
   background-color: rgba(255, 255, 255, 0.6);
   border-color: #d8a96d;
+  color:#273b52 ;
 }
 
 .form-control:focus {
-  color: #d3cec4;
+  color: #102f51;
   background-color: rgba(255, 255, 255, 0.6);
   border-color: #d8a96d;
   outline: 0;
@@ -62,6 +63,14 @@ a:hover {
   box-shadow :8px 8px 15px -10px rgba(0,0,0,0.25);
 }
 
+/* PROBUILDER */
+.card-img-top{
+  background-color: rgba(0,0,0,0)!important;
+}
+
+
+
+
 /* BOTONES Y TOGGLE GENERALES */
 
 .btn-primary {
@@ -69,6 +78,8 @@ a:hover {
   color: #fffefb!important;
   border-color: #d8a96d!important;
   border-radius: 0.2rem;
+  font-weight: 300;
+
 }
 
 
@@ -350,6 +361,7 @@ select:-webkit-autofill:focus {
 
 #probuild-contenedor{
   border: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .singleproduct-variable {
@@ -363,8 +375,18 @@ select:-webkit-autofill:focus {
   margin-top: 5px;
 }
 
+.info-single-product {
+  color: #102f51;
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0.15rem;
+  font-weight: 300;
+  text-align: center;
+  display: inline-block;
+}
+
 .singleproduct-card {
-  background-color: rgba(40, 38, 36, 0.6);
+  background-color: rgba(40, 38, 36, 0);
   box-shadow: 8px 8px 15px -10px rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
   text-align: center;

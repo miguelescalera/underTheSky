@@ -6,13 +6,19 @@ Size.init(
   {
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     price: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      defaultValue: 0
-    }
+      defaultValue: 0,
+    },
+    type: {
+      type: Sequelize.ENUM({
+        values: ["digital", "impreso"],
+      }),
+      allowNull: false,
+    },
   },
   { sequelize, modelName: "size" }
 );

@@ -54,6 +54,13 @@ export default ({ handleChange, handleSizeSubmit }) => {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Tipo</Form.Label>
+            <Form.Control as="select" name="sizeType" onChange={handleChange}>
+              <option>digital</option>
+              <option>impreso</option>
+            </Form.Control>
+          </Form.Group>
           <Form.Group controlId="formBasicCheckbox"></Form.Group>
           <Button
             className="boton-outline"
