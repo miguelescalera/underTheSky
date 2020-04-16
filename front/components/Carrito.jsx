@@ -52,6 +52,8 @@ export default ({
 
 
 
+  console.log("dataProduct",dataProduct)
+  
   return (
 
     <Container>

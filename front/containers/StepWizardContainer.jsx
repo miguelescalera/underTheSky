@@ -5,10 +5,15 @@ import SingleProductContainer from "./SingleProductContainer"
 import FormDataContainer from "./FormDataContainer"
 import CarritoContainer from "./CarritoContainer"
 import CheckoutContainer from "./CheckoutContainer"
+import {selectStyle} from "../actions/productsActions"
 
 
 
-
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        selectStyle:(data)=>dispatch(selectStyle(data))
+    }
+}
 
 
 
@@ -16,8 +21,14 @@ import CheckoutContainer from "./CheckoutContainer"
 class StepWizardContainer extends React.Component {
     constructor() {
         super()
+        
     }
-
+componentDidMount(){
+    let selectedStyle= JSON.parse(localStorage.getItem("selectedStyle"))
+    if(selectedStyle){
+    this.props.selectStyle(selectedStyle)
+    }
+}
 
 
     render() {
@@ -38,4 +49,4 @@ class StepWizardContainer extends React.Component {
 
 
 
-export default connect()(StepWizardContainer);
+export default connect(null,mapDispatchToProps)(StepWizardContainer);

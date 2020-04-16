@@ -50,12 +50,14 @@ const mapDispatchToProps=(dispatch)=>{
          if(!this.props.emailUser&&email){
             userLogin({email:email,password:decrypt(userPassword)})
             .then(user=> this.props.addLogin(user.data)).then(()=>{
-                this.props.getCart()
+                setTimeout(this.props.getCart(),1000)
+                
               })
               .catch(err=>console.error(err))
-         }
+            }
+        }
          
-     }
+               
          
     handlePerfil(){
         

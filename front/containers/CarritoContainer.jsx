@@ -55,7 +55,6 @@ class NavbarContainer extends React.Component {
       })
     getAllFrames()
       .then(result => {
-        console.log('ESTE ES EL RESULT', result)
         this.props.allFrames(result.data)
       })
 
@@ -66,6 +65,8 @@ class NavbarContainer extends React.Component {
       let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
       this.props.cartWithoutUser(dataProduct)
     }
+      
+
 
 
 
@@ -153,6 +154,7 @@ class NavbarContainer extends React.Component {
             handleEditData={this.handleEditData}
             PreviousStep={this.PreviousStep}
             Styles={this.props.Styles}
+            Frames={this.props.Frames}
           />
         </Container>
       </div>

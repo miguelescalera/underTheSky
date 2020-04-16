@@ -7,7 +7,6 @@ const Product = require("../models/product")
 
 router.get("/getDataProducts",function(req,res){
     console.log("USER",req.user)
-
     ProductData.findAll({
         where: {
             userId: req.user.id,
@@ -21,6 +20,7 @@ router.get("/getDataProducts",function(req,res){
         res.json(dataToSend)
     })
 })
+
 
 router.get("/getDigitalProduct",function(req,res){
     

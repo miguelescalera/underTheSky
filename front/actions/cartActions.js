@@ -44,6 +44,7 @@ axios.get("/api/cart/getDataProducts")
     allDataProducts.data,
     ))
   });
+
   
   export const modifyDataProduct =(id,quantity,user)=> dispatch =>{
     axios.put("/api/products/modifyQuantity",{quantity:quantity,productDataId:id})
