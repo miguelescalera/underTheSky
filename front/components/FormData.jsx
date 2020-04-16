@@ -10,7 +10,15 @@ import 'react-calendar/dist/Calendar.css'
 
 
 
-export default ({ handleChange, handleSubmit,state,PreviousStep,date, onChange }) => {
+export default ({ 
+    handleChange, 
+    handleSubmit,
+    state,
+    PreviousStep,
+    date, 
+    onChange,
+    enableButton
+ }) => {
 
 
     const formStyle = {
@@ -75,9 +83,10 @@ export default ({ handleChange, handleSubmit,state,PreviousStep,date, onChange }
                                     Nunca compartiremos tu Email
                                 </Form.Text>
                             </Form.Group>
-                            <Button onClick={PreviousStep} className="boton-outline" type="submit">
+                            {enableButton?<Button onClick={PreviousStep} className="boton-outline" type="submit">
                                 atras
-                            </Button>
+                            </Button>:null}
+                            
                             <Button onClick={handleSubmit} className="boton-outline" type="submit">
                                 Continuar
                             </Button>

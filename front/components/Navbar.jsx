@@ -183,8 +183,7 @@ export default ({
                 Productos
               </Link>
             </Nav.Link>
-            
-            <Nav.Link>
+            {User.email?null:<Nav.Link>
               <Link
                 style={navFont}
                 to="/register"
@@ -196,7 +195,8 @@ export default ({
               >
                 Registrate
               </Link>
-            </Nav.Link>
+            </Nav.Link> }
+           
 
 
             <Nav.Link style={navFont}>

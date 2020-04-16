@@ -3,7 +3,7 @@ import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import Modal from 'react-bootstrap/Modal'
 
 
-export default ({orders,user})=>{
+export default ({orders,user,allStyles})=>{
 
 const [isOpen, setIsOpen] = useState(false);
 
@@ -25,13 +25,18 @@ const styleUser={
         <div>
             <div>
                 <h3 style={{color:"white",textAlign:"center"}}>tus compras</h3>
-               {orderUser?orderUser.map((e,i)=>{
-                let total=0
+                {orderUser?orderUser.map((e,i)=>{
+                  let selectedStyle=null
+                  let total=0
+                   
                 let productDataUser= productsData.filter(f=>{
+                     selectedStyle= allStyles.filter(style=>{
+                        return f.styleId===style.id
+                    })
                       total+=f.price
                       return f.orderId=== e.id
                   })
-                 
+                
                    return(
                        <div key={i} style={styleUser}>
                            <strong>estado de tu compra: </strong><span>{e.status}</span><br/>
@@ -49,9 +54,13 @@ const styleUser={
                                     <Card key={i}>
                                     <CardBody>
                                     <span><strong>tamaño: </strong>{e.size+" "}</span>
-                                    <span><strong>estilo: </strong>{e.style+" "}</span>
+                                    <span><strong>estilo: </strong>{selectedStyle[0].name+" "}</span>
                                     {e.digital?<strong>digital</strong>:<span><strong>marco:</strong> {e.frame}</span>}<br/>
                                     <strong>fecha: </strong><span>{e.date}</span><br/>
+                                    <span><strong>color: </strong>{selectedStyle[0].color+" "}</span><br/>
+
+
+
                                     <strong>nombre o frase: </strong>{e.name}<span></span><br/>
                                     <strong>hora:</strong><span>{e.time}</span><br/>
                                     <strong>idioma: </strong><span>{e.language}</span><br/>

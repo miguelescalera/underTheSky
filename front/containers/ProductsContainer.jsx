@@ -10,7 +10,6 @@ import {
   allStyles,
 } from "../actions/productsActions";
 
-
 import { runInThisContext } from "vm";
 
 const mapStateToProps = (state, ownprops) => {
@@ -26,17 +25,6 @@ const mapDispatchToProps = (dispatch, state) => {
     selectStyle: data=>dispatch(selectStyle(data))
   };
 };
-
-
-
-
-
-
-
-
-
-
-
 
 class ProductsContainer extends React.Component {
   constructor(props) {
@@ -73,7 +61,6 @@ class ProductsContainer extends React.Component {
     );
   }
 }
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);

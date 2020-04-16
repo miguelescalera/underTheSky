@@ -15,7 +15,8 @@ const mapStateToProps = state => {
            Orders: state.admin.allOrders, 
            DataProducts: state.admin.allDataProducts,
            users:state.admin.allUsers,
-           selectedOrder:state.admin.selectedOrders
+           selectedOrder:state.admin.selectedOrders,
+           allStyles:state.products.allStyles
          }
            
 };
@@ -129,6 +130,7 @@ class AdminOrdenesContainer extends React.Component{
                 handleSelectedOrder={this.handleSelectedOrder}
                 handleChange={this.handleChange}
                 handleStatus={this.handleStatus}
+                allStyles={this.props.allStyles}
                 />
             </div>
         )
