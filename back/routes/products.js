@@ -11,13 +11,14 @@ const Style = require("../models/style");
 router.post('/nuevoproducto', function (req, res) {
   console.log("REQ.USER:",req.user)
   ProductData.create(req.body)
-  .then(productData => { 
-   if(req.user) productData.setUser(req.user.id); 
-   productData.setStyle(req.body.styleId)
-    res.send(productData) })
-  })
+    .then(productData => {
+      if (req.user) productData.setUser(req.user.id);
+      productData.setStyle(req.body.styleId)
+      res.send(productData)
+    })
+})
 
-  
+
 
 
 
@@ -41,7 +42,7 @@ router.put("/modifyQuantity", function (req, res) {
 
 
 router.put("/modifyData", function (req, res) {
-  console.log("BODY:",req.body)
+  console.log("BODY:", req.body)
   ProductData.update(
     req.body,
     { returning: true, where: { id: req.body.id } }
@@ -51,8 +52,8 @@ router.put("/modifyData", function (req, res) {
     })
     .catch(err => console.log("error:", err));
 });
-    
- 
+
+
 
 
 
@@ -70,7 +71,7 @@ router.post("/getUserProducts", (req, res) => {
 });
 
 router.post("/getProductFSS", (req, res) => {
-  
+
 
   Size.findByPk(req.body.sizeId).then(size => {
     Frame.findByPk(req.body.frameId).then(frame => {
@@ -121,11 +122,23 @@ router.get("/styles/:id", function (req, res, next) {
 
 router.post("/getAllStyles", function (req, res) {
   console.log("entre a todos los estilos");
-  Style.findAll().then(allStyles=>{
-    console.log('aquii estan los estilos',allStyles);
+  Style.findAll().then(allStyles => {
+    console.log('aquii estan los estilos', allStyles);
 
     res.send(
       allStyles,
+    )
+  })
+});
+
+
+router.post("/getAllFrames", function (req, res) {
+  console.log("ENTRE A TODOS MARCOS");
+  Frame.findAll().then(allFrames => {
+    console.log('aquii estan los estilos', allFrames);
+
+    res.send(
+      allFrames,
     )
   })
 });
@@ -143,6 +156,14 @@ router.post("/getAllfss", function (req, res) {
     });
   });
 });
+
+router.get('/size/:id', function (req, res) {
+  ('LE ESTOY PEGANDO AL BACK')
+  Size.findByPk(req.params.id)
+    .then(size => res.json(size))
+})
+
+
 
 router.get("/:id", function (req, res) {
   Product.findByPk(req.params.id)
