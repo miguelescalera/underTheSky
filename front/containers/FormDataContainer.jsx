@@ -5,6 +5,7 @@ import { createDataProduct, dataProduct,modifyData} from "../actions/productData
 import { fetchProduct } from '../actions/productsActions'
 import FormData from '../components/FormData'
 import { getCart,cartWithoutUser} from "../actions/cartActions"
+import moment from "moment"
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
@@ -32,13 +33,14 @@ const mapStateToProps = (state, ownprops) => {
     };
 };
 
-let arrOfData = []
+
 let arrOfProduct = []
 
 class FormDataContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            arrOfData:[],
             digital: "",
             date: '',
             content: '',
@@ -51,8 +53,8 @@ class FormDataContainer extends React.Component {
             color: "",
             frame: "",
 
-
         };
+        
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange=this.onChange.bind(this);
@@ -72,12 +74,10 @@ class FormDataContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
-
         createDataProduct(
 
              {
-                 date: this.state.date,
+                 date: moment(this.state.date).format('DD/MM/YYYY'),
                  content: this.state.content,
                  name: this.state.name,
                  time: this.state.time,
@@ -87,72 +87,86 @@ class FormDataContainer extends React.Component {
                  size:this.props.selectedSize.name,
                  frame:this.props.selectedFrame.name,
                  style:this.props.selectedStyle.name,
-                 price:this.props.selectedSize.price,
+                 price:this.props.selectedSize.price+this.props.selectedFrame.price,
                  styleId:this.props.selectedStyle.id
              }
          ).then((res)=>{
              this.props.dataProduct(res.data)
              if(!this.props.userEmail){
                 let dataWithoutUser=res.data
-                
-                if(arrOfData.length!==0){
+                let DataLocalStorage=JSON.parse(localStorage.getItem("dataWithoutUser"))
+              
+                if(DataLocalStorage){
+                    DataLocalStorage.push(dataWithoutUser)
+                    
+                    this.setState({
+                       arrOfData:DataLocalStorage
+                    })
+                    this.props.cartWithoutUser(this.state.arrOfData)
+                    localStorage.setItem("dataWithoutUser",JSON.stringify(this.state.arrOfData))
                    
-                    arrOfData=JSON.parse(localStorage.getItem("dataWithoutUser"))
-                    arrOfData.push(dataWithoutUser)
-                    this.props.cartWithoutUser(arrOfData)
-                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-                 
-
 
                 }
                 else {
-                    arrOfData.push(dataWithoutUser)
-
-                    this.props.cartWithoutUser(arrOfData)
-                    localStorage.setItem("dataWithoutUser",JSON.stringify(arrOfData))
-
-                    localStorage.setItem("dataWithoutUser", JSON.stringify(arrOfData))
-
+                    this.setState({
+                        arrOfData:[...this.state.arrOfData,dataWithoutUser]
+                    })
+                    this.props.cartWithoutUser(this.state.arrOfData)
+                    localStorage.setItem("dataWithoutUser",JSON.stringify(this.state.arrOfData))
                 }
             }
-
         })
         .then(()=>{
             if(this.props.userEmail){
                 this.props.getCart()
             }
-          }).then(()=>{
-              this.props.nextStep()
-            })
-        }
-          
-           
-
+        }).then(()=>{
+            this.props.nextStep()
+        })
+    }
     PreviousStep(e){
         e.preventDefault()
         this.props.previousStep()
     }
-         
-          render() {
-              
-                return (
-                    <div>
-                        <h3 className="titulopagina">Información</h3>
-                        <FormData
-                            handleChange={this.handleChange}
-                            handleSubmit={this.handleSubmit}
-                            PreviousStep={this.PreviousStep}
-                            onChange={this.onChange}
-                             date={this.state.date}
-
-                            state={this.state}
-                        />
-                    </div>
-                );
-            }
-        }
         
-        export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormDataContainer))
+    render() {
+        
+          return (
+              <div>
+                  <h3 className="titulopagina">Información</h3>
+                  <FormData
+                      handleChange={this.handleChange}
+                      handleSubmit={this.handleSubmit}
+                      PreviousStep={this.PreviousStep}
+                      onChange={this.onChange}
+                       date={this.state.date}
+                      enableButton={this.props.previousStep}
+                      state={this.state}
+                  />
+              </div>
+          );
+      }
+  }
+  
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormDataContainer))
+       
+
+
+
+
+
+             
+
+
+
+                   
+
+
+                
+
+          
+           
+
                
     
                    

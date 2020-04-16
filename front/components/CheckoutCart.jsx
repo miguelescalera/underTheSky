@@ -2,7 +2,7 @@ import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-export default ({ dataProduct, handleSubmit }) => {
+export default ({ dataProduct, handleSubmit,PreviousStep,BackStep }) => {
   
 
   const dataProductsIds = [];
@@ -47,6 +47,11 @@ export default ({ dataProduct, handleSubmit }) => {
             <strong>${total}</strong>
           </div>
         </ListGroup.Item>
+        {PreviousStep?<ListGroup.Item style={{ textAlign: "center" }}>
+          <Button onClick={() => BackStep()} className="boton-outline">
+            volver al paso anterior
+          </Button>
+        </ListGroup.Item> :null}
         <ListGroup.Item style={{ textAlign: "center" }}>
           <Button onClick={() => handleSubmit(dataProductsIds)} className="boton-outline">
             Finalizar compra
@@ -56,3 +61,4 @@ export default ({ dataProduct, handleSubmit }) => {
     </div>
   );
 };
+        

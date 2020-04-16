@@ -7,7 +7,7 @@ import {getCart,cart} from "../actions/cartActions"
 import {decrypt} from "../actions/RegisterAction"
 import {withRouter} from "react-router-dom"
 import {userOrders} from "../actions/orderActions"
-
+import {getAllStyles,allStyles} from "../actions/productsActions"
 const mapStateToProps = (state, ownprops) => {
     return {
         cartItems:state.cart.dataProducts,
@@ -18,6 +18,7 @@ const mapStateToProps = (state, ownprops) => {
 
 const mapDispatchToProps=(dispatch)=>{
     return{
+        allStyles:(data)=>dispatch(allStyles(data)),
         clearOrders:()=>dispatch(userOrders({})),
         getCart: ()=>dispatch(getCart()),
         logoutUser: ()=>dispatch(logoutUser()),
@@ -40,6 +41,9 @@ const mapDispatchToProps=(dispatch)=>{
      }
 
      componentDidMount(){
+        getAllStyles().then(res=>{
+            this.props.allStyles(res.data)
+        })
          let userPassword= localStorage.getItem("pass")
          let email=localStorage.getItem("email")
          

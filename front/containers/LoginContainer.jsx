@@ -25,11 +25,11 @@ class LoginContainer extends React.Component {
       password: "",
       alertNull: false,
       alertPass: false,
-      checkbox:false
+      
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkboxLogin= this.checkboxLogin.bind(this)
+    
   }
   checkboxLogin(){
     this.setState({checkbox:!this.state.checkbox})
@@ -46,11 +46,11 @@ class LoginContainer extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if(this.state.checkbox){
+    
      let encryptPass=encrypt(this.state.password)
       localStorage.setItem("email",this.state.email)
       localStorage.setItem("pass",encryptPass)
-      }
+    
     if(this.state.password.length === 0 ||this.state.email.length === 0){
       this.setState({alertNull:true})
       this.setState({alertPass:false})
@@ -78,7 +78,7 @@ class LoginContainer extends React.Component {
       <div>
         <Login
           handleChange={this.handleChange}
-          checkboxLogin={this.checkboxLogin}
+         
           handleSubmit={this.handleSubmit}
           alertNull={this.state.alertNull}
           alertPass={this.state.alertPass}
