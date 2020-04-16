@@ -17,7 +17,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     frames: state.products.Allfss.frames,
     sizes: state.products.Allfss.sizes,
-
     selectedStyle: state.products.selectedStyle,
     selectedFrame: state.products.selectedFrame,
     selectedSize: state.products.selectedSize,
@@ -30,9 +29,10 @@ const mapDispatchToProps = (dispatch) => {
     selectFrame: (frame) => dispatch(selectFrame(frame)),
     selectSize: (size) => dispatch(selectSize(size)),
     selectStyle: (data) => dispatch(selectStyle(data)),
-    getAllfss: () => dispatch(getAllfss()),
     fetchNewProduct: (data) => dispatch(fetchNewProduct(data)),
     Allfss: (data) => dispatch(Allfss(data)),
+    getAllfss: () => dispatch(getAllfss()),
+
   };
 };
 
@@ -41,7 +41,8 @@ class SingleProductContainer extends React.Component {
     super(props);
     this.state = {
       digital: false,
-      toggleDefault:0,
+      toggleDefault: 0,
+      selectedStyle: JSON.parse(localStorage.selectedStyle),
       selectedFrame: {
         id: 0,
         name: "frameless",
@@ -50,7 +51,7 @@ class SingleProductContainer extends React.Component {
         imgName: "dummy.png",
         imgData: { type: "Buffer", data: Array(4004) },
         imgPath:
-        '/public/src/img/dummy.png'
+          '/public/src/img/dummy.png'
       },
     };
     this.handleFrame = this.handleFrame.bind(this);
@@ -153,11 +154,15 @@ class SingleProductContainer extends React.Component {
           );
         }
     }
- 
     
-  
+    
 
- 
+
+
+
+
+
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer);

@@ -1,14 +1,15 @@
 import axios from "axios"
-import { 
-        SELECTED_PRODUCT,
-        ALL_PRODUCTS, 
-        ALL_FSS, 
-        SELECT_STYLE,
-        SELECT_FRAME,
-        SELECT_SIZE,
-        ALL_STYLES,
-        DIGITAL
-     } from "../constans"
+import {
+    SELECTED_PRODUCT,
+    ALL_PRODUCTS,
+    ALL_FSS,
+    SELECT_STYLE,
+    SELECT_FRAME,
+    SELECT_SIZE,
+    ALL_STYLES,
+    DIGITAL,
+    ALL_FRAMES
+} from "../constans"
 
 export const Allfss = (Allfss) => ({
     type: ALL_FSS,
@@ -18,6 +19,11 @@ export const Allfss = (Allfss) => ({
 export const allStyles = (allStyles) => ({
     type: ALL_STYLES,
     allStyles
+})
+
+export const allFrames = (allFrames) => ({
+    type: ALL_FRAMES,
+    allFrames
 })
 
 export const SelectedProducts = (Product) => ({
@@ -45,8 +51,8 @@ export const selectSize = selectedSize => ({
     selectedSize
 
 })
-export const selectDigital = digital =>({
-    type:DIGITAL,
+export const selectDigital = digital => ({
+    type: DIGITAL,
     digital
 })
 
@@ -61,25 +67,40 @@ export const fetchNewProduct = (body) => dispatch => {
 }
 
 export const getAllProducts = () => {
-   return axios.get("/api/products/getProducts")
+    return axios.get("/api/products/getProducts")
 }
-        
 
-export const getAllfss = ()=> dispatch => {
+export const getAllfss = () => dispatch => {
     return axios.post("/api/products/getAllfss")
 }
-  
+
 export const getAllStyles = () => {
     return axios.post("/api/products/getAllStyles")
 }
-        
+
+export const getAllFrames = () => {
+    console.log('ENTRE A LA ACCION DE AGARRAR TODOS LOS CUADROS, PA')
+    return axios.post("/api/products/getAllFrames")
+}
+
 
 
 export const fetchStyle = (styleId) => dispatch => {
     console.log('esto es conseguime estilo')
     axios.get(`/api/products/styles/${styleId}`)
         .then(res => res.data)
-        .then(style => {  dispatch(selectStyle(style)) })
+        .then(style => { dispatch(selectStyle(style)) })
+}
+
+export const fetchSize = (sizeId) => dispatch => {
+    console.log('esto es el conseguime tamano')
+    axios.get(`/api/products/size/${sizeId}`)
+        .then(res => dispatch(selectSize(res.data)))
+}
+
+export const fetchFrame = (frameId) => dispatch => {
+    axios.get(`/api/admin/getFrame/${frameId}`)
+        .then(res => dispatch(selectDigital(res.data)))
 }
 
 

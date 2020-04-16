@@ -24,6 +24,9 @@ import StepWizardContainer from "../containers/StepWizardContainer"
 import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
 import EditUserContainer from "../containers/EditUserContainer"
 import GraciasContainer from "../containers/GraciasContainer";
+import EditSizeContainer from "../containers/EditSizeContainer";
+import EditFrameContainer from '../containers/EditFrameContainer'
+import EditStyleContainer from '../containers/EditStyleContainer'
 
 
 
@@ -62,7 +65,7 @@ class Main extends React.Component {
         <NavbarContainer />
         <Switch>
           <Route path="/home" exact component={LandingContainer} />
-          <Route path="/products/getProducts" exact component={ProductsContainer}/>
+          <Route path="/products/getProducts" exact component={ProductsContainer} />
           <Route path="/products" exact component={StepWizardContainer} />
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/register" exact component={RegisterContainer} />
@@ -75,7 +78,7 @@ class Main extends React.Component {
           <Route path="/eladmin" exact component={Admin} />
           <Route path="/checkoutDigital" exact component={checkoutDigitalContainer} />
           <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
-          <Route path="/admin/getOrders" exact component={AdminOrdenesContainer}/>
+          <Route path="/admin/getOrders" exact component={AdminOrdenesContainer} />
           <Route path="/gracias" exact component={GraciasContainer} />
           <Route
             path="/admin/getOrders"
@@ -85,6 +88,10 @@ class Main extends React.Component {
           <Route path="/admin/newPunto" exact component={PuntoDeEncuentroContainer} />
 
           <Route path="/admin/getUsers" exact component={AdminUsersContainer} />
+          <Route path="/eladmin/editSize/:id" component={EditSizeContainer} />
+          <Route path="/eladmin/editFrame/:id" component={EditFrameContainer} />
+          <Route path="/eladmin/editStyle/:id" component={EditStyleContainer} />
+
           <Route path="/editProfile" exact component={EditUserContainer} />
           <Redirect from="/" to="/home" />
         </Switch>

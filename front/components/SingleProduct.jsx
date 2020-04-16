@@ -64,12 +64,12 @@ export default ({
   };
 
   const getPrice = () => {
-    return 0 + selectedFrame.price + selectedSize.price;
+    return 0 + selectedFrame.price + selectedSize.price
   };
 
-  const imgurlPoster = selectedStyle.imgPath.toString().split("/public")[1];
+  const imgurlPoster = selectedStyle.imgPath ? selectedStyle.imgPath.toString().split("/public")[1] : null
 
-  console.log("PRERETURN SELECTED FRAMEEEEEEEEEE", selectedFrame);
+  console.log('PRERETURN SELECTED FRAMEEEEEEEEEE', selectedFrame);
 
   return (
     <div style={singleStyle}>
@@ -82,6 +82,8 @@ export default ({
         <Card className="singleproduct-card ">
           <Card.Body style={{ padding: "0px" }}>
             <div id="probuild-contenedor">
+
+
               <Card.Img
                 id="probuild-marco"
                 style={{
@@ -95,11 +97,12 @@ export default ({
                   height: "100%",
                   zIndex: 1,
                   backgroundColor: "rgba(0, 0, 0, 0)",
-                  borderColor: "rgba(0,0,0,0)",
+                  borderColor: 'rgba(0,0,0,0)'
                 }}
                 variant="top"
                 src={selectedFrame.imgPath.slice(7)}
               />
+
 
               <Card.Img
                 id="probuild-poster"
