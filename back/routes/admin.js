@@ -33,6 +33,11 @@ router.get("/getFrame", function (req, res) {
   });
 });
 
+router.get('/getFrame/:id', function(req, res){
+  Frame.findByPk(req.params.id)
+  .then(data=>res.json(data))
+})
+
 router.post("/newFrame", upload.single("frameImg"), function (req, res) {
   console.log(req.file);
   console.log(req.body);

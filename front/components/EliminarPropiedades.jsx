@@ -85,13 +85,15 @@ export default ({ styles, frames, sizes, handleDeleteStyle, handleDeleteSize, ha
                                                             >
                                                                 Eliminar
                             </Button>
-                                                            <Button
-                                                                className="boton-outline"
-                                                                style={botonSelecc}
-                                                                onClick={() => handleDeleteStyle(style.id)}
-                                                            >
-                                                                Editar
+                                                            <Link to={`/eladmin/editStyle/${style.id}`}>
+                                                                <Button
+                                                                    className="boton-outline"
+                                                                    style={botonSelecc}
+
+                                                                >
+                                                                    Editar
                             </Button>
+                                                            </Link>
                                                         </span>
                                                     </Col>
                                                 </Row>
@@ -126,13 +128,16 @@ export default ({ styles, frames, sizes, handleDeleteStyle, handleDeleteSize, ha
                                                     >
                                                         Eliminar
                                 </Button>
-                                                    <Button
-                                                        className="boton-outline"
-                                                        style={botonSelecc}
-                                                        onClick={() => handleDeleteStyle(style.id)}
-                                                    >
-                                                        Editar
+
+                                                    <Link to={`/eladmin/editFrame/${frame.id}`} >
+                                                        <Button
+                                                            className="boton-outline"
+                                                            style={botonSelecc}
+                                                            onClick={() => handleDeleteStyle(style.id)}
+                                                        >
+                                                            Editar
                             </Button>
+                                                    </Link>
                                                 </span>
                                             </Col>
                                         </Row>

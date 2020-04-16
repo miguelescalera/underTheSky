@@ -9,7 +9,7 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
-  console.log("REQ.USER:",req.user)
+  console.log("REQ.USER:", req.user)
   ProductData.create(req.body)
     .then(productData => {
       if (req.user) productData.setUser(req.user.id);
@@ -158,10 +158,11 @@ router.post("/getAllfss", function (req, res) {
 });
 
 router.get('/size/:id', function (req, res) {
-  ('LE ESTOY PEGANDO AL BACK')
   Size.findByPk(req.params.id)
     .then(size => res.json(size))
 })
+
+
 
 
 

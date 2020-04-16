@@ -25,6 +25,8 @@ import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
 import EditUserContainer from "../containers/EditUserContainer"
 import GraciasContainer from "../containers/GraciasContainer";
 import EditSizeContainer from "../containers/EditSizeContainer";
+import EditFrameContainer from '../containers/EditFrameContainer'
+import EditStyleContainer from '../containers/EditStyleContainer'
 
 
 
@@ -87,6 +89,9 @@ class Main extends React.Component {
 
           <Route path="/admin/getUsers" exact component={AdminUsersContainer} />
           <Route path="/eladmin/editSize/:id" component={EditSizeContainer} />
+          <Route path="/eladmin/editFrame/:id" component={EditFrameContainer} />
+          <Route path="/eladmin/editStyle/:id" component={EditStyleContainer} />
+
           <Route path="/editProfile" exact component={EditUserContainer} />
           <Redirect from="/" to="/home" />
         </Switch>
