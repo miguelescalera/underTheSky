@@ -54,21 +54,21 @@ router.post("/login", function (req, res, next) {
     if (err) {
       return next(err); // will generate a 500 error
     }
-    // Generate a JSON response reflecting authentication status
     if (!user) {
       return res.send({ success: false, message: "authentication failed" });
     }
-
     req.login(user, loginErr => {
       if (loginErr) {
         console.log("login err: ", loginErr)
         return next(loginErr);
       }
-
+console.log("req.user",req.user)
       return res.send(req.user);
     });
   })(req, res, next);
 });
+    
+
 
 
 
