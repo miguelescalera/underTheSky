@@ -59,7 +59,11 @@ class CheckoutContainer extends React.Component {
             modifyData({bought:true,id:e})
         })
 
+
         
+
+        this.props.history.push("/gracias")
+
     }
         
 
@@ -81,8 +85,13 @@ class CheckoutContainer extends React.Component {
         this.props.idsForOrders.map(e=>{
             modifyData({bought:true,id:e})
         })
+
         localStorage.removeItem("dataWithoutUser")
         this.props.history.push("/")
+
+        
+        this.props.history.push("/gracias")
+
     }
 
     render() {

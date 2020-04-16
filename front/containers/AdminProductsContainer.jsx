@@ -7,25 +7,30 @@ import { Tabs, Tab,FormFile } from 'react-bootstrap'
 import AddFrame from "../components/AddFrame";
 import AddSize from '../components/AddSize'
 import AddStyle from '../components/AddStyle'
-import { newFrame, newSize, newStyle } from '../actions/adminActions'
+import { newFrame, newSize, newStyle, deleteStyle, deleteFrame, deleteSize} from '../actions/adminActions'
+import EliminarPropiedades from "../components/EliminarPropiedades";
+import {getAllStyles, allStyles, Allfss, getAllfss} from "../actions/productsActions";
 
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
-
-    };
+        allStyles:data => dispatch(allStyles(data)),
+        getAllfss: () => dispatch(getAllfss()),
+        Allfss: (data) => dispatch(Allfss(data))
+    }
 };
 
 const mapStateToProps = (state, ownprops) => {
     return {
-
-
-    };
+        styles:state.products.allStyles,
+        frames: state.products.Allfss.frames,
+        sizes: state.products.Allfss.sizes,
+    }
 };
 
 class AdminProductsContainer extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             size: "",
             sizePrice: 0,
@@ -45,8 +50,23 @@ class AdminProductsContainer extends React.Component {
         this.handleStyleSubmit = this.handleStyleSubmit.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.handleStyleFile = this.handleStyleFile.bind(this)
-
+        this.handleDeleteStyle= this.handleDeleteStyle.bind(this)
+        this.handleDeleteSize=this.handleDeleteSize.bind(this)
+        this.handleDeleteFrame=this.handleDeleteFrame.bind(this)
     }
+
+    componentDidMount() {
+        getAllStyles()
+        .then(result=>{
+          this.props.allStyles(result.data)
+        });
+
+      this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+        }) 
+      }
+
 
 
     checkboxLogin() {
@@ -82,7 +102,6 @@ class AdminProductsContainer extends React.Component {
  
     }
 
-
     handleSizeSubmit(e) {
         e.preventDefault();
         console.log('hola papu, gracias')
@@ -111,14 +130,44 @@ class AdminProductsContainer extends React.Component {
 
         newStyle(styleUpload)
         this.props.history.push("/eladmin");
-
     }
 
+    handleDeleteStyle(id){
+        deleteStyle(id)
+        .then(()=>{ 
+        getAllStyles()
+        .then(result=>{
+          this.props.allStyles(result.data)
+        })
+    })
+    }
+
+    handleDeleteFrame (id){
+        deleteFrame(id)
+        .then(()=>{
+        this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+        }) 
+        })
+    }
+
+
+    handleDeleteSize (id){
+        deleteSize(id)
+        .then(()=>{
+        this.props.getAllfss()
+        .then(result=>{
+            this.props.Allfss(result.data)
+        }) 
+        })
+    }
 
     render() {
         const tabStyle = {
             marginBlockStart:'0rem'
         }
+
         return (
             <Tabs className='tab-container' defaultActiveKey="profile" id="uncontrolled-tab-example">
                 
@@ -147,10 +196,17 @@ class AdminProductsContainer extends React.Component {
                         styleName={this.state.styleName}
                         styleImg={this.state.styleImg} />
                 </Tab>
-
+                <Tab eventKey="Eliminar" title="Eliminar">
+                    <EliminarPropiedades styles={this.props.styles}
+                    frames={this.props.frames}
+                    sizes={this.props.sizes}
+                    handleDeleteStyle={this.handleDeleteStyle}
+                    handleDeleteFrame={this.handleDeleteFrame}
+                    handleDeleteSize={this.handleDeleteSize}/>
+                </Tab>
             </Tabs>
         );
     }
 }
 
-export default connect(null, mapDispatchToProps)(AdminProductsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProductsContainer);
