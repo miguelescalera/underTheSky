@@ -98,6 +98,11 @@ export const fetchSize = (sizeId) => dispatch => {
         .then(res => dispatch(selectSize(res.data)))
 }
 
+export const fetchFrame = (frameId) => dispatch => {
+    axios.get(`/api/admin/getFrame/${frameId}`)
+        .then(res => dispatch(selectDigital(res.data)))
+}
+
 
 export const fetchProduct = (id) => dispatch => {
     console.log('eso es el body del front')
