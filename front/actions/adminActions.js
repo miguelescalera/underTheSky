@@ -202,5 +202,6 @@ export const deleteStyle = (style) =>
 
   ///////////////// Contacto //////////
 
-  export const sendEmail = (data)=>
-  axios.post("/api/users/sendEmail", data)
+  export const sendEmail = (data)=>{
+    axios.post("/api/users/sendEmail", data)
+  }
