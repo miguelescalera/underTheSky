@@ -1,8 +1,10 @@
-import React from "react"
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import React from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-export default ({handleChange, handleSubmit})=> {
+export default ({ handleChange, handleSubmit }) => {
   const formStyle = {
     width: "80%",
     maxWidth: "800px",
@@ -18,37 +20,53 @@ export default ({handleChange, handleSubmit})=> {
     marginBlockEnd: "5rem",
     marginBlockStart: "0.5rem",
   };
-    return(
-<div style={divFormStyle}>
-
-<Form style={formStyle} className={'login-container'}>
-  <Form.Group controlId="formBasicDireccion">
-    <Form.Label>Direccion Del Nuevo Punto</Form.Label>
-    <Form.Control type="text"   placeholder="Ingrese una Direccion" onChange={handleChange} name="address" />
-    <Form.Text className="text-muted">
-    </Form.Text>
-  </Form.Group>
-  <Form.Group controlId="formBasicPlace">
-    <Form.Label>nombre del lugar</Form.Label>
-    <Form.Control type="text"   placeholder="Nombre del Lugar" onChange={handleChange} name="place" />
-    <Form.Text className="text-muted">
-    </Form.Text>
-  </Form.Group><Form.Group controlId="formBasicneighborhood">
-    <Form.Label>Barrio</Form.Label>
-    <Form.Control type="text"   placeholder="Barrio" onChange={handleChange} name="neighborhood" />
-    <Form.Text className="text-muted">
-    </Form.Text>
-  </Form.Group>
-  <Form.Group controlId="formBasicAttention">
-    <Form.Label>Horario De Atencion</Form.Label>
-    <Form.Control type="text"   placeholder="Horario" onChange={handleChange} name="Attention" />
-    <Form.Text className="text-muted">
-    </Form.Text>
-  </Form.Group>  
-  <Button variant="primary" onClick={handleSubmit} type="submit">
-    Submit
-  </Button>
-</Form>
-</div>
-    )
-}
+  return (
+    <div style={divFormStyle}>
+      <Form style={formStyle} className={"login-container"}>
+        <Form.Group controlId="formBasicPlace">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Plaza Dorrego"
+            onChange={handleChange}
+            name="place"
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Form.Group controlId="formBasicDireccion">
+          <Form.Label>Direccion</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Av. Corrientes 6231"
+            onChange={handleChange}
+            name="address"
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Form.Group controlId="formBasicneighborhood">
+          <Form.Label>Barrio</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Villa Crespo"
+            onChange={handleChange}
+            name="neighborhood"
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Form.Group controlId="formBasicAttention">
+          <Form.Label>Horario De Atencion</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="12:00-18:00"
+            onChange={handleChange}
+            name="Attention"
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Button variant="primary" onClick={handleSubmit} type="submit">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </Button>
+      </Form>
+    </div>
+  );
+};

@@ -2,7 +2,14 @@ import axios from "axios"
 
 
 
-import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO,USER_ORDERS} from "../constans"
+import {
+  ORDER,
+  ORDER_IN_PROCESS,
+  ID_FOR_ORDERS, 
+  PUNTO_ENCUENTRO,
+  USER_ORDERS,
+  PUNTOS_DE_ENC
+} from "../constans"
 
 
 export const orderInProcess = orderInProcess => ({
@@ -59,3 +66,4 @@ export const deletePunto = (id) =>
   })
   
 
+  

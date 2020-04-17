@@ -53,6 +53,11 @@ class SingleProductContainer extends React.Component {
         imgPath:
           '/public/src/img/dummy.png'
       },
+      selectedSize: {
+        id: 0,
+        name: "dummy",
+        price: 0,
+      }
     };
     this.handleFrame = this.handleFrame.bind(this);
     this.handleSize = this.handleSize.bind(this);

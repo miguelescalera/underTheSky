@@ -3,8 +3,10 @@ import {Link} from 'react-router-dom'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faWhatsapp
+  faWhatsapp,
+  faInstagram
 } from "@fortawesome/free-brands-svg-icons";
+
 export default () => {
 
   const footerStyles = {
@@ -32,9 +34,17 @@ export default () => {
 
 
     <div style={footerStyles}>
-      <p style={{display:'inline-block', marginRight:'10px'}} >Under the sky 2020   </p>{'    '} 
+      <p style={{display:'inline-block', marginRight:'10px'}} >UnderTheSky © 2020   </p> 
+      <a target="_blank" href='https://www.instagram.com/undertheskydeco/'>
+      <FontAwesomeIcon icon={faInstagram}  />{'    '} 
+      
+      {'    '}
+      {'    '}
+      {'    '}
+      </a>
       <a target="_blank" href='https://api.whatsapp.com/send?phone=5491164180402'>
       <FontAwesomeIcon icon={faWhatsapp}  />
+      
 
       </a>
     </div>

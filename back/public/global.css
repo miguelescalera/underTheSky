@@ -3,6 +3,12 @@
   font-family: "Assistant", sans-serif;
 }
 
+.titulo-display{
+  font-weight: 100;
+  font-size: 3rem;
+
+}
+
 
 .headroom{
   z-index: 2!important;
@@ -15,6 +21,7 @@
 
   color: #d89a6d;
   text-align: center;
+  font-weight: 300;
 }
 
 .form-container {
@@ -194,14 +201,14 @@ a:hover {
 
 .boton-icono:active {
   background-color: rgba(0,0,0,0);
-  color: #ec7263 !important;
+  color: #b6d9d8 !important;
   border: none;
 
 }
 
 .boton-icono:focus {
   background-color: rgba(0,0,0,0);
-  color: #ec7263 !important;
+  color: #68a29b !important;
   border: none;
   box-shadow:none!important;
 
@@ -287,7 +294,7 @@ select:-webkit-autofill:focus {
   padding-block-end: 5rem;
 }
 .carrito-resumen {
-  background-color: rgba(255, 251, 254, 0.8);
+  background-color: #fffefbc9;
   width: 100%;
   box-shadow: 8px 8px 15px -10px rgba(0, 0, 0, 0.25);
   margin-block-start: 1.5rem;
@@ -326,7 +333,7 @@ select:-webkit-autofill:focus {
   margin-block-start: 0.5rem;
   color: #102f51;
   box-shadow: 8px 8px 15px -10px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 251, 254, 0.8);
+  background-color: #fffefbc9;
   padding-bottom: 3rem;
   
 }
@@ -359,13 +366,13 @@ select:-webkit-autofill:focus {
 
 /* VISTA DE DISPLAYS Y TARJETA PRODUCTO  */
 .tarjetaproducto {
-  background-color: rgba(255, 254, 251, 0.7);
+  background-color: #eae9e886;
   width: 100%;
   box-shadow: 8px 8px 15px -10px rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
   text-align: center;
   border-width: 0.5px;
-  border-color:rgba(125, 125, 125, 0.5);
+  border-color:rgba(125, 125, 125, 0);
 }
 
 .titulotarjeta {
@@ -386,7 +393,7 @@ select:-webkit-autofill:focus {
 }
 
 .card {
-  border-color:rgba(125, 125, 125, 0.5)!important;
+  border-color:rgba(125, 125, 125, 0)!important;
 
 }
 

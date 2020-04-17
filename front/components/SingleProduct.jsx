@@ -61,7 +61,7 @@ export default ({
   };
 
   const getPrice = () => {
-    let finalPrice = 0 + selectedFrame.price + selectedSize.price;
+    let finalPrice = selectedFrame.price + selectedSize.price;
     if (!finalPrice) {
       return (
         <Spinner style={{marginBlockEnd:'7px'}} animation="grow" size='sm' role="status" variant="secondary">

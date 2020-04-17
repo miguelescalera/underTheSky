@@ -42,7 +42,7 @@ class FormDataContainer extends React.Component {
         this.state = {
             arrOfData:[],
             digital: "",
-            date: '',
+            date:moment(Date.now()).format('DD/MM/YYYY') ,
             content: '',
             name: '',
             time: '',
@@ -121,7 +121,7 @@ class FormDataContainer extends React.Component {
                 this.props.getCart()
             }
         }).then(()=>{
-            this.props.nextStep()
+            this.props.history.push("/cart")
         })
     }
     PreviousStep(e){
@@ -130,7 +130,7 @@ class FormDataContainer extends React.Component {
     }
         
     render() {
-        
+        console.log("DATE:",this.state.date)
           return (
               <div>
                   <h3 className="titulopagina">Información</h3>
