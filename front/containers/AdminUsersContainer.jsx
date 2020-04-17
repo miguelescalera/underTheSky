@@ -3,6 +3,7 @@ import AdminUsers from "../components/AdminUsers";
 import { getUsers, changeStatus, deleteUser } from "../actions/adminActions";
 import { connect } from "react-redux";
 
+
 const mapStateToProps = (state) => {
   return { users: state.admin.allUsers };
 };
@@ -15,8 +16,14 @@ const mapDispatchToProps = function (dispatch) {
 
 class AdminUsersContainer extends React.Component {
   constructor(props) {
-    super(props);
-    this.handleStatus = this.handleStatus.bind(this);
+
+    super(props)
+    this.state={
+      input:""
+    }
+    this.handleStatus = this.handleStatus.bind(this),
+    this.handleChange = this.handleChange.bind(this)
+
     this.handleDelete=this.handleDelete.bind(this)
   }
 
@@ -34,8 +41,19 @@ class AdminUsersContainer extends React.Component {
     this.props.getUsers();
   }
 
+  handleChange(e) {
+    const key = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [key]: value
+    }); 
+    console.log("este es mi input",this.state.input)
+  }
+
   render() {
-    const usuarios = this.props.users;
+    const usuarios =(!this.state.input.length) ? this.props.users : (this.props.users).filter(user=>{
+      return user.firstName.toLowerCase().includes(this.state.input.toLowerCase()) || user.email.toLowerCase().includes(this.state.input.toLowerCase()) 
+    })
     return (
       <div>
         <h3 className="titulopagina">Usuarios</h3>
@@ -44,6 +62,7 @@ class AdminUsersContainer extends React.Component {
           usuarios={usuarios}
           handleStatus={this.handleStatus}
           handleDelete={this.handleDelete}
+          handleChange={this.handleChange}
         />
       </div>
     );

@@ -199,3 +199,9 @@ export const editSize = (sizeId, updtdSize) => {
 
 export const deleteStyle = (style) =>
   axios.delete(`/api/admin/deleteStyle/${style}`)
+
+  ///////////////// Contacto //////////
+
+  export const sendEmail = (data)=>{
+    axios.post("/api/users/sendEmail", data)
+  }
