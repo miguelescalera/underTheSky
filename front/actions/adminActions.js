@@ -90,16 +90,16 @@ export const getUsers = () => dispatch =>
     );
 
 
-  export const changeStatus = function(usertype,idUser){
-    return axios.post(`/api/admin/addAdmin`,{type:usertype,userId:idUser})
-  }
+export const changeStatus = function (usertype, idUser) {
+  return axios.post(`/api/admin/addAdmin`, { type: usertype, userId: idUser })
+}
 
 
 
 
 
 
-export const deleteUser=(idUser) => {
+export const deleteUser = (idUser) => {
   axios.delete(`/api/admin/deleteUser/${idUser}`)
 }
 
@@ -118,9 +118,9 @@ export const fetchDataProducts = () => dispatch => {
 export const deleteProduct = (product) =>
   axios.delete("/api/admin/deleteProduct", { productId: product.id })
 
-export const fetchAllProducts = ()=> dispatch=>{
-  axios.get("/api/admin/getProducts").then(allproducts=>{
-      dispatch(allProducts(allproducts.data))
+export const fetchAllProducts = () => dispatch => {
+  axios.get("/api/admin/getProducts").then(allproducts => {
+    dispatch(allProducts(allproducts.data))
   })
 }
 
@@ -137,8 +137,8 @@ export const getFrame = () => dispatch =>
 
 export const newFrame = (newFrame) =>
   axios.post("/api/admin/newFrame", newFrame)
-  .catch(err=>console.log(err)
-  )
+    .catch(err => console.log(err)
+    )
 
 
 export const deleteFrame = (frame) =>
@@ -164,19 +164,37 @@ export const deleteSize = (size) =>
 
 /*-------------------------STYLES-----------------------------------*/
 export const getStyle = () => dispatch =>
-axios.get("/api/admin/getStyle")
-  .then(style => {
-    dispatch(allStyle(style.data))
-    return style.data;
-  }
-  );
+  axios.get("/api/admin/getStyle")
+    .then(style => {
+      dispatch(allStyle(style.data))
+      return style.data;
+    }
+    );
 
 
 
 export const newStyle = (newStyle) =>
   axios.post("/api/admin/newStyle", newStyle)
-  .catch(err=>console.log(err)
-  )
+    .catch(err => console.log(err)
+    )
+
+export const editStyle = (styleId, updtdStyle) => {
+  console.log('LLEGUE AL PUT Y ESTO ES EL', updtdStyle)
+  axios.put(`/api/admin/editStyle/${styleId}`, updtdStyle)
+}
+
+
+export const editFrame = (frameId, updtdFrame) => {
+  console.log('LLEGUE AL PUT Y ESTO ES EL', updtdFrame)
+  axios.put(`/api/admin/editFrame/${frameId}`, updtdFrame)
+}
+
+
+export const editSize = (sizeId, updtdSize) => {
+  console.log('LLEGUE AL PUT Y ESTO ES EL', updtdSize, sizeId)
+  axios.put(`/api/admin/editSize/${sizeId}`, updtdSize)
+}
+
 
 
 export const deleteStyle = (style) =>

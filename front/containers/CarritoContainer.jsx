@@ -39,6 +39,9 @@ const mapDispatchToProps = (dispatch) => {
 class NavbarContainer extends React.Component {
   constructor(props) {
     super();
+    this.state={
+      refresh:true
+    }
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -88,6 +91,9 @@ class NavbarContainer extends React.Component {
       localStorage.setItem("dataWithoutUser", JSON.stringify(dataProduct))
       this.props.cartWithoutUser(dataProduct)
     }
+    this.setState({
+      refresh:!this.state.refresh
+    })
   }
 
 

@@ -22,14 +22,18 @@ class AdminUsersContainer extends React.Component {
     }
     this.handleStatus = this.handleStatus.bind(this),
     this.handleChange = this.handleChange.bind(this)
+    this.handleDelete=this.handleDelete.bind(this)
   }
 
   handleStatus(type, userid) {
     changeStatus(type, userid);
   }
   handleDelete(user) {
-    deleteUser(user);
+    deleteUser(user)
+    this.props.getUsers()
   }
+ 
+
 
   componentDidMount() {
     this.props.getUsers();

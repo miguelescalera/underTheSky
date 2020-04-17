@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
+import moment from "moment"
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -75,7 +75,7 @@ export default ({
             className="react-calendar"
           />
           <p className="info-single-product">
-            Fecha seleccionada: <strong>{state.date.toString()}</strong>
+            Fecha seleccionada: <strong>{moment(state.date).format('DD/MM/YYYY')}</strong>
           </p>
         </Form.Group>
       </Container>

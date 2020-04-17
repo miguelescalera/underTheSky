@@ -9,7 +9,7 @@ import Alert from "react-bootstrap/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-export default ({ handleChange, handleSizeSubmit, state }) => {
+export default ({ handleChange, handleSubmit, state }) => {
     const formStyle = {
         width: "80%",
         maxWidth: "800px",
@@ -61,7 +61,7 @@ export default ({ handleChange, handleSizeSubmit, state }) => {
                         className="boton-outline"
                         type="submit"
                         style={{ marginBlockStart: "0.5rem", marginBlockEnd: "1rem" }}
-                        onClick={handleSizeSubmit}
+                        onClick={handleSubmit}
                     >
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </Button>
