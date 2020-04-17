@@ -1,6 +1,6 @@
 import React from 'react'
 import Contacto from '../components/Contacto'
-import sendEmail from '../actions/adminActions'
+import {sendEmail} from '../actions/adminActions'
 
 export default class ContactoContainer extends React.Component{
     constructor(){
@@ -22,10 +22,9 @@ export default class ContactoContainer extends React.Component{
       }
 
       ///////////////////// la funcion sendEmail no esta llegando al back //////////
-    handleClick=()=>{
-        //sendEmail(this.state)
-        const Variable = this.state
-        console.log("estooooo",Variable)
+    handleClick(){
+        console.log("holaaa",this.state)
+        sendEmail(this.state)
     }
 
     render(){
