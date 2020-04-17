@@ -58,7 +58,6 @@ export default ({
 
     <Container>
       {dataProduct.map((e, i) => {
-
         let selectedStyle = Styles.filter(f => {
           return f.id === e.styleId
         })

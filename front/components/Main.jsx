@@ -27,6 +27,7 @@ import GraciasContainer from "../containers/GraciasContainer";
 import EditSizeContainer from "../containers/EditSizeContainer";
 import EditFrameContainer from '../containers/EditFrameContainer'
 import EditStyleContainer from '../containers/EditStyleContainer'
+import ContactoContainer from '../containers/ContactoContainer'
 
 
 
@@ -91,7 +92,7 @@ class Main extends React.Component {
           <Route path="/eladmin/editSize/:id" component={EditSizeContainer} />
           <Route path="/eladmin/editFrame/:id" component={EditFrameContainer} />
           <Route path="/eladmin/editStyle/:id" component={EditStyleContainer} />
-
+          <Route path="/contacto" component={ContactoContainer} />
           <Route path="/editProfile" exact component={EditUserContainer} />
           <Redirect from="/" to="/home" />
         </Switch>
