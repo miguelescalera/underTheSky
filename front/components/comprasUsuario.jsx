@@ -3,7 +3,7 @@ import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import Modal from 'react-bootstrap/Modal'
 
 
-export default ({orders,user,allStyles})=>{
+export default ({orders,user,allStyles,puntosDeEncuentro})=>{
 
 const [isOpen, setIsOpen] = useState(false);
 
@@ -28,7 +28,20 @@ const styleUser={
                 {orderUser?orderUser.map((e,i)=>{
                   let selectedStyle=null
                   let total=0
-                   
+                    let toggleOrder={
+                        display:"inline-block"
+                    }
+
+                let selected_P_E= puntosDeEncuentro.filter(p=>{
+                       return e.puntoDeEncuentroId===p.id
+                   })
+                   selected_P_E=selected_P_E[0]
+                   if(selected_P_E){
+                    toggleOrder.display="none"
+                   }
+                   else{
+                    toggleOrder.display="inline-block"
+                   }
                 let productDataUser= productsData.filter(f=>{
                      selectedStyle= allStyles.filter(style=>{
                         return f.styleId===style.id
@@ -36,14 +49,19 @@ const styleUser={
                       total+=f.price
                       return f.orderId=== e.id
                   })
+
                 
                    return(
                        <div key={i} style={styleUser}>
-                           <strong>estado de tu compra: </strong><span>{e.status}</span><br/>
-                           <strong>direccion:</strong><span>{e.address}</span><br/>
-                           <strong>pais: </strong><span>{e.country}</span><br/>
-                           <strong>provincia: </strong><span>{e.state}</span><br/>
-                           <strong>ciudad: </strong><span>{e.city}</span><br/>
+                           {selected_P_E?<span><strong>punto de entrega:</strong>{selected_P_E.address}</span>:null}
+                           <div style={toggleOrder}>
+                                <strong>estado de tu compra: </strong><span>{e.status}</span><br/>
+                                <strong>direccion:</strong><span>{e.address}</span><br/>
+                                <strong>pais: </strong><span>{e.country}</span><br/>
+                                <strong>provincia: </strong><span>{e.state}</span><br/>
+                                <strong>ciudad: </strong><span>{e.city}</span><br/>
+
+                           </div>
                             <h2>${total}</h2>
                            <div>
                             <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>ver productos</Button>
