@@ -133,7 +133,7 @@ export default ({ styles, frames, sizes, handleDeleteStyle, handleDeleteSize, ha
                                                         <Button
                                                             className="boton-outline"
                                                             style={botonSelecc}
-                                                            onClick={() => handleDeleteStyle(style.id)}
+
                                                         >
                                                             Editar
                             </Button>

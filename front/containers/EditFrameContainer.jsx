@@ -1,14 +1,8 @@
 import React from "react";
-import Login from "../components/Login";
 import { connect } from "react-redux";
-import { userLogin, addLogin } from "../actions/LoginAction"
-import { encrypt } from "../actions/RegisterAction"
-import { Tabs, Tab, FormFile } from 'react-bootstrap'
-import AddFrame from "../components/AddFrame";
-import AddSize from '../components/AddSize'
-import AddStyle from '../components/AddStyle'
 import { fetchFrame } from '../actions/productsActions'
-import EliminarPropiedades from "../components/EliminarPropiedades";
+import { editFrame } from '../actions/adminActions'
+
 import EditFrame from '../components/EditFrame'
 
 const mapDispatchToProps = (dispatch, state) => {
@@ -37,6 +31,7 @@ class EditFrameContainer extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleFile = this.handleFile.bind(this)
     }
 
 
@@ -50,14 +45,19 @@ class EditFrameContainer extends React.Component {
     }
 
     handleChange(e) {
-
         const key = e.target.name;
         const value = e.target.value;
         console.log(e.target.name, e.target.value);
         this.setState({
             [key]: value
         });
+        console.log('hola', this.state)
 
+    }
+
+    handleFile(e) {
+        console.log(e.target.files[0]);
+        this.setState({ frameImg: e.target.files[0] })
     }
 
     handleSubmit(e) {
@@ -67,8 +67,11 @@ class EditFrameContainer extends React.Component {
         frameUpload.append("frame", this.state.frame)
         frameUpload.append("framePrice", this.state.framePrice)
 
-
-        newFrame(frameUpload)
+        editFrame(this.props.match.params.id, {
+            frameImg: this.state.frameImg,
+            frame: this.state.frame,
+            framePrice: this.state.framePrice
+        })
         this.props.history.push("/eladmin");
 
     }
@@ -81,7 +84,7 @@ class EditFrameContainer extends React.Component {
 
         return (
             <div>
-                <EditFrame handleChange={this.handleChange} handleSubmit={this.handleSubmit} state={this.state} />
+                <EditFrame handleChange={this.handleChange} handleSubmit={this.handleSubmit} state={this.state} handleFile={this.handleFile} />
             </div>
         );
     }

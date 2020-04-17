@@ -10,6 +10,7 @@ import AddStyle from '../components/AddStyle'
 import { fetchStyle } from '../actions/productsActions'
 import EliminarPropiedades from "../components/EliminarPropiedades";
 import EditStyle from '../components/EditStyle'
+import { editStyle } from '../actions/adminActions'
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
@@ -73,9 +74,10 @@ class EditStyleContainer extends React.Component {
         styleUpload.append("styleColor", this.state.styleColor)
         styleUpload.append("styleTipo", this.state.styleTipo)
         styleUpload.append("styleSigno", this.state.styleSigno)
+        console.log('esteeselestyloeditado', styleUpload)
 
-        newStyle(styleUpload)
-        this.props.history.push("/eladmin");
+        editStyle(this.props.match.params.id, styleUpload)
+        this.props.history.push("/eladmin")
     }
 
 
@@ -86,7 +88,7 @@ class EditStyleContainer extends React.Component {
 
         return (
             <div>
-                <EditStyle handleChange={this.handleChange} handleStyleSubmit={this.handleSubmit} handleStyleFile={this.handleStyleFile} state={this.state} />
+                <EditStyle handleChange={this.handleChange} handleStyleSubmit={this.handleStyleSubmit} handleStyleFile={this.handleStyleFile} state={this.state} />
             </div>
         );
     }
