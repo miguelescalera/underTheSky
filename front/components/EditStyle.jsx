@@ -73,7 +73,7 @@ export default ({
                     className="d-flex justify-content-center"
                     style={{ marginBlockEnd: "1rem" }}
                 >
-                    Agregar un estilo
+                    Modificar un estilo
         </h3>
 
                 <Form

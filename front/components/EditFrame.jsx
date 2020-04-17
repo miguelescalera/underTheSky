@@ -54,7 +54,7 @@ export default ({ handleChange, handleSubmit, handleFile }) => {
                     className="d-flex justify-content-center"
                     style={{ marginBlockEnd: "1rem" }}
                 >
-                    Agrega un tipo de marco
+                    Modificar un tipo de marco
         </h3>
 
                 <Form

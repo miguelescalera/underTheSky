@@ -63,9 +63,9 @@ export default ({
   };
 
   console.log(state);
-  
+
   return (
-    <Form style={formStyle}>
+    <Form onSubmit={handleSubmit} style={formStyle}>
       <Container style={colStyle}>
         <Form.Group controlId="formDateContent">
           <Form.Label>Fecha del Evento</Form.Label>
@@ -133,20 +133,23 @@ export default ({
             Nunca compartiremos tu Email
           </Form.Text>
         </Form.Group>
-        <Container style={botonesWzrd }>
+        <Container style={botonesWzrd}>
           {enableButton ? (
             <Button
               onClick={PreviousStep}
               className="boton-solido"
               type="submit"
             >
-              
-<FontAwesomeIcon icon={faArrowLeft} />
+
+              <FontAwesomeIcon icon={faArrowLeft} />
             </Button>
           ) : null}
 
           <Button
-            onClick={handleSubmit}
+            disabled={
+              !state.emailClient || !state.content || !state.name || !state.time || !state.language
+            }
+
             className="boton-solid"
             type="submit"
           >

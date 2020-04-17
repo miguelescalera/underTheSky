@@ -22,7 +22,7 @@ export default () => (
                 <p>Órdenes</p>
             </Link>
             <Link to="/addProducts">
-                <p>Agregar Variables</p>
+                <p>Administrar Variables</p>
             </Link>
 
             <Link to="/admin/getUsers">

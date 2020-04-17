@@ -34,7 +34,7 @@ class AdminProductsContainer extends React.Component {
         this.state = {
             size: "",
             sizePrice: 0,
-            sizeType:'',
+            sizeType: '',
             frame: "",
             framePrice: 0,
             frameImg: null,
@@ -109,7 +109,7 @@ class AdminProductsContainer extends React.Component {
         newSize({
             name: this.state.size,
             price: this.state.sizePrice,
-            type:this.state.sizeType
+            type: this.state.sizeType
         })
         this.props.history.push("/eladmin");
 
@@ -198,7 +198,7 @@ class AdminProductsContainer extends React.Component {
                         styleName={this.state.styleName}
                         styleImg={this.state.styleImg} />
                 </Tab>
-                <Tab eventKey="Eliminar" title="Eliminar">
+                <Tab eventKey="Borrar/Editar" title="Borrar/Editar">
                     <EliminarPropiedades styles={this.props.styles}
                         frames={this.props.frames}
                         sizes={this.props.sizes}
