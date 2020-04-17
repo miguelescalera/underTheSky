@@ -91,7 +91,13 @@ class SingleProductContainer extends React.Component {
             this.props.selectSize(size)
             localStorage.setItem('selectedSize',JSON.stringify(size))
         }
-        handleDigital() {
+        handleDigital(frame,size) {
+          this.props.selectSize(size)
+          this.props.selectFrame(frame)
+          // this.setState({
+          //   selectedFrame: frame,
+          // });
+
           this.setState({ 
               digital: !this.state.digital,
               toggleDefault:this.state.digital?0:this.props.selectedFrame.id,

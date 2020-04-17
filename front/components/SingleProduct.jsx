@@ -8,10 +8,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import Switch from "react-switch";
 import Image from "react-bootstrap/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 <FontAwesomeIcon icon={faArrowLeft} />;
 export default ({
   handleSize,
@@ -29,23 +26,23 @@ export default ({
   selectedSize,
 }) => {
   const singleStyle = {
-    width:'100vw',
+    width: "100vw",
     marginBlockEnd: "5rem",
     display: "flex",
-    flexFlow:'row wrap',
+    flexFlow: "row wrap",
     textAlign: "center",
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   const colStyle = {
-    width:'90vw',
-    maxWidth:'18rem',
-    alignItems:'center',
+    width: "90vw",
+    maxWidth: "18rem",
+    alignItems: "center",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    margin:'20px'
+    margin: "20px",
   };
 
   const toggleDigitalDisplay = () => {
@@ -64,12 +61,23 @@ export default ({
   };
 
   const getPrice = () => {
-    return 0 + selectedFrame.price + selectedSize.price
+    let finalPrice = 0 + selectedFrame.price + selectedSize.price;
+    if (!finalPrice) {
+      return (
+        <Spinner style={{marginBlockEnd:'7px'}} animation="grow" size='sm' role="status" variant="secondary">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      );
+    } else {
+      return finalPrice;
+    }
   };
 
-  const imgurlPoster = selectedStyle.imgPath ? selectedStyle.imgPath.toString().split("/public")[1] : null
+  const imgurlPoster = selectedStyle.imgPath
+    ? selectedStyle.imgPath.toString().split("/public")[1]
+    : null;
 
-  console.log('PRERETURN SELECTED FRAMEEEEEEEEEE', selectedFrame);
+  console.log("PRERETURN SELECTED FRAMEEEEEEEEEE", selectedFrame);
 
   return (
     <div style={singleStyle}>
@@ -82,41 +90,46 @@ export default ({
         <Card className="singleproduct-card ">
           <Card.Body style={{ padding: "0px" }}>
             <div id="probuild-contenedor">
+              
+                <Card.Img
+                  id="probuild-marco"
+                  style={{
+                    borderRadius: "0.2rem",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    margin: 0,
+                    border: "none",
+                    width: "100%",
+                    height: "100%",
+                    zIndex: 1,
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    borderColor: "rgba(0,0,0,0)",
+                  }}
+                  variant="top"
+                  src={selectedFrame.imgPath.slice(7)}
+                />
+              
 
-
-              <Card.Img
-                id="probuild-marco"
-                style={{
-                  borderRadius: "0.2rem",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  margin: 0,
-                  border: "none",
-                  width: "100%",
-                  height: "100%",
-                  zIndex: 1,
-                  backgroundColor: "rgba(0, 0, 0, 0)",
-                  borderColor: 'rgba(0,0,0,0)'
-                }}
-                variant="top"
-                src={selectedFrame.imgPath.slice(7)}
-              />
-
-
-              <Card.Img
-                id="probuild-poster"
-                style={{
-                  zIndex: 0,
-                  position: "relative",
-                  borderRadius: "0.2rem",
-                  borderColor: "rgba(0,0,0,0)",
-                  backgroundColor: "rgba(255,251,254,0)",
-                  padding: "0.6rem",
-                }}
-                variant="top"
-                src={imgurlPoster}
-              />
+              {!imgurlPoster ? (
+                <Spinner animation="border" role="status" variant="secondary">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+              ) : (
+                <Card.Img
+                  id="probuild-poster"
+                  style={{
+                    zIndex: 0,
+                    position: "relative",
+                    borderRadius: "0.2rem",
+                    borderColor: "rgba(0,0,0,0)",
+                    backgroundColor: "rgba(255,251,254,0)",
+                    padding: "0.6rem",
+                  }}
+                  variant="top"
+                  src={imgurlPoster}
+                />
+              )}
             </div>
           </Card.Body>
         </Card>
@@ -128,7 +141,8 @@ export default ({
           }}
         >
           <p className="info-single-product">
-            Estilo: <strong>{selectedStyle.name}</strong>,  Color: <strong>{selectedStyle.color}</strong>
+            Estilo: <strong>{selectedStyle.name}</strong>, Color:{" "}
+            <strong>{selectedStyle.color}</strong>
           </p>
           <br />
           {selectedStyle.name === "zodiac" ||
@@ -136,8 +150,7 @@ export default ({
             <>
               <p className="info-single-product">
                 Tipografia: <strong>{selectedStyle.tipografia}</strong>,<br />
-                 Signo:{" "}
-                 <strong>{selectedStyle.signo}</strong>
+                Signo: <strong>{selectedStyle.signo}</strong>
               </p>
             </>
           ) : null}
@@ -213,7 +226,7 @@ export default ({
           </Container>
           <Container className="d-flex justify-content-center">
             {!sizes ? (
-              <Spinner animation="border" role="status" variant="light">
+              <Spinner animation="border" role="status" variant="dark">
                 <span className="sr-only">Loading...</span>
               </Spinner>
             ) : (
@@ -236,14 +249,7 @@ export default ({
             )}
           </Container>
         </div>
-        {/* <Container className="d-flex justify-content-center">
-        <h4>Color</h4>
-        {!styles ? <p>cargando</p> : styles.map((e) => {
-          return (
-            <Button variant="outline-dark" onClick={() => handleColor(e.id)} name="Blue" >{e.color}</Button>
-          )
-        })}
-      </Container> */}
+
         {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
         {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
         {/* //AQUI ES EL SEGUNDO RENDER DE VARIABLE (MARCO) */}
@@ -259,7 +265,7 @@ export default ({
 
           <Container className="d-flex justify-content-center">
             {!frames ? (
-              <Spinner animation="border" role="status" variant="light">
+              <Spinner animation="border" role="status" variant="dark">
                 <span className="sr-only">Loading...</span>
               </Spinner>
             ) : (
