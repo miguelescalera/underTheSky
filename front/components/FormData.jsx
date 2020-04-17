@@ -65,7 +65,7 @@ export default ({
   console.log(state);
   
   return (
-    <Form style={formStyle}>
+    <Form onSubmit={handleSubmit} style={formStyle}>
       <Container style={colStyle}>
         <Form.Group controlId="formDateContent">
           <Form.Label>Fecha del Evento</Form.Label>
@@ -146,7 +146,9 @@ export default ({
           ) : null}
 
           <Button
-            onClick={handleSubmit}
+            disabled={
+              !state.emailClient || !state.content || !state.name || !state.time || !state.language
+            }
             className="boton-solid"
             type="submit"
           >

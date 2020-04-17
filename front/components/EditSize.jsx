@@ -33,7 +33,7 @@ export default ({ handleChange, handleSubmit, state }) => {
                     className="d-flex justify-content-center"
                     style={{ marginBlockEnd: "1rem" }}
                 >
-                    Agrega tamaño
+                    Editar tamaño
         </h3>
                 <Form>
                     <Form.Group>

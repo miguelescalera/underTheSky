@@ -54,7 +54,7 @@ export default ({ handleChange, handleSubmit, handleFile }) => {
                     className="d-flex justify-content-center"
                     style={{ marginBlockEnd: "1rem" }}
                 >
-                    Agrega un tipo de marco
+                    Editar un marco
         </h3>
 
                 <Form
@@ -68,7 +68,7 @@ export default ({ handleChange, handleSubmit, handleFile }) => {
                         <Form.Label>Tipo de marco</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Madera"
+                            placeholder="Tipo"
                             name="frame"
                             onChange={handleChange}
                         />
@@ -78,7 +78,7 @@ export default ({ handleChange, handleSubmit, handleFile }) => {
                         <Form.Label>Precio</Form.Label>
                         <Form.Control
                             type="number"
-                            placeholder="$0"
+                            placeholder="Editar precio"
                             name="framePrice"
                             onChange={handleChange}
                         />

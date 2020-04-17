@@ -22,7 +22,7 @@ export default () => (
                 <p>Órdenes</p>
             </Link>
             <Link to="/addProducts">
-                <p>Agregar Variables</p>
+                <p>Administrar Variables</p>
             </Link>
 
             <Link to="/admin/getUsers">
@@ -30,7 +30,7 @@ export default () => (
             </Link>
 
             <Link to="/admin/newPunto">
-                <p>Puntos de Encuentro</p>
+                <p>Puntos de entrega</p>
             </Link>
         </div>
     </div>

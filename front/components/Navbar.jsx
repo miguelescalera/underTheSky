@@ -216,7 +216,7 @@ export default ({
                     </div>
                     <div>
                       <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
-                      {User.type==="admin"?<span>administrar productos</span>:<br/>}
+                      {User.type==="admin"?<span>Administrador UTS</span>:<br/>}
                       </Link>
                     </div>
                     <div style={{marginBottom:"15px"}}>

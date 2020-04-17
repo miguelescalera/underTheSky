@@ -49,7 +49,11 @@ export default ({handleChange,handleClick})=>{
                 <Form.Label>Mensaje</Form.Label>
                 <Form.Control as="textarea" rows="3" placeholder="Mensaje" onChange={handleChange} name='mensaje' />
             </Form.Group>
-            <Button  variant="primary" onClick={()=>handleClick()} >
+            <Button  variant="primary" onClick={
+              ()=>{
+              handleClick()
+              }
+              } >
                 Enviar 
             </Button>
           </Form>

@@ -6,7 +6,8 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Collapse from "react-bootstrap/Collapse";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 export default ({
   PuntoDeEncuentro,
@@ -18,9 +19,31 @@ export default ({
   lastNameUser
 }) => {
   const formStyle = {
-    width: "15rem"
+    width: "35rem",
+    display:'flex',
+    flexWrap:'wrap',
+    justifyContent:'center',
+
+    paddingBlockEnd:'3rem'
   };
  
+  const puntoStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    backgroundColor: 'rgba(0,0,0,0)',
+
+    justifyContent:'center',
+    paddingBlockEnd:'3rem'
+  };
+
+  const formGroupStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    margin:'15px',
+
+
+  };
+
   console.log("esto es mi puntod de encuentro",PuntoDeEncuentro)
  
 
@@ -28,35 +51,14 @@ export default ({
   const [count, setCount] = useState(false)
 
   return (
-    <Container>
-      <>
-        <Button
-          className="boton-outline"
-          onClick={() => setOpen(!open)}
-          aria-controls="formularioEntrega"
-          aria-expanded={open}
-        >
-          Envio a Domicilio
-        </Button>
+    <Tabs className='tab-container' defaultActiveKey="profile" id="uncontrolled-tab-example">
 
-
-        <Button
-          className="boton-outline"
-          onClick={() => setCount(!count)}
-          aria-controls="PuntoDeEncuentro"
-          aria-expanded={count}
-        >
-          Puntos De Encuentro
-        </Button>
-
-
-        <Collapse in={open}>
-          <div id="formularioEntrega">
+                <Tab eventKey="envio" title="Envío a domicilio">
+                <div id="formularioEntrega">
             <Card className="form-container">
-              <h3 className="titulopagina">Dirección de entrega</h3>
 
               <Form style={formStyle}>
-                <Form.Group controlId="formDateContent">
+                <Form.Group style={formGroupStyle} controlId="formDateContent">
                   <Form.Label>Dirección</Form.Label>
 
                   <Form.Control
@@ -67,7 +69,7 @@ export default ({
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPlace">
+                <Form.Group style={formGroupStyle} controlId="formBasicPlace">
                   <Form.Label>Ciudad</Form.Label>
 
                   <Form.Control
@@ -77,7 +79,7 @@ export default ({
                     name="city"
                   />
                 </Form.Group>
-                <Form.Group controlId="formBasicTime">
+                <Form.Group style={formGroupStyle} controlId="formBasicTime">
                   <Form.Label>Provincia</Form.Label>
 
                   <Form.Control
@@ -88,7 +90,7 @@ export default ({
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPhrase">
+                <Form.Group style={formGroupStyle} controlId="formBasicPhrase">
                   <Form.Label>Pais </Form.Label>
 
                   <Form.Control
@@ -99,7 +101,7 @@ export default ({
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicLanguage">
+                <Form.Group style={formGroupStyle} controlId="formBasicLanguage">
                   <Form.Label>Código Postal</Form.Label>
 
                   <Form.Control
@@ -108,12 +110,12 @@ export default ({
                     placeholder="1414"
                     name="postCode"
                   />
-                </Form.Group>
+                </Form.Group >
 
                 <Button
                   onClick={handleSubmit}
                   style={{ marginTop: "1.5rem" }}
-                  className="boton-outline"
+                  className="boton-solido"
                   type="submit"
                 >
                   Comprar
@@ -121,13 +123,12 @@ export default ({
               </Form>
             </Card>
           </div>
-        </Collapse>
-
-        <Collapse in={count}>
-          <div id="PuntoDeEncuentro">
+                </Tab>
+                <Tab eventKey="Entrega" title="Puntos de entrega">
+                <Container style={puntoStyle} id="PuntoDeEncuentro">
    {PuntoDeEncuentro.map(P=>{
      return(
-            <Card style={{ width: "16rem" }}>
+            <Card  className="tarjetaproducto" style={{ width: "16rem", margin:'25px', color:'#102f51' }}>
               <Card.Body>
                 <Card.Title>Lugar: {P.place}</Card.Title>
                 <Card.Text>Direccion: {P.address} </Card.Text>
@@ -138,11 +139,10 @@ export default ({
             </Card>
      )
       })}
-          </div>
-        </Collapse>
-
-      </>
-
-    </Container>
+          </Container>
+                </Tab>
+                
+            </Tabs>
+    
   );
 };

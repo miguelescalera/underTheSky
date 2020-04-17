@@ -53,6 +53,11 @@ class SingleProductContainer extends React.Component {
         imgPath:
           '/public/src/img/dummy.png'
       },
+      selectedSize: {
+        id: 0,
+        name: "dummy",
+        price: 0,
+      }
     };
     this.handleFrame = this.handleFrame.bind(this);
     this.handleSize = this.handleSize.bind(this);
@@ -91,7 +96,13 @@ class SingleProductContainer extends React.Component {
             this.props.selectSize(size)
             localStorage.setItem('selectedSize',JSON.stringify(size))
         }
-        handleDigital() {
+        handleDigital(frame,size) {
+          this.props.selectSize(size)
+          this.props.selectFrame(frame)
+          // this.setState({
+          //   selectedFrame: frame,
+          // });
+
           this.setState({ 
               digital: !this.state.digital,
               toggleDefault:this.state.digital?0:this.props.selectedFrame.id,

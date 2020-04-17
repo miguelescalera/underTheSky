@@ -1,101 +1,200 @@
-import React, { useState } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
-import Modal from 'react-bootstrap/Modal'
+import React, { useState } from "react";
+import { Collapse, Button, CardBody } from "reactstrap";
+import Modal from "react-bootstrap/Modal";
+import { Card, Popover, OverlayTrigger, Container } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
 
+export default ({ orders, user, allStyles, puntosDeEncuentro }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-export default ({orders,user,allStyles,puntosDeEncuentro})=>{
+  const toggle = () => setIsOpen(!isOpen);
 
-const [isOpen, setIsOpen] = useState(false);
+  const puntoStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    backgroundColor: "rgba(0,0,0,0)",
 
+    justifyContent: "center",
+    paddingBlockEnd: "3rem",
+  };
 
-const toggle = () => setIsOpen(!isOpen);
+  let orderUser = orders.orders;
+  let productsData = orders.productData;
 
+  const styleUser = {
+    width: "50%",
+    backgroundColor: "white",
+    marginLeft: "25%",
+    marginBottom: "10%",
+  };
 
+  return (
+    <Container style={puntoStyle}>
+      {orderUser ? (
+        orderUser.map((e, i) => {
+          let selectedStyle = null;
+          let total = 0;
+          let toggleOrder = {
+            display: "inline-block",
+          };
 
-let orderUser= orders.orders
-let productsData = orders.productData
+          let selected_P_E = puntosDeEncuentro.filter((p) => {
+            return e.puntoDeEncuentroId === p.id;
+          });
+          selected_P_E = selected_P_E[0];
+          if (selected_P_E) {
+            toggleOrder.display = "none";
+          } else {
+            toggleOrder.display = "inline-block";
+          }
+          let productDataUser = productsData.filter((f) => {
+            selectedStyle = allStyles.filter((style) => {
+              return f.styleId === style.id;
+            });
+            total += f.price;
+            return f.orderId === e.id;
+          });
+          const popover = (
+            <Popover id="popover-basic">
+              <Popover.Title as="h3">
+                Tenés {productDataUser.length}
+                {productDataUser.length > 1 ? (
+                  <span> productos </span>
+                ) : (
+                  <span>producto</span>
+                )}
+              </Popover.Title>
+              <Popover.Content
+                style={{
+                  backgroundColor: "#f7f4ed",
+                  maxHeight: "400px",
+                  overflow: "scroll",
+                }}
+              >
+                <p>
+                  {" "}
+                  {productDataUser.map((e, i) => {
+                    return (
+                      <Container
+                        style={{
+                          marginBlockEnd: "15px",
+                          borderBottom: "1px solid grey",
+                        }}
+                        key={i}
+                      >
+                        <span>
+                          <strong>Producto: </strong>
+                          {i+1}
+                        </span>
+                        <br />
+                        <span>
+                          <strong>Tamaño: </strong>
+                          {e.size + " "}
+                        </span>
+                        <br />
+                        <span>
+                          <strong>Estilo: </strong>
+                          {selectedStyle[0]
+                            ? selectedStyle[0].name + " "
+                            : null}
+                        </span>
+                        <br />
+                        {e.digital ? (
+                          <strong>Digital</strong>
+                        ) : (
+                          <span>
+                            <strong>Marco:</strong> {e.frame}
+                          </span>
+                        )}
+                        <br />
+                        <strong>Fecha: </strong>
+                        <span>{e.date}</span>
+                        <br />
+                        <span>
+                          <strong>Color: </strong>
+                          {selectedStyle[0]
+                            ? selectedStyle[0].color + " "
+                            : null}
+                        </span>
+                        <br />
 
-const styleUser={
-    width:"50%",
-    backgroundColor:"white",
-    marginLeft:"25%",
-    marginBottom:"10%"
-}
-    return(
-        <div>
-            <div>
-                <h3 style={{color:"white",textAlign:"center"}}>tus compras</h3>
-                {orderUser?orderUser.map((e,i)=>{
-                  let selectedStyle=null
-                  let total=0
-                    let toggleOrder={
-                        display:"inline-block"
-                    }
+                        <strong>Nombre o frase: </strong>
+                        {e.name}
+                        <span></span>
+                        <br />
+                        <strong>Hora:</strong>
+                        <span>{e.time}</span>
+                        <br />
+                        <strong>Idioma: </strong>
+                        <span>{e.language}</span>
+                        <br />
+                      </Container>
+                    );
+                  })}
+                </p>
+              </Popover.Content>
+            </Popover>
+          );
+          return (
+            <div key={i}>
+              <Card
+                key={i}
+                className="tarjetaproducto"
+                style={{ width: "16rem", margin: "25px", color: "#102f51" }}
+              >
+                <Card.Body>
+                  <Card.Title>Orden N° {e.id}</Card.Title>
+                  <Card.Text>
+                    {selected_P_E ? (
+                      <span>
+                        <strong>punto de entrega:</strong>
+                        {selected_P_E.address}
+                      </span>
+                    ) : null}
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>direccion:</strong>
+                    <span>{e.address}</span>
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>pais: </strong>
+                    <span>{e.country}</span>
+                    <br />
+                  </Card.Text>
 
-                let selected_P_E= puntosDeEncuentro.filter(p=>{
-                       return e.puntoDeEncuentroId===p.id
-                   })
-                   selected_P_E=selected_P_E[0]
-                   if(selected_P_E){
-                    toggleOrder.display="none"
-                   }
-                   else{
-                    toggleOrder.display="inline-block"
-                   }
-                let productDataUser= productsData.filter(f=>{
-                     selectedStyle= allStyles.filter(style=>{
-                        return f.styleId===style.id
-                    })
-                      total+=f.price
-                      return f.orderId=== e.id
-                  })
-
-                
-                   return(
-                       <div key={i} style={styleUser}>
-                           {selected_P_E?<span><strong>punto de entrega:</strong>{selected_P_E.address}</span>:null}
-                           <div style={toggleOrder}>
-                                <strong>estado de tu compra: </strong><span>{e.status}</span><br/>
-                                <strong>direccion:</strong><span>{e.address}</span><br/>
-                                <strong>pais: </strong><span>{e.country}</span><br/>
-                                <strong>provincia: </strong><span>{e.state}</span><br/>
-                                <strong>ciudad: </strong><span>{e.city}</span><br/>
-
-                           </div>
-                            <h2>${total}</h2>
-                           <div>
-                            <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>ver productos</Button>
-                            <Collapse isOpen={isOpen}>
-                            tienes {productDataUser.length}{productDataUser.length>1?<span>productos</span>:<span>producto</span> }
-                           { productDataUser.map((e,i)=>{
-                               return(
-                                    <Card key={i}>
-                                    <CardBody>
-                                    <span><strong>tamaño: </strong>{e.size+" "}</span>
-                                    <span><strong>estilo: </strong>{selectedStyle[0].name+" "}</span>
-                                    {e.digital?<strong>digital</strong>:<span><strong>marco:</strong> {e.frame}</span>}<br/>
-                                    <strong>fecha: </strong><span>{e.date}</span><br/>
-                                    <span><strong>color: </strong>{selectedStyle[0].color+" "}</span><br/>
-
-
-
-                                    <strong>nombre o frase: </strong>{e.name}<span></span><br/>
-                                    <strong>hora:</strong><span>{e.time}</span><br/>
-                                    <strong>idioma: </strong><span>{e.language}</span><br/>
-                                    </CardBody>
-                                    </Card>
-                               )
-                            })}
-
-                            </Collapse>
-
-                            </div>
-                       </div>
-                   )
-               }): <span style={{color:"white"}}>aun no tienes compras</span> }
+                  <Card.Text>
+                    <strong>provincia: </strong>
+                    <span>{e.state}</span>
+                    <br />
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>ciudad: </strong>
+                    <span>{e.city}</span>
+                    <br />
+                  </Card.Text>
+                  <Card.Text>
+                    <h2>${total}</h2>
+                  </Card.Text>
+                  <>
+                    <OverlayTrigger
+                      rootClose={true}
+                      trigger="click"
+                      placement="top"
+                      overlay={popover}
+                    >
+                      <Button className="boton-solido" size="sm">
+                        Detalles de la orden
+                      </Button>
+                    </OverlayTrigger>
+                  </>
+                </Card.Body>
+              </Card>
             </div>
-        </div>
-    )
-}
-            
-                           
+          );
+        })
+      ) : (
+        <span style={{ color: "white" }}>aun no tienes compras</span>
+      )}
+    </Container>
+  );
+};

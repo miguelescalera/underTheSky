@@ -32,7 +32,7 @@ export default ({handleChange, handleClick}) => {
       <Row>
       <span>
         <div style={divFormStyle}>
-          <Form  style={formStyle} >
+          <Form onSubmit={handleClick} style={formStyle} >
             <Form.Group controlId="formBasicFirstName">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" placeholder="Nombre" onChange={handleChange} name='firstName' />
@@ -52,7 +52,7 @@ export default ({handleChange, handleClick}) => {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" onChange={handleChange} name='password' />
             </Form.Group>
-            <Button onClick={handleClick} className='boton-solido' type="submit">
+            <Button  className='boton-solido' type="submit">
               Registrar
             </Button>
             <Link to="/login">

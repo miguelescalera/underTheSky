@@ -198,7 +198,7 @@ class AdminProductsContainer extends React.Component {
                         styleName={this.state.styleName}
                         styleImg={this.state.styleImg} />
                 </Tab>
-                <Tab eventKey="Eliminar" title="Eliminar">
+                <Tab eventKey="Eliminar" title="Editar o eliminar">
                     <EliminarPropiedades styles={this.props.styles}
                         frames={this.props.frames}
                         sizes={this.props.sizes}
