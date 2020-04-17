@@ -6,7 +6,7 @@ const passport = require("passport");
 
 
 
-const email = (email, content) => {
+ const email = (email, content) => {
   const nodemailer = require('nodemailer');
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -107,4 +107,39 @@ router.delete("/delete", function (req, res) {
       res.sendStatus(200);
     });
 });
+
+router.post("/sendEmail", function (req,res){
+emailSend(req.body.data)
+console.log("Enviado con exito papá")
+})
+
+
+
+const emailSend = (data) => {
+  const nodemailer = require('nodemailer');
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'undertheskydeco024@gmail.com',
+      pass: 'Bajoelcielo1-'
+    },
+  });
+  const mailOptions = {
+    from: 'undertheskydeco024@gmail.com',
+    to: `miguelescalera46@gmail.com`,
+    subject: 'Contacto underthesky',
+    text: ` ${data.mensaje}, NOMBRE: ${data.name}, EMAIL: ${data.email}`
+  };
+  console.log("sending email", mailOptions);
+  transporter.sendMail(mailOptions, function (error, info) {
+    console.log("senMail returned!");
+    if (error) {
+      console.log("ERROR!!!!!!", error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+} 
+
+
 module.exports = router;

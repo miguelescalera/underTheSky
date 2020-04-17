@@ -182,6 +182,12 @@ export default ({
               >
                 Productos
               </Link>
+            </Nav.Link><Nav.Link>
+              <Link
+                style={navFont}
+                to="/contacto">
+                Contacto
+              </Link>
             </Nav.Link>
             {User.email?null:<Nav.Link>
               <Link
