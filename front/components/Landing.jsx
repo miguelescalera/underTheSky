@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 
+
 export default ({ handleClick }) => {
   const landingStyle = {
     display: "flex",
@@ -41,7 +42,7 @@ export default ({ handleClick }) => {
           La posición de las estrellas <br />
           ese día especial
         </h1>
-        <p>Hecho con <FontAwesomeIcon icon={faHeart} /></p>
+        <p>Hecho con <FontAwesomeIcon style={{color:'#c04040'}} icon={faHeart} /></p>
         <Button onClick={handleClick} className="boton-outline">
           {" "}
           Nuestros productos

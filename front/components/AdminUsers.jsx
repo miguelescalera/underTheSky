@@ -4,12 +4,24 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner"
 
-export default ({ usuarios, handleStatus, handleDelete }) => {
+export default ({ usuarios, handleStatus, handleDelete, handleChange }) => {
 
   // agregar un sort() para ordenar las ordenes
 
-  return usuarios.map(usuario => {
+  return (
+    <div>
+      <Card id='user-card' style={{justifyContent:"center"}} >
+      <Form.Control type="text" placeholder="Buscar Usuarios" name="input" onChange={handleChange} />
+      </Card>
+      {!usuarios ? (
+              <Spinner animation="border" role="status" variant="light">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            ):(
+  usuarios.map(usuario => {
     return (
       <Container>
         <Card id='user-card'>
@@ -42,5 +54,8 @@ export default ({ usuarios, handleStatus, handleDelete }) => {
         </Card>
       </Container>
     );
-  });
+  }) )
+}
+  </div>
+  )
 };

@@ -193,7 +193,7 @@ export default ({
                     {e.time}
                   </Row>
                   <Row className="carrito-info-row">
-                    <strong>Nombre o frase: </strong>
+                    <strong>Texto: </strong>
                     {e.name}
                   </Row>
                   <Row className="carrito-info-row">

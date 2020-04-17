@@ -32,9 +32,9 @@ router.get("/getFrame", function (req, res) {
   });
 });
 
-router.get('/getFrame/:id', function(req, res){
+router.get('/getFrame/:id', function (req, res) {
   Frame.findByPk(req.params.id)
-  .then(data=>res.json(data))
+    .then(data => res.json(data))
 })
 
 router.post("/newFrame", upload.single("frameImg"), function (req, res) {
@@ -79,6 +79,16 @@ router.post("/newSize", function (req, res) {
   });
 });
 
+router.put('/editSize/:id', function (req, res) {
+  const id = req.params.id
+  Size.update(req.body, { where: { id } })
+    .then(function (resolved) {
+      console.log('se actualizaron', resolved, 'filas del modelo');
+      res.sendStatus(200);
+    });
+
+})
+
 router.delete("/deleteSize/:size", function (req, res) {
   Size.findByPk(req.params.size)
     .then(function (size) {
@@ -88,6 +98,49 @@ router.delete("/deleteSize/:size", function (req, res) {
       res.sendStatus(200);
     });
 });
+
+
+////////////FRAMES//////////////
+
+router.put("/editFrame/:id", upload.single("styleImg"), function (req, res) {
+  console.log("Ruta de edición de estilo ->", req.params.id);
+  console.log("Ruta de edicion de estilo->", req.body);
+  console.log("Ruta de edicion de estilo, img->", req.file);
+  let name = req.body.frame ? req.body.frame.toLowerCase() : undefined;
+  let price = req.body.framePrice ? req.body.framePrice.toLowerCase() : undefined;
+  let imgName = req.file ? req.file.originalname : undefined;
+  let imgType = req.file ? req.file.mimetype : undefined;
+  let imgData = req.file ? fs.readFileSync(req.file.path) : undefined;
+  let imgPath = req.file ? "/" + req.file.path : undefined;
+  let id = req.params.id;
+  Frame.update(
+    {
+      name,
+      price,
+      imgName,
+      imgType,
+      imgData,
+      imgPath,
+    },
+    {
+      where: { id },
+    }
+  )
+    .then(function (resolved) {
+      console.log('se actualizaron', resolved, 'filas del modelo');
+
+      res.sendStatus(200);
+    });
+});
+
+
+
+
+
+
+
+
+
 
 //////////////////////ESTILOS////////////////////////////////////
 
@@ -150,14 +203,14 @@ router.put("/editStyle/:style", upload.single("styleImg"), function (req, res) {
       imgPath,
     },
     {
-      where: {id},
+      where: { id },
     }
   )
-  .then(function (resolved) {
-    console.log('se actualizaron',resolved,'filas del modelo');
+    .then(function (resolved) {
+      console.log('se actualizaron', resolved, 'filas del modelo');
 
-    res.sendStatus(200);
-  });
+      res.sendStatus(200);
+    });
 });
 
 ///////estas andan

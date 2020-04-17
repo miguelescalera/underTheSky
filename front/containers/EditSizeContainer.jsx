@@ -1,15 +1,8 @@
 import React from "react";
 import Login from "../components/Login";
 import { connect } from "react-redux";
-import { userLogin, addLogin } from "../actions/LoginAction"
-import { encrypt } from "../actions/RegisterAction"
-import { Tabs, Tab, FormFile } from 'react-bootstrap'
-import AddFrame from "../components/AddFrame";
-import AddSize from '../components/AddSize'
-import AddStyle from '../components/AddStyle'
-import { newFrame, newSize, newStyle, deleteStyle, deleteFrame, deleteSize } from '../actions/adminActions'
-import EliminarPropiedades from "../components/EliminarPropiedades";
 import { fetchSize } from "../actions/productsActions";
+import { editSize } from '../actions/adminActions'
 import EditSize from '../components/EditSize'
 
 const mapDispatchToProps = (dispatch, state) => {
@@ -58,7 +51,7 @@ class EditSizeContainer extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log('hola papu, gracias')
-        newSize({
+        editSize(this.props.match.params.id, {
             name: this.state.size,
             price: this.state.sizePrice
         })

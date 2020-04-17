@@ -4,8 +4,14 @@
 }
 
 .titulo-display{
-  font-weight: 100;
+  font-weight: 100!important;
   font-size: 3rem;
+
+}
+
+.gracias-display{
+  font-weight: 100!important;
+  font-size: 2rem;
 
 }
 

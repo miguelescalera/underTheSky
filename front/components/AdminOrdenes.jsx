@@ -22,7 +22,6 @@ export default ({
   handleStatus,
   allStyles,
 }) => {
-  const [modalShow, setModalShow] = React.useState(false);
 
   const styleFilter = {
     width: "50%",
@@ -182,14 +181,14 @@ export default ({
 
               <Card.Text>
                 <strong>Email:</strong>
-                {dataProduct[0].emailClient}
+                {dataProduct[0]?dataProduct[0].emailClient:null}
               </Card.Text>
               <Card.Text>
                 <strong>Direccion: </strong> {e.address}
               </Card.Text>
               <Card.Text>
                 <strong>Email:</strong>
-                {dataProduct[0].emailClient}
+                {dataProduct[0]?dataProduct[0].emailClient:null}
               </Card.Text>
               <Card.Text>
                 <strong>Total: </strong>${total}

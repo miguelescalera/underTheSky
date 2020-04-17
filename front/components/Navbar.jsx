@@ -182,6 +182,12 @@ export default ({
               >
                 Productos
               </Link>
+            </Nav.Link><Nav.Link>
+              <Link
+                style={navFont}
+                to="/contacto">
+                Contacto
+              </Link>
             </Nav.Link>
             {User.email?null:<Nav.Link>
               <Link
@@ -210,7 +216,7 @@ export default ({
                     </div>
                     <div>
                       <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
-                      {User.type==="admin"?<span>administrar productos</span>:<br/>}
+                      {User.type==="admin"?<span>Administrador UTS</span>:<br/>}
                       </Link>
                     </div>
                     <div style={{marginBottom:"15px"}}>

@@ -73,7 +73,7 @@ export default ({
                     className="d-flex justify-content-center"
                     style={{ marginBlockEnd: "1rem" }}
                 >
-                    Agregar un estilo
+                   Editar estilo
         </h3>
 
                 <Form
@@ -89,7 +89,7 @@ export default ({
                         <Form.Label>Estilo</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Zodiac"
+                            placeholder="Editar estilo"
                             name="styleName"
                             onChange={handleChange}
                         />
@@ -101,7 +101,7 @@ export default ({
                         <Form.Label>Color</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Green"
+                            placeholder="Editar color"
                             name="styleColor"
                             onChange={handleChange}
                         />
@@ -113,7 +113,7 @@ export default ({
                         <Form.Label>Tipografía</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Keep Calm"
+                            placeholder="Editar tipografia"
                             name="StyleTipo"
                             onChange={handleChange}
                         />
@@ -123,6 +123,25 @@ export default ({
            **************** */}
 
                     {isZodiac()}
+
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Label>Signo</Form.Label>
+                    <Form.Control as="select" name="styleSigno" onChange={handleChange}>
+                        <option>Aries</option>
+                        <option>Tauro</option>
+                        <option>Géminis</option>
+                        <option>Cáncer</option>
+                        <option>Leo</option>
+                        <option>Virgo</option>
+                        <option>Libra</option>
+                        <option>Escorpio</option>
+                        <option>Sagitario</option>
+                        <option>Capricornio</option>
+                        <option>Acuario</option>
+                        <option>Piscis</option>
+                        <option>n/a</option>
+                    </Form.Control>
+                </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox"></Form.Group>
                     {/* *****************

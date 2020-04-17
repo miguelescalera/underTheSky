@@ -1,198 +1,206 @@
-import React, { useState } from "react"
-import Card from "react-bootstrap/Card"
+import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button"
-import Container from "react-bootstrap/Container"
-import Collapse from 'react-bootstrap/Collapse'
-import { Link } from 'react-router-dom'
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Collapse from "react-bootstrap/Collapse";
+import { Link } from "react-router-dom";
+import { Tab, Tabs } from "react-bootstrap";
+export default ({
+  styles,
+  frames,
+  sizes,
+  handleDeleteStyle,
+  handleDeleteSize,
+  handleDeleteFrame,
+}) => {
+  const [open, setOpen] = useState(false);
+  const [count, setCount] = useState(false);
+  const [press, setPress] = useState(false);
 
-export default ({ styles, frames, sizes, handleDeleteStyle, handleDeleteSize, handleDeleteFrame }) => {
+  const botonSelecc = {
+    fontSize: "0.7rem",
+  };
+  console.log("estilos", styles);
+  console.log("FRAMES", frames);
+  console.log("SIZESS", sizes);
 
-    const [open, setOpen] = useState(false);
-    const [count, setCount] = useState(false)
-    const [press, setPress] = useState(false)
+  return (
+    <Tabs
+      className="tab-container"
+      defaultActiveKey="profile"
+      id="uncontrolled-tab-example"
+    >
+      <Tab eventKey="size" title="Marcos">
+        <div id="Marcos">
+          <Container
+            style={{
+              marginBlockStart: "2rem",
+              display: "flex",
+              justifyContent: "center",
+              paddingBlockEnd:'3rem'
+            }}
+          >
+            {frames ? (
+              frames.map((frame) => {
+                return (
+                  <Container
+                    style={{
+                      padding: "3rem",
+                      maxWidth: "500px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Row style={{ textAlign: "center" }}>
+                      <Card.Img
+                        fluid
+                        variant="top"
+                        src={frame.imgPath.toString().split("/public")[1]}
+                      />
+                      <p>{frame.name}</p>
+                    </Row>
+                    <Row style={{ justifyContent: "center" }}>
+                      <Col>
+                        <span>
+                          <Button
+                            className="boton-outline"
+                            style={botonSelecc}
+                            onClick={() => handleDeleteFrame(frame.id)}
+                          >
+                            Eliminar
+                          </Button>
 
-    const botonSelecc = {
-        fontSize: "0.7rem",
-    };
-    console.log("estilos", styles)
-    console.log("FRAMES", frames)
-    console.log("SIZESS", sizes)
-
-    return (
-        <div style={{ justifyContent: "center", marginBlockStart: "2rem", marginBlockEnd: "1rem" }} >
-            <Button
-                className="boton-outline"
-                style={botonSelecc}
-                style={{ justifyContent: "center" }}
-                onClick={() => setOpen(!open)}
-                aria-controls="Estilos"
-                aria-expanded={open}
-            >
-                Estilos
-            </Button>
-            <Button
-                className="boton-outline"
-                style={botonSelecc}
-                style={{ justifyContent: "center" }}
-                onClick={() => setCount(!count)}
-                aria-controls="Marcos"
-                aria-expanded={count}
-            >
-                Marcos
-            </Button>
-            <Button
-                className="boton-outline"
-                style={botonSelecc}
-                style={{ justifyContent: "center" }}
-                onClick={() => setPress(!press)}
-                aria-controls="Tamaños"
-                aria-expanded={press}
-            >
-                Tamaños
-            </Button>
-
-            <Collapse in={open}>
-                <div id="Estilos">
-                    <Container style={{ marginBlockStart: "5rem" }}  >
-                        <Row >
-                            {styles.map((style) => {
-                                return (
-                                    <Col xs={2} >
-                                        <Card className="tarjetaproducto">
-                                            <Card.Img variant="top" src={style.imgPath.toString().split("/public")[1]} />
-                                            <Card.Body>
-                                                <Row>
-                                                    <Col>
-                                                        <Card.Text className="titulotarjeta">
-                                                            {style.name.charAt(0).toUpperCase() + style.name.slice(1)}
-                                                        </Card.Text>
-                                                        <Card.Text className="titulotarjeta">
-                                                            {style.color.charAt(0).toUpperCase() + style.color.slice(1)}
-                                                            {style.name === 'zodiac' ? ' - ' + style.signo.charAt(0).toUpperCase() + style.signo.slice(1) : null}
-                                                        </Card.Text>
-                                                    </Col>
-                                                </Row>
-
-                                                <Row style={{ justifyContent: "center" }}>
-                                                    <Col>
-                                                        <span>
-                                                            <Button
-                                                                className="boton-outline"
-                                                                style={botonSelecc}
-                                                                onClick={() => handleDeleteStyle(style.id)}
-                                                            >
-                                                                Eliminar
+                          <Link to={`/eladmin/editFrame/${frame.id}`}>
+                            <Button
+                              className="boton-outline"
+                              style={botonSelecc}
+                            >
+                              Editar
                             </Button>
-                                                            <Link to={`/eladmin/editStyle/${style.id}`}>
-                                                                <Button
-                                                                    className="boton-outline"
-                                                                    style={botonSelecc}
-
-                                                                >
-                                                                    Editar
-                            </Button>
-                                                            </Link>
-                                                        </span>
-                                                    </Col>
-                                                </Row>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                )
-                            })}
-                        </Row>
-                    </Container>
-                </div>
-            </Collapse>
-
-            <Collapse in={count}>
-                <div id="Marcos">
-                    <Container style={{ marginBlockStart: "2rem" }} >
-                        <Row>
-                            {frames ? frames.map((frame) => {
-                                return (
-                                    <Col xs={1} >
-                                        <Row>
-                                            <Card.Img variant="top" src={frame.imgPath.toString().split("/public")[1]} />
-                                            {frame.name}
-                                        </Row>
-                                        <Row style={{ justifyContent: "center" }} >
-                                            <Col>
-                                                <span>
-                                                    <Button
-                                                        className="boton-outline"
-                                                        style={botonSelecc}
-                                                        onClick={() => handleDeleteFrame(frame.id)}
-                                                    >
-                                                        Eliminar
-                                </Button>
-
-                                                    <Link to={`/eladmin/editFrame/${frame.id}`} >
-                                                        <Button
-                                                            className="boton-outline"
-                                                            style={botonSelecc}
-                                                            onClick={() => handleDeleteStyle(style.id)}
-                                                        >
-                                                            Editar
-                            </Button>
-                                                    </Link>
-                                                </span>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                )
-                            }
-                            ) :
-                                <span>
-
-                                </span>}
-                        </Row>
-                    </Container>
-                </div>
-            </Collapse>
-            <Collapse in={press}>
-                <div id="Tamaños">
-                    <Container style={{ marginBlockStart: "2rem" }}>
-                        <Row>
-                            {sizes ? sizes.map(size => {
-                                return (
-                                    <Col xs={2}>
-                                        <Row>
-                                            {size.name}
-                                        </Row>
-                                        <Row style={{ justifyContent: "center" }} >
-                                            <Col>
-                                                <span>
-                                                    <Button
-                                                        className="boton-outline"
-                                                        style={botonSelecc}
-                                                        onClick={() => handleDeleteSize(size.id)}
-                                                    >
-                                                        Eliminar
-                                </Button>
-                                                    <Link to={`/eladmin/editSize/${size.id}`}> <Button
-                                                        className="boton-outline"
-                                                        style={botonSelecc}
-
-                                                    >
-                                                        Editar
-                            </Button></Link>
-                                                </span>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                )
-                            }) :
-                                <span></span>
-                            }
-                        </Row>
-                    </Container>
-                </div>
-            </Collapse>
-
+                          </Link>
+                        </span>
+                      </Col>
+                    </Row>
+                  </Container>
+                );
+              })
+            ) : (
+              <span></span>
+            )}
+          </Container>
         </div>
+      </Tab>
+      <Tab eventKey="style" title="Tamaños">
+        <div id="Tamaños">
+          <Container
+            style={{
+              marginBlockStart: "2rem",
+              display: "flex",
+              justifyContent: "center",
+              textAlign: "center",
+              alignItems: "center",
+              paddingBlockEnd:'3rem'
+            }}
+          >
+            {sizes ? (
+              sizes.map((size) => {
+                return (
+                  <Col xs={2}>
+                    <Row style={{ justifyContent: "center" }}>
+                      <p> {size.name}</p>
+                      <span>
+                        <Button
+                          className="boton-outline"
+                          style={botonSelecc}
+                          onClick={() => handleDeleteSize(size.id)}
+                        >
+                          Eliminar
+                        </Button>
+                        <Link to={`/eladmin/editSize/${size.id}`}>
+                          {" "}
+                          <Button className="boton-outline" style={botonSelecc}>
+                            Editar
+                          </Button>
+                        </Link>
+                      </span>
+                    </Row>
+                  </Col>
+                );
+              })
+            ) : (
+              <span></span>
+            )}
+          </Container>
+        </div>
+      </Tab>
+      <Tab eventKey="estilos" title="Estilos">
+        <div id="Estilos">
+        <Container
+            style={{
+              marginBlockStart: "2rem",
+              display: "flex",
+              justifyContent: "center",
+              textAlign: "center",
+              alignItems: "center",
+              flexWrap:'wrap',
+              paddingBlockEnd:'3rem'
+            }}
+          >
+           
+              {styles.map((style) => {
+                return (
+                 
+                    <Card style={{margin:'1.5rem', maxWidth:'10rem'}} className="tarjetaproducto">
+                      <Card.Img
+                        variant="top"
+                        src={style.imgPath.toString().split("/public")[1]}
+                      />
+                      <Card.Body>
+                        
+                            <Card.Text className="titulotarjeta">
+                              {style.name.charAt(0).toUpperCase() +
+                                style.name.slice(1)}
+                            </Card.Text>
+                            <Card.Text className="titulotarjeta">
+                              {style.color.charAt(0).toUpperCase() +
+                                style.color.slice(1)}
+                              {style.name === "zodiac"
+                                ? " - " +
+                                  style.signo.charAt(0).toUpperCase() +
+                                  style.signo.slice(1)
+                                : null}
+                            </Card.Text>
+                        
 
-    )
-}
+                   
+                            <span>
+                              <Button
+                                className="boton-outline"
+                                style={botonSelecc}
+                                onClick={() => handleDeleteStyle(style.id)}
+                              >
+                                Eliminar
+                              </Button>
+                              <Link to={`/eladmin/editStyle/${style.id}`}>
+                                <Button
+                                  className="boton-outline"
+                                  style={botonSelecc}
+                                >
+                                  Editar
+                                </Button>
+                              </Link>
+                            </span>
+                       
+                      </Card.Body>
+                    </Card>
+                  
+                );
+              })}
+            
+          </Container>
+        </div>
+      </Tab>
+    </Tabs>
+  );
+};
